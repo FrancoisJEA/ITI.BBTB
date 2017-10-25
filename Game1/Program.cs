@@ -15,7 +15,7 @@ namespace ITI.BBTB
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new BBTB())
                 game.Run();
         }
     }

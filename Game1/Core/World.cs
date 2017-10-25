@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ITI.BBTB.Core
 {
-    class World
+    class World : GameObject
     {
+
     }
 }

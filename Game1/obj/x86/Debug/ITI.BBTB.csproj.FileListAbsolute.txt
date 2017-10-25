@@ -46,3 +46,4 @@ D:\Intech\S3\PI\ITI.BBTB\Game1\obj\x86\Debug\ITI.BBTB.csprojResolveAssemblyRefer
 D:\Intech\S3\PI\ITI.BBTB\Game1\obj\x86\Debug\ITI.BBTB.csproj.CoreCompileInputs.cache
 D:\Intech\S3\PI\ITI.BBTB\Game1\obj\x86\Debug\Game1.exe
 D:\Intech\S3\PI\ITI.BBTB\Game1\obj\x86\Debug\Game1.pdb
+D:\Intech\S3\PI\ITI.BBTB\Game1\bin\Windows\x86\Debug\Content\world.png

@@ -1,20 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using ITI.BBTB.Core;
+
 
 namespace ITI.BBTB
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class BBTB : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        public const int WINDOW_WIDTH = 1366;
-        public const int WINDOW_HEIGHT = 768;
+        public const int WINDOW_WIDTH = 224;
+        public const int WINDOW_HEIGHT = 248;
+        World world;
 
-        public Game1()
+        public BBTB()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -31,6 +34,7 @@ namespace ITI.BBTB
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            world = new World();
 
             base.Initialize();
         }
@@ -43,6 +47,8 @@ namespace ITI.BBTB
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            world.Texture = Content.Load<Texture2D>("world");
+            world.Position = new Vector2(0, 0);
 
             // TODO: use this.Content to load your game content here
         }
@@ -82,6 +88,9 @@ namespace ITI.BBTB
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            world.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

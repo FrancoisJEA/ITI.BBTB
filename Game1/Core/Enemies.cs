@@ -8,5 +8,6 @@ namespace ITI.BBTB.Core
 {
     class Enemies
     {
+
     }
 }
