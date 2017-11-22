@@ -32,6 +32,5 @@ namespace Game1
         {
             return new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
         }
-
     }
 }

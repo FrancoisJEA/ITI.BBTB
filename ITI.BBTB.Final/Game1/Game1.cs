@@ -17,12 +17,9 @@ namespace Game1
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D _tileTexture, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture;
+        private Texture2D _tileTexture, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture, _monsterTexture;
         private Jumper _jumper;
         private Board _board;
-        private Weapon _weapon;
-        private WeaponLib _ctx;
-        private Bullet _bullet;
         private Sprite _sprite;
         private Random _rnd = new Random();
         private SpriteFont _debugFont;
@@ -42,10 +39,11 @@ namespace Game1
             _bulletTexture = Content.Load<Texture2D>("bullet");
             _groundTexture = Content.Load<Texture2D>("ground");
             _tileTexture = Content.Load<Texture2D>("tile");
+            _monsterTexture = Content.Load<Texture2D>("monster");
             _jumperTexture = Content.Load<Texture2D>("BBTBplayer");
             _sprite = new Sprite(_groundTexture, new Vector2(60, 60), _spriteBatch);
             _jumper = new Jumper(_jumperTexture, _weaponTexture, _bulletTexture, new Vector2(80, 80), _spriteBatch);
-            _board = new Board(_spriteBatch, _tileTexture, 15, 10);
+            _board = new Board(_spriteBatch, _tileTexture, _monsterTexture, 15, 10);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
         }
 
@@ -89,12 +87,12 @@ namespace Game1
 
         private void WriteDebugInformation()
         {
-            string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _jumper.Position.X, _jumper.Position.Y);
-            string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _jumper.Movement.X, _jumper.Movement.Y);
+            //string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _jumper.Position.X, _jumper.Position.Y);
+            //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _jumper.Movement.X, _jumper.Movement.Y);
 
-            DrawWithShadow(positionInText, new Vector2(10, 0));
-            DrawWithShadow(movementInText, new Vector2(10, 20));
-            DrawWithShadow("F5 for random board", new Vector2(70, 600));
+           // DrawWithShadow(positionInText, new Vector2(10, 0));
+            //DrawWithShadow(movementInText, new Vector2(10, 20));
+           // DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }
 
         private void DrawWithShadow(string text, Vector2 position)

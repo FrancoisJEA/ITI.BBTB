@@ -7,19 +7,23 @@ namespace Game1
     public class Board
     {
         public Tile[,] Tiles { get; set; }
+        public Monster[,] Monsters { get; set; }
         public int Columns { get; set; }
         public int Rows { get; set; }
         public Texture2D TileTexture { get; set; }
+        public Texture2D MonsterTexture { get; set; }
         private SpriteBatch SpriteBatch { get; set; }
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
 
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, int columns, int rows)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D monsterTexture, int columns, int rows)
         {
             Columns = columns;
             Rows = rows;
             TileTexture = tileTexture;
+            MonsterTexture = monsterTexture;
             SpriteBatch = spritebatch;
+            Monsters = new Monster[Columns, Rows];
             Tiles = new Tile[Columns, Rows];
             CreateNewBoard();
             Board.CurrentBoard = this;
@@ -28,20 +32,40 @@ namespace Game1
         public void CreateNewBoard()
         {
             SetAllBorderTilesBlocked();
+            AddMonsters();
             //InitializeAllTilesAndBlockSomeRandomly();
-            //SetTopLeftTileUnblocked();
+            SetTopLeftTileUnblocked();
         }
 
         private void SetTopLeftTileUnblocked()
         {
             Tiles[1, 1].IsBlocked = false;
+            
+        }
+
+        private void AddMonsters()
+        {
+            for (int x = 0; x < Columns; x++)
+            {
+                for (int y = 0; y < Rows; y++)
+                {
+                    Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
+                    Monsters[x, y] = new Monster(MonsterTexture, monsterPosition, SpriteBatch, false);
+
+                    /*for (int i = 0; i < 2; i++)
+                    {
+                    Monsters[_rnd.Next(1,10), _rnd.Next(1,6)].IsAlive = true;
+                    Monsters[_rnd.Next(1,10), _rnd.Next(1,6)].IsAlive = true;
+                    }*/
+                }
+            }
         }
 
         /*private void InitializeAllTilesAndBlockSomeRandomly()
         {
             for (int x = 0; x < Columns; x++)
             {
-                for (int y = 1; y < Rows; y++)
+                for (int y = 0; y < Rows; y++)
                 {
                     Vector2 tilePosition = new Vector2(x * TileTexture.Width, y * TileTexture.Height);
                     Tiles[x, y] = new Tile(TileTexture, tilePosition, SpriteBatch, _rnd.Next(5) == 0);
@@ -70,6 +94,13 @@ namespace Game1
             foreach (var tile in Tiles)
             {
                 tile.Draw();
+
+            }
+
+            foreach (var monster in Monsters)
+            {
+                monster.Draw();
+
             }
         }
 

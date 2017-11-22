@@ -1,12 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Game1
 {
     public class Jumper : Sprite
     {
         Weapon _weapon;
+
+        int _time;
+        bool _booltime;
 
         public Vector2 Movement { get; set; }
         private Vector2 oldPosition;
@@ -15,6 +19,9 @@ namespace Game1
             : base(texture, position, spritebatch)
         {
             _weapon = new Weapon( weaponTexture,  bulletTexture, /*DungeonPlanetGame ctx,*/  position,  spritebatch,  this/*, List<Enemy> enemys*/);
+
+            _time = 0;
+            _booltime = false;
         }
 
         public void Update(GameTime gameTime)
@@ -30,11 +37,34 @@ namespace Game1
         {
             KeyboardState keyboardState = Keyboard.GetState();
 
+            Console.WriteLine(_time);
+
             if (keyboardState.IsKeyDown(Keys.Left)) { Movement -= Vector2.UnitX; }
             if (keyboardState.IsKeyDown(Keys.Right)) { Movement += Vector2.UnitX; }
 
             if (keyboardState.IsKeyDown(Keys.Down)) { Movement += Vector2.UnitY; }
             if (keyboardState.IsKeyDown(Keys.Up)) { Movement -= Vector2.UnitY; }
+
+            _booltime = keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.Space) ||
+                keyboardState.IsKeyDown(Keys.Down) && keyboardState.IsKeyDown(Keys.Space) ||
+                keyboardState.IsKeyDown(Keys.Left) && keyboardState.IsKeyDown(Keys.Space) ||
+                keyboardState.IsKeyDown(Keys.Right) && keyboardState.IsKeyDown(Keys.Space);
+
+
+            if (_time <= 0 && _booltime == true)
+            {
+                if (keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.Space)) Movement -= new Vector2(0, 20);
+                else if (keyboardState.IsKeyDown(Keys.Down) && keyboardState.IsKeyDown(Keys.Space)) Movement += new Vector2(0, 20);
+                else if (keyboardState.IsKeyDown(Keys.Left) && keyboardState.IsKeyDown(Keys.Space)) Movement -= new Vector2(20, 0);
+                else if (keyboardState.IsKeyDown(Keys.Right) && keyboardState.IsKeyDown(Keys.Space)) Movement += new Vector2(20, 0);
+
+                _time = 300;
+                _booltime = false;
+            }
+            else
+            {
+                _time -= 1;
+            }
         }
 
         private void MoveAsFarAsPossible(GameTime gameTime)
