@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using Microsoft.Xna.Framework.Audio;
 
 namespace Game1
 {
@@ -24,12 +24,16 @@ namespace Game1
         private Random _rnd = new Random();
         private SpriteFont _debugFont;
 
+        SoundEffect _sound;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             _graphics.PreferredBackBufferWidth = 960;
             _graphics.PreferredBackBufferHeight = 640;
+
+            this.IsMouseVisible = true;
         }
 
         protected override void LoadContent()
@@ -45,6 +49,8 @@ namespace Game1
             _jumper = new Jumper(_jumperTexture, _weaponTexture, _bulletTexture, new Vector2(80, 80), _spriteBatch);
             _board = new Board(_spriteBatch, _tileTexture, _monsterTexture, 15, 10);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
+
+            _sound = Content.Load<SoundEffect>("Sound/GunSound");
         }
 
         protected override void Update(GameTime gameTime)

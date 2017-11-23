@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Game1
 {
@@ -18,6 +19,7 @@ namespace Game1
         List<Bullet> Bullets { get; }
         Texture2D _bulletTexture;
         int _time;
+
         //DungeonPlanetGame _ctx;
         //List<Enemy> _enemys;
 
@@ -25,8 +27,8 @@ namespace Game1
             : base(weaponTexture, position, spritebatch)
         {
             _player = player;
-            _origin = new Vector2(6, 6);
-            Position = new Vector2(_player.Position.X, _player.Position.Y);
+            _origin = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
+            Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
             WeaponLib = new WeaponLib();
             Bullets = new List<Bullet>();
             _time = 0;
@@ -39,7 +41,7 @@ namespace Game1
         {
             CheckMouseAndUpdateMovement();
             BulletUpdate(gameTime);
-            Position = new Vector2(_player.Position.X, _player.Position.Y);
+            Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
             WeaponLib.Update(_currentMouse.X - Position.X, _currentMouse.Y - Position.Y);
         }
 
@@ -56,6 +58,7 @@ namespace Game1
                 {
                     bullet = new Bullet(_bulletTexture, Position, SpriteBatch, WeaponLib/*, _enemys*/);
                     Bullets.Add(bullet);
+                    
                     _time = 0;
                 }
                 else

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/monster.png</SourceFile>
-  <SourceTime>2017-11-20T18:22:32.0432019+01:00</SourceTime>
+  <SourceTime>2017-11-23T09:30:24.4544462+01:00</SourceTime>
   <DestFile>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/bin/Windows/monster.xnb</DestFile>
-  <DestTime>2017-11-20T18:24:29.4895419+01:00</DestTime>
+  <DestTime>2017-11-23T10:20:58.3835216+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

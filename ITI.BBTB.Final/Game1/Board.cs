@@ -40,7 +40,19 @@ namespace Game1
         private void SetTopLeftTileUnblocked()
         {
             Tiles[1, 1].IsBlocked = false;
-            
+            Monsters[1, 1].IsAlive = false;
+
+            for (int x = 0; x < Columns; x++)
+            {
+                for (int y = 0; y < Rows; y++)
+                {
+                    if (Tiles[x, y].IsBlocked.Equals(Monsters[x, y].IsAlive))
+                    {
+                        Tiles[x, y].IsBlocked = false;
+                        Monsters[x, y].IsAlive = false;
+                    }
+                }
+            }
         }
 
         private void AddMonsters()
@@ -50,7 +62,15 @@ namespace Game1
                 for (int y = 0; y < Rows; y++)
                 {
                     Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-                    Monsters[x, y] = new Monster(MonsterTexture, monsterPosition, SpriteBatch, false);
+                    Monsters[x, y] = new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false);
+
+                    if (x > 0 && x < 14 && y > 0 && y < 9)
+                    {
+                        if (_rnd.Next(4, 20) == 4)
+                        {
+                            Monsters[x, y].IsAlive = true;
+                        }
+                    }
 
                     /*for (int i = 0; i < 2; i++)
                     {
@@ -80,7 +100,15 @@ namespace Game1
                 for (int y = 0; y < Rows; y++)
                 {
                     Vector2 tilePosition = new Vector2(x * TileTexture.Width, y * TileTexture.Height);
-                    Tiles[x, y] = new Tile(TileTexture, tilePosition, SpriteBatch, _rnd.Next(50) == 0);
+                    Tiles[x, y] = new Tile(TileTexture, tilePosition, SpriteBatch, false);
+
+                    if (x > 0 && x < 14 && y > 0 && y < 9)
+                    {
+                        if (_rnd.Next(4, 20) == 4)
+                        {
+                            Tiles[x, y].IsBlocked = true;
+                        }
+                    }
 
                     if (x == 0 || x == Columns - 1 || y == 0 || y == Rows - 1)
                     { Tiles[x, y].IsBlocked = true; }

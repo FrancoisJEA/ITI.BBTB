@@ -30,3 +30,4 @@ D:\DéveloppementC#\ITI.BBTB.Final\Game1\bin\Windows\x86\Debug\Content\weapon.xn
 D:\DéveloppementC#\ITI.BBTB.Final\Game1\bin\Windows\x86\Debug\Content\BBTBplayer.xnb
 D:\DéveloppementC#\ITI.BBTB.Final\Game1\bin\Windows\x86\Debug\Content\bullet.xnb
 D:\DéveloppementC#\ITI.BBTB.Final\Game1\bin\Windows\x86\Debug\Content\monster.xnb
+D:\DéveloppementC#\ITI.BBTB.Final\Game1\bin\Windows\x86\Debug\Content\Sound\GunSound.xnb

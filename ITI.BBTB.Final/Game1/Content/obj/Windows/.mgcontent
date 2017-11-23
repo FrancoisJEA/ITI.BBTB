@@ -8,8 +8,9 @@
     <File>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/tile.png</File>
     <File>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/ground.png</File>
     <File>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/BBTBplayer.png</File>
-    <File>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/weapon.png</File>
     <File>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/bullet.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/weapon.png</File>
     <File>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/monster.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/Sound/GunSound.mp3</File>
   </SourceFiles>
 </SourceFileCollection>
