@@ -6,12 +6,6 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace Game1
 {
-    /// <summary>
-    /// Simple code for a platformer game
-    /// Created in 2013 by Jakob "xnafan" Krarup
-    /// http://www.xnafan.net
-    /// Distribute and reuse freely, but please leave this comment
-    /// </summary>
 
     public class Game1 : Game
     {
@@ -75,7 +69,7 @@ namespace Game1
 
         private void PutJumperInTopLeftCorner()
         {
-            _jumper.Position = Vector2.One * 80;
+            _jumper.position = Vector2.One * 80;
             _jumper.Movement = Vector2.Zero;
         }
 

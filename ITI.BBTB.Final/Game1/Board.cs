@@ -31,7 +31,7 @@ namespace Game1
 
         public void CreateNewBoard()
         {
-            SetAllBorderTilesBlocked();
+            SetAllBorderTilesBlockedAndSomeRandomly();
             AddMonsters();
             //InitializeAllTilesAndBlockSomeRandomly();
             SetTopLeftTileUnblocked();
@@ -93,7 +93,7 @@ namespace Game1
             }
         }*/
 
-        private void SetAllBorderTilesBlocked()
+        private void SetAllBorderTilesBlockedAndSomeRandomly()
         {
             for (int x = 0; x < Columns; x++)
             {
@@ -122,13 +122,11 @@ namespace Game1
             foreach (var tile in Tiles)
             {
                 tile.Draw();
-
             }
 
             foreach (var monster in Monsters)
             {
                 monster.Draw();
-
             }
         }
 

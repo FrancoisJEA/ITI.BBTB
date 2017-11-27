@@ -18,15 +18,15 @@ namespace Game1
         public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib ctx/*, List<Enemy> enemys*/)
             : base(texture, position, spritebatch)
         {
-            _origin = new Vector2(-48, 1);
+            _origin = new Vector2(-27, 20);
             _rotation = ctx.Rotation;
-            BulletLib = new BulletLib(ctx, new Vector2(Position.X, Position.Y), texture.Height, texture.Width);
+            BulletLib = new BulletLib(ctx, new Vector2(base.position.X, base.position.Y), texture.Height, texture.Width);
             //_enemys = enemys;
         }
         public void Update(GameTime gameTime)
         {
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);
-            Position += new Vector2(BulletLib.PositionUpdate().X, BulletLib.PositionUpdate().Y);
+            position += new Vector2(BulletLib.PositionUpdate().X, BulletLib.PositionUpdate().Y);
         }
 
         /*public bool HasTouchedEnemy()
@@ -40,25 +40,26 @@ namespace Game1
                 }
             }
             return false;
-        }
+        }*/
+
         public bool HasTouchedTile()
         {
-            foreach (TileLib tile in BoardLib.CurrentBoard.Tiles)
+            foreach (Tile tile in Board.CurrentBoard.Tiles)
             {
                 if (tile.IsBlocked)
                 {
-                    if (new System.Drawing.Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).IntersectsWith(tile.Bounds))
+                    if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(tile.Bounds))
                     {
                         return true;
                     }
                 }
             }
             return false;
-        }*/
+        }
 
         public override void Draw()
         {
-            SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
+            SpriteBatch.Draw(Texture, position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
         }
     }
 }

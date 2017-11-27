@@ -9,25 +9,25 @@ namespace Game1
 {
     public class Sprite
     {
-        public Vector2 Position { get; set; }
+        public Vector2 position { get; set; }
         public Texture2D Texture { set; get; }
         public SpriteBatch SpriteBatch { get; set; }
 
         public Rectangle Bounds
         {
-            get { return new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height); }
+            get { return new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height); }
         }
 
         public Sprite(Texture2D texture, Vector2 position, SpriteBatch batch)
         {
             Texture = texture;
-            Position = position;
+            this.position = position;
             SpriteBatch = batch;
         }
 
         public virtual void Draw()
         {
-            SpriteBatch.Draw(Texture, Position, Color.White);
+            SpriteBatch.Draw(Texture, position, Color.White);
         }
     }
 }

@@ -69,9 +69,9 @@ namespace Game1
 
         private void MoveAsFarAsPossible(GameTime gameTime)
         {
-            oldPosition = Position;
+            oldPosition = position;
             UpdatePositionBasedOnMovement(gameTime);
-            Position = Board.CurrentBoard.WhereCanIGetTo(oldPosition, Position, Bounds);
+            position = Board.CurrentBoard.WhereCanIGetTo(oldPosition, position, Bounds);
         }
 
         private void SimulateFriction()
@@ -81,12 +81,12 @@ namespace Game1
 
         private void UpdatePositionBasedOnMovement(GameTime gameTime)
         {
-            Position += Movement * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
+            position += Movement * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
         }
 
         private void StopMovingIfBlocked()
         {
-            Vector2 lastMovement = Position - oldPosition;
+            Vector2 lastMovement = position - oldPosition;
             if (lastMovement.X == 0) { Movement *= Vector2.UnitY; }
             if (lastMovement.Y == 0) { Movement *= Vector2.UnitX; }
         }
