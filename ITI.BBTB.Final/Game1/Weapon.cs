@@ -31,7 +31,7 @@ namespace Game1
             base.position = new Vector2(_player.position.X + (_player.Bounds.Width / 2), _player.position.Y + (_player.Bounds.Height / 2));
             WeaponLib = new WeaponLib();
             Bullets = new List<Bullet>();
-            _time = 0;
+            _time = 15;
             //_ctx = ctx;
             _bulletTexture = bulletTexture;
             //_enemys = enemys;

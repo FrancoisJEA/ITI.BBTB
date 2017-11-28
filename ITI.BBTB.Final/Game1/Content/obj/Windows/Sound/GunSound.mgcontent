@@ -3,7 +3,7 @@
   <SourceFile>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/Sound/GunSound.mp3</SourceFile>
   <SourceTime>2017-11-23T10:11:21.2221152+01:00</SourceTime>
   <DestFile>D:/DéveloppementC#/ITI.BBTB.Final/Game1/Content/bin/Windows/Sound/GunSound.xnb</DestFile>
-  <DestTime>2017-11-23T10:20:58.6034303+01:00</DestTime>
+  <DestTime>2017-11-27T11:32:00.3450809+01:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

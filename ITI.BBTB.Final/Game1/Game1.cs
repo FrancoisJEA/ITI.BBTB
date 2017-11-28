@@ -90,9 +90,9 @@ namespace Game1
             //string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _jumper.Position.X, _jumper.Position.Y);
             //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _jumper.Movement.X, _jumper.Movement.Y);
 
-           // DrawWithShadow(positionInText, new Vector2(10, 0));
+            // DrawWithShadow(positionInText, new Vector2(10, 0));
             //DrawWithShadow(movementInText, new Vector2(10, 20));
-           // DrawWithShadow("F5 for random board", new Vector2(70, 600));
+            // DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }
 
         private void DrawWithShadow(string text, Vector2 position)
