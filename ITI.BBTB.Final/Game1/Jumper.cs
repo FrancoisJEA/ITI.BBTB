@@ -5,14 +5,23 @@ using System;
 
 namespace Game1
 {
+    [Serializable]
     public class Jumper : Sprite
     {
         Weapon _weapon;
+        Weapon _weapon2;
 
+        int _life, _strenght, _agility, _experience, _intelligence, _resistance;
+        string _name;
+        int _krumbz;
+        [NonSerialized]
+        int _level;
+        [NonSerialized]
         int _time;
+        [NonSerialized]
         bool _booltime;
 
-        public Vector2 Movement { get; set; }
+        public Vector2 Mouvement { get; set; }
         private Vector2 oldPosition;
 
         public Jumper(Texture2D texture, Texture2D weaponTexture, Texture2D bulletTexture, Vector2 position, SpriteBatch spritebatch)
@@ -23,6 +32,17 @@ namespace Game1
             _time = 0;
             _booltime = false;
         }
+
+        public int Life { get { return _life; } set { _life = 100; } }
+        public int Experience { get { return _experience; } set { _experience = value; } }
+        public int Strenght { get { return _strenght; } set { _strenght = 20; } }
+        public int Agility { get { return _agility; } set { _agility = 20; } }
+        public int Intelligence { get { return _intelligence; } set { _intelligence = 20; } }
+        public int Resistance { get { return _resistance; }set { _resistance = 10; } }
+
+        public string Name { get { return _name; } set { _name = value; } }
+
+        public int Money { get { return _krumbz; } set { _krumbz = 00; } }
 
         public void Update(GameTime gameTime)
         {
@@ -39,11 +59,11 @@ namespace Game1
 
             Console.WriteLine(_time);
 
-            if (keyboardState.IsKeyDown(Keys.Left)) { Movement -= Vector2.UnitX; }
-            if (keyboardState.IsKeyDown(Keys.Right)) { Movement += Vector2.UnitX; }
+            if (keyboardState.IsKeyDown(Keys.Left)) { Mouvement -= Vector2.UnitX; }
+            if (keyboardState.IsKeyDown(Keys.Right)) { Mouvement += Vector2.UnitX; }
 
-            if (keyboardState.IsKeyDown(Keys.Down)) { Movement += Vector2.UnitY; }
-            if (keyboardState.IsKeyDown(Keys.Up)) { Movement -= Vector2.UnitY; }
+            if (keyboardState.IsKeyDown(Keys.Down)) { Mouvement += Vector2.UnitY; }
+            if (keyboardState.IsKeyDown(Keys.Up)) { Mouvement -= Vector2.UnitY; }
 
             _booltime = keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.Space) ||
                 keyboardState.IsKeyDown(Keys.Down) && keyboardState.IsKeyDown(Keys.Space) ||
@@ -53,10 +73,10 @@ namespace Game1
 
             if (_time <= 0 && _booltime == true)
             {
-                if (keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.Space)) Movement -= new Vector2(0, 20);
-                else if (keyboardState.IsKeyDown(Keys.Down) && keyboardState.IsKeyDown(Keys.Space)) Movement += new Vector2(0, 20);
-                else if (keyboardState.IsKeyDown(Keys.Left) && keyboardState.IsKeyDown(Keys.Space)) Movement -= new Vector2(20, 0);
-                else if (keyboardState.IsKeyDown(Keys.Right) && keyboardState.IsKeyDown(Keys.Space)) Movement += new Vector2(20, 0);
+                if (keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.Space)) Mouvement -= new Vector2(0, 20);
+                else if (keyboardState.IsKeyDown(Keys.Down) && keyboardState.IsKeyDown(Keys.Space)) Mouvement += new Vector2(0, 20);
+                else if (keyboardState.IsKeyDown(Keys.Left) && keyboardState.IsKeyDown(Keys.Space)) Mouvement -= new Vector2(20, 0);
+                else if (keyboardState.IsKeyDown(Keys.Right) && keyboardState.IsKeyDown(Keys.Space)) Mouvement += new Vector2(20, 0);
 
                 _time = 300;
                 _booltime = false;
@@ -76,19 +96,19 @@ namespace Game1
 
         private void SimulateFriction()
         {
-            Movement -= Movement * Vector2.One * 0.25f;
+            Mouvement -= Mouvement * Vector2.One * 0.25f;
         }
 
         private void UpdatePositionBasedOnMovement(GameTime gameTime)
         {
-            position += Movement * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
+            position += Mouvement * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
         }
 
         private void StopMovingIfBlocked()
         {
             Vector2 lastMovement = position - oldPosition;
-            if (lastMovement.X == 0) { Movement *= Vector2.UnitY; }
-            if (lastMovement.Y == 0) { Movement *= Vector2.UnitX; }
+            if (lastMovement.X == 0) { Mouvement *= Vector2.UnitY; }
+            if (lastMovement.Y == 0) { Mouvement *= Vector2.UnitX; }
         }
 
         public override void Draw()

@@ -70,7 +70,7 @@ namespace Game1
         private void PutJumperInTopLeftCorner()
         {
             _jumper.position = Vector2.One * 80;
-            _jumper.Movement = Vector2.Zero;
+            _jumper.Mouvement = Vector2.Zero;
         }
 
         protected override void Draw(GameTime gameTime)
