@@ -40,7 +40,9 @@ namespace Game1
             _monsterTexture = Content.Load<Texture2D>("monster");
             _jumperTexture = Content.Load<Texture2D>("BBTBplayer");
             _sprite = new Sprite(_groundTexture, new Vector2(60, 60), _spriteBatch);
-            _jumper = new Player(_jumperTexture, _weaponTexture, _bulletTexture, new Vector2(80, 80), _spriteBatch, this);
+            _jumper = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null);
+            Weapon _weapon = new Weapon(_weaponTexture, _bulletTexture, this, _jumper.position, _spriteBatch, _jumper);
+            _jumper.Weapon = _weapon;
             _board = new Board(_spriteBatch, _tileTexture, _monsterTexture, 15, 10);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 

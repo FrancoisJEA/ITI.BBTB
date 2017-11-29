@@ -20,17 +20,12 @@ namespace Game1
         Texture2D _texture;
         Vector2 _position;
         
-    
-        [NonSerialized]
         int _level;
-        [NonSerialized]
         int _time;
-        [NonSerialized]
         bool _booltime;
-        [NonSerialized]
         private Vector2 oldPosition;
 
-        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, Game1 ctx)
+        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, Game1 ctx, Weapon weapon)
             : base(texture, position, spritebatch)
         {
             _ctx = ctx;
@@ -38,6 +33,7 @@ namespace Game1
             _position = position;
             _time = 0;
             _booltime = false;
+            _weapon = weapon;
         }
 
         public int Life { get { return _life; } set { _life = 100; } }
@@ -63,7 +59,7 @@ namespace Game1
             SimulateFriction();
             MoveAsFarAsPossible(gameTime);
             StopMovingIfBlocked();
-            _weapon.Update(gameTime);
+            if (_weapon != null) _weapon.Update(gameTime);
         }
 
         private void CheckKeyboardAndUpdateMovement()
@@ -127,7 +123,7 @@ namespace Game1
         public override void Draw()
         {
             base.Draw();
-            _weapon.Draw();
+            if (_weapon != null) _weapon.Draw();
         }
     }
 }

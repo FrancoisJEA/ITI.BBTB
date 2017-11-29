@@ -21,22 +21,22 @@ namespace Game1
         Texture2D _bulletTexture;
         int _time;
 
-        Game1 _ctx;
-        //List<Enemy> _enemys;
+        Vector2 _position;
 
-        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Game1 ctx, Vector2 position, SpriteBatch spritebatch, Player player/*, List<Enemy> enemys*/)
+        Game1 _ctx;
+
+        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Game1 ctx, Vector2 position, SpriteBatch spritebatch, Player player)
             : base(weaponTexture, position, spritebatch)
         {
+            _position = position;
             _player = player;
             _origin = new Vector2(_player.position.X - (_player.Bounds.Width) - 50, _player.position.Y - (_player.Bounds.Height) - 15);
             base.position = new Vector2(_player.position.X + (_player.Bounds.Width / 2), _player.position.Y + (_player.Bounds.Height / 2));
             WeaponLib = new WeaponLib();
             Bullets = new List<Bullet>();
-            _time = 0;
+            _time = 15;
             _ctx = ctx;
             _bulletTexture = bulletTexture;
-            //_enemys = enemys;
-            //_weapon = new Weapon(weaponTexture,  bulletTexture, /*DungeonPlanetGame ctx,*/  position,  spritebatch,  this/*, List<Enemy> enemys*/);
         }
 
         public void Update(GameTime gameTime)
@@ -57,7 +57,7 @@ namespace Game1
             {
                 if (_time >= 15)
                 {
-                    bullet = new Bullet(_bulletTexture, position, SpriteBatch, WeaponLib/*, _enemys*/);
+                    bullet = new Bullet(_bulletTexture, position, SpriteBatch, WeaponLib);
                     Bullets.Add(bullet);
 
                     _ctx.PlayGunSound();
@@ -73,7 +73,7 @@ namespace Game1
         {
             for (int i = 0; i < Bullets.Count; i++)
             {
-                if (Bullets[i].BulletLib.IsDead()/* || Bullets[i].HasTouchedEnemy()*/ || Bullets[i].HasTouchedTile())
+                if (Bullets[i].BulletLib.IsDead() || Bullets[i].HasTouchedTile())
                 {
                     Bullets.Remove(Bullets[i]);
                 }
