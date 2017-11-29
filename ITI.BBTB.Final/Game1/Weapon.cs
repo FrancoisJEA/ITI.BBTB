@@ -20,10 +20,10 @@ namespace Game1
         Texture2D _bulletTexture;
         int _time;
 
-        //Game1 _ctx;
+        Game1 _ctx;
         //List<Enemy> _enemys;
 
-        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, /*Game1 ctx,*/ Vector2 position, SpriteBatch spritebatch, Jumper player/*, List<Enemy> enemys*/)
+        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Game1 ctx, Vector2 position, SpriteBatch spritebatch, Jumper player/*, List<Enemy> enemys*/)
             : base(weaponTexture, position, spritebatch)
         {
             _player = player;
@@ -32,7 +32,7 @@ namespace Game1
             WeaponLib = new WeaponLib();
             Bullets = new List<Bullet>();
             _time = 15;
-            //_ctx = ctx;
+            _ctx = ctx;
             _bulletTexture = bulletTexture;
             //_enemys = enemys;
         }
@@ -57,6 +57,8 @@ namespace Game1
                 {
                     bullet = new Bullet(_bulletTexture, position, SpriteBatch, WeaponLib/*, _enemys*/);
                     Bullets.Add(bullet);
+
+                    _ctx.PlayGunSound();
                     
                     _time = 0;
                 }

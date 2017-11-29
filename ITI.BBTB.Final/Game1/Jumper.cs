@@ -11,6 +11,8 @@ namespace Game1
         Weapon _weapon;
         Weapon _weapon2;
 
+        Game1 _ctx;
+
         int _life, _strenght, _agility, _experience, _intelligence, _resistance;
         string _name;
         int _krumbz;
@@ -24,11 +26,13 @@ namespace Game1
         public Vector2 Mouvement { get; set; }
         private Vector2 oldPosition;
 
-        public Jumper(Texture2D texture, Texture2D weaponTexture, Texture2D bulletTexture, Vector2 position, SpriteBatch spritebatch)
+        public Jumper(Texture2D texture, Texture2D weaponTexture, Texture2D bulletTexture, Vector2 position, SpriteBatch spritebatch, Game1 ctx)
             : base(texture, position, spritebatch)
         {
-            _weapon = new Weapon(weaponTexture,  bulletTexture, /*DungeonPlanetGame ctx,*/  position,  spritebatch,  this/*, List<Enemy> enemys*/);
+            _ctx = ctx;
 
+            _weapon = new Weapon(weaponTexture, bulletTexture, _ctx, position,  spritebatch,  this/*, List<Enemy> enemys*/);
+            
             _time = 0;
             _booltime = false;
         }

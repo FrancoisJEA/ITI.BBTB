@@ -40,7 +40,7 @@ namespace Game1
             _monsterTexture = Content.Load<Texture2D>("monster");
             _jumperTexture = Content.Load<Texture2D>("BBTBplayer");
             _sprite = new Sprite(_groundTexture, new Vector2(60, 60), _spriteBatch);
-            _jumper = new Jumper(_jumperTexture, _weaponTexture, _bulletTexture, new Vector2(80, 80), _spriteBatch);
+            _jumper = new Jumper(_jumperTexture, _weaponTexture, _bulletTexture, new Vector2(80, 80), _spriteBatch, this);
             _board = new Board(_spriteBatch, _tileTexture, _monsterTexture, 15, 10);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 
@@ -52,6 +52,11 @@ namespace Game1
             base.Update(gameTime);
             _jumper.Update(gameTime);
             CheckKeyboardAndReact();
+        }
+
+        internal void PlayGunSound()
+        {
+            _sound.Play();
         }
 
         private void CheckKeyboardAndReact()
