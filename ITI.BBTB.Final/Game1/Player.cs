@@ -6,7 +6,7 @@ using System;
 namespace Game1
 {
     [Serializable]
-    public class Jumper : Sprite
+    public class Player : Sprite
     {
         Weapon _weapon;
         Weapon _weapon2;
@@ -16,23 +16,26 @@ namespace Game1
         int _life, _strenght, _agility, _experience, _intelligence, _resistance;
         string _name;
         int _krumbz;
+
+        Texture2D _texture;
+        Vector2 _position;
+        
+    
         [NonSerialized]
         int _level;
         [NonSerialized]
         int _time;
         [NonSerialized]
         bool _booltime;
-
-        public Vector2 Mouvement { get; set; }
+        [NonSerialized]
         private Vector2 oldPosition;
 
-        public Jumper(Texture2D texture, Texture2D weaponTexture, Texture2D bulletTexture, Vector2 position, SpriteBatch spritebatch, Game1 ctx)
+        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, Game1 ctx)
             : base(texture, position, spritebatch)
         {
             _ctx = ctx;
-
-            _weapon = new Weapon(weaponTexture, bulletTexture, _ctx, position,  spritebatch,  this/*, List<Enemy> enemys*/);
-            
+            _texture = texture;
+            _position = position;
             _time = 0;
             _booltime = false;
         }
@@ -47,6 +50,12 @@ namespace Game1
         public string Name { get { return _name; } set { _name = value; } }
 
         public int Money { get { return _krumbz; } set { _krumbz = 00; } }
+
+        public Weapon Weapon { get { return _weapon; } set { _weapon = value; } }
+        public Weapon Weapon2 { get { return _weapon2; } set { _weapon2 = value; } }
+
+        public Vector2 Mouvement { get; set; }
+
 
         public void Update(GameTime gameTime)
         {

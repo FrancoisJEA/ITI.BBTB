@@ -42,19 +42,19 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
-    <Compile Include="Bullet.cs" />
-    <Compile Include="BulletLib.cs" />
+    <Compile Include="Map\Board.cs" />
+    <Compile Include="Bullets\Bullet.cs" />
+    <Compile Include="Bullets\BulletLib.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Jumper.cs" />
-    <Compile Include="Monster.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Enemies\Monster.cs" />
     <Compile Include="MovementWrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprite.cs" />
-    <Compile Include="Tile.cs" />
-    <Compile Include="Weapon.cs" />
-    <Compile Include="WeaponLib.cs" />
+    <Compile Include="Map\Tile.cs" />
+    <Compile Include="Weapons\Weapon.cs" />
+    <Compile Include="Weapons\WeaponLib.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

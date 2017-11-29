@@ -13,16 +13,15 @@ namespace Game1
         public Texture2D Texture { set; get; }
         public SpriteBatch SpriteBatch { get; set; }
 
-        public Rectangle Bounds
-        {
-            get { return new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height); }
-        }
-
         public Sprite(Texture2D texture, Vector2 position, SpriteBatch batch)
         {
             Texture = texture;
             this.position = position;
             SpriteBatch = batch;
+        }
+        public Rectangle Bounds
+        {
+            get { return new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height); }
         }
 
         public virtual void Draw()

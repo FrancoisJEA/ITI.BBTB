@@ -7,12 +7,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 
 namespace Game1
 {
     public class Weapon : Sprite
     {
-        Jumper _player;
+        Player _player;
         internal WeaponLib WeaponLib { get; set; }
         public Vector2 _origin;
         MouseState _currentMouse;
@@ -23,7 +24,7 @@ namespace Game1
         Game1 _ctx;
         //List<Enemy> _enemys;
 
-        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Game1 ctx, Vector2 position, SpriteBatch spritebatch, Jumper player/*, List<Enemy> enemys*/)
+        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Game1 ctx, Vector2 position, SpriteBatch spritebatch, Player player/*, List<Enemy> enemys*/)
             : base(weaponTexture, position, spritebatch)
         {
             _player = player;
@@ -31,10 +32,11 @@ namespace Game1
             base.position = new Vector2(_player.position.X + (_player.Bounds.Width / 2), _player.position.Y + (_player.Bounds.Height / 2));
             WeaponLib = new WeaponLib();
             Bullets = new List<Bullet>();
-            _time = 15;
+            _time = 0;
             _ctx = ctx;
             _bulletTexture = bulletTexture;
             //_enemys = enemys;
+            //_weapon = new Weapon(weaponTexture,  bulletTexture, /*DungeonPlanetGame ctx,*/  position,  spritebatch,  this/*, List<Enemy> enemys*/);
         }
 
         public void Update(GameTime gameTime)
@@ -59,7 +61,6 @@ namespace Game1
                     Bullets.Add(bullet);
 
                     _ctx.PlayGunSound();
-                    
                     _time = 0;
                 }
                 else
