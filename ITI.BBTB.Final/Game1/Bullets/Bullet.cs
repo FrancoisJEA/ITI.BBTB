@@ -44,12 +44,14 @@ namespace Game1
 
         public bool HasTouchedTile()
         {
-            Rectangle bullet = new Rectangle((int)(position.X), (int)(position.Y), Texture.Width, Texture.Height);
             foreach (Tile tile in Board.CurrentBoard.Tiles)
             {
-                if (tile.IsBlocked && tile.Bounds.Intersects(bullet))
+                if (tile.IsBlocked)
                 {
-                    return true;
+                    if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(tile.Bounds))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
