@@ -8,14 +8,11 @@ namespace Game1
     [Serializable]
     public class Player : Sprite
     {
+        readonly PlayerModel _player;
         Weapon _weapon;
         Weapon _weapon2;
 
         Game1 _ctx;
-
-        int _life, _strenght, _agility, _experience, _intelligence, _resistance;
-        string _name;
-        int _krumbz;
 
         Texture2D _texture;
         Vector2 _position;
@@ -35,17 +32,6 @@ namespace Game1
             _booltime = false;
             _weapon = weapon;
         }
-
-        public int Life { get { return _life; } set { _life = 100; } }
-        public int Experience { get { return _experience; } set { _experience = value; } }
-        public int Strenght { get { return _strenght; } set { _strenght = 20; } }
-        public int Agility { get { return _agility; } set { _agility = 20; } }
-        public int Intelligence { get { return _intelligence; } set { _intelligence = 20; } }
-        public int Resistance { get { return _resistance; }set { _resistance = 10; } }
-
-        public string Name { get { return _name; } set { _name = value; } }
-
-        public int Money { get { return _krumbz; } set { _krumbz = 00; } }
 
         public Weapon Weapon { get { return _weapon; } set { _weapon = value; } }
         public Weapon Weapon2 { get { return _weapon2; } set { _weapon2 = value; } }
