@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game1", "Game1\Game1.csproj", "{3DA630A6-6393-4A8F-8D1F-5C2FAC9E91B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBTB", "Game1\BBTB.csproj", "{3DA630A6-6393-4A8F-8D1F-5C2FAC9E91B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBTB.Tests", "BBTB.Tests\BBTB.Tests.csproj", "{3D687F02-D493-4FCA-8FDE-BDC3CEAE3D2E}"
 EndProject

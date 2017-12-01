@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game1
+namespace BBTB
 {
     [Serializable]
     public class PlayerModel 
@@ -19,10 +19,12 @@ namespace Game1
         string _potiontype;
 
         int _krumbz;
-                
+        [NonSerialized]        
         int _level;
+        [NonSerialized]
         int _xpnext, _xplast;
         int _skillspoints;
+        public string name;
 
         public PlayerModel(string name,int classes)
         {
@@ -65,6 +67,7 @@ namespace Game1
             {
                 _resistance = _resistance + numberofskillpoint;
             }
+            _skillspoints = _skillspoints - numberofskillpoint;
         }
 
         public void SetExp()

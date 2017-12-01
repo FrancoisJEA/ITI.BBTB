@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace Game1
+namespace BBTB
 {
     [Serializable]
     public class Player : Sprite
@@ -45,7 +45,7 @@ namespace Game1
             SimulateFriction();
             MoveAsFarAsPossible(gameTime);
             StopMovingIfBlocked();
-            if (_weapon != null) _weapon.Update(gameTime);
+            if (_weapon != null) { _weapon.Update(gameTime); }
         }
 
         private void CheckKeyboardAndUpdateMovement()

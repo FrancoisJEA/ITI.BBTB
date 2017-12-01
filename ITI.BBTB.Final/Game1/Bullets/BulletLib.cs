@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using Microsoft.Xna.Framework;
 
-namespace Game1
+namespace BBTB
 {
     public class BulletLib
     {
