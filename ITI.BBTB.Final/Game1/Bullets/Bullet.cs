@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Game1
+namespace BBTB
 {
     public class Bullet : Sprite
     {
@@ -41,6 +41,24 @@ namespace Game1
             }
             return false;
         }*/
+
+        public bool HasTouchedEnemy()
+        {
+            foreach (Monster monsters in Board.CurrentBoard.Monsters)
+            {
+                if (monsters.IsAlive)
+                {
+                    if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monsters.Bounds))
+                    {
+                        monsters.Life -= 50;
+                        if (monsters.Life <= 0) monsters.IsAlive = false;
+                        return true;
+                    }
+
+                }
+            }
+            return false;
+        }
 
         public bool HasTouchedTile()
         {

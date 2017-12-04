@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace Game1
+namespace BBTB
 {
     [Serializable]
     public class Player : Sprite
@@ -12,7 +12,7 @@ namespace Game1
         Weapon _weapon;
         Weapon _weapon2;
 
-        Game1 _ctx;
+        BBTB _ctx;
 
         Texture2D _texture;
         Vector2 _position;
@@ -22,7 +22,7 @@ namespace Game1
         bool _booltime;
         private Vector2 oldPosition;
 
-        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, Game1 ctx, Weapon weapon)
+        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, BBTB ctx, Weapon weapon)
             : base(texture, position, spritebatch)
         {
             _ctx = ctx;

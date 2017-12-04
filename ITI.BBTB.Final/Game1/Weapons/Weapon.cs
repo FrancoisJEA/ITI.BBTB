@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
-namespace Game1
+namespace BBTB
 {
     public class Weapon : Sprite
     {
@@ -23,9 +23,9 @@ namespace Game1
 
         Vector2 _position;
 
-        Game1 _ctx;
+        BBTB _ctx;
 
-        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Game1 ctx, Vector2 position, SpriteBatch spritebatch, Player player)
+        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, BBTB ctx, Vector2 position, SpriteBatch spritebatch, Player player)
             : base(weaponTexture, position, spritebatch)
         {
             _position = position;
@@ -73,7 +73,7 @@ namespace Game1
         {
             for (int i = 0; i < Bullets.Count; i++)
             {
-                if (Bullets[i].BulletLib.IsDead() || Bullets[i].HasTouchedTile())
+                if (Bullets[i].BulletLib.IsDead() || Bullets[i].HasTouchedEnemy() || Bullets[i].HasTouchedTile())
                 {
                     Bullets.Remove(Bullets[i]);
                 }

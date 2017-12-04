@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Game1
+namespace BBTB
 {
     public struct MovementWrapper
     {
