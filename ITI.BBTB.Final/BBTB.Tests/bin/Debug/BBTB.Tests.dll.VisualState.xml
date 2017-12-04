@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ShowCheckBoxes="false">
-  <TopNode>[0-1006]C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB.Tests\bin\Debug\BBTB.Tests.dll</TopNode>
-  <SelectedNode>[0-1005]BBTB.Tests.SimpleTests.LevelUp</SelectedNode>
+  <TopNode>[0-1007]C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB.Tests\bin\Debug\BBTB.Tests.dll</TopNode>
+  <SelectedNode>[0-1000]BBTB.Tests.SimpleTests</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
-    <Node UniqueName="[0-1006]C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB.Tests\bin\Debug\BBTB.Tests.dll" Expanded="true" />
-    <Node UniqueName="[0-1007]BBTB" Expanded="true" />
-    <Node UniqueName="[0-1008]BBTB.Tests" Expanded="true" />
+    <Node UniqueName="[0-1007]C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB.Tests\bin\Debug\BBTB.Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1008]BBTB" Expanded="true" />
+    <Node UniqueName="[0-1009]BBTB.Tests" Expanded="true" />
     <Node UniqueName="[0-1000]BBTB.Tests.SimpleTests" Expanded="true" />
   </Nodes>
 </VisualState>

@@ -90,5 +90,24 @@ namespace BBTB.Tests
                 Assert.That(WhiteGuy.Life == 130);
             }
         }
+
+        [Test]
+        public void UpSkill()
+        {
+            using (var stream = new MemoryStream())
+            {
+                var BlackGuy = new PlayerModel("FirstPlayer", 1);
+                BinaryFormatter f = new BinaryFormatter();
+                f.Serialize(stream, BlackGuy);
+                stream.Position = 0;
+                PlayerModel WhiteGuy = (PlayerModel)f.Deserialize(stream);
+                WhiteGuy.Level1SkillSetUp();
+                WhiteGuy.Experience = 900;
+                WhiteGuy.LevelUp();
+                WhiteGuy.UpSkills(3, "intelligence");
+                Assert.That(WhiteGuy.SkillPoint == 0);
+                Assert.That(WhiteGuy.Intelligence == 13);
+            }
+        }
     }
 }
