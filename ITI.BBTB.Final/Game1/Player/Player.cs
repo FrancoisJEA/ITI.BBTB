@@ -12,7 +12,7 @@ namespace BBTB
         Weapon _weapon;
         Weapon _weapon2;
 
-        BBTB _ctx;
+        Game1 _ctx;
 
         Texture2D _texture;
         Vector2 _position;
@@ -22,7 +22,7 @@ namespace BBTB
         bool _booltime;
         private Vector2 oldPosition;
 
-        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, BBTB ctx, Weapon weapon)
+        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, Game1 ctx, Weapon weapon)
             : base(texture, position, spritebatch)
         {
             _ctx = ctx;
@@ -45,7 +45,7 @@ namespace BBTB
             SimulateFriction();
             MoveAsFarAsPossible(gameTime);
             StopMovingIfBlocked();
-            if (_weapon != null) _weapon.Update(gameTime);
+            if (_weapon != null) { _weapon.Update(gameTime); }
         }
 
         private void CheckKeyboardAndUpdateMovement()

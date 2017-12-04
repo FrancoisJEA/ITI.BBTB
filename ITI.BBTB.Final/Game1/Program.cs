@@ -14,7 +14,7 @@ namespace BBTB
         [STAThread]
         static void Main()
         {
-            using (var game = new BBTB())
+            using (var game = new Game1())
                 game.Run();
         }
     }

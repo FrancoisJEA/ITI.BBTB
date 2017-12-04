@@ -23,9 +23,9 @@ namespace BBTB
 
         Vector2 _position;
 
-        BBTB _ctx;
+        Game1 _ctx;
 
-        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, BBTB ctx, Vector2 position, SpriteBatch spritebatch, Player player)
+        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Game1 ctx, Vector2 position, SpriteBatch spritebatch, Player player)
             : base(weaponTexture, position, spritebatch)
         {
             _position = position;

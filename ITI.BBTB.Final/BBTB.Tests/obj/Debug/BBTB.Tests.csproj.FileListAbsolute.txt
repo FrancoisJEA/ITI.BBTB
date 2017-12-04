@@ -1,0 +1,7 @@
+D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\bin\Debug\BBTB.Tests.dll
+D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\bin\Debug\BBTB.Tests.pdb
+D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\bin\Debug\nunit.framework.dll
+D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\bin\Debug\nunit.framework.xml
+D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\obj\Debug\BBTB.Tests.csproj.CoreCompileInputs.cache
+D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\obj\Debug\BBTB.Tests.dll
+D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\obj\Debug\BBTB.Tests.pdb
