@@ -1,22 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\bin\Debug\BBTB.Tests.dll" total="2" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2017-11-28" time="12:14:34">
+<test-results name="D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\bin\Debug\BBTB.Tests.dll" total="3" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2017-12-04" time="09:48:39">
   <environment nunit-version="2.6.4.14350" clr-version="4.0.30319.42000" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\bin\Debug" machine-name="ELTOREDO" user="ElToredo" user-domain="ELTOREDO" />
   <culture-info current-culture="fr-FR" current-uiculture="fr-FR" />
-  <test-suite type="Assembly" name="D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\bin\Debug\BBTB.Tests.dll" executed="True" result="Failure" success="False" time="0.171" asserts="0">
+  <test-suite type="Assembly" name="D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\bin\Debug\BBTB.Tests.dll" executed="True" result="Failure" success="False" time="9.220" asserts="0">
     <results>
-      <test-suite type="Namespace" name="BBTB" executed="True" result="Failure" success="False" time="0.161" asserts="0">
+      <test-suite type="Namespace" name="BBTB" executed="True" result="Failure" success="False" time="9.212" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="0.161" asserts="0">
+          <test-suite type="Namespace" name="Tests" executed="True" result="Failure" success="False" time="9.212" asserts="0">
             <results>
-              <test-suite type="TestFixture" name="SimpleTests" executed="True" result="Failure" success="False" time="0.160" asserts="0">
+              <test-suite type="TestFixture" name="SimpleTests" executed="True" result="Failure" success="False" time="9.211" asserts="0">
                 <results>
-                  <test-case name="BBTB.Tests.SimpleTests.ShouldFail" executed="True" result="Failure" success="False" time="0.085" asserts="1">
+                  <test-case name="BBTB.Tests.SimpleTests.PlayerSerialization" executed="True" result="Success" success="True" time="0.077" asserts="2" />
+                  <test-case name="BBTB.Tests.SimpleTests.ShouldFail" executed="True" result="Failure" success="False" time="9.046" asserts="1">
                     <failure>
                       <message><![CDATA[  Expected: 1
   But was:  0
 ]]></message>
-                      <stack-trace><![CDATA[à BBTB.Tests.SimpleTests.ShouldFail() dans D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\SimpleTests.cs:ligne 22
+                      <stack-trace><![CDATA[à BBTB.Tests.SimpleTests.ShouldFail() dans D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB.Tests\SimpleTests.cs:ligne 25
 ]]></stack-trace>
                     </failure>
                   </test-case>
