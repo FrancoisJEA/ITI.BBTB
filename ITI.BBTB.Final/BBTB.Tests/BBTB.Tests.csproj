@@ -55,7 +55,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Game1\BBTB.csproj">
+    <ProjectReference Include="..\BBTB\BBTB.csproj">
       <Project>{3da630a6-6393-4a8f-8d1f-5c2fac9e91b1}</Project>
       <Name>BBTB</Name>
     </ProjectReference>

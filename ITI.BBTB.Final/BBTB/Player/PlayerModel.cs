@@ -18,8 +18,7 @@ namespace BBTB
         string _helmet, _breastplate, _boots, _leggings;
         string _potiontype;
 
-        int _krumbz;
-        [NonSerialized]        
+        int _krumbz;      
         int _level;
         [NonSerialized]
         int _xplast;
