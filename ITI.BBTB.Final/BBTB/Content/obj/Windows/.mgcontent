@@ -4,7 +4,6 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-<<<<<<< HEAD
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/DebugFont.spritefont</File>
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/tile.png</File>
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/ground.png</File>
@@ -13,15 +12,5 @@
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/weapon.png</File>
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/monster.png</File>
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Sound/GunSound.mp3</File>
-=======
-    <File>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/DebugFont.spritefont</File>
-    <File>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/tile.png</File>
-    <File>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/ground.png</File>
-    <File>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/BBTBplayer.png</File>
-    <File>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/bullet.png</File>
-    <File>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/weapon.png</File>
-    <File>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/monster.png</File>
-    <File>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/Sound/GunSound.mp3</File>
->>>>>>> 4ec9d4444c77b3603c8de9b62822fe5152e09a16
   </SourceFiles>
 </SourceFileCollection>
