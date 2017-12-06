@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<<<<<<< HEAD
   <SourceFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/bullet.png</SourceFile>
   <SourceTime>2017-12-04T10:44:02.1690113+01:00</SourceTime>
   <DestFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/bin/Windows/bullet.xnb</DestFile>
   <DestTime>2017-12-06T10:37:25.0302943+01:00</DestTime>
+=======
+  <SourceFile>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/bullet.png</SourceFile>
+  <SourceTime>2017-11-28T10:01:08.2912351+01:00</SourceTime>
+  <DestFile>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/bin/Windows/bullet.xnb</DestFile>
+  <DestTime>2017-12-04T10:00:06.5744152+01:00</DestTime>
+>>>>>>> 4ec9d4444c77b3603c8de9b62822fe5152e09a16
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

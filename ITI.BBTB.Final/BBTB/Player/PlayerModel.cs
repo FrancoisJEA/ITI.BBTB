@@ -23,7 +23,7 @@ namespace BBTB
         [NonSerialized]
         int _xplast;
         int _xpnext;
-        int _skillspoints;
+        int _skillsPoints;
         public string name;
 
         public PlayerModel(string name,int classes)
@@ -34,6 +34,7 @@ namespace BBTB
 
         public int Life { get { return _life; } set { _life = value; } }
         public int Experience { get { return _experience; } set { _experience = value; } }
+        public int Xpnext { get { return _xpnext; } set { _xpnext = value; } }
         public int Strength { get { return _strength; } set { _strength = value; } }
         public int Agility { get { return _agility; } set { _agility = value; } }
         public int Intelligence { get { return _intelligence; } set { _intelligence = value; } }
@@ -45,6 +46,8 @@ namespace BBTB
 
         public int Level { get { return _level; ; } set { _level = value; } }
 
+        public int SkillPoint { get { return _skillsPoints ; } set { _skillsPoints = value; } }
+
         public void Level1SkillSetUp()
         {
             Level = 1;
@@ -55,58 +58,60 @@ namespace BBTB
             Agility = 10;
             Resistance = 10;
             Money = 0;
+            _xplast = 0;
+            _xpnext = 100;
         }
 
-        public void UpSkills(int numberofskillpoint, string attribute)
+        public void LevelUp()
+        {
+            while (_experience >= _xpnext)
+            {
+                _level++;
+                _xplast = _xpnext;
+                _xpnext = _xpnext * 3;
+                _skillsPoints++;
+                StatLevelUP();
+            }
+        }
+        public void StatLevelUP()
+        {
+            if (_classes == 1)
+            {
+                _life = _life + 10;
+            }
+            else if (_classes==2)
+            {
+                _life = _life + 10;
+            }
+            else if(_classes ==3)
+            {
+                _life = _life + 10;
+            }
+        }
+
+        public void UpSkills(int skillPointNumber, string attribute)
         {
             if (attribute == ("intelligence"))
             {
-                _intelligence = _intelligence + numberofskillpoint;
+                _intelligence = _intelligence + skillPointNumber;
             }
             else if (attribute == ("life"))
             {
-                _life = _life + numberofskillpoint;
+                _life = _life + skillPointNumber;
             }
             else if(attribute == ("strength"))
             {
-                _strength = _strength + numberofskillpoint;
+                _strength = _strength + skillPointNumber;
             }
             else if (attribute==("agility"))
             {
-                _agility = _agility + numberofskillpoint; 
+                _agility = _agility + skillPointNumber; 
             }
             else if (attribute == ("resistance"))
             {
-                _resistance = _resistance + numberofskillpoint;
+                _resistance = _resistance + skillPointNumber;
             }
-            _skillspoints = _skillspoints - numberofskillpoint;
-        }
-
-        public void SetExp()
-        {
-            _xpnext = _xplast = 0;
-            if (_level == 0) { _xpnext = 100; }
-        }
-
-        public void StatLevelUP()
-        {
-            bool LvlUp = (_experience == _xpnext);
-            if (LvlUp == true)
-            {
-                _life = _life +10;
-            }
-        }
-
-        public int LevelUpdate ()
-        {
-            if(_experience == _xpnext)
-            {
-                _level ++;
-                _xplast = _xpnext;
-                _xpnext = _xpnext * 3;
-                _skillspoints ++;
-            }
-            return _level;
+            _skillsPoints = _skillsPoints - skillPointNumber;
         }
     }
 }
