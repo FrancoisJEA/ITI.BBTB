@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BBTB.States;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -12,7 +13,7 @@ namespace BBTB
         Weapon _weapon;
         Weapon _weapon2;
 
-        Game1 _ctx;
+        GameState _ctx;
 
         Texture2D _texture;
         Vector2 _position;
@@ -22,7 +23,7 @@ namespace BBTB
         bool _booltime;
         private Vector2 oldPosition;
 
-        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, Game1 ctx, Weapon weapon)
+        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon)
             : base(texture, position, spritebatch)
         {
             _ctx = ctx;
