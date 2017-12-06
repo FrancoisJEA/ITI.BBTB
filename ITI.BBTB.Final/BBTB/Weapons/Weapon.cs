@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
+using BBTB.States;
 
 namespace BBTB
 {
@@ -23,9 +24,9 @@ namespace BBTB
 
         Vector2 _position;
 
-        Game1 _ctx;
+        GameState _ctx;
 
-        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Game1 ctx, Vector2 position, SpriteBatch spritebatch, Player player)
+        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, GameState ctx, Vector2 position, SpriteBatch spritebatch, Player player)
             : base(weaponTexture, position, spritebatch)
         {
             _position = position;
