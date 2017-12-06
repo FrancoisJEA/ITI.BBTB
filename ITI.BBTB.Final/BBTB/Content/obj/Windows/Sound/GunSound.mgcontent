@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/Sound/GunSound.mp3</SourceFile>
-  <SourceTime>2017-12-04T09:47:30.7642908+01:00</SourceTime>
-  <DestFile>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/bin/Windows/Sound/GunSound.xnb</DestFile>
-  <DestTime>2017-12-04T09:48:21.7349563+01:00</DestTime>
+  <SourceFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Sound/GunSound.mp3</SourceFile>
+  <SourceTime>2017-12-04T10:44:02.0789399+01:00</SourceTime>
+  <DestFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/bin/Windows/Sound/GunSound.xnb</DestFile>
+  <DestTime>2017-12-06T10:37:26.6057574+01:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
