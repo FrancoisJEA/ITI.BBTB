@@ -30,3 +30,4 @@ D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Sharp
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.csproj.CoreCompileInputs.cache
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.exe
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.pdb
+D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.csprojResolveAssemblyReference.cache
