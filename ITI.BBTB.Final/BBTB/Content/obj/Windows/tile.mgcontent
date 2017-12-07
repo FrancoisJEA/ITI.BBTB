@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/tile.png</SourceFile>
-  <SourceTime>2017-12-04T09:47:30.7532606+01:00</SourceTime>
-  <DestFile>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/bin/Windows/tile.xnb</DestFile>
-  <DestTime>2017-12-04T09:48:19.671281+01:00</DestTime>
+<<<<<<< HEAD
+  <SourceFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/tile.png</SourceFile>
+  <SourceTime>2017-12-04T10:44:02.2050581+01:00</SourceTime>
+  <DestFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/bin/Windows/tile.xnb</DestFile>
+  <DestTime>2017-12-06T11:00:18.9162505+01:00</DestTime>
+=======
+  <SourceFile>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/tile.png</SourceFile>
+  <SourceTime>2017-11-28T10:01:08.3017631+01:00</SourceTime>
+  <DestFile>C:/Users/franc/OneDrive/Documents/cours/In'Tech/IL/S3/PI/Projet S3/BBTB GitHub/ITI.BBTB.Final/ITI.BBTB.Final/BBTB/Content/bin/Windows/tile.xnb</DestFile>
+  <DestTime>2017-12-04T10:00:06.4480809+01:00</DestTime>
+>>>>>>> origin/master
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

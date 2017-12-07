@@ -47,6 +47,8 @@
     <Compile Include="Armor\BreastPlate.cs" />
     <Compile Include="Armor\Helmet.cs" />
     <Compile Include="Armor\Leggings.cs" />
+    <Compile Include="Component.cs" />
+    <Compile Include="Controls\Button.cs" />
     <Compile Include="Map\Board.cs" />
     <Compile Include="Bullets\Bullet.cs" />
     <Compile Include="Bullets\BulletLib.cs" />
@@ -59,6 +61,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="Map\Tile.cs" />
+    <Compile Include="States\CharacterMenu.cs" />
+    <Compile Include="States\GameState.cs" />
+    <Compile Include="States\MenuState.cs" />
+    <Compile Include="States\State.cs" />
     <Compile Include="Weapons\Weapon.cs" />
     <Compile Include="Weapons\WeaponLib.cs" />
   </ItemGroup>
