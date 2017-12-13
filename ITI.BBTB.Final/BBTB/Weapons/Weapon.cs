@@ -70,6 +70,7 @@ namespace BBTB
                 }
             }
         }
+
         private void BulletUpdate(GameTime gameTime)
         {
             for (int i = 0; i < Bullets.Count; i++)
