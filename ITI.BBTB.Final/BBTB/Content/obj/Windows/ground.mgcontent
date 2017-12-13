@@ -3,7 +3,11 @@
   <SourceFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/ground.png</SourceFile>
   <SourceTime>2017-12-04T10:44:02.1805411+01:00</SourceTime>
   <DestFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/bin/Windows/ground.xnb</DestFile>
+<<<<<<< HEAD
   <DestTime>2017-12-06T14:33:49.500819+01:00</DestTime>
+=======
+  <DestTime>2017-12-06T11:16:33.7872594+01:00</DestTime>
+>>>>>>> master
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

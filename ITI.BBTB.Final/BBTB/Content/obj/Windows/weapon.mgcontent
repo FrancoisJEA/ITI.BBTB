@@ -3,7 +3,11 @@
   <SourceFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/weapon.png</SourceFile>
   <SourceTime>2017-12-04T10:44:02.206539+01:00</SourceTime>
   <DestFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/bin/Windows/weapon.xnb</DestFile>
+<<<<<<< HEAD
   <DestTime>2017-12-06T14:33:49.5778738+01:00</DestTime>
+=======
+  <DestTime>2017-12-06T11:16:33.8810025+01:00</DestTime>
+>>>>>>> master
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

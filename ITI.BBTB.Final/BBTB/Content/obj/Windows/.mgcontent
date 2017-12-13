@@ -12,6 +12,7 @@
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/weapon.png</File>
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/monster.png</File>
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Sound/GunSound.mp3</File>
+<<<<<<< HEAD
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Controls/button.png</File>
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Font/Font.spritefont</File>
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Character/Gunner.png</File>
@@ -20,5 +21,7 @@
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Background/Menu.JPG</File>
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Background/Character.jpg</File>
     <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Font/Character.spritefont</File>
+=======
+>>>>>>> master
   </SourceFiles>
 </SourceFileCollection>

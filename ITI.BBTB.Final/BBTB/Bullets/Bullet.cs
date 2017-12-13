@@ -10,9 +10,10 @@ namespace BBTB
 {
     public class Bullet : Sprite
     {
+        Board _ctx; 
         float _rotation;
         Vector2 _origin;
-        //List<Enemy> _enemys;
+        List<Monster> _enemys;
         public BulletLib BulletLib { get; set; }
 
         public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib ctx/*, List<Enemy> enemys*/)
@@ -28,34 +29,12 @@ namespace BBTB
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);
             position += new Vector2(BulletLib.PositionUpdate().X, BulletLib.PositionUpdate().Y);
         }
-
-        /*public bool HasTouchedEnemy()
-        {
-            foreach (Enemy enemy in _enemys)
-            {
-                if (new System.Drawing.Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).IntersectsWith(enemy.EnemyLib.Bounds))
-                {
-                    enemy.EnemyLib.Life -= 10;
-                    return true;
-                }
-            }
-            return false;
-        }*/
-
         public bool HasTouchedEnemy()
         {
-            foreach (Monster monsters in Board.CurrentBoard.Monsters)
+            foreach(Monster monster in _ctx.Monsters)
+            if (monster.IsAlive)
             {
-                if (monsters.IsAlive)
-                {
-                    if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monsters.Bounds))
-                    {
-                        monsters.Life -= 50;
-                        if (monsters.Life <= 0) monsters.IsAlive = false;
-                        return true;
-                    }
-
-                }
+                return new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds);
             }
             return false;
         }
