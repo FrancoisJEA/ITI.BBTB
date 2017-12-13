@@ -11,17 +11,13 @@ namespace BBTB
     public class Monster : Sprite
     {
         public bool IsAlive { get; set; }
-
-        int _life;
+        public int Life { get; set; }
 
         public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive)
             : base(texture, position, batch)
         {
             IsAlive = isAlive;
-            _life = 100;
         }
-
-        public int Life { get { return _life; } set { _life = value; } }
 
         public override void Draw()
         {
