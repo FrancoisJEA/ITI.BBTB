@@ -14,22 +14,29 @@ namespace BBTB.States
     public class MenuState : State
     {
         private List<Component> _components;
-
+        Texture2D backGround;
+        Vector2 position;
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
+           
+            backGround = _content.Load<Texture2D>("Background/Menu");
+            position = new Vector2(0, 0);
             var buttonTexture = _content.Load<Texture2D>("Controls/Button");
             var buttonFont = _content.Load<SpriteFont>("Font/Font");
 
-                var newGameButton = new Button(buttonTexture, buttonFont)
-                {
+            var newGameButton = new Button(buttonTexture, buttonFont)
+            {
                     Position = new Vector2(240, 100),
                     Text = "New Game",
-                };
+                    PenColor = Color.BurlyWood,
+            };
             newGameButton.Click += NewGameButton_Click;
+          
             var loadGameButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(240, 250),
                 Text = "Load Game",
+                PenColor =  Color.BurlyWood,
             };
             loadGameButton.Click += LoadGameButton_Click;
 
@@ -37,11 +44,15 @@ namespace BBTB.States
             {
                 Position = new Vector2(240, 400),
                 Text = "Quit",
+                PenColor = Color.BurlyWood,
             };
             quitGameButton.Click += QuitGameButton_Click;
 
+
+
             _components = new List<Component>()
             {
+               
                 newGameButton,
                 loadGameButton,
                 quitGameButton,
@@ -55,7 +66,7 @@ namespace BBTB.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-
+            spriteBatch.Draw(backGround, position, Color.White);
             foreach (var component in _components)  
                 component.Draw(gameTime, spriteBatch);
             spriteBatch.End();
@@ -68,7 +79,7 @@ namespace BBTB.States
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new GameState(_game, _graphicsDevice, _content));
+            _game.ChangeState(new CharacterMenu(_game, _graphicsDevice, _content));
         }
 
         public override void PostUpdate(GameTime gameTime)
