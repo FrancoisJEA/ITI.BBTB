@@ -1,40 +1,3 @@
-<<<<<<< HEAD
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\BBTBplayer.xnb
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\bullet.xnb
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\DebugFont.xnb
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\ground.xnb
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\monster.xnb
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\tile.xnb
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\weapon.xnb
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\Controls\button.xnb
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\Font\Font.xnb
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\Sound\GunSound.xnb
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\BBTB.exe.config
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\BBTB.exe
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\BBTB.pdb
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\MonoGame.Framework.dll
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.dll
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.DXGI.dll
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.XInput.dll
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\MonoGame.Framework.xml
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.xml
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.DXGI.xml
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.XInput.xml
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.csprojResolveAssemblyReference.cache
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.csproj.CoreCompileInputs.cache
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.exe
-C:\Users\Madjid\Desktop\ITI.BBTB\ITI.BBTB\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.pdb
-=======
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\BBTBplayer.xnb
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\bullet.xnb
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\DebugFont.xnb
@@ -42,6 +5,8 @@ D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Conte
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\monster.xnb
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\tile.xnb
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\weapon.xnb
+D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\Controls\button.xnb
+D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\Font\Font.xnb
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\Sound\GunSound.xnb
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\BBTB.exe.config
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\BBTB.exe
@@ -64,40 +29,7 @@ D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Sharp
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.XInput.xml
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.csprojResolveAssemblyReference.cache
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.csproj.CoreCompileInputs.cache
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.exe
 D:\DéveloppementC#\ITI.BBTB.Git\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.pdb
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\BBTBplayer.xnb
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\bullet.xnb
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\DebugFont.xnb
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\ground.xnb
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\monster.xnb
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\tile.xnb
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\weapon.xnb
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\Content\Sound\GunSound.xnb
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\BBTB.exe.config
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\BBTB.exe
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\BBTB.pdb
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\MonoGame.Framework.dll
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.dll
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.DXGI.dll
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.XInput.dll
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\MonoGame.Framework.xml
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.xml
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.DXGI.xml
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.XInput.xml
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.csprojResolveAssemblyReference.cache
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.csproj.CoreCompileInputs.cache
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.exe
-C:\Users\franc\OneDrive\Documents\cours\In'Tech\IL\S3\PI\Projet S3\BBTB GitHub\ITI.BBTB.Final\ITI.BBTB.Final\BBTB\obj\x86\Debug\BBTB.pdb
->>>>>>> origin/master

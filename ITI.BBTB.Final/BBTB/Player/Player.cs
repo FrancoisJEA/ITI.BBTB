@@ -9,16 +9,14 @@ namespace BBTB
     [Serializable]
     public class Player : Sprite
     {
-        readonly PlayerModel _player;
         Weapon _weapon;
-        Weapon _weapon2;
+        PlayerModel _playerM;
 
         GameState _ctx;
 
         Texture2D _texture;
         Vector2 _position;
-        
-        int _level;
+
         int _time;
         bool _booltime;
         private Vector2 oldPosition;
@@ -26,6 +24,8 @@ namespace BBTB
         public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon)
             : base(texture, position, spritebatch)
         {
+            _playerM = new PlayerModel("Tanguy", 1);
+
             _ctx = ctx;
             _texture = texture;
             _position = position;
@@ -35,10 +35,8 @@ namespace BBTB
         }
 
         public Weapon Weapon { get { return _weapon; } set { _weapon = value; } }
-        public Weapon Weapon2 { get { return _weapon2; } set { _weapon2 = value; } }
 
         public Vector2 Mouvement { get; set; }
-
 
         public void Update(GameTime gameTime)
         {
@@ -81,6 +79,21 @@ namespace BBTB
             {
                 _time -= 1;
             }
+        }
+
+        public bool HasTouchedMonster()
+        {
+            foreach (Monster monster in Board.CurrentBoard.Monsters)
+            {
+                if (monster.IsAlive)
+                {
+                    if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private void MoveAsFarAsPossible(GameTime gameTime)

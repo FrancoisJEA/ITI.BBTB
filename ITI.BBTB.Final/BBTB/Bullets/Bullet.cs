@@ -12,35 +12,22 @@ namespace BBTB
     {
         float _rotation;
         Vector2 _origin;
-        //List<Enemy> _enemys;
         public BulletLib BulletLib { get; set; }
+        //PlayerModel _ctxM;
 
-        public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib ctx/*, List<Enemy> enemys*/)
+        public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib ctx)
             : base(texture, position, spritebatch)
         {
             _origin = new Vector2(-27, 20);
             _rotation = ctx.Rotation;
             BulletLib = new BulletLib(ctx, new Vector2(base.position.X, base.position.Y), texture.Height, texture.Width);
-            //_enemys = enemys;
+            //_ctxM = new PlayerModel("Tanguy", 1);
         }
         public void Update(GameTime gameTime)
         {
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);
             position += new Vector2(BulletLib.PositionUpdate().X, BulletLib.PositionUpdate().Y);
         }
-
-        /*public bool HasTouchedEnemy()
-        {
-            foreach (Enemy enemy in _enemys)
-            {
-                if (new System.Drawing.Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).IntersectsWith(enemy.EnemyLib.Bounds))
-                {
-                    enemy.EnemyLib.Life -= 10;
-                    return true;
-                }
-            }
-            return false;
-        }*/
 
         public bool HasTouchedEnemy()
         {
@@ -51,7 +38,13 @@ namespace BBTB
                     if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monsters.Bounds))
                     {
                         monsters.Life -= 50;
-                        if (monsters.Life <= 0) monsters.IsAlive = false;
+
+                        if (monsters.Life <= 0)
+                        {
+                            monsters.IsAlive = false;
+                            //_ctxM.Experience += 100;
+                        }
+
                         return true;
                     }
 

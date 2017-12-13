@@ -18,13 +18,12 @@ namespace BBTB.States
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _tileTexture, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture, _monsterTexture;
-        private Player _jumper;
+        private Player _player;
+        private Player _ctxM;
         private Board _board;
         private Sprite _sprite;
         private Random _rnd = new Random();
         private SpriteFont _debugFont;
-     
-        Game1 ctx;
 
         SoundEffect _sound;
 
@@ -39,9 +38,9 @@ namespace BBTB.States
             _monsterTexture = Content.Load<Texture2D>("monster");
             _jumperTexture = Content.Load<Texture2D>("BBTBplayer");
             _sprite = new Sprite(_groundTexture, new Vector2(60, 60), _spriteBatch);
-            _jumper = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null);
-            Weapon _weapon = new Weapon(_weaponTexture, _bulletTexture, this, _jumper.position, _spriteBatch, _jumper);
-            _jumper.Weapon = _weapon;
+            _player = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null);
+            Weapon _weapon = new Weapon(_weaponTexture, _bulletTexture, this, _player.position, _spriteBatch, _player);
+            _player.Weapon = _weapon;
             _board = new Board(_spriteBatch, _tileTexture, _monsterTexture, 15, 10);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 
@@ -52,7 +51,7 @@ namespace BBTB.States
         public override void Update(GameTime gameTime)
         {
 
-            _jumper.Update(gameTime);
+            _player.Update(gameTime);
             CheckKeyboardAndReact();
 
         }
@@ -64,8 +63,8 @@ namespace BBTB.States
 
         private void PutJumperInTopLeftCorner()
         {
-            _jumper.position = Vector2.One * 80;
-            _jumper.Mouvement = Vector2.Zero;
+            _player.position = Vector2.One * 80;
+            _player.Mouvement = Vector2.Zero;
         }
 
         private void RestartGame()
@@ -80,10 +79,6 @@ namespace BBTB.States
             if (state.IsKeyDown(Keys.F5)) { RestartGame(); }
         }
 
-      
-
-     
-
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             _graphicsDevice.Clear(Color.WhiteSmoke);
@@ -91,19 +86,23 @@ namespace BBTB.States
             _sprite.Draw();
             _board.Draw();
             WriteDebugInformation();
-            _jumper.Draw();
+            _player.Draw();
             _spriteBatch.End();
 
         }
 
         private void WriteDebugInformation()
         {
-            //string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _jumper.Position.X, _jumper.Position.Y);
-            //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _jumper.Movement.X, _jumper.Movement.Y);
+            string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.position.X, _player.position.Y);
+            string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
+            string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
+            //string experienceInText = string.Format("Character's experience: ({0:0})", _ctxM.Experience);
 
-            // DrawWithShadow(positionInText, new Vector2(10, 0));
-            //DrawWithShadow(movementInText, new Vector2(10, 20));
-            // DrawWithShadow("F5 for random board", new Vector2(70, 600));
+            DrawWithShadow(positionInText, new Vector2(10, 0));
+            DrawWithShadow(movementInText, new Vector2(10, 20));
+            DrawWithShadow(lifeInText, new Vector2(200, 200));
+            //DrawWithShadow(experienceInText, new Vector2(240, 240));
+            DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }
 
         private void DrawWithShadow(string text, Vector2 position)
