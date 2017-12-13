@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game1.Object
+namespace Game1.Item
 {
     public class Potion : ObtainableItem
     {

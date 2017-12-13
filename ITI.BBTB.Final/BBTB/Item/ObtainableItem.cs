@@ -1,6 +1,6 @@
 ﻿using System;
  
-namespace Game1.Object
+namespace Game1.Item
 {
     public abstract class ObtainableItem
         {

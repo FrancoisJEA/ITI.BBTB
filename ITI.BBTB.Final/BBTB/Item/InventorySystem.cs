@@ -9,7 +9,7 @@ namespace Game1
 {
         public class InventorySystem
         {
-            private const int MAXIMUM_SLOTS_IN_INVENTORY = 10;
+            private const int MAXIMUM_SLOTS_IN_INVENTORY = 5;
 
             public readonly List<InventoryRecord> InventoryRecords = new List<InventoryRecord>();
 
@@ -49,8 +49,7 @@ namespace Game1
                         }
                         else
                         {
-                            // Throw an exception, or somehow let the user know they are out of inventory space.
-                            // This exception here is just a quick example. Do something better in your code.
+                            // If no more place in Inventory, replace item.
                             throw new Exception("There is no more space in the inventory");
                         }
                     }
