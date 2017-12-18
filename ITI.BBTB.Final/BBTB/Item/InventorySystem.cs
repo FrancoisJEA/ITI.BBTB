@@ -11,7 +11,7 @@ namespace Game1
         {
             private const int MAXIMUM_SLOTS_IN_INVENTORY = 5;
 
-            public readonly List<InventoryRecord> InventoryRecords = new List<InventoryRecord>();
+            public readonly List<InventoryRecord> InventoryRecords = new List<InventoryRecord>(); //Inventory of the player
 
             public void AddItem(ObtainableItem item, int quantityToAdd)
             {
