@@ -18,7 +18,7 @@ namespace BBTB.States
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _tileTexture, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture, _monsterTexture;
-        private Player _jumper;
+        private Player _player;
         private Board _board;
         private Sprite _sprite;
         private Random _rnd = new Random();
@@ -39,9 +39,9 @@ namespace BBTB.States
             _monsterTexture = Content.Load<Texture2D>("monster");
             _jumperTexture = Content.Load<Texture2D>("BBTBplayer");
             _sprite = new Sprite(_groundTexture, new Vector2(60, 60), _spriteBatch);
-            _jumper = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null);
-            Weapon _weapon = new Weapon(_weaponTexture, _bulletTexture, this, _jumper.position, _spriteBatch, _jumper);
-            _jumper.Weapon = _weapon;
+            _player = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null);
+            Weapon _weapon = new Weapon(_weaponTexture, _bulletTexture, this, _player.position, _spriteBatch, _player);
+            _player.Weapon = _weapon;
             _board = new Board(_spriteBatch, _tileTexture, _monsterTexture, 15, 10);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 
@@ -52,7 +52,7 @@ namespace BBTB.States
         public override void Update(GameTime gameTime)
         {
 
-            _jumper.Update(gameTime);
+            _player.Update(gameTime);
             CheckKeyboardAndReact();
 
         }
@@ -64,8 +64,8 @@ namespace BBTB.States
 
         private void PutJumperInTopLeftCorner()
         {
-            _jumper.position = Vector2.One * 80;
-            _jumper.Mouvement = Vector2.Zero;
+            _player.position = Vector2.One * 80;
+            _player.Mouvement = Vector2.Zero;
         }
 
         private void RestartGame()
@@ -91,7 +91,7 @@ namespace BBTB.States
             _sprite.Draw();
             _board.Draw();
             WriteDebugInformation();
-            _jumper.Draw();
+            _player.Draw();
             _spriteBatch.End();
 
         }

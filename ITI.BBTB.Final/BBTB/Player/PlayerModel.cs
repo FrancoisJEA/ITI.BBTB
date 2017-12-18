@@ -17,11 +17,12 @@ namespace BBTB
         string _weapon1, _weapon2;
         string _helmet, _breastplate, _boots, _leggings;
         string _potiontype;
-
         int _krumbz;      
+
         int _level;
         [NonSerialized]
         int _xplast;
+
         int _xpnext;
         int _skillsPoints;
         public string name;

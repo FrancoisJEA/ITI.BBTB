@@ -8,6 +8,9 @@ namespace BBTB
     {
         public Tile[,] Tiles { get; set; }
         public Monster[,] Monsters { get; set; }
+        public Player player;
+        int _stageNumber;
+        int _roomInFloor;
         public int Columns { get; set; }
         public int Rows { get; set; }
         public Texture2D TileTexture { get; set; }
@@ -29,12 +32,30 @@ namespace BBTB
             Board.CurrentBoard = this;
         }
 
+        public int StageNumber { get { return _stageNumber; } set{ _stageNumber = value; } }
+
         public void CreateNewBoard()
         {
             SetAllBorderTilesBlockedAndSomeRandomly();
             AddMonsters();
             //InitializeAllTilesAndBlockSomeRandomly();
             SetTopLeftTileUnblocked();
+        }
+
+        public void Stage1()
+        {
+            _roomInFloor = _rnd.Next(4, 7);
+            _stageNumber = 1;
+
+            
+        }
+
+        public void NewStage()
+        {
+            if(_roomInFloor = )
+            {
+
+            }
         }
 
         private void SetTopLeftTileUnblocked()
