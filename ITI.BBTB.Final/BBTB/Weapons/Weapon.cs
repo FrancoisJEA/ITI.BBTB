@@ -75,7 +75,7 @@ namespace BBTB
         {
             for (int i = 0; i < Bullets.Count; i++)
             {
-                if (Bullets[i].BulletLib.IsDead() || Bullets[i].HasTouchedEnemy() || Bullets[i].HasTouchedTile())
+                if (Bullets[i].BulletLib.IsDead() || Bullets[i].TouchEnemy() || Bullets[i].HasTouchedTile())
                 {
                     Bullets.Remove(Bullets[i]);
                 }

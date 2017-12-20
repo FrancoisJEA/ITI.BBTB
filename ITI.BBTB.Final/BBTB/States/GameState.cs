@@ -19,7 +19,6 @@ namespace BBTB.States
         private SpriteBatch _spriteBatch;
         private Texture2D _tileTexture, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture, _monsterTexture;
         private Player _player;
-        private Player _ctxM;
         private Board _board;
         private Sprite _sprite;
         private Random _rnd = new Random();
@@ -52,8 +51,9 @@ namespace BBTB.States
         {
 
             _player.Update(gameTime);
+            foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
             CheckKeyboardAndReact();
-
+            
         }
 
         internal void PlayGunSound()
@@ -96,12 +96,12 @@ namespace BBTB.States
             string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.position.X, _player.position.Y);
             string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
             string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
-            //string experienceInText = string.Format("Character's experience: ({0:0})", _ctxM.Experience);
+            string experienceInText = string.Format("Character's experience: ({0:0})", _player._playerM.Experience);
 
             DrawWithShadow(positionInText, new Vector2(10, 0));
             DrawWithShadow(movementInText, new Vector2(10, 20));
             DrawWithShadow(lifeInText, new Vector2(200, 200));
-            //DrawWithShadow(experienceInText, new Vector2(240, 240));
+            DrawWithShadow(experienceInText, new Vector2(240, 240));
             DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }
 

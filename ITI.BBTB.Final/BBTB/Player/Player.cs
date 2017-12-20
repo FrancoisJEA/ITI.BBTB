@@ -10,7 +10,7 @@ namespace BBTB
     public class Player : Sprite
     {
         Weapon _weapon;
-        PlayerModel _playerM;
+        public PlayerModel _playerM;
 
         GameState _ctx;
 
