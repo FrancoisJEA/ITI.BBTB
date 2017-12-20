@@ -8,6 +8,10 @@ namespace BBTB
     {
         public Tile[,] Tiles { get; set; }
         public Monster[,] Monsters { get; set; }
+        public Player player;
+        int _stageNumber;
+        int _roomInFloor;
+        int _roomNumber;
         public int Columns { get; set; }
         public int Rows { get; set; }
         public Texture2D TileTexture { get; set; }
@@ -29,12 +33,52 @@ namespace BBTB
             Board.CurrentBoard = this;
         }
 
+        public int StageNumber { get { return _stageNumber; } set{ _stageNumber = value; } }
+
         public void CreateNewBoard()
         {
             SetAllBorderTilesBlockedAndSomeRandomly();
             AddMonsters();
             //InitializeAllTilesAndBlockSomeRandomly();
             SetTopLeftTileUnblocked();
+        }
+
+        public void Stage1()
+        {
+            _roomInFloor = _rnd.Next(4, 7);
+            _stageNumber = 1;
+            _roomNumber = 1;
+        }
+        /*
+        public Vector2 TPtile()
+        {
+            if(TPtileUp())
+            {
+
+            }
+        }
+        */
+
+        public bool TPtileUp()
+        {
+            foreach (Monster monster in Monsters)
+            {
+                if (!monster.IsAlive)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void NewStage()
+        {
+            if(_roomNumber == _roomInFloor /*&& player.position == TPtile()*/ )
+            {
+                CreateNewBoard();
+                _roomInFloor = _rnd.Next(4, 7);
+                _stageNumber = _stageNumber + 1;
+            }
         }
 
         private void SetTopLeftTileUnblocked()
