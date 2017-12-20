@@ -11,6 +11,7 @@ namespace BBTB
         public Player player;
         int _stageNumber;
         int _roomInFloor;
+        int _roomNumber;
         public int Columns { get; set; }
         public int Rows { get; set; }
         public Texture2D TileTexture { get; set; }
@@ -46,15 +47,37 @@ namespace BBTB
         {
             _roomInFloor = _rnd.Next(4, 7);
             _stageNumber = 1;
+            _roomNumber = 1;
+        }
+        /*
+        public Vector2 TPtile()
+        {
+            if(TPtileUp())
+            {
 
-            
+            }
+        }
+        */
+
+        public bool TPtileUp()
+        {
+            foreach (Monster monster in Monsters)
+            {
+                if (!monster.IsAlive)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void NewStage()
         {
-            if(_roomInFloor = )
+            if(_roomNumber == _roomInFloor /*&& player.position == TPtile()*/ )
             {
-
+                CreateNewBoard();
+                _roomInFloor = _rnd.Next(4, 7);
+                _stageNumber = _stageNumber + 1;
             }
         }
 
