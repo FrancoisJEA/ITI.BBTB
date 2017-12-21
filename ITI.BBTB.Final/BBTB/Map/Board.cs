@@ -34,6 +34,8 @@ namespace BBTB
         }
 
         public int StageNumber { get { return _stageNumber; } set{ _stageNumber = value; } }
+        public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
+        public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
 
         public void CreateNewBoard()
         {
@@ -48,17 +50,17 @@ namespace BBTB
             _roomInFloor = _rnd.Next(4, 7);
             _stageNumber = 1;
             _roomNumber = 1;
+            CreateNewBoard();
         }
         /*
         public Vector2 TPtile()
         {
             if(TPtileUp())
             {
-
+              
             }
         }
         */
-
         public bool TPtileUp()
         {
             foreach (Monster monster in Monsters)
@@ -70,7 +72,18 @@ namespace BBTB
             }
             return false;
         }
-
+        /*
+        public void NewRoom()
+        {
+            if (_roomNumber < _roomInFloor)
+            {
+                if (TPtile() == player.position)
+                {
+                    CreateNewBoard();
+                }
+            }
+        }
+        */
         public void NewStage()
         {
             if(_roomNumber == _roomInFloor /*&& player.position == TPtile()*/ )
