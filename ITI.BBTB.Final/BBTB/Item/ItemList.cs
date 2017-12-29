@@ -7,9 +7,22 @@ using System.Threading.Tasks;
 namespace BBTB
 {
    public class ItemList
-    {
+   {
         var Items = new Dictionnary<item>
-        { 
+        {
+            // Items ID
+
+                    // [0] = Helmet
+                    // [1] = Plastron
+                    // [2] = Greaves
+                    // [3] = Boots
+
+            // Weapons ID
+
+                    // [4] = Archer
+                    // [5] = Wizard
+                    // [6] = Marksman
+
             Items.add (0,"Steel helmet"),
             Items.add (0,"Leather helmet"),
             Items.add (1,"Steel plastron"),
@@ -18,22 +31,15 @@ namespace BBTB
             Items.add (2,"Leather greaves"),
             Items.add (3,"Steel boots"),
             Items.add (3,"Leather boots"),
-            Items.add (4,"Leather helmet"),
-            Items.add (4,"Leather helmet"),
+            Items.add (4,"Crossbow1"),
+            Items.add (4,"Bow 1"),
+            Items.add (5,"Magic Wand"),
+            Items.add (5,"Fire Staff"),
+            Items.add (6,"Pistol1"),
+            Items.add (6,"Machine gun1")
 
 
-
-        }
-
-
-    }
+        };
+  
+   }
 }
-
-
-new Item { Tags = new[0] { "Steel helmet", "Leather helmet" }},
-    new Item { Tags = new[1] { "Steel plastron", "Leather armor" }},
-    new Item { Tags = new[2] { "Steel greaves", "Leather greaves" }},
-    new Item { Tags = new[3] { "Steel Boots", "Leather boots" }},
-    new Item { Tags = new[4] { "Crossbow1", "Bow1" }},
-    new Item { Tags = new[5] { "Magic Wand1", "Fire Staff1" }},
-    new Item { Tags = new[5] { "Pistol1", "Machine gun1" }}
