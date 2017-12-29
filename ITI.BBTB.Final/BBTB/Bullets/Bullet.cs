@@ -10,7 +10,6 @@ namespace BBTB
 {
     public class Bullet : Sprite
     {
-   
         float _rotation;
         Vector2 _origin;
         List<Monster> _enemys;
