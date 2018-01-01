@@ -15,8 +15,6 @@ namespace BBTB
         public int Life { get; set; }
 		Player player;
 		Vector2 _position;
-		double l;
-
 
         public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive)
             : base(texture, position, batch)
@@ -24,7 +22,7 @@ namespace BBTB
             IsAlive = isAlive;
         }
 
-		public void Intelligence()
+		public void IntelligenceMoves()
 	    {
 			double k;
 			k = (position.X - player.position.X) * (position.X - player.position.X) + (position.Y - player.position.Y) * (position.Y - player.position.Y);
@@ -32,18 +30,33 @@ namespace BBTB
 			
 			if ( 10 < k && k <80 )
 			{
-				// this.shot(player.position);
-
+				this.shot(player.position);
 			}
 		}
 
-		// public static double Sqrt( double l) { return l;}
+		public void shot(Vector2 positionPlayer)
+		{
+			double k;
+			k = (position.X - player.position.X) * (position.X - player.position.X) + (position.Y - player.position.Y) * (position.Y - player.position.Y);
+			k = Math.Sqrt(k);
+
+			if (10 < k && k < 80)
+			{
+				
+			}
+		}
+
+		public void Move()
+		{
+
+		}
 
         public override void Draw()
         {
             if (IsAlive)
             {
                 base.Draw();
+
             }
         }
     }
