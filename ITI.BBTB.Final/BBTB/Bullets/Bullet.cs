@@ -15,29 +15,37 @@ namespace BBTB
         Vector2 _origin;
         List<Monster> _enemys;
         public BulletLib BulletLib { get; set; }
+		int _damages;
 
-        public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib ctx)
+        public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon,Board board)
             : base(texture, position, spritebatch)
         {
             
             _origin = new Vector2(-27, 20);
-            _rotation = ctx.Rotation;
-            BulletLib = new BulletLib(ctx, new Vector2(base.position.X, base.position.Y), texture.Height, texture.Width);
+            _rotation = weapon.Rotation;
+            BulletLib = new BulletLib(weapon, new Vector2(base.position.X, base.position.Y), texture.Height, texture.Width);
+			_damages = 50;
+			_ctx = board;
         }
 
+		public int Damages { get { return _damages;} set { _damages = value; } }
         public void Update(GameTime gameTime)
         {
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);
             position += new Vector2(BulletLib.PositionUpdate().X, BulletLib.PositionUpdate().Y);
         }
 
-		public bool HasTouchedEnemy()
+		public bool TouchEnemy()
 		{
 			foreach (Monster monster in Board.CurrentBoard.Monsters)
 			
 				if (monster.IsAlive)
 				{
-					return new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds);
+					monster.Hit(this);
+					if (monster.Life <= 0) monster.IsAlive = false;
+					_ctx.OnBulletDestroy(this);
+					return true;
+
 				}
 				return false;
         }
@@ -56,11 +64,6 @@ namespace BBTB
             }
             return false;
         }
-
-		public int Damages ()
-		{
-			return 1;
-		}
 
 		public override void Draw()
         {

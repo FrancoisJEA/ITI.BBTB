@@ -118,7 +118,7 @@ namespace BBTB
 
         internal void CreateBullet(Texture2D bulletTexture, Vector2 position, SpriteBatch spriteBatch, WeaponLib weaponLib)
         {
-            Bullets.Add(new Bullet(bulletTexture, position, spriteBatch, weaponLib, this));
+            Bullets.Add(new Bullet(bulletTexture, position, spriteBatch, weaponLib,this));
         }
 
         private void AddMonsters()
