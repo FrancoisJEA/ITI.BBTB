@@ -10,6 +10,7 @@ namespace BBTB
 {
     public class Bullet : Sprite
     {
+		Board _ctx;
         float _rotation;
         Vector2 _origin;
         List<Monster> _enemys;
@@ -39,7 +40,6 @@ namespace BBTB
 					return new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds);
 				}
 				return false;
-			
         }
 
         public bool HasTouchedTile()
@@ -57,7 +57,12 @@ namespace BBTB
             return false;
         }
 
-        public override void Draw()
+		public int Damages ()
+		{
+			return 1;
+		}
+
+		public override void Draw()
         {
             SpriteBatch.Draw(Texture, position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
         }
