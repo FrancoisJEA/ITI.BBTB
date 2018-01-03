@@ -56,15 +56,15 @@ namespace BBTB
             _roomNumber = 1;
             CreateNewBoard();
         }
-        /*
-        public Vector2 TPtile()
+        
+        public void TPtile()
         {
             if(TPtileUp())
             {
-              
+                Tiles[13, 1].IsBlocked = true;
             }
         }
-        */
+        
         public bool TPtileUp()
         {
             foreach (Monster monster in Monsters)
@@ -76,18 +76,18 @@ namespace BBTB
             }
             return false;
         }
-        /*
+        
         public void NewRoom()
         {
             if (_roomNumber < _roomInFloor)
             {
-                if (TPtile() == player.position)
+                if (player.Bounds.Intersects(Tiles[13, 1].Bounds))
                 {
                     CreateNewBoard();
                 }
             }
         }
-        */
+        
         public void NewStage()
         {
             if(_roomNumber == _roomInFloor /*&& player.position == TPtile()*/ )
@@ -101,6 +101,12 @@ namespace BBTB
         private void SetTopLeftTileUnblocked()
         {
             Tiles[1, 1].IsBlocked = false;
+
+            Monsters[13, 1].IsAlive = false;
+            Tiles[12, 1].IsBlocked = false;
+            Tiles[13, 2].IsBlocked = false;
+            Tiles[11, 1].IsBlocked = false;
+
             Monsters[1, 1].IsAlive = false;
 
             for (int x = 0; x < Columns; x++)
@@ -212,6 +218,8 @@ namespace BBTB
         internal void Update(GameTime gameTime)
         {
             BulletUpdate(gameTime);
+            TPtileUp();
+            TPtile();
         }
 
         private void BulletUpdate(GameTime gameTime)
