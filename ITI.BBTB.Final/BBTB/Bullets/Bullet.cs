@@ -19,12 +19,13 @@ namespace BBTB
 
         int _damages;
 
-        public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib ctx)
+        public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon, Board ctx)
             : base(texture, position, spritebatch)
         {
+            _ctx = ctx;
             _origin = new Vector2(-27, 20);
-            _rotation = ctx.Rotation;
-            BulletLib = new BulletLib(ctx, new Vector2(base.position.X, base.position.Y), texture.Height, texture.Width);
+            _rotation = weapon.Rotation;
+            BulletLib = new BulletLib(weapon, new Vector2(base.position.X, base.position.Y), texture.Height, texture.Width);
 
             //Bullets = new List<Bullet>();
 
@@ -49,30 +50,14 @@ namespace BBTB
                 {
                     if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
-                        monster.Life -= 50;
+                        monster.Hit(this);
                         if (monster.Life <= 0) monster.IsAlive = false;
+                        _ctx.OnBulletDestroy(this);
                         return true;
-                        /*for (int i = 0; i < Bullets.Count; i++) Bullets.Remove(Bullets[i]);
-                        monster.Hit(this);*/
                     }
                 }
             return false;
         }
-
-        /*private void BulletUpdate(GameTime gameTime)
-        {
-            for (int i = 0; i < Bullets.Count; i++)
-            {
-                if (Bullets[i].BulletLib.IsDead())
-                {
-                    Bullets.Remove(Bullets[i]);
-                }
-                else
-                {
-                    Bullets[i].Update(gameTime);
-                }
-            }
-        }*/
 
         public bool HasTouchedTile()
         {

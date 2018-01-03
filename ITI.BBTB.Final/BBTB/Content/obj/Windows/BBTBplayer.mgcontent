@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/BBTBplayer.png</SourceFile>
-  <SourceTime>2017-12-04T10:44:02.0709359+01:00</SourceTime>
-  <DestFile>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/bin/Windows/BBTBplayer.xnb</DestFile>
-  <DestTime>2017-12-13T10:08:55.1071887+01:00</DestTime>
+  <SourceFile>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/BBTBplayer.png</SourceFile>
+  <SourceTime>2017-12-04T09:47:30.7683006+01:00</SourceTime>
+  <DestFile>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/bin/Windows/BBTBplayer.xnb</DestFile>
+  <DestTime>2017-12-20T09:12:13.8119191+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

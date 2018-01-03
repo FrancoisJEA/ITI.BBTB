@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace BBTB
 {
@@ -15,6 +16,8 @@ namespace BBTB
         private SpriteBatch SpriteBatch { get; set; }
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
+        List<Bullet> Bullets { get; }
+
 
         public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D monsterTexture, int columns, int rows)
         {
@@ -27,6 +30,7 @@ namespace BBTB
             Tiles = new Tile[Columns, Rows];
             CreateNewBoard();
             Board.CurrentBoard = this;
+            Bullets = new List<Bullet>();
         }
 
         public void CreateNewBoard()
@@ -55,6 +59,11 @@ namespace BBTB
             }
         }
 
+        internal void CreateBullet(Texture2D bulletTexture, Vector2 position, SpriteBatch spriteBatch, WeaponLib weaponLib)
+        {
+            Bullets.Add(new Bullet(bulletTexture, position, spriteBatch, weaponLib, this));
+        }
+
         private void AddMonsters()
         {
             for (int x = 0; x < Columns; x++)
@@ -78,6 +87,14 @@ namespace BBTB
                     Monsters[_rnd.Next(1,10), _rnd.Next(1,6)].IsAlive = true;
                     }*/
                 }
+            }
+        }
+
+        internal void OnBulletDestroy(Bullet bullet)
+        {
+            for (int i = 0; i < Bullets.Count; i++)
+            {
+                Bullets.Remove(Bullets[i]);
             }
         }
 
@@ -127,6 +144,31 @@ namespace BBTB
             foreach (var monster in Monsters)
             {
                 monster.Draw();
+            }
+
+            foreach (var bullet in Bullets)
+            {
+                bullet.Draw();
+            }
+        }
+
+        internal void Update(GameTime gameTime)
+        {
+            BulletUpdate(gameTime);
+        }
+
+        private void BulletUpdate(GameTime gameTime)
+        {
+            for (int i = 0; i < Bullets.Count; i++)
+            {
+                if (Bullets[i].BulletLib.IsDead() || Bullets[i].TouchEnemy() || Bullets[i].HasTouchedTile())
+                {
+                    Bullets.Remove(Bullets[i]);
+                }
+                else
+                {
+                    Bullets[i].Update(gameTime);
+                }
             }
         }
 

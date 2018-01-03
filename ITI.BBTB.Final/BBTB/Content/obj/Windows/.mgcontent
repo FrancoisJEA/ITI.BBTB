@@ -4,21 +4,21 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/DebugFont.spritefont</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/tile.png</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/ground.png</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/BBTBplayer.png</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/bullet.png</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/weapon.png</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/monster.png</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Sound/GunSound.mp3</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Controls/button.png</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Font/Font.spritefont</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Character/Gunner.png</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Character/Archer.png</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Character/Mage.png</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Background/Menu.JPG</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Background/Character.jpg</File>
-    <File>C:/Users/Madjid/Desktop/ITI.BBTB/ITI.BBTB/ITI.BBTB.Final/BBTB/Content/Font/Character.spritefont</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/DebugFont.spritefont</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/tile.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/ground.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/BBTBplayer.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/bullet.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/weapon.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/monster.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/Sound/GunSound.mp3</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/Controls/button.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/Font/Font.spritefont</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/Character/Gunner.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/Character/Archer.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/Character/Mage.png</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/Background/Menu.JPG</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/Background/Character.jpg</File>
+    <File>D:/DéveloppementC#/ITI.BBTB.Git/ITI.BBTB.Final/BBTB/Content/Font/Character.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>

@@ -47,13 +47,18 @@ namespace BBTB.States
 
         }
 
+        internal Board Board
+        {
+            get { return _board; }
+        }
+
         public override void Update(GameTime gameTime)
         {
 
             _player.Update(gameTime);
             foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
             CheckKeyboardAndReact();
-            
+            _board.Update(gameTime);
         }
 
         internal void PlayGunSound()
