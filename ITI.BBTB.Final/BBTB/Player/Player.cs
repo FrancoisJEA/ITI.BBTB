@@ -17,6 +17,8 @@ namespace BBTB
 
         Texture2D _texture;
         Vector2 _position;
+
+
         
         int _level;
         int _time;

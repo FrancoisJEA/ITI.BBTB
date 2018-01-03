@@ -13,8 +13,6 @@ namespace BBTB.States
 {
     public class GameState : State
     {
-
-
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _tileTexture, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture, _monsterTexture;
