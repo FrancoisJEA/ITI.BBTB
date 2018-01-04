@@ -22,7 +22,8 @@ namespace BBTB
 		public void Pray ()
 		{
 			// appication of boosts 
-			
+			_player._playerM.Life += 100;
+			_player.HavePrayed = true;
 		}
 
 

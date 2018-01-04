@@ -29,7 +29,6 @@ namespace BBTB
             : base(texture, position, spritebatch)
         {
             _playerM = new PlayerModel("Tanguy", 1);
-
             _ctx = ctx;
             _texture = texture;
             _position = position;
@@ -39,9 +38,8 @@ namespace BBTB
 			_havePrayed = havePrayed;
         }
 		
-		
+		public bool HavePrayed {get { return _havePrayed; } set { _havePrayed = value; }  }
         public Weapon Weapon { get { return _weapon; } set { _weapon = value; } }
-
         public Vector2 Mouvement { get; set; }
 
         public void Update(GameTime gameTime)
