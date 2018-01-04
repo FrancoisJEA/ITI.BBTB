@@ -9,7 +9,8 @@ namespace BBTB
     {
         public Tile[,] Tiles { get; set; }
         public Monster[,] Monsters { get; set; }
-        public Player player;
+		// public Preacher[,] Preacher { get; set; }
+		public Player player;
         int _stageNumber;
         int _roomInFloor;
         int _roomNumber;
@@ -17,6 +18,7 @@ namespace BBTB
         public int Rows { get; set; }
         public Texture2D TileTexture { get; set; }
         public Texture2D MonsterTexture { get; set; }
+		public Texture2D PreacherTexture { get; set; }
         private SpriteBatch SpriteBatch { get; set; }
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
@@ -45,7 +47,6 @@ namespace BBTB
         {
             SetAllBorderTilesBlockedAndSomeRandomly();
             AddMonsters();
-            //InitializeAllTilesAndBlockSomeRandomly();
             SetTopLeftTileUnblocked();
         }
 
@@ -153,7 +154,27 @@ namespace BBTB
             }
         }
 
-        internal void OnBulletDestroy(Bullet bullet)
+		private void AddPreacher()
+		{
+			for (int x = 0; x < Columns; x++)
+			{
+				for (int y = 0; y < Rows; y++)
+				{
+					Vector2 preacherPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
+					Monsters[x, y] = new Monster(MonsterTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false);
+
+					if (x > 0 && x < 14 && y > 0 && y < 9)
+					{
+						if (_rnd.Next(4, 20) == 4)
+						{
+							Monsters[x, y].IsAlive = true;
+						}
+					}
+				}
+			}
+		}
+
+		internal void OnBulletDestroy(Bullet bullet)
         {
             for (int i = 0; i < Bullets.Count; i++)
             {

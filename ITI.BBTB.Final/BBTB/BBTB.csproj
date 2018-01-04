@@ -49,7 +49,8 @@
     <Compile Include="Armor\Leggings.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Controls\Button.cs" />
-    <Compile Include="God\God.cs" />
+    <Compile Include="GodPlaces\Preacher.cs" />
+    <Compile Include="GodPlaces\God.cs" />
     <Compile Include="Map\Board.cs" />
     <Compile Include="Bullets\Bullet.cs" />
     <Compile Include="Bullets\BulletLib.cs" />

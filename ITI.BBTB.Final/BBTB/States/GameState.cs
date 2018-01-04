@@ -35,7 +35,7 @@ namespace BBTB.States
             _monsterTexture = Content.Load<Texture2D>("monster");
             _jumperTexture = Content.Load<Texture2D>("BBTBplayer");
             _sprite = new Sprite(_groundTexture, new Vector2(60, 60), _spriteBatch);
-            _player = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null);
+            _player = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null, false);
             Weapon _weapon = new Weapon(_weaponTexture, _bulletTexture, this, _player.position, _spriteBatch, _player);
             _player.Weapon = _weapon;
             _board = new Board(_spriteBatch, _tileTexture, _monsterTexture, 15, 10);
