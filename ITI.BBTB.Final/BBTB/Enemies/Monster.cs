@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BBTB.States;
+using Microsoft.Xna.Framework.Input;
 
 namespace BBTB
 {
@@ -29,6 +30,7 @@ namespace BBTB
         public void Update(GameTime gameTime)
         {
             IsDead();
+            KillAllMonsters();
         }
 
         public void Hit(Bullet bullet)
@@ -54,5 +56,12 @@ namespace BBTB
                 base.Draw();
             }
         }
+
+        internal void KillAllMonsters()
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.B)) { IsAlive = false; }
+        }
+
     }
 }
