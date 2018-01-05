@@ -13,8 +13,6 @@ namespace BBTB.States
 {
     public class GameState : State
     {
-
-
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _tileTexture, _tileTexture2, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture, _monsterTexture;
@@ -38,7 +36,7 @@ namespace BBTB.States
             _monsterTexture = Content.Load<Texture2D>("monster");
             _jumperTexture = Content.Load<Texture2D>("BBTBplayer");
             _sprite = new Sprite(_groundTexture, new Vector2(60, 60), _spriteBatch);
-            _player = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null);
+            _player = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null, false);
             Weapon _weapon = new Weapon(_weaponTexture, _bulletTexture, this, _player.position, _spriteBatch, _player);
             _player.Weapon = _weapon;
             _board = new Board(_spriteBatch, _tileTexture, _tileTexture2, _monsterTexture, 15, 10, _player, this);
@@ -58,7 +56,8 @@ namespace BBTB.States
 
             _player.Update(gameTime);
             foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
-            CheckKeyboardAndReact();
+			foreach (Preacher preacher in _board.Preacher) preacher.Update(gameTime);
+			CheckKeyboardAndReact();
             _board.Update(gameTime);
         }
 

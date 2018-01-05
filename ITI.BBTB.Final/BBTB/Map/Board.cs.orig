@@ -11,8 +11,12 @@ namespace BBTB
         public Tile[,] Tiles { get; set; }
         public Tile[,] Tiles2 { get; set; }
         public Monster[,] Monsters { get; set; }
+<<<<<<< HEAD
+        public Player _player;
+=======
 		public Preacher[,] Preacher { get; set; }
 		public Player _player;
+>>>>>>> origin/master
         int _stageNumber;
         int _roomInFloor;
         int _roomNumber;
@@ -62,6 +66,16 @@ namespace BBTB
 		public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
         {
+<<<<<<< HEAD
+            SetAllBorderTilesBlockedAndSomeRandomly();
+            AddMonsters();
+            BlockSomeTilesRandomly();
+            SetTopLeftTileUnblocked();
+            _gameState.PutJumperInTopLeftCorner();
+        }
+        
+        public void Stage1()
+=======
 			if (Special == _roomNumber && SpecialType == 1)
 			{
 				SetAllBorderTilesBlockedAndSomeRandomly();
@@ -85,12 +99,19 @@ namespace BBTB
 			{
 				SetAllBorderTilesBlockedAndSomeRandomly();
 				AddMonsters();
-            BlockSomeTilesRandomly();
 				SetTopLeftTileUnblocked();
-            _gameState.PutJumperInTopLeftCorner();
+				PutJumperInTopLeftCorner();
+			}
         }
-        
+
+		public void PutJumperInTopLeftCorner()
+		{
+			_player.position = Vector2.One * 80;
+			_player.Mouvement = Vector2.Zero;
+		}
+
 		public void Stage1()
+>>>>>>> origin/master
         {
             _roomInFloor = _rnd.Next(4, 7);
             _stageNumber = 1;
@@ -98,7 +119,21 @@ namespace BBTB
             CreateNewBoard();
         }
         
+<<<<<<< HEAD
         public void NewRoom()
+=======
+        public void TPtile()
+        {
+            if(TPtileUp())
+            {
+                Tiles[13, 1].IsBlocked = true;
+				NewRoom();
+				NewStage();
+			}
+        }
+        
+        public bool TPtileUp()
+>>>>>>> origin/master
         {
             bool showExist = true;
             foreach (Monster monster in Monsters)
@@ -113,24 +148,39 @@ namespace BBTB
 
             if (_roomNumber < _roomInFloor)
             {
+<<<<<<< HEAD
                 if (_player.Bounds.Intersects(Tiles2[13, 1].Bounds))
                 {
                     CreateNewBoard();
                     _roomNumber++;
+=======
+                if (_player.Bounds.Intersects(Tiles[13, 1].Bounds))
+                {
+                    CreateNewBoard();
+					RoomNumber++;						 
+>>>>>>> origin/master
                 }
             }
         }
         
         public void NewStage()
         {
+<<<<<<< HEAD
             if(_roomNumber == _roomInFloor && _player.Bounds.Intersects(Tiles2[13, 1].Bounds))
+=======
+            if(_roomNumber == _roomInFloor && _player.Bounds.Intersects(Tiles[13, 1].Bounds) )
+>>>>>>> origin/master
             {
                 CreateNewBoard();
                 _roomInFloor = _rnd.Next(4, 7);
                 _stageNumber = _stageNumber + 1;
+<<<<<<< HEAD
                 _roomNumber = 1;
+=======
+				_roomNumber = 1;
 				_special = _rnd.Next(2, RoomInFloor);
 				_specialType = _rnd.Next(1, 3);
+>>>>>>> origin/master
             }
         }
 
@@ -161,7 +211,7 @@ namespace BBTB
 
         internal void CreateBullet(Texture2D bulletTexture, Vector2 position, SpriteBatch spriteBatch, WeaponLib weaponLib)
         {
-            Bullets.Add(new Bullet(bulletTexture, position, spriteBatch, weaponLib, this));
+            Bullets.Add(new Bullet(bulletTexture, position, spriteBatch, weaponLib,this));
         }
 
         private void AddMonsters()
@@ -211,7 +261,6 @@ namespace BBTB
 		}
 
 		internal void OnBulletDestroy(Bullet bullet)
-        internal void OnBulletDestroy(Bullet bullet)
         {
             for (int i = 0; i < Bullets.Count; i++)
             {

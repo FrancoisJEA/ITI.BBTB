@@ -20,22 +20,26 @@ namespace BBTB
         int _time;
         bool _booltime;
         private Vector2 oldPosition;
+		//God
+		bool _havePrayed;
+		God _god;
 
-        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon)
+
+        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed)
             : base(texture, position, spritebatch)
         {
             _playerM = new PlayerModel("Tanguy", 1);
-
             _ctx = ctx;
             _texture = texture;
             _position = position;
             _time = 0;
             _booltime = false;
             _weapon = weapon;
+			_havePrayed = havePrayed;
         }
-
+		
+		public bool HavePrayed {get { return _havePrayed; } set { _havePrayed = value; }  }
         public Weapon Weapon { get { return _weapon; } set { _weapon = value; } }
-
         public Vector2 Mouvement { get; set; }
 
         public void Update(GameTime gameTime)
