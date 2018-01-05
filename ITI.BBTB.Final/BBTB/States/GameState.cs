@@ -15,7 +15,7 @@ namespace BBTB.States
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D _tileTexture, _tileTexture2, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture, _monsterTexture;
+        private Texture2D _tileTexture, _tileTexture2, _tileTexture3, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture, _monsterTexture;
         private Player _player;
         private Board _board;
         private Sprite _sprite;
@@ -33,13 +33,14 @@ namespace BBTB.States
             _groundTexture = Content.Load<Texture2D>("ground");
             _tileTexture = Content.Load<Texture2D>("tile");
             _tileTexture2 = Content.Load<Texture2D>("barrel");
+            _tileTexture3 = Content.Load<Texture2D>("stairs");
             _monsterTexture = Content.Load<Texture2D>("monster");
             _jumperTexture = Content.Load<Texture2D>("BBTBplayer");
             _sprite = new Sprite(_groundTexture, new Vector2(60, 60), _spriteBatch);
             _player = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null, false);
             Weapon _weapon = new Weapon(_weaponTexture, _bulletTexture, this, _player.position, _spriteBatch, _player);
             _player.Weapon = _weapon;
-            _board = new Board(_spriteBatch, _tileTexture, _tileTexture2, _monsterTexture, 15, 10, _player, this);
+            _board = new Board(_spriteBatch, _tileTexture, _tileTexture2, _tileTexture3, _monsterTexture, 15, 10, _player, this);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound");
