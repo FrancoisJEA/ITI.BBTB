@@ -12,9 +12,11 @@ namespace BBTB
 
 	{
 		God _dieu;
+		Board _board;
 		Vector2 _position;
 		Texture2D _texture;
 		SpriteBatch _batch;
+
 		bool _isAlive;
 		bool _activated;
 		int _life;

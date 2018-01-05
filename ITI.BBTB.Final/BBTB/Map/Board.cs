@@ -10,10 +10,12 @@ namespace BBTB
         public Tile[,] Tiles { get; set; }
         public Monster[,] Monsters { get; set; }
 		// public Preacher[,] Preacher { get; set; }
-		public Player player;
+		public Player _player;
         int _stageNumber;
         int _roomInFloor;
         int _roomNumber;
+		int _special;
+		int _specialType;
         public int Columns { get; set; }
         public int Rows { get; set; }
         public Texture2D TileTexture { get; set; }
@@ -42,15 +44,47 @@ namespace BBTB
         public int StageNumber { get { return _stageNumber; } set{ _stageNumber = value; } }
         public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
         public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
+		public int Special { get { return _special; } set { _special = value; } }
+		public int SpecialType { get { return _roomNumber; } set { _roomNumber = value; } }
 
-        public void CreateNewBoard()
+		public void CreateNewBoard()
+			/*  Types= 1:chest 2:god 3:save  */
         {
-            SetAllBorderTilesBlockedAndSomeRandomly();
-            AddMonsters();
-            SetTopLeftTileUnblocked();
+			if (Special == _roomNumber && SpecialType == 1)
+			{
+				SetAllBorderTilesBlockedAndSomeRandomly();
+				SetTopLeftTileUnblocked();
+				PutJumperInTopLeftCorner();
+				// SetUpChestInTheMiddle()
+			}
+			if (Special == _roomNumber && SpecialType == 2)
+			{
+				SetAllBorderTilesBlockedAndSomeRandomly();
+				AddPreacher();
+				SetTopLeftTileUnblocked();
+				PutJumperInTopLeftCorner();
+				// SetSanctuary();
+			}
+			if (Special == _roomNumber && SpecialType == 3)
+			{
+				PutJumperInTopLeftCorner();
+			}
+			else
+			{
+				SetAllBorderTilesBlockedAndSomeRandomly();
+				AddMonsters();
+				SetTopLeftTileUnblocked();
+				PutJumperInTopLeftCorner();
+			}
         }
 
-        public void Stage1()
+		public void PutJumperInTopLeftCorner()
+		{
+			_player.position = Vector2.One * 80;
+			_player.Mouvement = Vector2.Zero;
+		}
+
+		public void Stage1()
         {
             _roomInFloor = _rnd.Next(4, 7);
             _stageNumber = 1;
@@ -82,20 +116,24 @@ namespace BBTB
         {
             if (_roomNumber < _roomInFloor)
             {
-                if (player.Bounds.Intersects(Tiles[13, 1].Bounds))
+                if (_player.Bounds.Intersects(Tiles[13, 1].Bounds))
                 {
                     CreateNewBoard();
+					RoomNumber++;						 
                 }
             }
         }
         
         public void NewStage()
         {
-            if(_roomNumber == _roomInFloor /*&& player.position == TPtile()*/ )
+            if(_roomNumber == _roomInFloor && _player.Bounds.Intersects(Tiles[13, 1].Bounds) )
             {
                 CreateNewBoard();
                 _roomInFloor = _rnd.Next(4, 7);
                 _stageNumber = _stageNumber + 1;
+				_roomNumber = 1;
+				_special = _rnd.Next(2, 7);
+				_specialType = _rnd.Next(1, 3);
             }
         }
 
