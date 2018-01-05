@@ -49,11 +49,14 @@
     <Compile Include="Armor\Leggings.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Controls\Button.cs" />
+<<<<<<< HEAD
     <Compile Include="Item\InventorySystem2.cs" />
     <Compile Include="Item\InventoryItem.cs" />
+    <Compile Include="Item\WorldItem.cs" />
+=======
     <Compile Include="GodPlaces\Preacher.cs" />
     <Compile Include="GodPlaces\God.cs" />
-    <Compile Include="Item\WorldItem.cs" />
+>>>>>>> ae9a74555e600172fe11392384fa7dc655db89cf
     <Compile Include="Map\Board.cs" />
     <Compile Include="Bullets\Bullet.cs" />
     <Compile Include="Bullets\BulletLib.cs" />
