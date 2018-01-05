@@ -135,7 +135,7 @@ namespace BBTB
                 _roomInFloor = _rnd.Next(4, 7);
                 _stageNumber = _stageNumber + 1;
                 _roomNumber = 1;
-				_special = _rnd.Next(2, RoomInFloor);
+				_special = _rnd.Next(2, _roomInFloor);
 				_specialType = _rnd.Next(1, 3);
             }
         }
