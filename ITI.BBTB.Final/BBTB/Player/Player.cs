@@ -57,11 +57,11 @@ namespace BBTB
 
             Console.WriteLine(_time);
 
-            if (keyboardState.IsKeyDown(Keys.Left)) { Mouvement -= Vector2.UnitX; }
-            if (keyboardState.IsKeyDown(Keys.Right)) { Mouvement += Vector2.UnitX; }
+            if (keyboardState.IsKeyDown(Keys.Left)) { Mouvement -= Vector2.UnitX*2; }
+            if (keyboardState.IsKeyDown(Keys.Right)) { Mouvement += Vector2.UnitX*2; }
 
-            if (keyboardState.IsKeyDown(Keys.Down)) { Mouvement += Vector2.UnitY; }
-            if (keyboardState.IsKeyDown(Keys.Up)) { Mouvement -= Vector2.UnitY; }
+            if (keyboardState.IsKeyDown(Keys.Down)) { Mouvement += Vector2.UnitY*2; }
+            if (keyboardState.IsKeyDown(Keys.Up)) { Mouvement -= Vector2.UnitY*2; }
 
             _booltime = keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.Space) ||
                 keyboardState.IsKeyDown(Keys.Down) && keyboardState.IsKeyDown(Keys.Space) ||
