@@ -72,6 +72,18 @@ namespace BBTB
                     }
                 }
             }
+
+            foreach (Tile tile in Board.CurrentBoard.Tiles2)
+            {
+                if (tile.IsBlocked)
+                {
+                    if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(tile.Bounds))
+                    {
+                        /*for (int i = 0; i < Bullets.Count; i++) Bullets.Remove(Bullets[i]);*/
+                        return true;
+                    }
+                }
+            }
             return false;
         }
 
