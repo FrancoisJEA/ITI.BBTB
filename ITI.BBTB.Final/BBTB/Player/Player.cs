@@ -9,36 +9,38 @@ namespace BBTB
     [Serializable]
     public class Player : Sprite
     {
-        readonly PlayerModel _player;
         Weapon _weapon;
-        Weapon _weapon2;
+        public PlayerModel _playerM;
 
         GameState _ctx;
 
         Texture2D _texture;
         Vector2 _position;
-        
-        int _level;
+
         int _time;
         bool _booltime;
         private Vector2 oldPosition;
+		//God
+		bool _havePrayed;
+		God _god;
 
-        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon)
+
+        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed)
             : base(texture, position, spritebatch)
         {
+            _playerM = new PlayerModel("Tanguy", 1);
             _ctx = ctx;
             _texture = texture;
             _position = position;
             _time = 0;
             _booltime = false;
             _weapon = weapon;
+			_havePrayed = havePrayed;
         }
-
+		
+		public bool HavePrayed {get { return _havePrayed; } set { _havePrayed = value; }  }
         public Weapon Weapon { get { return _weapon; } set { _weapon = value; } }
-        public Weapon Weapon2 { get { return _weapon2; } set { _weapon2 = value; } }
-
         public Vector2 Mouvement { get; set; }
-
 
         public void Update(GameTime gameTime)
         {
@@ -55,11 +57,11 @@ namespace BBTB
 
             Console.WriteLine(_time);
 
-            if (keyboardState.IsKeyDown(Keys.Left)) { Mouvement -= Vector2.UnitX; }
-            if (keyboardState.IsKeyDown(Keys.Right)) { Mouvement += Vector2.UnitX; }
+            if (keyboardState.IsKeyDown(Keys.Left)) { Mouvement -= Vector2.UnitX*2; }
+            if (keyboardState.IsKeyDown(Keys.Right)) { Mouvement += Vector2.UnitX*2; }
 
-            if (keyboardState.IsKeyDown(Keys.Down)) { Mouvement += Vector2.UnitY; }
-            if (keyboardState.IsKeyDown(Keys.Up)) { Mouvement -= Vector2.UnitY; }
+            if (keyboardState.IsKeyDown(Keys.Down)) { Mouvement += Vector2.UnitY*2; }
+            if (keyboardState.IsKeyDown(Keys.Up)) { Mouvement -= Vector2.UnitY*2; }
 
             _booltime = keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.Space) ||
                 keyboardState.IsKeyDown(Keys.Down) && keyboardState.IsKeyDown(Keys.Space) ||
@@ -81,6 +83,21 @@ namespace BBTB
             {
                 _time -= 1;
             }
+        }
+
+        public bool HasTouchedMonster()
+        {
+            foreach (Monster monster in Board.CurrentBoard.Monsters)
+            {
+                if (monster.IsAlive)
+                {
+                    if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private void MoveAsFarAsPossible(GameTime gameTime)

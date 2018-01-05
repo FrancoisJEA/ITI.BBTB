@@ -27,10 +27,12 @@ namespace BBTB
         int _skillsPoints;
         public string name;
 
-        public PlayerModel(string name,int classes)
+        public PlayerModel(string name, int classes)
         {
             _name = name;
             _classes = classes;
+            _life = 100;
+            _experience = 0;
         }
 
         public int Life { get { return _life; } set { _life = value; } }
