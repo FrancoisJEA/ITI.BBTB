@@ -22,7 +22,7 @@ namespace BBTB
         {
             _origin = new Vector2(-27, 20);
             _rotation = weapon.Rotation;
-            BulletLib = new BulletLib(weapon, new Vector2(base.position.X, base.position.Y), texture.Height, texture.Width);
+            BulletLib = new BulletLib(weapon, new Vector2(base.Position.X, base.Position.Y), texture.Height, texture.Width);
 			_damages = 50;
 			_ctx = board;
         }
@@ -31,7 +31,7 @@ namespace BBTB
         public void Update(GameTime gameTime)
         {
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);
-            position += new Vector2(BulletLib.PositionUpdate().X, BulletLib.PositionUpdate().Y);
+            Position += new Vector2(BulletLib.PositionUpdate().X, BulletLib.PositionUpdate().Y);
         }
 
 		public bool TouchEnemy()
@@ -40,7 +40,7 @@ namespace BBTB
             {
                 if (monster.IsAlive)
                 {
-                    if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
+                    if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
                         monster.Hit(this);
                         if (monster.Life <= 0) monster.IsAlive = false;
@@ -57,7 +57,7 @@ namespace BBTB
             {
                 if (tile.IsBlocked)
                 {
-                    if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(tile.Bounds))
+                    if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(tile.Bounds))
                     {
                         return true;
                     }
@@ -68,7 +68,7 @@ namespace BBTB
             {
                 if (tile.IsBlocked)
                 {
-                    if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(tile.Bounds))
+                    if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(tile.Bounds))
                     {
                         /*for (int i = 0; i < Bullets.Count; i++) Bullets.Remove(Bullets[i]);*/
                         return true;
@@ -80,7 +80,7 @@ namespace BBTB
 
 		public override void Draw()
         {
-            SpriteBatch.Draw(Texture, position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
+            SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
         }
     }
 }

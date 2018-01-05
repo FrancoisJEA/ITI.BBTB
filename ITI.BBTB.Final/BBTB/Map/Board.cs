@@ -66,34 +66,29 @@ namespace BBTB
 		public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
         {
+			SetAllBorderTilesBlockedAndSomeRandomly();
 			if (Special == _roomNumber && SpecialType == 1)
 			{
-				SetAllBorderTilesBlockedAndSomeRandomly();
 				SetTopLeftTileUnblocked();
-				_gameState.PutJumperInTopLeftCorner();
 				// SetUpChestInTheMiddle()
 			}
 			if (Special == _roomNumber && SpecialType == 2)
 			{
-				SetAllBorderTilesBlockedAndSomeRandomly();
 				//AddPreacher();
 				SetTopLeftTileUnblocked();
-                _gameState.PutJumperInTopLeftCorner();
-				// SetSanctuary();
-			}
+                // SetSanctuary();
+            }
             if (Special == _roomNumber && SpecialType == 3)
             {
-                _gameState.PutJumperInTopLeftCorner();
             }
             else
             {
-                SetAllBorderTilesBlockedAndSomeRandomly();
                 AddMonsters();
                 BlockSomeTilesRandomly();
                 SetTopLeftTileUnblocked();
                 SetStairs();
-                _gameState.PutJumperInTopLeftCorner();
             }
+			_player.ResetPosition();
         }
         
 		public void Stage1()
