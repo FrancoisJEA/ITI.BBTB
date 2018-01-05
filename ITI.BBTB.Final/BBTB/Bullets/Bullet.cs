@@ -37,16 +37,18 @@ namespace BBTB
 
 		public bool TouchEnemy()
 		{
-			foreach (Monster monster in Board.CurrentBoard.Monsters)
-			
-				if (monster.IsAlive)
-				{
-					monster.Hit(this);
-					if (monster.Life <= 0) monster.IsAlive = false;
-					_ctx.OnBulletDestroy(this);
-					return true;
-
-				}
+            foreach (Monster monster in Board.CurrentBoard.Monsters)
+            {
+                if (monster.IsAlive)
+                {
+                    if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
+                    {
+                        monster.Hit(this);
+                        if (monster.Life <= 0) monster.IsAlive = false;
+                        return true;
+                    }
+                }
+            }
 				return false;
         }
 

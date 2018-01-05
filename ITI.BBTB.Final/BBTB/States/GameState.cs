@@ -56,7 +56,7 @@ namespace BBTB.States
 
             _player.Update(gameTime);
             foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
-			foreach (Preacher preacher in _board.Preacher) preacher.Update(gameTime);
+			//foreach (Preacher preacher in _board.Preacher) preacher.Update(gameTime);
 			CheckKeyboardAndReact();
             _board.Update(gameTime);
         }

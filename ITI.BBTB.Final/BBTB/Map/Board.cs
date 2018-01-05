@@ -34,7 +34,6 @@ namespace BBTB
 
         public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D monsterTexture, int columns, int rows, Player player, GameState gameState)
         {
-            if (gameState == null) throw new ArgumentNullException(nameof(gameState));
             Columns = columns;
             Rows = rows;
             TileTexture = tileTexture;
@@ -66,28 +65,29 @@ namespace BBTB
 			{
 				SetAllBorderTilesBlockedAndSomeRandomly();
 				SetTopLeftTileUnblocked();
-				PutJumperInTopLeftCorner();
+				_gameState.PutJumperInTopLeftCorner();
 				// SetUpChestInTheMiddle()
 			}
 			if (Special == _roomNumber && SpecialType == 2)
 			{
 				SetAllBorderTilesBlockedAndSomeRandomly();
-				AddPreacher();
+				//AddPreacher();
 				SetTopLeftTileUnblocked();
-				PutJumperInTopLeftCorner();
+                _gameState.PutJumperInTopLeftCorner();
 				// SetSanctuary();
 			}
-			if (Special == _roomNumber && SpecialType == 3)
-			{
-				PutJumperInTopLeftCorner();
-			}
-			else
-			{
-				SetAllBorderTilesBlockedAndSomeRandomly();
-				AddMonsters();
-            BlockSomeTilesRandomly();
-				SetTopLeftTileUnblocked();
-            _gameState.PutJumperInTopLeftCorner();
+            if (Special == _roomNumber && SpecialType == 3)
+            {
+                _gameState.PutJumperInTopLeftCorner();
+            }
+            else
+            {
+                SetAllBorderTilesBlockedAndSomeRandomly();
+                AddMonsters();
+                BlockSomeTilesRandomly();
+                SetTopLeftTileUnblocked();
+                _gameState.PutJumperInTopLeftCorner();
+            }
         }
         
 		public void Stage1()
@@ -210,12 +210,12 @@ namespace BBTB
 			}
 		}
 
-		internal void OnBulletDestroy(Bullet bullet)
         internal void OnBulletDestroy(Bullet bullet)
         {
             for (int i = 0; i < Bullets.Count; i++)
             {
-                Bullets.Remove(Bullets[i]);
+                Bullet b = Bullets[i];
+                Bullets.RemoveAt(i--);
             }
         }
 
