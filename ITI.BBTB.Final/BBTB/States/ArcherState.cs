@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Input;
 
 namespace BBTB.States
 {
-    public class GameState : State
+    class ArcherState : State
     {
-
-
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _tileTexture, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture, _monsterTexture;
@@ -23,12 +21,12 @@ namespace BBTB.States
         private Sprite _sprite;
         private Random _rnd = new Random();
         private SpriteFont _debugFont;
-     
+
         Game1 ctx;
 
         SoundEffect _sound;
 
-        public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager Content) : base(game, graphicsDevice, Content)
+        public ArcherState(Game1 game, GraphicsDevice graphicsDevice, ContentManager Content) : base(game, graphicsDevice, Content)
         {
             _graphicsDevice = graphicsDevice;
             _spriteBatch = new SpriteBatch(graphicsDevice);
@@ -39,15 +37,15 @@ namespace BBTB.States
             _monsterTexture = Content.Load<Texture2D>("monster");
             _jumperTexture = Content.Load<Texture2D>("BBTBplayer");
             _sprite = new Sprite(_groundTexture, new Vector2(60, 60), _spriteBatch);
-            _jumper = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch,this, null);
+            _jumper = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null);
             Weapon _weapon = new Weapon(_weaponTexture, _bulletTexture, this, _jumper.position, _spriteBatch, _jumper);
             _jumper.Weapon = _weapon;
             _board = new Board(_spriteBatch, _tileTexture, _monsterTexture, 15, 10);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound");
-
         }
+
 
         public override void Update(GameTime gameTime)
         {
@@ -80,10 +78,6 @@ namespace BBTB.States
             if (state.IsKeyDown(Keys.F5)) { RestartGame(); }
         }
 
-      
-
-     
-
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             _graphicsDevice.Clear(Color.WhiteSmoke);
@@ -111,6 +105,7 @@ namespace BBTB.States
             _spriteBatch.DrawString(_debugFont, text, position + Vector2.One, Color.Black);
             _spriteBatch.DrawString(_debugFont, text, position, Color.LightYellow);
         }
+
 
         public override void PostUpdate(GameTime gameTime)
         {

@@ -13,7 +13,7 @@ namespace BBTB
         Weapon _weapon;
         Weapon _weapon2;
 
-        GameState _ctx;
+        State _ctx;
 
         Texture2D _texture;
         Vector2 _position;
@@ -23,7 +23,7 @@ namespace BBTB
         bool _booltime;
         private Vector2 oldPosition;
 
-        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon)
+        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, State ctx, Weapon weapon)
             : base(texture, position, spritebatch)
         {
             _ctx = ctx;

@@ -24,11 +24,13 @@ namespace BBTB
 
         Vector2 _position;
 
-        GameState _ctx;
+        State _ctx;
+        GameState _gsCtx ;
 
-        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, GameState ctx, Vector2 position, SpriteBatch spritebatch, Player player)
+        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, State ctx, Vector2 position, SpriteBatch spritebatch, Player player)
             : base(weaponTexture, position, spritebatch)
         {
+            
             _position = position;
             _player = player;
             _origin = new Vector2(_player.position.X - (_player.Bounds.Width) - 50, _player.position.Y - (_player.Bounds.Height) - 15);
@@ -61,7 +63,7 @@ namespace BBTB
                     bullet = new Bullet(_bulletTexture, position, SpriteBatch, WeaponLib);
                     Bullets.Add(bullet);
 
-                    _ctx.PlayGunSound();
+                    _gsCtx.PlayGunSound();
                     _time = 0;
                 }
                 else
