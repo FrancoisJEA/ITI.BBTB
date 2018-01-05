@@ -60,22 +60,26 @@ namespace BBTB
         public int StageNumber { get { return _stageNumber; } set{ _stageNumber = value; } }
         public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
         public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
-		public int Special { get { return _special; } set { _special = value; } }
-		public int SpecialType { get { return _roomNumber; } set { _roomNumber = value; } }
+		public int Special { get { return _special; } }
+		public int SpecialType { get { return _specialType; } }
 
 		public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
         {
-			if (Special == _roomNumber && SpecialType == 1)
+			if (Special == RoomNumber && SpecialType == 1)
 			{
-				SetAllBorderTilesBlockedAndSomeRandomly();
+				SetAllBorderTilesBlocked();
 				SetTopLeftTileUnblocked();
 				_gameState.PutJumperInTopLeftCorner();
 				// SetUpChestInTheMiddle()
+				foreach (Monster monster in Monsters)
+			    {
+					monster.IsAlive = false;
+				}
 			}
 			if (Special == _roomNumber && SpecialType == 2)
 			{
-				SetAllBorderTilesBlockedAndSomeRandomly();
+				SetAllBorderTilesBlocked();
 				//AddPreacher();
 				SetTopLeftTileUnblocked();
                 _gameState.PutJumperInTopLeftCorner();
@@ -87,7 +91,7 @@ namespace BBTB
             }
             else
             {
-                SetAllBorderTilesBlockedAndSomeRandomly();
+                SetAllBorderTilesBlocked();
                 AddMonsters();
                 BlockSomeTilesRandomly();
                 SetTopLeftTileUnblocked();
@@ -121,8 +125,9 @@ namespace BBTB
             {
                 if (showExist == true &&_player.Bounds.Intersects(Tiles3[13, 1].Bounds))
                 {
-                    CreateNewBoard();
-                    _roomNumber++;
+					_roomNumber++;
+					CreateNewBoard();
+               
                 }
             }
         }
@@ -237,7 +242,7 @@ namespace BBTB
             }
         }*/
 
-        private void SetAllBorderTilesBlockedAndSomeRandomly()
+        private void SetAllBorderTilesBlocked()
         {
             for (int x = 0; x < Columns; x++)
             {
