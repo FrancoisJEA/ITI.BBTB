@@ -11,7 +11,7 @@ namespace BBTB
 		Player _player;
 		string _name;
 
-		int boost_life;
+		int _lifeBoost;
 
 		public God (Player player, string name)
 		{
@@ -25,9 +25,5 @@ namespace BBTB
 			_player._playerM.Life += 100;
 			_player.HavePrayed = true;
 		}
-
-
-
-
 	}
 }

@@ -9,7 +9,7 @@ namespace BBTB
     {
         public Tile[,] Tiles { get; set; }
         public Monster[,] Monsters { get; set; }
-		// public Preacher[,] Preacher { get; set; }
+		public Preacher[,] Preacher { get; set; }
 		public Player _player;
         int _stageNumber;
         int _roomInFloor;
@@ -97,7 +97,9 @@ namespace BBTB
             if(TPtileUp())
             {
                 Tiles[13, 1].IsBlocked = true;
-            }
+				NewRoom();
+				NewStage();
+			}
         }
         
         public bool TPtileUp()
@@ -132,7 +134,7 @@ namespace BBTB
                 _roomInFloor = _rnd.Next(4, 7);
                 _stageNumber = _stageNumber + 1;
 				_roomNumber = 1;
-				_special = _rnd.Next(2, 7);
+				_special = _rnd.Next(2, RoomInFloor);
 				_specialType = _rnd.Next(1, 3);
             }
         }

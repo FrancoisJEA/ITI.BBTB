@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace BBTB
 {
-	class Preacher: Monster
-
+	public class Preacher: Monster
 	{
 		God _dieu;
 		Board _board;
@@ -29,7 +28,6 @@ namespace BBTB
 			_texture = texture;
 			_isAlive = isAlive;
 			_dieu = dieu;
-			_life = 100;
 			_activated = activated;
 		}
 
