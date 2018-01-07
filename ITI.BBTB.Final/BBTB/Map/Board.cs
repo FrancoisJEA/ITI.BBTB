@@ -66,34 +66,29 @@ namespace BBTB
 		public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
         {
-			if (Special == RoomNumber && SpecialType == 1)
+			SetAllBorderTilesBlockedAndSomeRandomly();
+			if (Special == _roomNumber && SpecialType == 1)
 			{
-				SetAllBorderTilesBlocked();
 				SetTopLeftTileUnblocked();
-				_gameState.PutJumperInTopLeftCorner();
 				// SetUpChestInTheMiddle()
 			}
 			else if (Special == _roomNumber && SpecialType == 2)
 			{
-				SetAllBorderTilesBlocked();
 				//AddPreacher();
 				SetTopLeftTileUnblocked();
-                _gameState.PutJumperInTopLeftCorner();
-				// SetSanctuary();
-			}
+                // SetSanctuary();
+            }
             else if (Special == _roomNumber && SpecialType == 3)
             {
-                _gameState.PutJumperInTopLeftCorner();
             }
             else
             {
-                SetAllBorderTilesBlocked();
                 AddMonsters();
                 BlockSomeTilesRandomly();
                 SetTopLeftTileUnblocked();
                 SetStairs();
-                _gameState.PutJumperInTopLeftCorner();
             }
+			_player.ResetPosition();
         }
         
 		public void Stage1()
@@ -121,9 +116,8 @@ namespace BBTB
             {
                 if (showExist == true &&_player.Bounds.Intersects(Tiles3[13, 1].Bounds))
                 {
-					_roomNumber++;
-					CreateNewBoard();
-               
+                    CreateNewBoard();
+                    _roomNumber++;
                 }
             }
         }
@@ -136,9 +130,8 @@ namespace BBTB
                 _roomInFloor = _rnd.Next(4, 7);
                 _stageNumber = _stageNumber + 1;
                 _roomNumber = 1;
-				_special = _rnd.Next(2, _roomInFloor);
-			    // _specialType = _rnd.Next(1, 3);
-				_specialType = 1;
+				_special = _rnd.Next(2, RoomInFloor);
+				_specialType = _rnd.Next(1, 3);
             }
         }
 
