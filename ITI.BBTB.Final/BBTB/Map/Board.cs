@@ -72,12 +72,8 @@ namespace BBTB
 				SetTopLeftTileUnblocked();
 				_gameState.PutJumperInTopLeftCorner();
 				// SetUpChestInTheMiddle()
-				foreach (Monster monster in Monsters)
-			    {
-					monster.IsAlive = false;
-				}
 			}
-			if (Special == _roomNumber && SpecialType == 2)
+			else if (Special == _roomNumber && SpecialType == 2)
 			{
 				SetAllBorderTilesBlocked();
 				//AddPreacher();
@@ -85,7 +81,7 @@ namespace BBTB
                 _gameState.PutJumperInTopLeftCorner();
 				// SetSanctuary();
 			}
-            if (Special == _roomNumber && SpecialType == 3)
+            else if (Special == _roomNumber && SpecialType == 3)
             {
                 _gameState.PutJumperInTopLeftCorner();
             }
@@ -141,7 +137,8 @@ namespace BBTB
                 _stageNumber = _stageNumber + 1;
                 _roomNumber = 1;
 				_special = _rnd.Next(2, _roomInFloor);
-				_specialType = _rnd.Next(1, 3);
+			    // _specialType = _rnd.Next(1, 3);
+				_specialType = 1;
             }
         }
 

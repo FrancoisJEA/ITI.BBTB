@@ -97,7 +97,7 @@ namespace BBTB.States
             _spriteBatch.End();
 
         }
-
+		
         private void WriteDebugInformation()
         {
             string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.position.X, _player.position.Y);
@@ -126,7 +126,7 @@ namespace BBTB.States
 
             DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }
-
+		
         private void DrawWithShadow(string text, Vector2 position)
         {
             _spriteBatch.DrawString(_debugFont, text, position + Vector2.One, Color.Black);
