@@ -10,10 +10,9 @@ namespace BBTB
     public class Player : Sprite
     {
         readonly GameState _ctx;
-        readonly Weapon _weapon;
+        public Weapon _weapon;
         public PlayerModel _playerM;
         Vector2 _mouvement;
-
 
         int _time;
         bool _booltime;

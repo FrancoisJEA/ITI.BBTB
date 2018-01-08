@@ -17,17 +17,22 @@ namespace BBTB
         public BulletLib BulletLib { get; set; }
 		int _damages;
 
-        public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon,Board board)
+        Weapon _weaponCtx;
+
+        public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon, Board board, Weapon weaponCtx)
             : base(texture, position, spritebatch)
         {
             _origin = new Vector2(-27, 20);
             _rotation = weapon.Rotation;
             BulletLib = new BulletLib(weapon, new Vector2(base.Position.X, base.Position.Y), texture.Height, texture.Width);
-			_damages = 50;
+
+            _weaponCtx = weaponCtx;
+            _damages = weaponCtx.Damages;
 			_ctx = board;
         }
 
 		public int Damages { get { return _damages;} set { _damages = value; } }
+
         public void Update(GameTime gameTime)
         {
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);
