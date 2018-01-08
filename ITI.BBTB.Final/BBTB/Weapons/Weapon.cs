@@ -21,6 +21,7 @@ namespace BBTB
         int _time;
 
         GameState _ctx;
+        int _damages;
 
         public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, Player player)
             : base(weaponTexture, position, spritebatch)
@@ -35,14 +36,26 @@ namespace BBTB
             WeaponLib = new WeaponLib();
             _time = 15;
             _ctx = player.Ctx;
+
+            _damages = 50;
         }
+
+		public int Damages { get { return _damages;} set { _damages = value; } }
 
         public int WeaponType => Texture == _weaponTexture ? 1 : 2;
 
         void SetWeaponType( int type )
         {
-            if (type == 1) Texture = _weaponTexture;
-            else Texture = _weaponTexture2;
+            if (type == 1)
+            {
+                Texture = _weaponTexture;
+                _damages = 50;
+            }
+            else
+            {
+                Texture = _weaponTexture2;
+                _damages = 100;
+            }
         }
 
         public void Update(GameTime gameTime)

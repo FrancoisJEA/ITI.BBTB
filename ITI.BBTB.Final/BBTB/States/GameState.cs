@@ -95,7 +95,7 @@ namespace BBTB.States
         private void WriteDebugInformation()
         {
             string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.Position.X, _player.Position.Y);
-//            string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
+          //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
 
             string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
             string experienceInText = string.Format("Character's experience: ({0:0})", _player._playerM.Experience);
@@ -106,8 +106,10 @@ namespace BBTB.States
             string SpecialInText = string.Format("Special Number: ({0:0})", Board.CurrentBoard.Special);
             string SpecialTypeInText = string.Format("Special Type: ({0:0})", Board.CurrentBoard.SpecialType);
 
+            //string monsterDeadInText = string.Format("Monsters Dead: ({0:0})", Board.monsters.MonsterDead);
+
             DrawWithShadow(positionInText, new Vector2(10, 0));
-           // DrawWithShadow(movementInText, new Vector2(10, 20));
+          //DrawWithShadow(movementInText, new Vector2(10, 20));
 
             DrawWithShadow(lifeInText, new Vector2(200, 200));
             DrawWithShadow(experienceInText, new Vector2(240, 240));
@@ -117,6 +119,8 @@ namespace BBTB.States
 
             DrawWithShadow(SpecialInText, new Vector2(360, 360));
             DrawWithShadow(SpecialTypeInText, new Vector2(400, 400));
+
+            //DrawWithShadow(monsterDeadInText, new Vector2(440, 440));
 
             DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }

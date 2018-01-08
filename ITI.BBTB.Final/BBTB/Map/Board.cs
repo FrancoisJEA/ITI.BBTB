@@ -66,20 +66,21 @@ namespace BBTB
 		public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
         {
-			SetAllBorderTilesBlockedAndSomeRandomly();
+            SetAllBorderTilesBlockedAndSomeRandomly();
 			if (Special == _roomNumber && SpecialType == 1)
 			{
-				SetTopLeftTileUnblocked();
-				// SetUpChestInTheMiddle()
-			}
-			if (Special == _roomNumber && SpecialType == 2)
+			    SetTopLeftTileUnblocked();
+                // SetUpChestInTheMiddle()
+            }
+            if (Special == _roomNumber && SpecialType == 2)
 			{
 				//AddPreacher();
-				SetTopLeftTileUnblocked();
+			    SetTopLeftTileUnblocked();
                 // SetSanctuary();
             }
             if (Special == _roomNumber && SpecialType == 3)
             {
+			    SetTopLeftTileUnblocked();
             }
             else
             {
@@ -138,14 +139,13 @@ namespace BBTB
         private void SetTopLeftTileUnblocked()
         {
             Tiles2[1, 1].IsBlocked = false;
+            Monsters[1, 1].IsAlive = false;
 
             Monsters[13, 1].IsAlive = false;
             Tiles2[13, 1].IsBlocked = false;
             Tiles2[12, 1].IsBlocked = false;
             Tiles2[13, 2].IsBlocked = false;
             Tiles2[11, 1].IsBlocked = false;
-
-            Monsters[1, 1].IsAlive = false;
 
             for (int x = 0; x < Columns; x++)
             {
@@ -162,7 +162,7 @@ namespace BBTB
 
         internal void CreateBullet(Texture2D bulletTexture, Vector2 position, SpriteBatch spriteBatch, WeaponLib weaponLib)
         {
-            Bullets.Add(new Bullet(bulletTexture, position, spriteBatch, weaponLib, this));
+            Bullets.Add(new Bullet(bulletTexture, position, spriteBatch, weaponLib, this, _player._weapon));
         }
 
         private void AddMonsters()

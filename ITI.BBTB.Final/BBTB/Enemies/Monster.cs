@@ -16,6 +16,8 @@ namespace BBTB
 
         int _life;
 
+        public int _monsterDead;
+
         GameState _ctx; // Paramètre du constructeur
 
         public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive)
@@ -23,8 +25,11 @@ namespace BBTB
         {
             IsAlive = isAlive;
             _life = 100;
+
+            _monsterDead = 0;
         }
 
+        public int MonsterDead { get { return _monsterDead; } set { _monsterDead = value; } }
         public int Life { get { return _life; } set { _life = value; } }
 
         public void Update(GameTime gameTime)
@@ -44,6 +49,7 @@ namespace BBTB
             if (_life <= 0)
             {
                 IsAlive = false;
+                _monsterDead++;
                 return true;
             }
             return false;
