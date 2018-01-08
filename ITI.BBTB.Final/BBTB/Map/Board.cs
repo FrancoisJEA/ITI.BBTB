@@ -61,7 +61,7 @@ namespace BBTB
         public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
         public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
 		public int Special { get { return _special; } set { _special = value; } }
-		public int SpecialType { get { return _roomNumber; } set { _roomNumber = value; } }
+		public int SpecialType { get { return _specialType; } set { _specialType = value; } }
 
 		public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
@@ -72,17 +72,17 @@ namespace BBTB
 			    SetTopLeftTileUnblocked();
                 // SetUpChestInTheMiddle()
             }
-            if (Special == _roomNumber && SpecialType == 2)
+            else if (Special == _roomNumber && SpecialType == 2)
 			{
 				//AddPreacher();
 			    SetTopLeftTileUnblocked();
                 // SetSanctuary();
             }
-            if (Special == _roomNumber && SpecialType == 3)
+            else if (Special == _roomNumber && SpecialType == 3)
             {
 			    SetTopLeftTileUnblocked();
             }
-            else
+            else if(Special != _roomNumber)
             {
                 AddMonsters();
                 BlockSomeTilesRandomly();
@@ -131,7 +131,7 @@ namespace BBTB
                 _roomInFloor = _rnd.Next(4, 7);
                 _stageNumber = _stageNumber + 1;
                 _roomNumber = 1;
-				_special = _rnd.Next(2, RoomInFloor);
+				_special = _rnd.Next(2, _roomInFloor);
 				_specialType = _rnd.Next(1, 3);
             }
         }
