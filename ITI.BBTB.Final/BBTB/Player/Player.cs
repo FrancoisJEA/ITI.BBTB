@@ -17,7 +17,6 @@ namespace BBTB
         int _time;
         bool _booltime;
         private Vector2 oldPosition;
-		//God
 		bool _havePrayed;
 		God _god;
 

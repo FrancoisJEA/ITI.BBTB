@@ -60,37 +60,35 @@ namespace BBTB
         public int StageNumber { get { return _stageNumber; } set{ _stageNumber = value; } }
         public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
         public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
-		public int Special { get { return _special; } set { _special = value; } }
-		public int SpecialType { get { return _specialType; } set { _specialType = value; } }
+		public int Special { get { return _special; } }
+		public int SpecialType { get { return _specialType; } }
 
 		public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
         {
-            SetAllBorderTilesBlockedAndSomeRandomly();
+			if (_special != _roomNumber)
+			{
+				AddMonsters();
+				BlockSomeTilesRandomly();
+				SetStairs();
+			}
 			if (Special == _roomNumber && SpecialType == 1)
 			{
-			    SetTopLeftTileUnblocked();
                 // SetUpChestInTheMiddle()
             }
             else if (Special == _roomNumber && SpecialType == 2)
 			{
-				//AddPreacher();
-			    SetTopLeftTileUnblocked();
+				AddPreacher();
                 // SetSanctuary();
             }
             else if (Special == _roomNumber && SpecialType == 3)
             {
-			    SetTopLeftTileUnblocked();
+
             }
-            else if(Special != _roomNumber)
-            {
-                AddMonsters();
-                BlockSomeTilesRandomly();
-                SetTopLeftTileUnblocked();
-                SetStairs();
-            }
+			SetAllBorderTilesBlocked();
+			SetTopLeftTileUnblocked();
 			_player.ResetPosition();
-        }
+		}
         
 		public void Stage1()
         {
@@ -117,8 +115,8 @@ namespace BBTB
             {
                 if (showExist == true &&_player.Bounds.Intersects(Tiles3[13, 1].Bounds))
                 {
-                    CreateNewBoard();
-                    _roomNumber++;
+					_roomNumber++;
+					CreateNewBoard();
                 }
             }
         }
@@ -164,7 +162,7 @@ namespace BBTB
         {
             Bullets.Add(new Bullet(bulletTexture, position, spriteBatch, weaponLib, this, _player._weapon));
         }
-
+		// Add Monster in the board (if its not a special room)
         private void AddMonsters()
         {
             for (int x = 0; x < Columns; x++)
@@ -190,7 +188,7 @@ namespace BBTB
                 }
             }
         }
-
+		// Add preachers in the room (if its a special room and a god one)
 		private void AddPreacher()
 		{
 			for (int x = 0; x < Columns; x++)
@@ -232,7 +230,7 @@ namespace BBTB
             }
         }*/
 
-        private void SetAllBorderTilesBlockedAndSomeRandomly()
+        private void SetAllBorderTilesBlocked()
         {
             for (int x = 0; x < Columns; x++)
             {
@@ -267,7 +265,7 @@ namespace BBTB
             }
         }
 
-        private void SetStairs()
+        private void SetStairs() // donne la position aux escalier
         {
             for (int x = 0; x < Columns; x++)
             {
