@@ -12,12 +12,11 @@ namespace BBTB
     {
         Vector2 _direction;
         float _timer;
-        float _lifeSpan = 1f;
-        float _linearVelocity = 8f;
+        float _lifeSpan = 1.5f;
+        float _linearVelocity = 20f;
         Vector2 _position;
         int _height;
         int _width;
-        //int _damage;
 
         public BulletLib(WeaponLib ctx, Vector2 position, int height, int width)
         {
@@ -25,7 +24,6 @@ namespace BBTB
             _position = position;
             _height = height;
             _width = width;
-            //_damage = 10;
         }
 
 

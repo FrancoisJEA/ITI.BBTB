@@ -62,24 +62,24 @@ namespace BBTB
 
             Console.WriteLine(_time);
 
-            if (keyboardState.IsKeyDown(Keys.Left)) { _mouvement -= Vector2.UnitX*2; }
-            if (keyboardState.IsKeyDown(Keys.Right)) { _mouvement += Vector2.UnitX*2; }
+            if (keyboardState.IsKeyDown(Keys.Q)) { _mouvement -= Vector2.UnitX*2; }
+            if (keyboardState.IsKeyDown(Keys.D)) { _mouvement += Vector2.UnitX*2; }
 
-            if (keyboardState.IsKeyDown(Keys.Down)) { _mouvement += Vector2.UnitY*2; }
-            if (keyboardState.IsKeyDown(Keys.Up)) { _mouvement -= Vector2.UnitY*2; }
+            if (keyboardState.IsKeyDown(Keys.S)) { _mouvement += Vector2.UnitY*2; }
+            if (keyboardState.IsKeyDown(Keys.Z)) { _mouvement -= Vector2.UnitY*2; }
 
-            _booltime = keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.Space) ||
-                        keyboardState.IsKeyDown(Keys.Down) && keyboardState.IsKeyDown(Keys.Space) ||
-                        keyboardState.IsKeyDown(Keys.Left) && keyboardState.IsKeyDown(Keys.Space) ||
-                        keyboardState.IsKeyDown(Keys.Right) && keyboardState.IsKeyDown(Keys.Space);
+            _booltime = keyboardState.IsKeyDown(Keys.Z) && keyboardState.IsKeyDown(Keys.Space) ||
+                        keyboardState.IsKeyDown(Keys.S) && keyboardState.IsKeyDown(Keys.Space) ||
+                        keyboardState.IsKeyDown(Keys.Q) && keyboardState.IsKeyDown(Keys.Space) ||
+                        keyboardState.IsKeyDown(Keys.D) && keyboardState.IsKeyDown(Keys.Space);
 
 
             if (_time <= 0 && _booltime == true)
             {
-                if (keyboardState.IsKeyDown(Keys.Up) && keyboardState.IsKeyDown(Keys.Space)) _mouvement -= new Vector2(0, 20);
-                else if (keyboardState.IsKeyDown(Keys.Down) && keyboardState.IsKeyDown(Keys.Space)) _mouvement += new Vector2(0, 20);
-                else if (keyboardState.IsKeyDown(Keys.Left) && keyboardState.IsKeyDown(Keys.Space)) _mouvement -= new Vector2(20, 0);
-                else if (keyboardState.IsKeyDown(Keys.Right) && keyboardState.IsKeyDown(Keys.Space)) _mouvement += new Vector2(20, 0);
+                if (keyboardState.IsKeyDown(Keys.Z) && keyboardState.IsKeyDown(Keys.Space)) _mouvement -= new Vector2(0, 20);
+                else if (keyboardState.IsKeyDown(Keys.S) && keyboardState.IsKeyDown(Keys.Space)) _mouvement += new Vector2(0, 20);
+                else if (keyboardState.IsKeyDown(Keys.Q) && keyboardState.IsKeyDown(Keys.Space)) _mouvement -= new Vector2(20, 0);
+                else if (keyboardState.IsKeyDown(Keys.D) && keyboardState.IsKeyDown(Keys.Space)) _mouvement += new Vector2(20, 0);
 
                 _time = 300;
                 _booltime = false;
