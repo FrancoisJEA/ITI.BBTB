@@ -34,7 +34,7 @@ namespace BBTB
             _rotationOrigin = new Vector2(_player.Position.X - (_player.Bounds.Width) - 50, _player.Position.Y - (_player.Bounds.Height) - 15);
             Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
             WeaponLib = new WeaponLib();
-            _time = 15;
+            _time = 1;
             _ctx = player.Ctx;
 
             _damages = 50;
@@ -61,8 +61,8 @@ namespace BBTB
         public void Update(GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.O)) SetWeaponType( 1 );
-            if (keyboardState.IsKeyDown(Keys.P)) SetWeaponType( 2 );
+            if (keyboardState.IsKeyDown(Keys.E)) SetWeaponType( 1 );
+            if (keyboardState.IsKeyDown(Keys.R)) SetWeaponType( 2 );
 
             var mousePos = CheckMouseAndUpdateMovement();
             Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
@@ -74,7 +74,7 @@ namespace BBTB
             MouseState mouse = Mouse.GetState();
             if (mouse.LeftButton == ButtonState.Pressed)
             {
-                if (_time >= 15)
+                if (_time >= 1)
                 {
                     var bTexture = WeaponType == 1 ? _bulletTexture : _bulletTexture2;
                     _ctx.Board.CreateBullet(bTexture, Position, SpriteBatch, WeaponLib);

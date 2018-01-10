@@ -13,7 +13,6 @@ namespace BBTB
 		Board _ctx;
         float _rotation;
         Vector2 _origin;
-        List<Monster> _enemys;
         public BulletLib BulletLib { get; set; }
 		int _damages;
 
