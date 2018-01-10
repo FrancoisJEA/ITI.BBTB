@@ -38,11 +38,12 @@ namespace BBTB.States
             var bulletTexture = Content.Load<Texture2D>("bullet");
             var weaponTexture2 = Content.Load<Texture2D>("weapon2");
             var bulletTexture2 = Content.Load<Texture2D>("bullet2");
+			var _chestTexture = Content.Load<Texture2D>("chest");
 
             _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false);
 
             _background = new Sprite(Content.Load<Texture2D>("ground"), new Vector2(60, 60), _spriteBatch);
-            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, monsterTexture, 15, 10, _player, this);
+            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, 15, 10, _player, this);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound");
@@ -91,7 +92,7 @@ namespace BBTB.States
             _spriteBatch.End();
 
         }
-
+		
         private void WriteDebugInformation()
         {
             string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.Position.X, _player.Position.Y);
@@ -124,7 +125,7 @@ namespace BBTB.States
 
             DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }
-
+		
         private void DrawWithShadow(string text, Vector2 position)
         {
             _spriteBatch.DrawString(_debugFont, text, position + Vector2.One, Color.Black);

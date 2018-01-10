@@ -70,9 +70,10 @@ namespace BBTB
             while (_experience >= _xpnext)
             {
                 _level++;
+				_experience = _xpnext - Experience;
                 _xplast = _xpnext;
                 _xpnext = _xpnext * 3;
-                _skillsPoints++;
+                _skillsPoints++; 
                 StatLevelUP();
             }
         }
