@@ -6,7 +6,6 @@ using System;
 
 namespace BBTB
 {
-    [Serializable]
     public class Player : Sprite
     {
         readonly GameState _ctx;
