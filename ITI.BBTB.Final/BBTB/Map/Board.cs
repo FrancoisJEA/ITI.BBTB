@@ -76,7 +76,7 @@ namespace BBTB
 				BlockSomeTilesRandomly();
 				SetStairs();
 			}
-			if (Special == _roomNumber && SpecialType == 1)
+			else if (Special == _roomNumber && SpecialType == 1)
 			{
 				SetUpChestInTheMiddle();
 				Tile4[5, 4].IsBlocked = true;
