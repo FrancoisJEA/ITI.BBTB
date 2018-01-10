@@ -75,10 +75,10 @@ namespace BBTB
 				AddMonsters();
 				BlockSomeTilesRandomly();
 				SetStairs();
-			}
-			else if (Special == _roomNumber && SpecialType == 1)
-			{
 				SetUpChestInTheMiddle();
+            }
+            else if (Special == _roomNumber && SpecialType == 1)
+			{
 				Tile4[5, 4].IsBlocked = true;
 			}
             else if (Special == _roomNumber && SpecialType == 2)
@@ -135,21 +135,20 @@ namespace BBTB
                 _stageNumber = _stageNumber + 1;
                 _roomNumber = 1;
 				_special = _rnd.Next(2, _roomInFloor);
-				// _specialType = _rnd.Next(1, 3);
-				_specialType = 1;
+				_specialType = _rnd.Next(1, 3);
             }
         }
 
 		private void SetUpChestInTheMiddle()
 		{
-				for (int x = 0; x < Columns; x++)
+			for (int x = 0; x < Columns; x++)
+			{
+				for (int y = 0; y < Rows; y++)
 				{
-					for (int y = 0; y < Rows; y++)
-					{
-						Vector2 tilePosition = new Vector2(x * ChestTexture.Width, y * ChestTexture.Height);
-						Tile4[x, y] = new Tile(ChestTexture, tilePosition, SpriteBatch, false);
-					}
+					Vector2 tilePosition = new Vector2(x * ChestTexture.Width, y * ChestTexture.Height);
+					Tile4[x, y] = new Tile(ChestTexture, tilePosition, SpriteBatch, false);
 				}
+			}
 		}
 
         private void SetTopLeftTileUnblocked()
@@ -283,7 +282,7 @@ namespace BBTB
             }
         }
 
-        private void SetStairs() // donne la position aux escalier
+        private void SetStairs() // donne la position aux escaliers
         {
             for (int x = 0; x < Columns; x++)
             {
@@ -362,6 +361,14 @@ namespace BBTB
             }
 
             foreach (var tile in Tiles2)
+            {
+                if (tile.IsBlocked && tile.Bounds.Intersects(rectangleToCheck))
+                {
+                    return false;
+                }
+            }
+
+            foreach (var tile in Tile4)
             {
                 if (tile.IsBlocked && tile.Bounds.Intersects(rectangleToCheck))
                 {
