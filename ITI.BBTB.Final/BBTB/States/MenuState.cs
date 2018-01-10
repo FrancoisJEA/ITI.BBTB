@@ -7,7 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using BBTB.Controls;
-
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace BBTB.States
 {
@@ -59,10 +60,6 @@ namespace BBTB.States
             };
         }
 
-    
-      
-
-
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
@@ -74,8 +71,19 @@ namespace BBTB.States
 
         private void LoadGameButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Load Game");
-        }
+			Board _board;
+			PlayerModel Hero2;
+			BinaryFormatter f = new BinaryFormatter();
+			using (var stream = File.OpenRead("Content/Saves/Saves"))
+			{
+				Hero2 = (PlayerModel)f.Deserialize(stream);
+				_board = (Board)f.Deserialize(stream);
+			}
+			Hero2.StageAndRoom();
+			_board.Special = Hero2.Room;
+			_board.RoomNumber--;
+			_board.NewRoom();
+		}
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {

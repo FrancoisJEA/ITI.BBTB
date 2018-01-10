@@ -244,3 +244,8 @@
 /processorParam:TextureFormat=Color
 /build:chest.png
 
+#begin Saves/Saves.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Saves/Saves.xml
+

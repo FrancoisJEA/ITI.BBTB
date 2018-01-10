@@ -9,7 +9,6 @@ namespace BBTB
     [Serializable]
     public class PlayerModel 
     {
-        string _name;
         int _classes;
         /*Attributs*/
         int _life, _strength, _agility, _experience, _intelligence, _resistance;
@@ -20,13 +19,18 @@ namespace BBTB
         int _krumbz;      
 
         int _level;
-        [NonSerialized]
+
+		int _xpnext;
+		int _skillsPoints;
+
+		int _floor, _room, _type;
+		public string _name;
+
+		
+		[NonSerialized]
         int _xplast;
-
-        int _xpnext;
-        int _skillsPoints;
-        public string name;
-
+		[NonSerialized]
+		Board _board;
         public PlayerModel(string name, int classes)
         {
             _name = name;
@@ -50,7 +54,14 @@ namespace BBTB
         public int Level { get { return _level; ; } set { _level = value; } }
 
         public int SkillPoint { get { return _skillsPoints ; } set { _skillsPoints = value; } }
+		public int Room {get {return _room; }}
 
+		public void StageAndRoom()
+		{
+			_floor = _board.StageNumber;
+			_room = _board.RoomNumber;
+			_type = 3;
+		}
         public void Level1SkillSetUp()
         {
             Level = 1;
