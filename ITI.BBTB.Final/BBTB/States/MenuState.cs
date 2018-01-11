@@ -71,6 +71,7 @@ namespace BBTB.States
 
         private void LoadGameButton_Click(object sender, EventArgs e)
         {
+			/*
 			Board _board;
 			PlayerModel Hero2;
 			BinaryFormatter f = new BinaryFormatter();
@@ -83,6 +84,7 @@ namespace BBTB.States
 			_board.Special = Hero2.Room;
 			_board.RoomNumber--;
 			_board.NewRoom();
+			*/
 		}
 
         private void NewGameButton_Click(object sender, EventArgs e)

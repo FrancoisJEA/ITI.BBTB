@@ -9,7 +9,8 @@ namespace BBTB
     [Serializable]
     public class PlayerModel 
     {
-        int _classes;
+		#region Champs
+		int _classes;
         /*Attributs*/
         int _life, _strength, _agility, _experience, _intelligence, _resistance;
         /*Inventory*/
@@ -26,12 +27,13 @@ namespace BBTB
 		int _floor, _room, _type;
 		public string _name;
 
-		
 		[NonSerialized]
         int _xplast;
 		[NonSerialized]
 		Board _board;
-        public PlayerModel(string name, int classes)
+#endregion
+
+		public PlayerModel(string name, int classes)
         {
             _name = name;
             _classes = classes;
@@ -39,7 +41,8 @@ namespace BBTB
             _experience = 0;
         }
 
-        public int Life { get { return _life; } set { _life = value; } }
+		#region Propriétés
+		public int Life { get { return _life; } set { _life = value; } }
         public int Experience { get { return _experience; } set { _experience = value; } }
         public int Xpnext { get { return _xpnext; } set { _xpnext = value; } }
         public int Strength { get { return _strength; } set { _strength = value; } }
@@ -55,6 +58,7 @@ namespace BBTB
 
         public int SkillPoint { get { return _skillsPoints ; } set { _skillsPoints = value; } }
 		public int Room {get {return _room; }}
+		#endregion
 
 		public void StageAndRoom()
 		{
@@ -88,6 +92,7 @@ namespace BBTB
                 StatLevelUP();
             }
         }
+
         public void StatLevelUP()
         {
             if (_classes == 1)

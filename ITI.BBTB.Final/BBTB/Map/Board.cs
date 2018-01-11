@@ -19,7 +19,7 @@ namespace BBTB
 		[NonSerialized]
 		Tile[,] _tile3;
 		[NonSerialized]
-		Tile[,] _tiles4;
+		Tile[,]_tiles4;
 		[NonSerialized]
 		Monster[,] _monster;
 		[NonSerialized]
@@ -48,8 +48,8 @@ namespace BBTB
 		List<Bullet> _bullet;
 		[NonSerialized]
 		readonly GameState _gameState;
-		[NonSerialized]
-		BinaryFormatter f;
+		// [NonSerialized]
+		// BinaryFormatter f;
 		#endregion
 
 		public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, int columns, int rows, Player player, GameState gameState)
@@ -70,14 +70,14 @@ namespace BBTB
 
 			Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();
-
+			
 			_player = player;
 			_gameState = gameState;
 			Stage1();
 		}
 		
 		#region Prorpiétés
-		public BinaryFormatter F { get { return f; } }
+		// public BinaryFormatter F { get { return f; } }
 		public int StageNumber { get { return _stageNumber; } set { _stageNumber = value; } }
 		public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
 		public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
@@ -123,6 +123,7 @@ namespace BBTB
             }
             else if (Special == _roomNumber && SpecialType == 3)
             {
+				/*
 					string Saves = Path.GetTempFileName();
 					var Hero = _player._playerM;
 				    var Map = _currentBoard;
@@ -132,7 +133,7 @@ namespace BBTB
 						f.Serialize(stream, Hero);
 					    f.Serialize(stream, Map);
 					}
-				
+				*/
             }
 			SetAllBorderTilesBlocked();
 			SetTopLeftTileUnblocked();
