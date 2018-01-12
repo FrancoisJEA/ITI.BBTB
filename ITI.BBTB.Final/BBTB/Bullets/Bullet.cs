@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
+using BBTB.Items;
 
 namespace BBTB
 {
@@ -13,9 +15,14 @@ namespace BBTB
 		Board _ctx;
         float _rotation;
         Vector2 _origin;
+        private SpriteBatch _spriteBatch;
         List<Monster> _enemys;
         public BulletLib BulletLib { get; set; }
 		int _damages;
+        public Sprite _item;
+        private Texture2D _itemTexture;
+        protected ContentManager _content;
+        protected GraphicsDevice GraphicsDevice;
 
         public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon,Board board)
             : base(texture, position, spritebatch)
@@ -43,7 +50,13 @@ namespace BBTB
                     if (new Rectangle((int)position.X, (int)position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
                         monster.Hit(this);
-                        if (monster.Life <= 0) monster.IsAlive = false;
+                        if (monster.Life <= 0)
+                        { 
+                            monster.IsAlive = false;
+                           
+
+                            new Rectangle((int)monster.position.X, (int)monster.position.Y, Texture.Width, Texture.Height);
+                        }
                         return true;
                     }
                 }
@@ -81,6 +94,7 @@ namespace BBTB
 		public override void Draw()
         {
             SpriteBatch.Draw(Texture, position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
+         
         }
     }
 }

@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using BBTB.States;
+using Microsoft.Xna.Framework.Content;
+using BBTB.Items;
 
 namespace BBTB
 {
@@ -12,7 +14,10 @@ namespace BBTB
         public Tile[,] Tiles2 { get; set; }
         public Tile[,] Tiles3 { get; set; }
         public Monster[,] Monsters { get; set; }
-		public Preacher[,] Preacher { get; set; }
+
+        private Texture2D _itemTexture;
+
+        public Preacher[,] Preacher { get; set; }
 		public Player _player;
         int _stageNumber;
         int _roomInFloor;
@@ -30,11 +35,13 @@ namespace BBTB
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
         List<Bullet> Bullets { get; }
-
+        ContentManager Content;
+        public Texture2D ItemTexture { get; set; }
         readonly GameState _gameState;
+        private Texture2D itemTexture;
+        Item item;
 
-
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D monsterTexture, int columns, int rows, Player player, GameState gameState)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D monsterTexture, int columns, int rows, Player player, GameState gameState, Texture2D itemTexture)
         {
             Columns = columns;
             Rows = rows;
@@ -44,6 +51,8 @@ namespace BBTB
             MonsterTexture = monsterTexture;
             SpriteBatch = spritebatch;
             Monsters = new Monster[Columns, Rows];
+            ItemTexture = itemTexture;
+           
 
             Tiles = new Tile[Columns, Rows];
             Tiles2 = new Tile[Columns, Rows];
@@ -177,7 +186,7 @@ namespace BBTB
                 for (int y = 0; y < Rows; y++)
                 {
                     Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-                    Monsters[x, y] = new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false);
+                    Monsters[x, y] = new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false,this.ItemTexture);
 
                     if (x > 0 && x < 14 && y > 0 && y < 9)
                     {
@@ -203,7 +212,7 @@ namespace BBTB
 				for (int y = 0; y < Rows; y++)
 				{
 					Vector2 preacherPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-					Monsters[x, y] = new Monster(MonsterTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false);
+					Monsters[x, y] = new Monster(MonsterTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, _itemTexture);
 
 					if (x > 0 && x < 14 && y > 0 && y < 9)
 					{

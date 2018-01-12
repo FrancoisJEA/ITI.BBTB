@@ -9,20 +9,31 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 
+using BBTB.Items;
+
 namespace BBTB.States
 {
     public class GameState : State
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D _tileTexture, _tileTexture2, _tileTexture3, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture, _monsterTexture;
+        private Texture2D _tileTexture, _tileTexture2, _tileTexture3, _jumperTexture, _groundTexture, _bulletTexture, _weaponTexture, _monsterTexture, _itemTexture;
         private Player _player;
         private Board _board;
-        private Sprite _sprite;
+        private Sprite _sprite, _item;
         private Random _rnd = new Random();
         private SpriteFont _debugFont;
+   
+        private Monster monster;
 
+        public Item Item;
         SoundEffect _sound;
+
+        internal Board Board
+        {
+            get { return _board; }
+        }
+
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager Content) : base(game, graphicsDevice, Content)
         {
@@ -35,28 +46,33 @@ namespace BBTB.States
             _tileTexture2 = Content.Load<Texture2D>("barrel");
             _tileTexture3 = Content.Load<Texture2D>("stairs");
             _monsterTexture = Content.Load<Texture2D>("monster");
+            _itemTexture = Content.Load<Texture2D>("Steel_boots");
             _jumperTexture = Content.Load<Texture2D>("BBTBplayer");
             _sprite = new Sprite(_groundTexture, new Vector2(60, 60), _spriteBatch);
             _player = new Player(_jumperTexture, new Vector2(80, 80), _spriteBatch, this, null, false);
+           
+
             Weapon _weapon = new Weapon(_weaponTexture, _bulletTexture, this, _player.position, _spriteBatch, _player);
             _player.Weapon = _weapon;
-            _board = new Board(_spriteBatch, _tileTexture, _tileTexture2, _tileTexture3, _monsterTexture, 15, 10, _player, this);
+           
+            _board = new Board(_spriteBatch, _tileTexture, _tileTexture2, _tileTexture3, _monsterTexture, 15, 10, _player, this,_itemTexture);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
+          
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound");
 
         }
 
-        internal Board Board
-        {
-            get { return _board; }
-        }
+    
+
+       
+     
 
         public override void Update(GameTime gameTime)
         {
 
             _player.Update(gameTime);
-            foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
+            //foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
             foreach (Tile tile in _board.Tiles2) tile.Update(gameTime);
             //foreach (Preacher preacher in _board.Preacher) preacher.Update(gameTime);
             CheckKeyboardAndReact();
@@ -93,7 +109,12 @@ namespace BBTB.States
             _sprite.Draw();
             _board.Draw();
             WriteDebugInformation();
+            foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
             _player.Draw();
+            if (_item != null)
+            {
+               _item.Draw();
+            }
             _spriteBatch.End();
 
         }

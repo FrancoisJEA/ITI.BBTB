@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BBTB.Item;
+using BBTB.Items;
 
-namespace BBTB.Item
+namespace BBTB.Items
 {
     public class InventorySystem2
     {
@@ -32,6 +32,24 @@ namespace BBTB.Item
                     }
                 }
             }
+        }
+
+        public string Drop_Random_Item()
+        {
+            Random random = new Random();
+            int DropProb = random.Next(0, 100);
+            if (DropProb < 10)
+            {
+                string[,] ItemList = WorldItem.AddItems();
+
+                int ItemType = random.Next(0, 8);
+                int ItemNb = ItemList.GetLength(1) - 1;
+                int Item = random.Next(0, ItemNb);
+                string ItemName = ItemList[ItemType, ItemNb];
+                return ItemName;
+
+            }
+            else return "False";
         }
     
     }
