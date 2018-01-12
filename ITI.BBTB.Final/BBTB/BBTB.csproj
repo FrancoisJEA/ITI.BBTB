@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AnimationManager.cs" />
     <Compile Include="Armor\ArmorPieceModel.cs" />
     <Compile Include="Armor\Boots.cs" />
     <Compile Include="Armor\BreastPlate.cs" />
@@ -49,10 +50,18 @@
     <Compile Include="Armor\Leggings.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Controls\Button.cs" />
+    <Compile Include="Item\InventorySystem2.cs" />
+    <Compile Include="Item\InventoryItem.cs" />
+    <Compile Include="GodPlaces\Preacher.cs" />
+    <Compile Include="GodPlaces\God.cs" />
+    <Compile Include="Item\WorldItem.cs" />
+    <Compile Include="Manage\AnimationManager.cs" />
     <Compile Include="Map\Board.cs" />
     <Compile Include="Bullets\Bullet.cs" />
     <Compile Include="Bullets\BulletLib.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Models\Animation.cs" />
+    <Compile Include="Models\Input.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Enemies\Monster.cs" />
     <Compile Include="MovementWrapper.cs" />
@@ -61,7 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="Map\Tile.cs" />
-    <Compile Include="States\ArcherState.cs" />
+    <Compile Include="Sprites\Sprites.cs" />
     <Compile Include="States\CharacterMenu.cs" />
     <Compile Include="States\GameState.cs" />
     <Compile Include="States\MenuState.cs" />

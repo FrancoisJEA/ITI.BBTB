@@ -17,19 +17,22 @@ namespace BBTB
         string _weapon1, _weapon2;
         string _helmet, _breastplate, _boots, _leggings;
         string _potiontype;
-
         int _krumbz;      
+
         int _level;
         [NonSerialized]
         int _xplast;
+
         int _xpnext;
         int _skillsPoints;
         public string name;
 
-        public PlayerModel(string name,int classes)
+        public PlayerModel(string name, int classes)
         {
             _name = name;
             _classes = classes;
+            _life = 100;
+            _experience = 0;
         }
 
         public int Life { get { return _life; } set { _life = value; } }

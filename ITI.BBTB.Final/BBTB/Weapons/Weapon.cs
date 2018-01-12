@@ -14,56 +14,71 @@ namespace BBTB
 {
     public class Weapon : Sprite
     {
-        Player _player;
+        readonly Vector2 _rotationOrigin;
+        readonly Player _player;
         internal WeaponLib WeaponLib { get; set; }
-        public Vector2 _origin;
-        MouseState _currentMouse;
-        List<Bullet> Bullets { get; }
-        Texture2D _bulletTexture;
+        readonly Texture2D _weaponTexture, _bulletTexture, _weaponTexture2, _bulletTexture2;
         int _time;
 
-        Vector2 _position;
+        GameState _ctx;
+        int _damages;
 
-        State _ctx;
-        GameState _gsCtx ;
-
-        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, State ctx, Vector2 position, SpriteBatch spritebatch, Player player)
+        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, Player player)
             : base(weaponTexture, position, spritebatch)
         {
-            
-            _position = position;
-            _player = player;
-            _origin = new Vector2(_player.position.X - (_player.Bounds.Width) - 50, _player.position.Y - (_player.Bounds.Height) - 15);
-            base.position = new Vector2(_player.position.X + (_player.Bounds.Width / 2), _player.position.Y + (_player.Bounds.Height / 2));
-            WeaponLib = new WeaponLib();
-            Bullets = new List<Bullet>();
-            _time = 15;
-            _ctx = ctx;
             _bulletTexture = bulletTexture;
+            _weaponTexture = weaponTexture;
+            _bulletTexture2 = bulletTexture2;
+            _weaponTexture2 = weaponTexture2;
+            _player = player;
+            _rotationOrigin = new Vector2(_player.Position.X - (_player.Bounds.Width) - 50, _player.Position.Y - (_player.Bounds.Height) - 15);
+            Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
+            WeaponLib = new WeaponLib();
+            _time = 15;
+            _ctx = player.Ctx;
+
+            _damages = 50;
+        }
+
+		public int Damages { get { return _damages;} set { _damages = value; } }
+
+        public int WeaponType => Texture == _weaponTexture ? 1 : 2;
+
+        void SetWeaponType( int type )
+        {
+            if (type == 1)
+            {
+                Texture = _weaponTexture;
+                _damages = 50;
+            }
+            else
+            {
+                Texture = _weaponTexture2;
+                _damages = 100;
+            }
         }
 
         public void Update(GameTime gameTime)
         {
-            CheckMouseAndUpdateMovement();
-            BulletUpdate(gameTime);
-            position = new Vector2(_player.position.X + (_player.Bounds.Width / 2), _player.position.Y + (_player.Bounds.Height / 2));
-            WeaponLib.Update(_currentMouse.X - position.X, _currentMouse.Y - position.Y);
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.O)) SetWeaponType( 1 );
+            if (keyboardState.IsKeyDown(Keys.P)) SetWeaponType( 2 );
+
+            var mousePos = CheckMouseAndUpdateMovement();
+            Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
+            WeaponLib.Update(mousePos.X - Position.X, mousePos.Y - Position.Y);
         }
 
-        private void CheckMouseAndUpdateMovement()
+        private Vector2 CheckMouseAndUpdateMovement()
         {
-            _currentMouse = Mouse.GetState();
-
-            Bullet bullet;
-
-            if (_currentMouse.LeftButton == ButtonState.Pressed)
+            MouseState mouse = Mouse.GetState();
+            if (mouse.LeftButton == ButtonState.Pressed)
             {
                 if (_time >= 15)
                 {
-                    bullet = new Bullet(_bulletTexture, position, SpriteBatch, WeaponLib);
-                    Bullets.Add(bullet);
-
-                    _gsCtx.PlayGunSound();
+                    var bTexture = WeaponType == 1 ? _bulletTexture : _bulletTexture2;
+                    _ctx.Board.CreateBullet(bTexture, Position, SpriteBatch, WeaponLib);
+                    _ctx.PlayGunSound();
                     _time = 0;
                 }
                 else
@@ -71,30 +86,12 @@ namespace BBTB
                     _time += 1;
                 }
             }
-        }
-
-        private void BulletUpdate(GameTime gameTime)
-        {
-            for (int i = 0; i < Bullets.Count; i++)
-            {
-                if (Bullets[i].BulletLib.IsDead() || Bullets[i].HasTouchedEnemy() || Bullets[i].HasTouchedTile())
-                {
-                    Bullets.Remove(Bullets[i]);
-                }
-                else
-                {
-                    Bullets[i].Update(gameTime);
-                }
-            }
+            return new Vector2(mouse.X, mouse.Y);
         }
 
         public override void Draw()
         {
-            SpriteBatch.Draw(Texture, position, null, Color.White, WeaponLib.Rotation, _origin, 1, SpriteEffects.None, 0);
-            foreach (Bullet bullet in Bullets)
-            {
-                bullet.Draw();
-            }
+            SpriteBatch.Draw(Texture, Position, null, Color.White, WeaponLib.Rotation, _rotationOrigin, 1, SpriteEffects.None, 0);
         }
     }
 }
