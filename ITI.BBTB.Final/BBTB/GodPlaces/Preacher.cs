@@ -14,14 +14,14 @@ namespace BBTB
 		Board _board;
 		Vector2 _position;
 		Texture2D _texture;
-		SpriteBatch _batch;
+        SpriteBatch _batch;
 
 		bool _isAlive;
 		bool _activated;
 		int _life;
 
 		public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,God dieu, bool activated)
-			:base(texture,position,batch,isAlive)
+			: base(texture, position, batch, isAlive)
 		{
 			_position = position;
 			_batch = batch;

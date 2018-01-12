@@ -43,7 +43,7 @@ namespace BBTB.States
             _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false);
 
             _background = new Sprite(Content.Load<Texture2D>("ground"), new Vector2(60, 60), _spriteBatch);
-            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, 15, 10, _player, this);
+            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, _chestTexture, monsterTexture, 15, 10, _player, this);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound");
@@ -90,13 +90,11 @@ namespace BBTB.States
             WriteDebugInformation();
             _player.Draw();
             _spriteBatch.End();
-
         }
 		
         private void WriteDebugInformation()
         {
             string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.Position.X, _player.Position.Y);
-          //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
 
             string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
             string experienceInText = string.Format("Character's experience: ({0:0})", _player._playerM.Experience);
@@ -107,10 +105,9 @@ namespace BBTB.States
             string SpecialInText = string.Format("Special Number: ({0:0})", Board.CurrentBoard.Special);
             string SpecialTypeInText = string.Format("Special Type: ({0:0})", Board.CurrentBoard.SpecialType);
 
-            //string monsterDeadInText = string.Format("Monsters Dead: ({0:0})", Board.monsters.MonsterDead);
+            string monsterDeadInText = string.Format("Monsters Dead: ({0:0})", _board.MonsterDead);
 
             DrawWithShadow(positionInText, new Vector2(10, 0));
-          //DrawWithShadow(movementInText, new Vector2(10, 20));
 
             DrawWithShadow(lifeInText, new Vector2(200, 200));
             DrawWithShadow(experienceInText, new Vector2(240, 240));
@@ -121,7 +118,7 @@ namespace BBTB.States
             DrawWithShadow(SpecialInText, new Vector2(360, 360));
             DrawWithShadow(SpecialTypeInText, new Vector2(400, 400));
 
-            //DrawWithShadow(monsterDeadInText, new Vector2(440, 440));
+            DrawWithShadow(monsterDeadInText, new Vector2(440, 440));
 
             DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }

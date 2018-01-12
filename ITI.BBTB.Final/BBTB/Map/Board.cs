@@ -3,11 +3,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using BBTB.States;
+using System.Linq;
 
 namespace BBTB
 {
 	public class Board
 	{
+        List<Texture2D> mapTextures;
+        
 		public Tile[,] Tiles { get; set; }
 		public Tile[,] Tiles2 { get; set; }
 		public Tile[,] Tiles3 { get; set; }
@@ -20,6 +23,7 @@ namespace BBTB
         int _roomNumber;
 		int _special;
 		int _specialType;
+        int _monsterDead;
         public int Columns { get; set; }
         public int Rows { get; set; }
 		public Texture2D ChestTexture { get; set; }
@@ -36,8 +40,13 @@ namespace BBTB
         readonly GameState _gameState;
 
 
-		public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture,  int columns, int rows, Player player, GameState gameState)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, int columns, int rows, Player player, GameState gameState)
         {
+            mapTextures = new List<Texture2D>();
+
+            /*mapTextures.Add("test");*/ // * 10
+            textureEtage = mapTextures.Where(c => c.Name == "stage1");
+
             Columns = columns;
             Rows = rows;
             TileTexture = tileTexture;
@@ -59,6 +68,8 @@ namespace BBTB
             _player = player;
             _gameState = gameState;
             Stage1();
+
+            _monsterDead = 0;
         }
 
         public int StageNumber { get { return _stageNumber; } set{ _stageNumber = value; } }
@@ -66,13 +77,14 @@ namespace BBTB
         public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
 		public int Special { get { return _special; } }
 		public int SpecialType { get { return _specialType; } }
+        public int MonsterDead { get { return _monsterDead; } set { _monsterDead = value; } }
 
-		public void CreateNewBoard()
+        public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
         {
 			if (_special != _roomNumber)
 			{
-				AddMonsters();
+                AddMonsters();
 				BlockSomeTilesRandomly();
 				SetStairs();
 				SetUpChestInTheMiddle();
@@ -95,6 +107,12 @@ namespace BBTB
 			_player.ResetPosition();
 		}
         
+        public void IsMonsterDead()
+        {
+            foreach (Monster monster in Monsters)
+                if (monster.Life <= 0)  _monsterDead++;
+        }
+
 		public void Stage1()
         {
             _roomInFloor = _rnd.Next(4, 7);
@@ -332,6 +350,7 @@ namespace BBTB
             NewRoom();
             NewStage();
             BulletUpdate(gameTime);
+            IsMonsterDead();
         }
 
         private void BulletUpdate(GameTime gameTime)
