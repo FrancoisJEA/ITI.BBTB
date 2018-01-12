@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BBTB.Item
+namespace BBTB.Items
 {
     public class WorldItem
     {
@@ -13,6 +13,7 @@ namespace BBTB.Item
         public WorldItem()
         {
         }
+        
 
         public string[,] AddItems() {
 

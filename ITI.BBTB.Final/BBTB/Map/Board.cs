@@ -3,104 +3,79 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using BBTB.States;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using Microsoft.Xna.Framework.Content;
+using BBTB.Items;
 
 namespace BBTB
 {
-	[Serializable]
 	public class Board
 	{
-		#region Champs
-		[NonSerialized]
-		Tile[,] _tiles;
-		[NonSerialized]
-		Tile[,] _tile2;
-		[NonSerialized]
-		Tile[,] _tile3;
-		[NonSerialized]
-		Tile[,]_tiles4;
-		[NonSerialized]
-		Monster[,] _monster;
-		[NonSerialized]
-		Preacher[,] _preacher;
-		[NonSerialized]
+		public Tile[,] Tiles { get; set; }
+		public Tile[,] Tiles2 { get; set; }
+		public Tile[,] Tiles3 { get; set; }
+		public Tile[,] Tile4 { get; set; }
+        public Monster[,] Monsters { get; set; }
+
+        private Texture2D _itemTexture;
+
+        public Preacher[,] Preacher { get; set; }
 		public Player _player;
-		int _stageNumber;
-		int _roomInFloor;
-		int _roomNumber;
-		int _specialType;
-		[NonSerialized]
+        int _stageNumber;
+        int _roomInFloor;
+        int _roomNumber;
 		int _special;
-		[NonSerialized]
-		int _columns;
-		[NonSerialized]
-		int _rows;
-		[NonSerialized]
-		Texture2D _chestTexture, _tileTexture, _tileTexture2, _tileTexture3, _monsterTexture, _preacherTexture;
-		[NonSerialized]
-		SpriteBatch _spriteBatch;
-		[NonSerialized]
-		private Random _rnd = new Random();
-		[NonSerialized]
-		static Board _currentBoard;
-		[NonSerialized]
-		List<Bullet> _bullet;
-		[NonSerialized]
-		readonly GameState _gameState;
-		// [NonSerialized]
-		// BinaryFormatter f;
-		#endregion
+		int _specialType;
+        public int Columns { get; set; }
+        public int Rows { get; set; }
+		public Texture2D ChestTexture { get; set; }
+        public Texture2D TileTexture { get; set; }
+        public Texture2D TileTexture2 { get; set; }
+        public Texture2D TileTexture3 { get; set; }
+        public Texture2D MonsterTexture { get; set; }
+		public Texture2D PreacherTexture { get; set; }
+        private SpriteBatch SpriteBatch { get; set; }
+        private Random _rnd = new Random();
+        public static Board CurrentBoard { get; private set; }
+        List<Bullet> Bullets { get; }
+        ContentManager Content;
+        public Texture2D ItemTexture { get; set; }
+        readonly GameState _gameState;
+        private Texture2D itemTexture;
+        Item item;
 
-		public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, int columns, int rows, Player player, GameState gameState)
-		{
-			Rows = rows;
-			TileTexture = tileTexture;
-			TileTexture2 = tileTexture2;
-			TileTexture3 = tileTexture3;
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D monsterTexture, int columns, int rows, Player player, GameState gameState, Texture2D itemTexture)
+		public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture,  int columns, int rows, Player player, GameState gameState)
+        {
+            Columns = columns;
+            Rows = rows;
+            TileTexture = tileTexture;
+            TileTexture2 = tileTexture2;
+            TileTexture3 = tileTexture3;
 			ChestTexture = chestTexture;
-			MonsterTexture = monsterTexture;
-			SpriteBatch = spritebatch;
-			Monsters = new Monster[Columns, Rows];
+            MonsterTexture = monsterTexture;
+            SpriteBatch = spritebatch;
+            Monsters = new Monster[Columns, Rows];
+            ItemTexture = itemTexture;
+           
 
-			Tiles = new Tile[Columns, Rows];
-			Tiles2 = new Tile[Columns, Rows];
-			Tiles3 = new Tile[Columns, Rows];
+            Tiles = new Tile[Columns, Rows];
+            Tiles2 = new Tile[Columns, Rows];
+            Tiles3 = new Tile[Columns, Rows];
 			Tile4 = new Tile[Columns, Rows];
 
-			Board.CurrentBoard = this;
-			Bullets = new List<Bullet>();
-			
-			_player = player;
-			_gameState = gameState;
-			Stage1();
-		}
-		
-		#region Prorpiétés
-		// public BinaryFormatter F { get { return f; } }
-		public int StageNumber { get { return _stageNumber; } set { _stageNumber = value; } }
-		public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
-		public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
-		public int Special { get { return _special; } set { _special = value; } }
+            Board.CurrentBoard = this;
+            Bullets = new List<Bullet>();
+
+            _player = player;
+            _gameState = gameState;
+            Stage1();
+        }
+
+        public int StageNumber { get { return _stageNumber; } set{ _stageNumber = value; } }
+        public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
+        public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
+		public int Special { get { return _special; } }
 		public int SpecialType { get { return _specialType; } }
-		public Tile[,] Tiles { get { return _tiles; } set { _tiles = value; } }
-		public Tile[,] Tiles2 { get { return _tile2; }  set {_tile2 = value ;} }
-		public Tile[,] Tiles3 { get { return _tile3; } set { _tile3 = value; } }
-		public Tile[,] Tile4 { get {return _tiles4; } set {_tiles4 = value; } }
-		public Monster[,] Monsters { get { return _monster; } set { _monster = value; } }
-		public Preacher[,] Preacher { get {return _preacher; } set {_preacher = value; } }
-		public int Columns { get {return _columns; } set {_columns = value; } }
-		public int Rows { get {return _rows; } set {_rows = value; } }
-		public Texture2D ChestTexture { get {return _chestTexture; } set {_chestTexture = value; } }
-		public Texture2D TileTexture { get {return _tileTexture; } set {_tileTexture = value; } }
-		public Texture2D TileTexture2 { get {return _tileTexture2; } set {_tileTexture2= value; } }
-		public Texture2D TileTexture3 { get {return _tileTexture3; } set {_tileTexture3=value; } }
-		public Texture2D MonsterTexture { get { return _monsterTexture; } set { _monsterTexture = value; } }
-		public Texture2D PreacherTexture { get { return _preacherTexture; } set { _preacherTexture = value; } }
-		private SpriteBatch SpriteBatch { get { return _spriteBatch; } set { _spriteBatch = value; } }
-		List<Bullet> Bullets { get { return _bullet; } set { _bullet = value; } }
-		public static Board CurrentBoard { get { return _currentBoard; } private set { _currentBoard = value; } }
-		#endregion
 
 		public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
@@ -123,17 +98,7 @@ namespace BBTB
             }
             else if (Special == _roomNumber && SpecialType == 3)
             {
-				/*
-					string Saves = Path.GetTempFileName();
-					var Hero = _player._playerM;
-				    var Map = _currentBoard;
-					f = new BinaryFormatter();
-					using (var stream = File.OpenWrite("Content/Saves/Saves"))
-					{
-						f.Serialize(stream, Hero);
-					    f.Serialize(stream, Map);
-					}
-				*/
+
             }
 			SetAllBorderTilesBlocked();
 			SetTopLeftTileUnblocked();
@@ -180,8 +145,7 @@ namespace BBTB
                 _stageNumber = _stageNumber + 1;
                 _roomNumber = 1;
 				_special = _rnd.Next(2, _roomInFloor);
-				//_specialType = _rnd.Next(1, 3);
-				_specialType = 3;
+				_specialType = _rnd.Next(1, 3);
             }
         }
 
@@ -233,7 +197,7 @@ namespace BBTB
                 for (int y = 0; y < Rows; y++)
                 {
                     Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-                    Monsters[x, y] = new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false);
+                    Monsters[x, y] = new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false,this.ItemTexture);
 
                     if (x > 0 && x < 14 && y > 0 && y < 9)
                     {
@@ -259,7 +223,7 @@ namespace BBTB
 				for (int y = 0; y < Rows; y++)
 				{
 					Vector2 preacherPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-					Monsters[x, y] = new Monster(MonsterTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false);
+					Monsters[x, y] = new Monster(MonsterTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, _itemTexture);
 
 					if (x > 0 && x < 14 && y > 0 && y < 9)
 					{

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BBTB.Items;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,16 @@ namespace BBTB
 		Vector2 _position;
 		Texture2D _texture;
 		SpriteBatch _batch;
-
+        Texture2D itemTexture;
+        Item item;
 		bool _isAlive;
 		bool _activated;
 		int _life;
 
-		public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,God dieu, bool activated)
-			:base(texture,position,batch,isAlive)
+        public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, Texture2D itemTexture)
+			: base(texture,position,batch,isAlive, itemTexture)
 		{
+            
 			_position = position;
 			_batch = batch;
 			_texture = texture;

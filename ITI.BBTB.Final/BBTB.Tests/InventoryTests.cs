@@ -1,4 +1,4 @@
-﻿using BBTB.Item;
+﻿using BBTB.Items;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -64,8 +64,8 @@ namespace BBTB.Tests
         [Test]
         public void Pick_an_item_in_inventory()
         {
-            var Items = new Item.InventoryItem();
-            var InventorySystem = new Item.InventorySystem2();
+            var Items = new Items.InventoryItem();
+            var InventorySystem = new Items.InventorySystem2();
             string ItemName = "Steel helmet";
             InventorySystem.PickItem(ItemName, Items);
             string ItemName2 = "Leather plastron";
@@ -78,6 +78,14 @@ namespace BBTB.Tests
             Assert.That(Inventory[0], Is.SameAs(ItemName));
             Assert.That(Inventory[1], Is.SameAs(ItemName2));
 
+        }
+        
+        [Test]
+        public void Drop_a_random_item ()
+        {
+            var InventorySystem = new Items.InventorySystem2();
+            string ItemName = InventorySystem.Drop_Random_Item();
+            Assert.That(ItemName, Is.Not.EqualTo(null));
         }
 
     }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BBTB.States;
 using Microsoft.Xna.Framework.Input;
+using BBTB.Items;
 
 namespace BBTB
 {
@@ -15,15 +16,19 @@ namespace BBTB
         public bool IsAlive { get; set; }
 
         int _life;
+       public Item _item;
 		int _xp;
 		Player _player;
         public int _monsterDead;
 
         GameState _ctx; // Paramètre du constructeur
+        public Texture2D _itemTexture { get; set; }
 
-        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive)
+        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,Texture2D itemTexture)
             : base(texture, position, batch)
         {
+            
+            _itemTexture = itemTexture;
             IsAlive = isAlive;
             _life = 100;
 			_xp = 10;
@@ -51,6 +56,12 @@ namespace BBTB
             {
                 IsAlive = false;
                 _monsterDead++;
+               // InventorySystem2 InventorySystem2 = new InventorySystem2();
+               // string ItemName = InventorySystem2.Drop_Random_Item();
+               // if (ItemName != null) {
+                    _item = new Item(new Vector2(this.position.X, this.position.Y), _itemTexture, SpriteBatch);
+                    _item.Draw();
+                //}
                 return true;
             }
             return false;
