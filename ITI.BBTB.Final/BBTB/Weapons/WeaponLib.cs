@@ -9,9 +9,9 @@ namespace BBTB
 {
     public class WeaponLib
     {
-        public Vector2 Distance { get; set; }
-        public float Rotation { get; set; }
-        public Vector2 Direction { get; set; }
+        public Vector2 Distance { get; private set; }
+        public float Rotation { get; private set; }
+        public Vector2 Direction { get; private set; }
 
         public WeaponLib()
         {
@@ -24,11 +24,12 @@ namespace BBTB
             Direction = DirectionSet(Rotation);
         }
 
-        public float RotationSet(Vector2 distance)
+        float RotationSet(Vector2 distance)
         {
             return (float)Math.Atan2(distance.Y, distance.X);
         }
-        public Vector2 DirectionSet(float rotation)
+
+        Vector2 DirectionSet(float rotation)
         {
             return new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
         }

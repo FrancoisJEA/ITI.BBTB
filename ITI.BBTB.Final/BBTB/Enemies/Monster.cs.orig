@@ -16,10 +16,13 @@ namespace BBTB
         public bool IsAlive { get; set; }
 
         int _life;
+<<<<<<< HEAD
        public Item _item;
+=======
 		int _xp;
 		Player _player;
         public int _monsterDead;
+>>>>>>> 00c1b9768a593954fad3b35bc9b32b3d14a3c918
 
         GameState _ctx; // Paramètre du constructeur
         public Texture2D _itemTexture { get; set; }
@@ -55,13 +58,16 @@ namespace BBTB
             if (_life <= 0)
             {
                 IsAlive = false;
-                _monsterDead++;
+<<<<<<< HEAD
                // InventorySystem2 InventorySystem2 = new InventorySystem2();
                // string ItemName = InventorySystem2.Drop_Random_Item();
                // if (ItemName != null) {
                     _item = new Item(new Vector2(this.position.X, this.position.Y), _itemTexture, SpriteBatch);
                     _item.Draw();
                 //}
+=======
+                _monsterDead++;
+>>>>>>> 00c1b9768a593954fad3b35bc9b32b3d14a3c918
                 return true;
             }
             return false;

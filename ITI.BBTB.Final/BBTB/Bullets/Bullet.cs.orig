@@ -15,7 +15,11 @@ namespace BBTB
 		Board _ctx;
         float _rotation;
         Vector2 _origin;
+<<<<<<< HEAD
         private SpriteBatch _spriteBatch;
+        List<Monster> _enemys;
+=======
+>>>>>>> 00c1b9768a593954fad3b35bc9b32b3d14a3c918
         public BulletLib BulletLib { get; set; }
 		int _damages;
         public Sprite _item;
@@ -97,8 +101,12 @@ namespace BBTB
 
 		public override void Draw()
         {
-            SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
+<<<<<<< HEAD
+            SpriteBatch.Draw(Texture, position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
          
+=======
+            SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
+>>>>>>> 00c1b9768a593954fad3b35bc9b32b3d14a3c918
         }
     }
 }
