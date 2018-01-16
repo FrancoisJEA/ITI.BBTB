@@ -63,7 +63,7 @@ namespace BBTB
 		public void StageAndRoom()
 		{
 			_floor = _board.StageNumber;
-			_room = _board.RoomNumber;
+			_room = _board.PlayerActualRoom;
 			_type = 3;
 		}
         public void Level1SkillSetUp()

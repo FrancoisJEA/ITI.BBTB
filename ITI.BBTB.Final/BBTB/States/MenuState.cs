@@ -81,7 +81,7 @@ namespace BBTB.States
 			}
 			Hero2.StageAndRoom();
 			_board.Special = Hero2.Room;
-			_board.RoomNumber--;
+			_board.PlayerActualRoom--;
 			_board.NewRoom();
 		}
 
