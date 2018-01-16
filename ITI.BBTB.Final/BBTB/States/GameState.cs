@@ -15,6 +15,8 @@ namespace BBTB.States
 {
     public class GameState : State
     {
+        Texture2D[,] mapTextures;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Player _player;
@@ -24,8 +26,6 @@ namespace BBTB.States
         private Random _rnd = new Random();
         private SpriteFont _debugFont;
    
-        private Monster monster;
-
         public Item Item;
         SoundEffect _sound;
 
@@ -40,13 +40,22 @@ namespace BBTB.States
             _graphicsDevice = graphicsDevice;
             _spriteBatch = new SpriteBatch(graphicsDevice);
 
+            mapTextures = new Texture2D[10, 2];
+
+            mapTextures[0, 0] = Content.Load<Texture2D>("ground");
+            mapTextures[0, 1] = Content.Load<Texture2D>("tile");
+            mapTextures[1, 0] = Content.Load<Texture2D>("ground2");
+            mapTextures[1, 1] = Content.Load<Texture2D>("tile");
+
+
             var groundTexture = Content.Load<Texture2D>("ground");
             var tileTexture = Content.Load<Texture2D>("tile");
             var tileTexture2 = Content.Load<Texture2D>("barrel");
             var tileTexture3 = Content.Load<Texture2D>("stairs");
             var monsterTexture = Content.Load<Texture2D>("monster");
             var playerTexture = Content.Load<Texture2D>("BBTBplayer");
-            _itemTexture = Content.Load<Texture2D>("Steel_boots");
+            var preacherTexture = Content.Load<Texture2D>("prêtre");
+            var itemTexture = Content.Load<Texture2D>("weapon2");
             var weaponTexture = Content.Load<Texture2D>("weapon");
             var bulletTexture = Content.Load<Texture2D>("bullet");
             var weaponTexture2 = Content.Load<Texture2D>("weapon2");
@@ -55,18 +64,14 @@ namespace BBTB.States
 
             _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false);
 
-            _background = new Sprite(Content.Load<Texture2D>("ground"), new Vector2(60, 60), _spriteBatch);
-            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, _chestTexture, monsterTexture, 15, 10, _player, this);
+            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, _chestTexture, monsterTexture, preacherTexture, itemTexture, mapTextures, 15, 10, _player, this);
+            
+
             _debugFont = Content.Load<SpriteFont>("DebugFont");
           
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound");
         }
-
-    
-
-       
-     
 
         public override void Update(GameTime gameTime)
         {
@@ -76,6 +81,8 @@ namespace BBTB.States
             //foreach (Preacher preacher in _board.Preacher) preacher.Update(gameTime);
             CheckKeyboardAndReact();
             _board.Update(gameTime);
+
+            _background = new Sprite(mapTextures[_board.StageNumber - 1, 0], new Vector2(60, 60), _spriteBatch);
         }
 
         internal void PlayGunSound()
@@ -102,7 +109,11 @@ namespace BBTB.States
             _background.Draw();
             _board.Draw();
             WriteDebugInformation();
-            foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
+            foreach (Monster monster in _board.Monsters)
+            {
+                if( monster.IsAlive ) monster.Update(gameTime);
+            }
+
             _player.Draw();
             if (_item != null)
             {

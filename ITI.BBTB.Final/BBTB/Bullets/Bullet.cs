@@ -56,10 +56,7 @@ namespace BBTB
                         monster.Hit(this);
                         if (monster.Life <= 0)
                         { 
-                            monster.IsAlive = false;
-                           
-
-                            new Rectangle((int)monster.position.X, (int)monster.position.Y, Texture.Width, Texture.Height);
+                            new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
                         }
                         return true;
                     }
