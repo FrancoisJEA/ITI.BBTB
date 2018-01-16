@@ -69,7 +69,7 @@ namespace BBTB
 
         public bool HasTouchedTile()
         {
-            foreach (Tile tile in Board.CurrentBoard.Tiles)
+            foreach (Tile tile in Board.CurrentBoard.Tile)
             {
                 if (tile.IsBlocked)
                 {
@@ -80,7 +80,7 @@ namespace BBTB
                 }
             }
 
-            foreach (Tile tile in Board.CurrentBoard.Tiles2)
+            foreach (Tile tile in Board.CurrentBoard.Tile2)
             {
                 if (tile.IsBlocked)
                 {
