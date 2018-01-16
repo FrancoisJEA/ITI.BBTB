@@ -13,23 +13,24 @@ namespace BBTB
 {
     public class Monster : Sprite
     {
-        public bool IsAlive { get; set; }
+        public bool IsAlive { get { return _life >= 0; } }
 
         int _life;
-       public Item _item;
+        public Item _item;
 		int _xp;
 		Player _player;
         public int _monsterDead;
+        PlayerInventory PlayerInventory = new PlayerInventory();
 
         GameState _ctx; // Paramètre du constructeur
-        public Texture2D _itemTexture { get; set; }
+        public List<Texture2D> _itemTexture { get; set; }
 
-        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,Texture2D itemTexture)
+        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)
             : base(texture, position, batch)
         {
-            
+         
             _itemTexture = itemTexture;
-            IsAlive = isAlive;
+
             _life = 100;
 			_xp = 10;
             _monsterDead = 0;
@@ -41,7 +42,6 @@ namespace BBTB
         public void Update(GameTime gameTime)
         {
             IsDead();
-            KillAllMonsters();
         }
 
         public void Hit(Bullet bullet)
@@ -54,17 +54,22 @@ namespace BBTB
         {
             if (_life <= 0)
             {
-                IsAlive = false;
-                _monsterDead++;
-               // InventorySystem2 InventorySystem2 = new InventorySystem2();
-               // string ItemName = InventorySystem2.Drop_Random_Item();
-               // if (ItemName != null) {
-                    _item = new Item(new Vector2(this.position.X, this.position.Y), _itemTexture, SpriteBatch);
-                    _item.Draw();
-                //}
+
+               _monsterDead++;
                 return true;
             }
             return false;
+        }
+        
+        public void DropItem ()
+        {
+            Random Random = new Random();
+            int ItemNb = _itemTexture.Count - 1;
+            int ItemID = Random.Next(0, ItemNb);
+
+            Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
+            _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch);
+            _item.Draw();
         }
 
         public override void Draw()
@@ -73,12 +78,6 @@ namespace BBTB
             {
                 base.Draw();
             }
-        }
-
-        internal void KillAllMonsters()
-        {
-            KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.B)) { IsAlive = false; }
         }
 
     }
