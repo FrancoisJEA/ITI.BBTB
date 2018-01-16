@@ -244,7 +244,7 @@
 /processorParam:TextureFormat=Color
 /build:chest.png
 
-#begin prêtre.jpeg
+#begin Bow.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -254,9 +254,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:prêtre.jpeg
+/build:Bow.png
 
-#begin ground2.jpg
+#begin Steel_boots.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -266,5 +266,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:ground2.jpg
+/build:Steel_boots.png
 

@@ -15,25 +15,20 @@ namespace BBTB
 		Board _board;
 		Vector2 _position;
 		Texture2D _texture;
-<<<<<<< HEAD
         SpriteBatch _batch;
-
-=======
-		SpriteBatch _batch;
         Texture2D itemTexture;
         Item item;
->>>>>>> 57ae91f2e6592087f5bd6ae53799233e37c60b01
 		bool _isAlive;
 		bool _activated;
 		int _life;
 
 <<<<<<< HEAD
-		public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,God dieu, bool activated)
-			: base(texture, position, batch, isAlive)
-=======
         public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, Texture2D itemTexture)
+			: base(texture,position,batch, itemTexture)
+=======
+        public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, List<Texture2D> itemTexture)
 			: base(texture,position,batch,isAlive, itemTexture)
->>>>>>> 57ae91f2e6592087f5bd6ae53799233e37c60b01
+>>>>>>> 5e74c2ec10ed88ea20af7cc51a7eec434a923bf2
 		{
             
 			_position = position;
@@ -48,7 +43,7 @@ namespace BBTB
 
 		public void Update(GameTime gameTime)
 		{
-			IsDead();
+			//IsDead();
 		}
 
 		public void Hit(Bullet bullet)
@@ -57,7 +52,8 @@ namespace BBTB
 			//if (IsDead()) prévenir le jeu pour gagner l'expérience
 		}
 
-		public bool IsDead()
+<<<<<<< HEAD
+		/*public bool IsDead()
 		{
 			if (_life <= 0)
 			{
@@ -65,7 +61,10 @@ namespace BBTB
 				return true;
 			}
 			return false;
-		}
+		}*/
+=======
+	
+>>>>>>> 5e74c2ec10ed88ea20af7cc51a7eec434a923bf2
 
 		public override void Draw()
 		{

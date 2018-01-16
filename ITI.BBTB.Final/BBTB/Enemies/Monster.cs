@@ -19,11 +19,12 @@ namespace BBTB
         int _life;
         public Item _item;
 		int _xp;
+        PlayerInventory PlayerInventory = new PlayerInventory();
 
         GameState _ctx; // Paramètre du constructeur
-        public Texture2D _itemTexture { get; set; }
+        public List<Texture2D> _itemTexture { get; set; }
 
-        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, Texture2D itemTexture)
+        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)
             : base(texture, position, batch)
         {
             _itemTexture = itemTexture;
@@ -42,12 +43,21 @@ namespace BBTB
             _life -= bullet.Damages;
             if (_life <= 0)
             {
-                _item = new Item(new Vector2(this.Position.X, this.Position.Y), _itemTexture, SpriteBatch);
-                _item.Draw();
+
             } 
             //if (IsDead()) prévenir le jeu pour gagner l'expérience
         }
+        
+        public void DropItem ()
+        {
+            Random Random = new Random();
+            int ItemNb = _itemTexture.Count - 1;
+            int ItemID = Random.Next(0, ItemNb);
 
+            Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
+            _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch);
+            _item.Draw();
+        }
 
         public override void Draw()
         {

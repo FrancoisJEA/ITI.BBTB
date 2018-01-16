@@ -49,13 +49,11 @@
     <Compile Include="Armor\Leggings.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Controls\Button.cs" />
-    <Compile Include="Items\Inventory.cs" />
-    <Compile Include="Items\InventorySystem2.cs" />
-    <Compile Include="Items\InventoryItem.cs" />
+    <Compile Include="Items\Armor.cs" />
+    <Compile Include="Items\PlayerInventory.cs" />
     <Compile Include="GodPlaces\Preacher.cs" />
     <Compile Include="GodPlaces\God.cs" />
     <Compile Include="Items\Item.cs" />
-    <Compile Include="Items\WorldItem.cs" />
     <Compile Include="Map\Board.cs" />
     <Compile Include="Bullets\Bullet.cs" />
     <Compile Include="Bullets\BulletLib.cs" />
@@ -72,8 +70,8 @@
     <Compile Include="States\GameState.cs" />
     <Compile Include="States\MenuState.cs" />
     <Compile Include="States\State.cs" />
-    <Compile Include="Weapons\Weapon.cs" />
-    <Compile Include="Weapons\WeaponLib.cs" />
+    <Compile Include="Items\Weapon.cs" />
+    <Compile Include="Items\WeaponLib.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
