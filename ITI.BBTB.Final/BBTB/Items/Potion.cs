@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BBTB.Item
 {
-    public class Potion : InventoryItem
+    public class Potion : Item
     {
         public Potion()
         {

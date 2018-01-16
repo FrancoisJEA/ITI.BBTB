@@ -8,65 +8,59 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace BBTB
 {
-	[Serializable]
-	public class Board
-	{
-		#region Champs
-		[NonSerialized]
-		Tile[,] _tiles;
-		[NonSerialized]
-		Tile[,] _tile2;
-		[NonSerialized]
-		Tile[,] _tile3;
-		[NonSerialized]
-		Tile[,]_tiles4;
-		[NonSerialized]
-		Monster[,] _monster;
-		[NonSerialized]
-		Preacher[,] _preacher;
-		[NonSerialized]
-		public Player _player;
+    public class Board
+    {
+        public Tile[,] Tiles { get; set; }
+        public Tile[,] Tiles2 { get; set; }
+        public Tile[,] Tiles3 { get; set; }
+        public Tile[,] Tile4 { get; set; }
+        public List<Monster> Monsters { get; set; }
+
+        private Texture2D _itemTexture;
+
+        public List<Preacher> Preacher { get; set; }
+        public Player _player;
 		int _stageNumber;
 		int _roomInFloor;
 		int _roomNumber;
-		int _specialType;
-		[NonSerialized]
-		int _special;
-		[NonSerialized]
-		int _columns;
-		[NonSerialized]
-		int _rows;
-		[NonSerialized]
-		Texture2D _chestTexture, _tileTexture, _tileTexture2, _tileTexture3, _monsterTexture, _preacherTexture;
-		[NonSerialized]
-		SpriteBatch _spriteBatch;
-		[NonSerialized]
-		private Random _rnd = new Random();
-		[NonSerialized]
-		static Board _currentBoard;
-		[NonSerialized]
-		List<Bullet> _bullet;
-		[NonSerialized]
-		readonly GameState _gameState;
-		 [NonSerialized]
-		 BinaryFormatter _f;
-		#endregion
+        int _special;
+        int _specialType;
+        public int Columns { get; set; }
+        public int Rows { get; set; }
+        public Texture2D ChestTexture { get; set; }
+        public Texture2D TileTexture { get; set; }
+        public Texture2D TileTexture2 { get; set; }
+        public Texture2D TileTexture3 { get; set; }
+        public Texture2D MonsterTexture { get; set; }
+        public Texture2D PreacherTexture { get; set; }
+        private SpriteBatch SpriteBatch { get; set; }
+        private Random _rnd = new Random();
+        public static Board CurrentBoard { get; private set; }
+        List<Bullet> Bullets { get; }
+        ContentManager Content;
+        public List<Texture2D> ItemTexture { get; set; }
+        readonly GameState _gameState;
+        private Texture2D itemTexture;
+        Item item;
 
 		public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, int columns, int rows, Player player, GameState gameState)
-		{
-			Rows = rows;
-			TileTexture = tileTexture;
-			TileTexture2 = tileTexture2;
-			TileTexture3 = tileTexture3;
-			ChestTexture = chestTexture;
+        {
+            Columns = columns;
+            Rows = rows;
+            TileTexture = tileTexture;
+            TileTexture2 = tileTexture2;
+            TileTexture3 = tileTexture3;
+            ChestTexture = chestTexture;
 			MonsterTexture = monsterTexture;
 			SpriteBatch = spritebatch;
-			Monsters = new Monster[Columns, Rows];
+            Monsters = new List<Monster>();
+            Preacher = new List<Preacher>();
+            ItemTexture = itemTexture;
 
 			Tiles = new Tile[Columns, Rows];
 			Tiles2 = new Tile[Columns, Rows];
 			Tiles3 = new Tile[Columns, Rows];
-			Tile4 = new Tile[Columns, Rows];
+            Tile4 = new Tile[Columns, Rows];
 
 			Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();
@@ -77,11 +71,11 @@ namespace BBTB
 		}
 		
 		#region Prorpiétés
-		public int StageNumber { get { return _stageNumber; } set { _stageNumber = value; } }
+        public int StageNumber { get { return _stageNumber; } set { _stageNumber = value; } }
 		public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
 		public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
 		public int Special { get { return _special; } set { _special = value; } }
-		public int SpecialType { get { return _specialType; } }
+        public int SpecialType { get { return _specialType; } }
 		public Tile[,] Tiles { get { return _tiles; } set { _tiles = value; } }
 		public Tile[,] Tiles2 { get { return _tile2; }  set {_tile2 = value ;} }
 		public Tile[,] Tiles3 { get { return _tile3; } set { _tile3 = value; } }
@@ -102,6 +96,18 @@ namespace BBTB
 		public BinaryFormatter Formatter { get { return _f; } }
 		#endregion
 
+        public void KillMonster()
+        {
+            for (int x = 0; x < Monsters.Count; x++) {
+
+                if (Monsters[x].IsAlive == false)
+                {
+                   
+                    Monsters[x].DropItem();
+                    Monsters.RemoveAt(x--);
+                }
+            }
+        }
 		public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
         {
@@ -200,9 +206,9 @@ namespace BBTB
         private void SetTopLeftTileUnblocked()
         {
             Tiles2[1, 1].IsBlocked = false;
-            Monsters[1, 1].IsAlive = false;
+            //Monsters[1, 1].IsAlive = false;
 
-            Monsters[13, 1].IsAlive = false;
+            //Monsters[13, 1].IsAlive = false;
             Tiles2[13, 1].IsBlocked = false;
             Tiles2[12, 1].IsBlocked = false;
             Tiles2[13, 2].IsBlocked = false;
@@ -212,10 +218,12 @@ namespace BBTB
             {
                 for (int y = 0; y < Rows; y++)
                 {
-                    if (Tiles2[x, y].IsBlocked.Equals(Monsters[x, y].IsAlive))
+                    foreach (Monster monster in Monsters)
                     {
-                        Tiles2[x, y].IsBlocked = false;
-                        Monsters[x, y].IsAlive = false;
+                        if (monster.Position.X == x && monster.Position.Y == y)
+                        {
+                            Tiles2[x, y].IsBlocked = false;
+                        }
                     }
                 }
             }
@@ -232,14 +240,17 @@ namespace BBTB
             {
                 for (int y = 0; y < Rows; y++)
                 {
-                    Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-                    Monsters[x, y] = new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false);
+                    //Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
+                    //Monsters[x, y] = new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false,this.ItemTexture);
 
                     if (x > 0 && x < 14 && y > 0 && y < 9)
                     {
                         if (_rnd.Next(4, 20) == 4)
                         {
-                            Monsters[x, y].IsAlive = true;
+                            Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
+
+                            Monsters.Add(new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture));
+                           
                         }
                     }
 
@@ -258,19 +269,18 @@ namespace BBTB
 			{
 				for (int y = 0; y < Rows; y++)
 				{
-					Vector2 preacherPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-					Monsters[x, y] = new Monster(MonsterTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false);
-
 					if (x > 0 && x < 14 && y > 0 && y < 9)
 					{
 						if (_rnd.Next(4, 20) == 4)
 						{
-							Monsters[x, y].IsAlive = true;
+                            Vector2 preacherPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
+                            //Monsters.Add(new Monster(MonsterTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, ItemTexture));
 						}
 					}
 				}
 			}
 		}
+
 
         internal void OnBulletDestroy(Bullet bullet)
         {
@@ -365,7 +375,7 @@ namespace BBTB
 
 			foreach (var monster in Monsters)
             {
-                monster.Draw();
+                if (monster != null) monster.Draw();
             }
 
             foreach (var bullet in Bullets)
@@ -379,6 +389,7 @@ namespace BBTB
             NewRoom();
             NewStage();
             BulletUpdate(gameTime);
+            KillMonster();
         }
 
         private void BulletUpdate(GameTime gameTime)

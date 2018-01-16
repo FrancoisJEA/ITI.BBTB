@@ -13,7 +13,7 @@ namespace BBTB
         Vector2 _direction;
         float _timer;
         float _lifeSpan = 1.5f;
-        float _linearVelocity = 20f;
+        float _linearVelocity = 8f;
         Vector2 _position;
         int _height;
         int _width;
