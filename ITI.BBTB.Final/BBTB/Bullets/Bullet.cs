@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using BBTB.Enemies;
+using BBTB.Items;
 
 namespace BBTB
 {
@@ -15,8 +16,13 @@ namespace BBTB
         float _rotation;
         Boss _boss;
         Vector2 _origin;
+        private SpriteBatch _spriteBatch;
         public BulletLib BulletLib { get; set; }
 		int _damages;
+        public Sprite _item;
+        private Texture2D _itemTexture;
+        protected ContentManager _content;
+        protected GraphicsDevice GraphicsDevice;
     
         Weapon _weaponCtx;
 
@@ -46,14 +52,15 @@ namespace BBTB
 		{
             foreach (Monster monster in Board.CurrentBoard.Monsters)
             {
-                if (monster.IsAlive)
-                {
+
                     if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
                         monster.Hit(this);
-                        if (monster.Life <= 0) monster.IsAlive = false;
-                        return true;
-                    }
+                        if (monster.Life <= 0)
+                        {
+                        Board.CurrentBoard.Monsters.Remove(monster);
+                            new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
+                        }
                 }
             }
             
@@ -64,14 +71,15 @@ namespace BBTB
                     _boss.Hit(this);
                     if (_boss.Life < +0) _boss.IsAlive = false;
                     return true;
-                }
+                    }
+                
             }
 				return false;
         }
 
         public bool HasTouchedTile()
         {
-            foreach (Tile tile in Board.CurrentBoard.Tiles)
+            foreach (Tile tile in Board.CurrentBoard.Tile)
             {
                 if (tile.IsBlocked)
                 {
@@ -82,7 +90,7 @@ namespace BBTB
                 }
             }
 
-            foreach (Tile tile in Board.CurrentBoard.Tiles2)
+            foreach (Tile tile in Board.CurrentBoard.Tile2)
             {
                 if (tile.IsBlocked)
                 {
@@ -99,6 +107,7 @@ namespace BBTB
 		public override void Draw()
         {
             SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
+         
         }
     }
 }

@@ -6,34 +6,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BBTB.Item
+namespace BBTB.Items
 {
-   public class InventoryItem
+   public class PlayerInventory
     {
-        string[] Inventory = new string[8];
+        List<Item> Inventory = new List<Item>();
         public string ItemName { get; set; }
         public Texture2D Texture { get; set; }
-        private int MaxQuantity = 1;
-        string[,] ItemList;
-        WorldItem WorldItem = new WorldItem();
-
-        public InventoryItem()
+       
+       
+       public PlayerInventory()
         {
 
         }
 
-        public InventoryItem(string ItemName, Texture2D Texture)
+        public PlayerInventory(string ItemName, Texture2D Texture)
         {
             this.ItemName = ItemName;
             this.Texture = Texture;
         }
-        public string[] AddItemToInventory(int i, int j)
-        {
-
-            ItemList = WorldItem.AddItems();
-            Inventory[i] = ItemList[i,j];
-            return Inventory;
-            
+        public void AddItemToInventory(Item Item)
+        { 
+            int i = Item.InventoryEmplacement;
+            Inventory[i] = Item;
         }
 
         public void Draw(SpriteBatch sb, Vector2 position)
@@ -41,9 +36,14 @@ namespace BBTB.Item
             sb.Draw(this.Texture, position, Color.White);
         }
 
-        public string[] InventoryList()
+        public List<Item> InventoryList()
         {
             return Inventory;
+        }
+        public Texture2D FoundTextureByID(int ItemID, List<Texture2D> ItemTextures)
+        {
+            Texture2D itemTexture = ItemTextures.ElementAt(ItemID);
+            return itemTexture;
         }
     }
 }

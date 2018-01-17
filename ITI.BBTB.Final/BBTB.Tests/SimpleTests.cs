@@ -109,6 +109,5 @@ namespace BBTB.Tests
                 Assert.That(WhiteGuy.Intelligence == 13);
             }
         }
-
     }
 }

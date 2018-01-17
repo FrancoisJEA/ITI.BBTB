@@ -6,10 +6,10 @@ using System;
 
 namespace BBTB
 {
-    [Serializable]
     public class Player : Sprite
     {
-        readonly GameState _ctx;
+		#region Champs
+		readonly GameState _ctx;
         public Weapon _weapon;
         public PlayerModel _playerM;
         Vector2 _mouvement;
@@ -21,8 +21,9 @@ namespace BBTB
       
         internal string _classes;
 		God _god;
+		#endregion
 
-        public Player(Texture2D texture, Texture2D weaponTexture, Texture2D weaponTexture2, Texture2D bulletTexture, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed)
+		public Player(Texture2D texture, Texture2D weaponTexture, Texture2D weaponTexture2, Texture2D bulletTexture, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed)
             : base(texture, position, spritebatch)
         {
             _playerM = new PlayerModel("Tanguy", 1);
@@ -33,7 +34,8 @@ namespace BBTB
 			_havePrayed = havePrayed;
             _weapon = new Weapon(weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, Position, spritebatch, this);
         }
-		
+
+		#region propriété 
 		public bool HavePrayed { get { return _havePrayed; } set { _havePrayed = value; }  }
         public string Classes { get { return _classes ; } set { _classes = value; } }
         public int WeaponType => _weapon.WeaponType;
@@ -41,8 +43,9 @@ namespace BBTB
         public Weapon Weapon => _weapon;
 
         public GameState Ctx => _ctx;
+		#endregion 
 
-        public void ResetPosition()
+		public void ResetPosition()
         {
             Position = Vector2.One * 70;
             _mouvement = Vector2.Zero;
