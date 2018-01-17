@@ -13,6 +13,9 @@ namespace BBTB
         public Tile[,] Tiles2 { get; set; }
         public Tile[,] Tiles3 { get; set; }
         public Tile[,] Tile4 { get; set; }
+
+        public Texture2D[,] mapTextures;
+
         public List<Monster> Monsters { get; set; }
         public List<Preacher> Preacher { get; set; }
         private Texture2D _itemTexture;
@@ -39,7 +42,7 @@ namespace BBTB
         public List<Texture2D> ItemTexture { get; set; }
         readonly GameState _gameState;
 
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, Texture2D[,] MapTextures, Texture2D preacherTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture)
 
         {
             Columns = columns;
@@ -50,10 +53,12 @@ namespace BBTB
             ChestTexture = chestTexture;
             MonsterTexture = monsterTexture;
             PreacherTexture = preacherTexture;
-            _itemTexture = ItemTexture;
+            ItemTexture = itemTexture;
             SpriteBatch = spritebatch;
             Monsters = new List<Monster>();
             Preacher = new List<Preacher>();
+
+            mapTextures = MapTextures;
 
             Tiles = new Tile[Columns, Rows];
             Tiles2 = new Tile[Columns, Rows];
@@ -196,7 +201,7 @@ namespace BBTB
                 {
                     foreach (Monster monster in Monsters)
                     {
-                        if (monster.Position.X == x && monster.Position.Y == y)
+                        if (monster.Position.X == x * 64 && monster.Position.Y == y * 64)
                         {
                             Tiles2[x, y].IsBlocked = false;
                         }
@@ -350,6 +355,8 @@ namespace BBTB
 
 			foreach (var monster in Monsters)
             {
+                if (StageNumber > 0) monster.Texture = mapTextures[StageNumber - 1, 2];
+
                 if (monster != null) monster.Draw();
             }
 

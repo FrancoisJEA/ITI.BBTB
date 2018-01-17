@@ -23,7 +23,7 @@ namespace BBTB
 		int _life;
 
         public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, List<Texture2D> itemTexture)
-			: base(texture,position,batch, itemTexture)
+			: base(texture,position,batch, false, itemTexture)
 		{
             
 			_position = position;

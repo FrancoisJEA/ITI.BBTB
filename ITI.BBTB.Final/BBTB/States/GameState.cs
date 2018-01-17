@@ -41,20 +41,22 @@ namespace BBTB.States
             _graphicsDevice = graphicsDevice;
             _spriteBatch = new SpriteBatch(graphicsDevice);
 
-            mapTextures = new Texture2D[10, 2];
+            mapTextures = new Texture2D[11, 3]; // Nombre d'étages (11 - 1), type de murs ou type de ground ou type de monstre (0 ground, 1 murs, 2 monstre))
 
             mapTextures[0, 0] = Content.Load<Texture2D>("ground");
             mapTextures[0, 1] = Content.Load<Texture2D>("tile");
+            mapTextures[0, 2] = Content.Load<Texture2D>("monster");
+
             mapTextures[1, 0] = Content.Load<Texture2D>("ground2");
             mapTextures[1, 1] = Content.Load<Texture2D>("tile");
+            mapTextures[1, 2] = Content.Load<Texture2D>("prêtre");
 
 
-            var groundTexture = Content.Load<Texture2D>("ground");
             var tileTexture = Content.Load<Texture2D>("tile");
             var tileTexture2 = Content.Load<Texture2D>("barrel");
             var tileTexture3 = Content.Load<Texture2D>("stairs");
-            var monsterTexture = Content.Load<Texture2D>("monster");
             var playerTexture = Content.Load<Texture2D>("BBTBplayer");
+            var monsterTexture = mapTextures[0, 2];
             var preacherTexture = Content.Load<Texture2D>("prêtre");
             _itemTexture = ItemTextures(Content);
             var itemTexture = Content.Load<Texture2D>("weapon2");
@@ -66,11 +68,9 @@ namespace BBTB.States
             
             _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false);
 
-            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, _chestTexture, monsterTexture, preacherTexture, itemTexture, mapTextures, 15, 10, _player, this);
-            
+            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, _chestTexture, monsterTexture, mapTextures, preacherTexture, /*mapTextures,*/ 15, 10, _player, this, _itemTexture);
 
             _debugFont = Content.Load<SpriteFont>("DebugFont");
-          
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound");
         }
@@ -124,9 +124,6 @@ namespace BBTB.States
             _board.Draw();
 
             WriteDebugInformation();
-            {
-                if( monster.IsAlive ) monster.Update(gameTime);
-            }
 
             _player.Draw();
             _spriteBatch.End();
