@@ -9,8 +9,8 @@ namespace BBTB
     [Serializable]
     public class PlayerModel 
     {
-        string _name;
-        int _classes;
+		#region Champs
+		int _classes;
         /*Attributs*/
         int _life, _strength, _agility, _experience, _intelligence, _resistance;
         /*Inventory*/
@@ -20,14 +20,20 @@ namespace BBTB
         int _krumbz;      
 
         int _level;
-        [NonSerialized]
+
+		int _xpnext;
+		int _skillsPoints;
+
+		int _floor, _room, _type;
+		public string _name;
+
+		[NonSerialized]
         int _xplast;
+		[NonSerialized]
+		Board _board;
+#endregion
 
-        int _xpnext;
-        int _skillsPoints;
-        public string name;
-
-        public PlayerModel(string name, int classes)
+		public PlayerModel(string name, int classes)
         {
             _name = name;
             _classes = classes;
@@ -35,7 +41,8 @@ namespace BBTB
             _experience = 0;
         }
 
-        public int Life { get { return _life; } set { _life = value; } }
+		#region Propriétés
+		public int Life { get { return _life; } set { _life = value; } }
         public int Experience { get { return _experience; } set { _experience = value; } }
         public int Xpnext { get { return _xpnext; } set { _xpnext = value; } }
         public int Strength { get { return _strength; } set { _strength = value; } }
@@ -50,7 +57,15 @@ namespace BBTB
         public int Level { get { return _level; ; } set { _level = value; } }
 
         public int SkillPoint { get { return _skillsPoints ; } set { _skillsPoints = value; } }
+		public int Room {get {return _room; }}
+		#endregion
 
+		public void StageAndRoom()
+		{
+			_floor = _board.StageNumber;
+			_room = _board.RoomNumber;
+			_type = 3;
+		}
         public void Level1SkillSetUp()
         {
             Level = 1;
@@ -77,6 +92,7 @@ namespace BBTB
                 StatLevelUP();
             }
         }
+
         public void StatLevelUP()
         {
             if (_classes == 1)

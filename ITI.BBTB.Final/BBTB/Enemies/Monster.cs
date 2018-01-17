@@ -19,6 +19,7 @@ namespace BBTB
         int _life;
         public Item _item;
 		int _xp;
+		Vector2 _position;
         PlayerInventory PlayerInventory = new PlayerInventory();
 
         GameState _ctx; // Paramètre du constructeur
@@ -27,12 +28,14 @@ namespace BBTB
         public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)
             : base(texture, position, batch)
         {
+			_position = position;
             _itemTexture = itemTexture;
             _life = 100;
 			_xp = 10;
         }
 
         public int Life { get { return _life; } set { _life = value; } }
+		// public Vector2 Position { get { return _position; } set { _position = value; } }
 
         public void Update(GameTime gameTime)
         {

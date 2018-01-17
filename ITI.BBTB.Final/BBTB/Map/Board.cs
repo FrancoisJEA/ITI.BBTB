@@ -3,26 +3,28 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using BBTB.States;
-using System.Linq;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using Microsoft.Xna.Framework.Content;
+using BBTB.Items;
 
 namespace BBTB
 {
     public class Board
     {
-        public Tile[,] Tiles { get; set; }
-        public Tile[,] Tiles2 { get; set; }
-        public Tile[,] Tiles3 { get; set; }
-        public Tile[,] Tile4 { get; set; }
-
+		Tile[,] _tiles;
+		Tile[,] _tile2;
+		Tile[,] _tile3;
+		Tile[,] _tile4;
+       
         public Texture2D[,] mapTextures;
-
         public List<Monster> Monsters { get; set; }
         public List<Preacher> Preacher { get; set; }
-        private Texture2D _itemTexture;
+
         public Player _player;
-        int _stageNumber;
-        int _roomInFloor;
-        int _roomNumber;
+		int _stageNumber;
+		int _roomInFloor;
+		int _roomNumber;
         int _special;
         int _specialType;
         int _monsterDead;
@@ -41,9 +43,9 @@ namespace BBTB
 
         public List<Texture2D> ItemTexture { get; set; }
         readonly GameState _gameState;
+		BinaryFormatter _f;
 
         public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, Texture2D[,] MapTextures, Texture2D preacherTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture)
-
         {
             Columns = columns;
             Rows = rows;
@@ -51,10 +53,10 @@ namespace BBTB
             TileTexture2 = tileTexture2;
             TileTexture3 = tileTexture3;
             ChestTexture = chestTexture;
-            MonsterTexture = monsterTexture;
+			MonsterTexture = monsterTexture;
             PreacherTexture = preacherTexture;
             ItemTexture = itemTexture;
-            SpriteBatch = spritebatch;
+			SpriteBatch = spritebatch;
             Monsters = new List<Monster>();
             Preacher = new List<Preacher>();
 
@@ -65,24 +67,32 @@ namespace BBTB
             Tiles3 = new Tile[Columns, Rows];
             Tile4 = new Tile[Columns, Rows];
 
-            Board.CurrentBoard = this;
-            Bullets = new List<Bullet>();
-
-            _player = player;
-            _gameState = gameState;
-            Stage1();
+			Board.CurrentBoard = this;
+			Bullets = new List<Bullet>();
+			
+			_player = player;
+			_gameState = gameState;
+			Stage1();
 
             _monsterDead = 0;
-        }
-
+		}
+		
+		#region Prorpiétés
         public int StageNumber { get { return _stageNumber; } set { _stageNumber = value; } }
-        public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
-        public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
-        public int Special { get { return _special; } }
+		public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
+		public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
+		public int Special { get { return _special; } set { _special = value; } }
         public int SpecialType { get { return _specialType; } }
+		public BinaryFormatter Formatter { get { return _f; } }
         public int MonsterDead { get { return _monsterDead; } set { _monsterDead = value; } }
+		public Tile[,] Tile { get { return _tiles; } set { _tiles = value; } }
+		public Tile[,] Tile2 { get { return _tile2; } set { _tile2 = value; } }
+		public Tile[,] Tile3 { get { return _tile3; } set { _tile3 = value; } }
+		public Tile[,] Tile4 { get { return _tile4; } set { _tile4 = value; } }
+		public List<Monster> Monsters { get { return _monsters; } set { _monsters = value; } }
+		#endregion
 
-        public void KillMonster()
+		public void KillMonster()
         {
             for (int x = 0; x < Monsters.Count; x++) {
 
@@ -115,7 +125,17 @@ namespace BBTB
             }
             else if (Special == _roomNumber && SpecialType == 3)
             {
-
+				
+					string Saves = Path.GetTempFileName();
+					var Hero = _player._playerM;
+				    var Map = CurrentBoard;
+					_f = new BinaryFormatter();
+					using (var stream = File.OpenWrite("Content/Saves/Saves"))
+					{
+						_f.Serialize(stream, Hero);
+					    //_f.Serialize(stream, Map);
+					}
+				
             }
 			SetAllBorderTilesBlocked();
 			SetTopLeftTileUnblocked();
@@ -147,11 +167,11 @@ namespace BBTB
                     break;
                 }
             }
-            Tiles3[13, 1].IsBlocked = showExist;
+            Tile3[13, 1].IsBlocked = showExist;
 
             if (_roomNumber < _roomInFloor)
             {
-                if (showExist == true &&_player.Bounds.Intersects(Tiles3[13, 1].Bounds))
+                if (showExist == true &&_player.Bounds.Intersects(Tile3[13, 1].Bounds))
                 {
 					_roomNumber++;
 					CreateNewBoard();
@@ -161,14 +181,15 @@ namespace BBTB
         
         public void NewStage()
         {
-            if(_roomNumber == _roomInFloor && _player.Bounds.Intersects(Tiles3[13, 1].Bounds))
+            if(_roomNumber == _roomInFloor && _player.Bounds.Intersects(Tile3[13, 1].Bounds))
             {
                 CreateNewBoard();
                 _roomInFloor = _rnd.Next(4, 7);
                 _stageNumber = _stageNumber + 1;
                 _roomNumber = 1;
 				_special = _rnd.Next(2, _roomInFloor);
-				_specialType = _rnd.Next(1, 3);
+				//_specialType = _rnd.Next(1, 3);
+				_specialType = 3;
             }
         }
 
@@ -186,14 +207,14 @@ namespace BBTB
 
         private void SetTopLeftTileUnblocked()
         {
-            Tiles2[1, 1].IsBlocked = false;
+            Tile2[1, 1].IsBlocked = false;
             //Monsters[1, 1].IsAlive = false;
 
             //Monsters[13, 1].IsAlive = false;
-            Tiles2[13, 1].IsBlocked = false;
-            Tiles2[12, 1].IsBlocked = false;
-            Tiles2[13, 2].IsBlocked = false;
-            Tiles2[11, 1].IsBlocked = false;
+            Tile2[13, 1].IsBlocked = false;
+            Tile2[12, 1].IsBlocked = false;
+            Tile2[13, 2].IsBlocked = false;
+            Tile2[11, 1].IsBlocked = false;
 
             for (int x = 0; x < Columns; x++)
             {
@@ -203,7 +224,7 @@ namespace BBTB
                     {
                         if (monster.Position.X == x * 64 && monster.Position.Y == y * 64)
                         {
-                            Tiles2[x, y].IsBlocked = false;
+                            Tile2[x, y].IsBlocked = false;
                         }
                     }
                 }
@@ -282,7 +303,8 @@ namespace BBTB
                     Tiles[x, y] = new Tile(TileTexture, tilePosition, SpriteBatch, _rnd.Next(5) == 0);
                 }
             }
-        }*/
+        }
+		*/
 
         private void SetAllBorderTilesBlocked()
         {
@@ -291,10 +313,10 @@ namespace BBTB
                 for (int y = 0; y < Rows; y++)
                 {
                     Vector2 tilePosition = new Vector2(x * TileTexture.Width, y * TileTexture.Height);
-                    Tiles[x, y] = new Tile(TileTexture, tilePosition, SpriteBatch, false);
+                    Tile[x, y] = new Tile(TileTexture, tilePosition, SpriteBatch, false);
 
                     if (x == 0 || x == Columns - 1 || y == 0 || y == Rows - 1)
-                    { Tiles[x, y].IsBlocked = true; }
+                    { Tile[x, y].IsBlocked = true; }
                 }
             }
         }
@@ -306,13 +328,13 @@ namespace BBTB
                 for (int y = 0; y < Rows; y++)
                 {
                     Vector2 tilePosition = new Vector2(x * TileTexture2.Width, y * TileTexture2.Height);
-                    Tiles2[x, y] = new Tile(TileTexture2, tilePosition, SpriteBatch, false);
+                    Tile2[x, y] = new Tile(TileTexture2, tilePosition, SpriteBatch, false);
 
                     if (x > 0 && x < 14 && y > 0 && y < 9)
                     {
                         if (_rnd.Next(4, 20) == 4)
                         {
-                            Tiles2[x, y].IsBlocked = true;
+                            Tile2[x, y].IsBlocked = true;
                         }
                     }
                 }
@@ -326,24 +348,24 @@ namespace BBTB
                 for (int y = 0; y < Rows; y++)
                 {
                     Vector2 tilePosition = new Vector2(x * TileTexture3.Width, y * TileTexture3.Height);
-                    Tiles3[x, y] = new Tile(TileTexture3, tilePosition, SpriteBatch, false);
+                    Tile3[x, y] = new Tile(TileTexture3, tilePosition, SpriteBatch, false);
                 }
             }
         }
 
         public void Draw()
         {
-            foreach (var tile in Tiles)
+            foreach (var tile in Tile)
             {
                 tile.Draw();
             }
 
-            foreach (var tile2 in Tiles2)
+            foreach (var tile2 in Tile2)
             {
                 tile2.Draw();
             }
 
-            foreach (var tile3 in Tiles3)
+            foreach (var tile3 in Tile3)
             {
                 tile3.Draw();
             }
@@ -392,7 +414,7 @@ namespace BBTB
 
         public bool HasRoomForRectangle(Rectangle rectangleToCheck)
         {
-            foreach (var tile in Tiles)
+            foreach (var tile in Tile)
             {
                 if (tile.IsBlocked && tile.Bounds.Intersects(rectangleToCheck))
                 {
@@ -400,7 +422,7 @@ namespace BBTB
                 }
             }
 
-            foreach (var tile in Tiles2)
+            foreach (var tile in Tile2)
             {
                 if (tile.IsBlocked && tile.Bounds.Intersects(rectangleToCheck))
                 {
