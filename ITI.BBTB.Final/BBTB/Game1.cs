@@ -17,7 +17,7 @@ namespace BBTB
 
         private State _currentState;
         private State _nextState;
-        private State _gameState;
+   
 
         public Game1()
         {
@@ -33,7 +33,7 @@ namespace BBTB
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             _currentState = new MenuState(this, GraphicsDevice, Content);
-            _gameState = new GameState(this, GraphicsDevice, Content);
+        
         }
 
         public void ChangeState(State state)

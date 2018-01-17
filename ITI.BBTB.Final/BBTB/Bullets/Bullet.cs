@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using BBTB.Enemies;
 
 namespace BBTB
 {
@@ -12,22 +13,25 @@ namespace BBTB
     {
 		Board _ctx;
         float _rotation;
+        Boss _boss;
         Vector2 _origin;
         public BulletLib BulletLib { get; set; }
 		int _damages;
-
+    
         Weapon _weaponCtx;
 
         public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon, Board board, Weapon weaponCtx)
             : base(texture, position, spritebatch)
         {
+           
+    
             _origin = new Vector2(-27, 20);
             _rotation = weapon.Rotation;
-            BulletLib = new BulletLib(weapon, new Vector2(base.Position.X, base.Position.Y), texture.Height, texture.Width);
-
+            BulletLib = new BulletLib(weapon, new Vector2(base.Position.X, base.Position.Y), texture.Height, texture.Width);    
             _weaponCtx = weaponCtx;
             _damages = weaponCtx.Damages;
 			_ctx = board;
+            _boss = _ctx._boss;
         }
 
 		public int Damages { get { return _damages;} set { _damages = value; } }
@@ -50,6 +54,16 @@ namespace BBTB
                         if (monster.Life <= 0) monster.IsAlive = false;
                         return true;
                     }
+                }
+            }
+            
+            if(_boss.IsAlive)
+            {
+                if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(_boss.Bounds))
+                {
+                    _boss.Hit(this);
+                    if (_boss.Life < +0) _boss.IsAlive = false;
+                    return true;
                 }
             }
 				return false;

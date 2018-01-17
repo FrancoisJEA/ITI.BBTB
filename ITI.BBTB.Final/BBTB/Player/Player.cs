@@ -13,11 +13,13 @@ namespace BBTB
         public Weapon _weapon;
         public PlayerModel _playerM;
         Vector2 _mouvement;
-
+       
         int _time;
         bool _booltime;
         private Vector2 oldPosition;
 		bool _havePrayed;
+      
+        internal string _classes;
 		God _god;
 
         public Player(Texture2D texture, Texture2D weaponTexture, Texture2D weaponTexture2, Texture2D bulletTexture, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed)
@@ -33,7 +35,7 @@ namespace BBTB
         }
 		
 		public bool HavePrayed { get { return _havePrayed; } set { _havePrayed = value; }  }
-
+        public string Classes { get { return _classes ; } set { _classes = value; } }
         public int WeaponType => _weapon.WeaponType;
 
         public Weapon Weapon => _weapon;

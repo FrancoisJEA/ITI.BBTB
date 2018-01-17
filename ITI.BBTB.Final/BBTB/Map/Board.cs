@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using BBTB.States;
+using BBTB.Enemies;
 
 namespace BBTB
 {
@@ -14,6 +15,7 @@ namespace BBTB
 		public Tile[,] Tile4 { get; set; }
         public Monster[,] Monsters { get; set; }
 		public Preacher[,] Preacher { get; set; }
+       
 		public Player _player;
         int _stageNumber;
         int _roomInFloor;
@@ -27,8 +29,11 @@ namespace BBTB
         public Texture2D TileTexture2 { get; set; }
         public Texture2D TileTexture3 { get; set; }
         public Texture2D MonsterTexture { get; set; }
+        public Texture2D BossTexture { get; set; }
 		public Texture2D PreacherTexture { get; set; }
         private SpriteBatch SpriteBatch { get; set; }
+        internal Boss _boss;
+        Vector2 _bossPosition = new Vector2(300,400);
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
         List<Bullet> Bullets { get; }
@@ -36,7 +41,7 @@ namespace BBTB
         readonly GameState _gameState;
 
 
-		public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture,  int columns, int rows, Player player, GameState gameState)
+		public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState)
         {
             Columns = columns;
             Rows = rows;
@@ -44,6 +49,7 @@ namespace BBTB
             TileTexture2 = tileTexture2;
             TileTexture3 = tileTexture3;
 			ChestTexture = chestTexture;
+            BossTexture = bossTexture;
             MonsterTexture = monsterTexture;
             SpriteBatch = spritebatch;
             Monsters = new Monster[Columns, Rows];
@@ -52,11 +58,13 @@ namespace BBTB
             Tiles2 = new Tile[Columns, Rows];
             Tiles3 = new Tile[Columns, Rows];
 			Tile4 = new Tile[Columns, Rows];
-
+            _boss = new Boss(BossTexture, _bossPosition , SpriteBatch, false);
             Board.CurrentBoard = this;
             Bullets = new List<Bullet>();
 
             _player = player;
+           
+
             _gameState = gameState;
             Stage1();
         }
@@ -73,7 +81,10 @@ namespace BBTB
 			if (_special != _roomNumber)
 			{
 				AddMonsters();
-				BlockSomeTilesRandomly();
+                if (_roomNumber == _roomInFloor)
+                    _boss.IsAlive = true;
+
+                BlockSomeTilesRandomly();
 				SetStairs();
 				SetUpChestInTheMiddle();
             }
@@ -88,10 +99,12 @@ namespace BBTB
             }
             else if (Special == _roomNumber && SpecialType == 3)
             {
-
+                
             }
 			SetAllBorderTilesBlocked();
 			SetTopLeftTileUnblocked();
+            if (_boss.IsAlive == true)
+                SetBossTileUnblocked();
 			_player.ResetPosition();
 		}
         
@@ -164,6 +177,7 @@ namespace BBTB
 
             for (int x = 0; x < Columns; x++)
             {
+                
                 for (int y = 0; y < Rows; y++)
                 {
                     if (Tiles2[x, y].IsBlocked.Equals(Monsters[x, y].IsAlive))
@@ -174,7 +188,30 @@ namespace BBTB
                 }
             }
         }
+        private void SetBossTileUnblocked()
+        {
+            Tiles2[6, 4].IsBlocked = false;
+            Tiles2[7, 4].IsBlocked = false;
+            Tiles2[8, 4].IsBlocked = false;
+            Tiles2[6, 5].IsBlocked = false;
+            Tiles2[7, 5].IsBlocked = false;
+            Tiles2[8, 5].IsBlocked = false;
+            Tiles2[6, 6].IsBlocked = false;
+            Tiles2[7, 6].IsBlocked = false;
+            Tiles2[8, 6].IsBlocked = false;
 
+            for (int x = 0; x < Columns; x++)
+            {
+                for (int y = 0; y < Rows; y++)
+                {
+                    if (Tiles2[x,y].IsBlocked.Equals(_boss.Position))
+                    {
+                        Tiles2[x, y].IsBlocked = false;
+                        Monsters[x, y].IsAlive = false;
+                    }
+                }
+            }
+        }
         internal void CreateBullet(Texture2D bulletTexture, Vector2 position, SpriteBatch spriteBatch, WeaponLib weaponLib)
         {
             Bullets.Add(new Bullet(bulletTexture, position, spriteBatch, weaponLib, this, _player._weapon));
@@ -205,6 +242,8 @@ namespace BBTB
                 }
             }
         }
+
+    
 		// Add preachers in the room (if its a special room and a god one)
 		private void AddPreacher()
 		{
@@ -296,6 +335,9 @@ namespace BBTB
 
         public void Draw()
         {
+
+            _boss.Draw();
+
             foreach (var tile in Tiles)
             {
                 tile.Draw();
@@ -325,6 +367,8 @@ namespace BBTB
             {
                 bullet.Draw();
             }
+
+
         }
 
         internal void Update(GameTime gameTime)
@@ -348,6 +392,7 @@ namespace BBTB
                     b.Update(gameTime);
                 }
             }
+            _boss.Update(gameTime);
         }
 
         public bool HasRoomForRectangle(Rectangle rectangleToCheck)
