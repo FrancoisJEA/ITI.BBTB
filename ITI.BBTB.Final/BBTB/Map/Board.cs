@@ -62,10 +62,10 @@ namespace BBTB
 
             mapTextures = MapTextures;
 
-            Tiles = new Tile[Columns, Rows];
-            Tiles2 = new Tile[Columns, Rows];
-            Tiles3 = new Tile[Columns, Rows];
-            Tile4 = new Tile[Columns, Rows];
+            _tiles = new Tile[Columns, Rows];
+            _tile2 = new Tile[Columns, Rows];
+            _tile3 = new Tile[Columns, Rows];
+            _tile4 = new Tile[Columns, Rows];
 
 			Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();
@@ -89,7 +89,6 @@ namespace BBTB
 		public Tile[,] Tile2 { get { return _tile2; } set { _tile2 = value; } }
 		public Tile[,] Tile3 { get { return _tile3; } set { _tile3 = value; } }
 		public Tile[,] Tile4 { get { return _tile4; } set { _tile4 = value; } }
-		public List<Monster> Monsters { get { return _monsters; } set { _monsters = value; } }
 		#endregion
 
 		public void KillMonster()
