@@ -85,6 +85,37 @@ namespace BBTB.Items
             Texture2D itemTexture = ItemTextures.ElementAt(ItemID);
             return itemTexture;
         }
+        public List<Texture2D> DefineBulletTexture(List<Texture2D> BulletTextures,string classe)
+        {
+            List<Texture2D> Btextures = new List<Texture2D>();
+
+            if (classe == "Wizard")
+            {
+                Texture2D BulletTexture = BulletTextures.ElementAt(0);
+                Btextures.Add(BulletTexture);
+                Texture2D BulletTexture2 = BulletTextures.ElementAt(1);
+                Btextures.Add(BulletTexture2);
+                return Btextures;
+            }
+            if (classe == "Archer")
+            {
+                Texture2D BulletTexture = BulletTextures.ElementAt(2);
+                Btextures.Add(BulletTexture);
+                Texture2D BulletTexture2 = BulletTextures.ElementAt(3);
+                Btextures.Add(BulletTexture2);
+                return Btextures;
+            }
+            if (classe == "Gunner")
+            {
+                Texture2D BulletTexture = BulletTextures.ElementAt(4);
+                Btextures.Add(BulletTexture);
+                Texture2D BulletTexture2 = BulletTextures.ElementAt(5);
+                Btextures.Add(BulletTexture2);
+                return Btextures;
+            }
+            else return Btextures;
+
+        }
 
     }
 }

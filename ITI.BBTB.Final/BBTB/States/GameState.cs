@@ -28,7 +28,7 @@ namespace BBTB.States
         SoundEffect _sound;
         public List<Texture2D> _itemTexture;
         PlayerInventory Inventory;
-        
+        List<Texture2D> _bulletTextures;
         internal Board Board
         {
             get { return _board; }
@@ -48,7 +48,8 @@ namespace BBTB.States
             var monsterTexture = Content.Load<Texture2D>("monster");
             var playerTexture = Content.Load<Texture2D>("BBTBplayer");
             _itemTexture = ItemTextures(Content);
-            var weaponTexture = Content.Load<Texture2D>("weapon");
+            _bulletTextures = BulletTextures(Content);      
+                var weaponTexture = Content.Load<Texture2D>("weapon");
             var bulletTexture = Content.Load<Texture2D>("bullet");
             var weaponTexture2 = Content.Load<Texture2D>("weapon2");
             var bulletTexture2 = Content.Load<Texture2D>("bullet2");
@@ -56,7 +57,7 @@ namespace BBTB.States
             var _boxTexture = Content.Load<Texture2D>("HUDBox");
             var _boxTexture2 = Content.Load<Texture2D>("HUDBox2");
         Inventory = new PlayerInventory(_itemTexture, _spriteBatch, _boxTexture,_boxTexture2);
-            _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false,Inventory);
+            _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false,Inventory,_bulletTextures);
 
             _background = new Sprite(Content.Load<Texture2D>("ground"), new Vector2(60, 60), _spriteBatch);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
@@ -85,6 +86,17 @@ namespace BBTB.States
             AllTextures.Add(Content.Load<Texture2D>("Items/Leather_helmet"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Skeleton_sword"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Super_staff"));
+            return AllTextures;
+        }
+        public List<Texture2D> BulletTextures(ContentManager Content)
+        {
+            List<Texture2D> AllTextures = new List<Texture2D>();
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Mage_effect1"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Mage_effect2"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Arrow"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Crossbow_arrow"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Bullet1"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Bullet2"));
             return AllTextures;
         }
 

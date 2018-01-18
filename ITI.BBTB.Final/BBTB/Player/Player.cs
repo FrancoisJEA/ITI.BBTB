@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 namespace BBTB
 {
@@ -22,9 +23,10 @@ namespace BBTB
         God _god;
         public PlayerInventory Inventory;
         public string PlayerClasse {get; set;}
+        public List<Texture2D> _bulletTextures;
         
 
-        public Player(Texture2D texture, Texture2D weaponTexture, Texture2D weaponTexture2, Texture2D bulletTexture, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed,PlayerInventory inventory)
+        public Player(Texture2D texture, Texture2D weaponTexture, Texture2D weaponTexture2, Texture2D bulletTexture, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed,PlayerInventory inventory,List<Texture2D> BulletTextures)
             : base(texture, position, spritebatch)
         {
             _playerM = new PlayerModel("Tanguy", 1);
@@ -35,8 +37,12 @@ namespace BBTB
             Inventory = inventory;
             Inventory.ItemByDefault(this);
             _havePrayed = havePrayed;
-            _weapon = new Weapon(weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, Position, spritebatch, this);
+            _bulletTextures = BulletTextures;
             PlayerClasse = "Wizard";
+            _weapon = new Weapon(weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, Position, spritebatch, this,_bulletTextures);
+           
+            
+            
             
         }
 		

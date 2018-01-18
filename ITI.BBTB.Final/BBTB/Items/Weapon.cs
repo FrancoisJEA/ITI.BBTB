@@ -21,20 +21,23 @@ namespace BBTB
         public Texture2D _weaponTexture, _bulletTexture, _weaponTexture2, _bulletTexture2;
         int _time;
         List<Item> Inventory;
-
+        public List<Texture2D> _bulletTextures;
         GameState _ctx;
         int _damages;
 
-        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, Player player)
+        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, Player player, List<Texture2D> BulletTextures)
             : base(weaponTexture, position, spritebatch)
         {
-            _bulletTexture = bulletTexture;
+          
             _player = player;
+            _bulletTextures = BulletTextures;
             Inventory = _player.Inventory.InventoryList();
             _weaponTexture = Inventory[4]._texture;
-            _bulletTexture2 = bulletTexture2;
+           
             _weaponTexture2 = Inventory[5]._texture;
+
             SetWeaponType(1);
+            _bulletTextures = Inventory[4].DefineBulletTexture(BulletTextures, _player.PlayerClasse);
 
             _rotationOrigin = new Vector2(_player.Position.X - (_player.Bounds.Width) - 50, _player.Position.Y - (_player.Bounds.Height) - 15);
             Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
@@ -82,7 +85,7 @@ namespace BBTB
             {
                 if (_time >= 15)
                 {
-                    var bTexture = WeaponType == 1 ? _bulletTexture : _bulletTexture2;
+                    var bTexture = WeaponType == 1 ? _bulletTextures[0] : _bulletTextures[1];
                     _ctx.Board.CreateBullet(bTexture, Position, SpriteBatch, WeaponLib);
                     _ctx.PlayGunSound();
                     _time = 0;
