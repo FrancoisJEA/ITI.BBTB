@@ -17,7 +17,7 @@ namespace BBTB
         readonly Vector2 _rotationOrigin;
         readonly Player _player;
         internal WeaponLib WeaponLib { get; set; }
-        public Texture2D _weaponTexture, _bulletTexture, _weaponTexture2, _bulletTexture2;
+        readonly Texture2D _weaponTexture, _bulletTexture, _weaponTexture2, _bulletTexture2;
         int _time;
 
         GameState _ctx;

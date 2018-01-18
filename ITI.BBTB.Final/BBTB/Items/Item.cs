@@ -16,26 +16,33 @@ namespace BBTB.Items
         public Texture2D _texture;
         public SpriteBatch SpriteBatch;
         public string Name { get; }
-        //public enum Type
+        public string ItemType { get; set; }
         //public enum category
-        int Attack { get; }
+        public enum _classe{ Wizard, Archer, Gunner };
+        public int Attack { get; }
+        private Player _player;
 
 
         public int InventoryEmplacement { get; }
 
 
 
-        public Item(Vector2 position, Texture2D texture, SpriteBatch spriteBatch)
+        public Item(Vector2 position, Texture2D texture, SpriteBatch spriteBatch,Player player)
              
         {
             _position = position;
             _texture = texture;
             SpriteBatch = spriteBatch;
-            Name = texture.Name;
+            Name = texture.Name.Replace("_"," ");
             InventoryEmplacement = this.FindInventoryEmplacement(Name);
-            
-            //this.Attack = Convert.ToInt32(player.Level * 1.8);
 
+            _player = player;
+            
+
+        }
+        public void DefineItem ()
+        {
+           
         }
 
         public void AddToInventory(string Name)
@@ -45,22 +52,27 @@ namespace BBTB.Items
         internal int FindInventoryEmplacement (string Name)
         {
 
-            if (Name.Contains("helmet")) { return 0; } //this.category 
-            if (Name.Contains("armor")) { return 1; }
-            if (Name.Contains("boots")) { return 2; }
-            if (Name.Contains("greaves")) { return 3; }
-            if (Name.Contains("bow") || Name.Contains("staff") ||Name.Contains("Gun")) { return 4; }
-            else return 5;
+            if (Name.Contains("helmet")) {  ItemType = "armor"; return 0; } //this.category 
+            if (Name.Contains("armor")) {  this.ItemType = "armor"; return 1; }
+            if (Name.Contains("boots")) {  this.ItemType = "armor"; return 3; }
+            if (Name.Contains("gloves")) {  this.ItemType = "armor"; return 2; }
+            if (Name.Contains("bow") || Name.Contains("staff") || Name.Contains("gun")) {  ItemType = "weapon"; return 4; }
+            if (Name.Contains("dagger") || Name.Contains("stick") || Name.Contains("sword")) {  ItemType = "weapon"; return 5; }
+
+            else return 6;
 
         }
-         public void Draw ()
+
+        public void Draw ()
         {
-            SpriteBatch.Begin();
             SpriteBatch.Draw(_texture, _position, Color.White);
-            SpriteBatch.End();
         }
 
-        
-     
+        public Texture2D FoundTextureByID(int ItemID, List<Texture2D> ItemTextures)
+        {
+            Texture2D itemTexture = ItemTextures.ElementAt(ItemID);
+            return itemTexture;
+        }
+
     }
 }

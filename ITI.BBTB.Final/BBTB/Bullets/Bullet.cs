@@ -18,8 +18,6 @@ namespace BBTB
         private SpriteBatch _spriteBatch;
         public BulletLib BulletLib { get; set; }
 		int _damages;
-        public Sprite _item;
-        private Texture2D _itemTexture;
         protected ContentManager _content;
         protected GraphicsDevice GraphicsDevice;
 
@@ -55,12 +53,14 @@ namespace BBTB
                         monster.Hit(this);
                         if (monster.Life <= 0)
                         {
-                        Board.CurrentBoard.Monsters.Remove(monster);
-                           
+                        Board.CurrentBoard.KillMonster();
 
-                            new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
-                        }
                         return true;
+
+
+                        new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
+                        }
+                        
                     }
                 
             }

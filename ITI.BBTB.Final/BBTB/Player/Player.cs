@@ -1,4 +1,5 @@
-﻿using BBTB.States;
+﻿using BBTB.Items;
+using BBTB.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -19,6 +20,8 @@ namespace BBTB
         private Vector2 oldPosition;
 		bool _havePrayed;
 		God _god;
+   
+        
 
         public Player(Texture2D texture, Texture2D weaponTexture, Texture2D weaponTexture2, Texture2D bulletTexture, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed)
             : base(texture, position, spritebatch)
@@ -30,6 +33,12 @@ namespace BBTB
             _weapon = weapon;
 			_havePrayed = havePrayed;
             _weapon = new Weapon(weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, Position, spritebatch, this);
+            
+        }
+        public void ChangeWeapon (Item item)
+        {
+            _weapon.Damages = Convert.ToInt32(this._playerM.Level * 1.8); ;
+            _weapon._weaponTexture = item._texture;
         }
 		
 		public bool HavePrayed { get { return _havePrayed; } set { _havePrayed = value; }  }

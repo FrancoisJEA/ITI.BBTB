@@ -20,16 +20,14 @@ namespace BBTB.States
         private Player _player;
         private Board _board;
         private Sprite _background;
-        private Sprite _sprite, _item;
         private Random _rnd = new Random();
         private SpriteFont _debugFont;
    
         private Monster monster;
 
-        public Item Item;
         SoundEffect _sound;
         public List<Texture2D> _itemTexture;
-
+        PlayerInventory Inventory;
         internal Board Board
         {
             get { return _board; }
@@ -58,8 +56,11 @@ namespace BBTB.States
             _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false);
 
             _background = new Sprite(Content.Load<Texture2D>("ground"), new Vector2(60, 60), _spriteBatch);
-            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, 15, 10, _player, this,_itemTexture);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
+            Inventory = new PlayerInventory(_itemTexture, _spriteBatch,_player);
+            Inventory.ItemByDefault();
+            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, 15, 10, _player, this,_itemTexture,_debugFont, Inventory);
+            
           
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound");
@@ -71,19 +72,27 @@ namespace BBTB.States
      public List<Texture2D> ItemTextures (ContentManager Content)
         {
             List<Texture2D> AllTextures = new List<Texture2D>();
-            AllTextures.Add(Content.Load<Texture2D>("Steel_boots"));
-            AllTextures.Add(Content.Load<Texture2D>("Bow"));
-            AllTextures.Add(Content.Load<Texture2D>("Steel_boots"));
-            AllTextures.Add(Content.Load<Texture2D>("Bow"));
-            AllTextures.Add(Content.Load<Texture2D>("Bow"));
+            AllTextures.Add(Content.Load<Texture2D>("InventorySprite"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Steel_gloves"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Steel_boots"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Steel_helmet"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Super_bow"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Steel_armor"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Leather_armor"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Leather_boots"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Leather_gloves"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Leather_helmet"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Skeleton_sword"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Super_staff"));
             return AllTextures;
         }
 
         public override void Update(GameTime gameTime)
         {
             _player.Update(gameTime);
+           
 
-
+             Board.KillMonster();
             foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
             foreach (Tile tile in _board.Tiles2) tile.Update(gameTime);
             //foreach (Preacher preacher in _board.Preacher) preacher.Update(gameTime);
@@ -115,6 +124,7 @@ namespace BBTB.States
             _spriteBatch.Begin();
             _background.Draw();
             _board.Draw();
+            Inventory.ShowInventory();
 
             WriteDebugInformation();
             _player.Draw();

@@ -20,17 +20,17 @@ namespace BBTB
 		int _xp;
 		Player _player;
         public int _monsterDead;
-        PlayerInventory PlayerInventory = new PlayerInventory();
+        PlayerInventory PlayerInventory;
 
         GameState _ctx; // Paramètre du constructeur
         public List<Texture2D> _itemTexture { get; set; }
 
-        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)
+        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
          
             _itemTexture = itemTexture;
-
+            PlayerInventory = Inventory;
             _life = 100;
 			_xp = 10;
             _monsterDead = 0;
@@ -41,7 +41,7 @@ namespace BBTB
 
         public void Update(GameTime gameTime)
         {
-            IsDead();
+            //IsDead();
         }
 
         public void Hit(Bullet bullet)
@@ -61,23 +61,26 @@ namespace BBTB
             return false;
         }
         
-        public void DropItem ()
+        public Item DropItem ()
         {
             Random Random = new Random();
             int ItemNb = _itemTexture.Count - 1;
-            int ItemID = Random.Next(0, ItemNb);
-
-            Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
-            _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch);
-            _item.Draw();
+            int ItemID = Random.Next(1, ItemNb);
+            int dropProb = Random.Next(0, 100);
+            if (dropProb >= 10)
+            {
+                Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
+                _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch,PlayerInventory._player);
+            }
+            return _item;
         }
 
         public override void Draw()
         {
-            if (IsAlive)
-            {
+           // if (IsAlive)
+            //{
                 base.Draw();
-            }
+            //}
         }
 
     }
