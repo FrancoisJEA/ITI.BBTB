@@ -15,11 +15,7 @@ namespace BBTB
 		Board _ctx;
         float _rotation;
         Vector2 _origin;
-<<<<<<< HEAD
         private SpriteBatch _spriteBatch;
-        List<Monster> _enemys;
-=======
->>>>>>> 00c1b9768a593954fad3b35bc9b32b3d14a3c918
         public BulletLib BulletLib { get; set; }
 		int _damages;
         public Sprite _item;
@@ -53,21 +49,24 @@ namespace BBTB
 		{
             foreach (Monster monster in Board.CurrentBoard.Monsters)
             {
-                if (monster.IsAlive)
-                {
+
                     if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
                         monster.Hit(this);
                         if (monster.Life <= 0)
+<<<<<<< HEAD
                         { 
-                            monster.IsAlive = false;
+=======
+                        {
+                        Board.CurrentBoard.Monsters.Remove(monster);
                            
 
-                            new Rectangle((int)monster.position.X, (int)monster.position.Y, Texture.Width, Texture.Height);
+>>>>>>> 5e74c2ec10ed88ea20af7cc51a7eec434a923bf2
+                            new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
                         }
                         return true;
                     }
-                }
+                
             }
 				return false;
         }
@@ -101,12 +100,8 @@ namespace BBTB
 
 		public override void Draw()
         {
-<<<<<<< HEAD
-            SpriteBatch.Draw(Texture, position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
-         
-=======
             SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
->>>>>>> 00c1b9768a593954fad3b35bc9b32b3d14a3c918
+         
         }
     }
 }

@@ -56,8 +56,6 @@ namespace BBTB
                         if (monster.Life <= 0)
                         {
                         Board.CurrentBoard.Monsters.Remove(monster);
-                           
-
                             new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
                         }
                         return true;

@@ -22,8 +22,13 @@ namespace BBTB
 		bool _activated;
 		int _life;
 
+<<<<<<< HEAD
+        public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, Texture2D itemTexture)
+			: base(texture,position,batch, itemTexture)
+=======
         public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, List<Texture2D> itemTexture)
-			: base(texture,position,batch, false, itemTexture)
+			: base(texture,position,batch,isAlive, itemTexture)
+>>>>>>> 5e74c2ec10ed88ea20af7cc51a7eec434a923bf2
 		{
             
 			_position = position;
@@ -47,7 +52,19 @@ namespace BBTB
 			//if (IsDead()) prévenir le jeu pour gagner l'expérience
 		}
 
+<<<<<<< HEAD
+		/*public bool IsDead()
+		{
+			if (_life <= 0)
+			{
+				IsAlive = false;
+				return true;
+			}
+			return false;
+		}*/
+=======
 	
+>>>>>>> 5e74c2ec10ed88ea20af7cc51a7eec434a923bf2
 
 		public override void Draw()
 		{

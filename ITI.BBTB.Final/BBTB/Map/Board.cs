@@ -3,40 +3,24 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using BBTB.States;
-<<<<<<< HEAD
-using System.Linq;
-=======
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework.Content;
 using BBTB.Items;
->>>>>>> 4bd7922c2f351c1da5b5f9a01a4a8646e0f45dff
 
 namespace BBTB
 {
     public class Board
     {
-<<<<<<< HEAD
-        public Tile[,] Tiles { get; set; }
-        public Tile[,] Tiles2 { get; set; }
-        public Tile[,] Tiles3 { get; set; }
-        public Tile[,] Tile4 { get; set; }
-
-        public Texture2D[,] mapTextures;
-
-        public List<Monster> Monsters { get; set; }
-        public List<Preacher> Preacher { get; set; }
-        private Texture2D _itemTexture;
-=======
 		Tile[,] _tiles;
 		Tile[,] _tile2;
 		Tile[,] _tile3;
 		Tile[,] _tile4;
-		List<Monster> _monsters;
        
+        public Texture2D[,] mapTextures;
+        public List<Monster> Monsters { get; set; }
         public List<Preacher> Preacher { get; set; }
 
->>>>>>> 4bd7922c2f351c1da5b5f9a01a4a8646e0f45dff
         public Player _player;
 		int _stageNumber;
 		int _roomInFloor;
@@ -56,19 +40,12 @@ namespace BBTB
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
         List<Bullet> Bullets { get; }
-<<<<<<< HEAD
 
-        public List<Texture2D> ItemTexture { get; set; }
-        readonly GameState _gameState;
-
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, Texture2D[,] MapTextures, Texture2D preacherTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture)
-=======
         public List<Texture2D> ItemTexture { get; set; }
         readonly GameState _gameState;
 		BinaryFormatter _f;
->>>>>>> 4bd7922c2f351c1da5b5f9a01a4a8646e0f45dff
 
-		public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, int columns, int rows, Player player, GameState gameState,List<Texture2D> itemTexture)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, Texture2D[,] MapTextures, Texture2D preacherTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture)
         {
             Columns = columns;
             Rows = rows;
@@ -76,41 +53,19 @@ namespace BBTB
             TileTexture2 = tileTexture2;
             TileTexture3 = tileTexture3;
             ChestTexture = chestTexture;
-<<<<<<< HEAD
-            MonsterTexture = monsterTexture;
+			MonsterTexture = monsterTexture;
             PreacherTexture = preacherTexture;
             ItemTexture = itemTexture;
-            SpriteBatch = spritebatch;
-=======
-			MonsterTexture = monsterTexture;
 			SpriteBatch = spritebatch;
->>>>>>> 4bd7922c2f351c1da5b5f9a01a4a8646e0f45dff
             Monsters = new List<Monster>();
             Preacher = new List<Preacher>();
 
-<<<<<<< HEAD
             mapTextures = MapTextures;
 
-            Tiles = new Tile[Columns, Rows];
-            Tiles2 = new Tile[Columns, Rows];
-            Tiles3 = new Tile[Columns, Rows];
-            Tile4 = new Tile[Columns, Rows];
-
-            Board.CurrentBoard = this;
-            Bullets = new List<Bullet>();
-
-            _player = player;
-            _gameState = gameState;
-            Stage1();
-
-            _monsterDead = 0;
-        }
-
-=======
-			Tile = new Tile[Columns, Rows];
-			Tile2 = new Tile[Columns, Rows];
-			Tile3 = new Tile[Columns, Rows];
-            Tile4 = new Tile[Columns, Rows];
+            _tiles = new Tile[Columns, Rows];
+            _tile2 = new Tile[Columns, Rows];
+            _tile3 = new Tile[Columns, Rows];
+            _tile4 = new Tile[Columns, Rows];
 
 			Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();
@@ -118,30 +73,25 @@ namespace BBTB
 			_player = player;
 			_gameState = gameState;
 			Stage1();
+
+            _monsterDead = 0;
 		}
 		
 		#region Prorpiétés
->>>>>>> 4bd7922c2f351c1da5b5f9a01a4a8646e0f45dff
         public int StageNumber { get { return _stageNumber; } set { _stageNumber = value; } }
 		public int RoomInFloor { get { return _roomInFloor; } set { _roomInFloor = value; } }
 		public int RoomNumber { get { return _roomNumber; } set { _roomNumber = value; } }
 		public int Special { get { return _special; } set { _special = value; } }
         public int SpecialType { get { return _specialType; } }
-<<<<<<< HEAD
-        public int MonsterDead { get { return _monsterDead; } set { _monsterDead = value; } }
-
-        public void KillMonster()
-=======
 		public BinaryFormatter Formatter { get { return _f; } }
+        public int MonsterDead { get { return _monsterDead; } set { _monsterDead = value; } }
 		public Tile[,] Tile { get { return _tiles; } set { _tiles = value; } }
 		public Tile[,] Tile2 { get { return _tile2; } set { _tile2 = value; } }
 		public Tile[,] Tile3 { get { return _tile3; } set { _tile3 = value; } }
 		public Tile[,] Tile4 { get { return _tile4; } set { _tile4 = value; } }
-		public List<Monster> Monsters { get { return _monsters; } set { _monsters = value; } }
 		#endregion
 
 		public void KillMonster()
->>>>>>> 4bd7922c2f351c1da5b5f9a01a4a8646e0f45dff
         {
             for (int x = 0; x < Monsters.Count; x++) {
 

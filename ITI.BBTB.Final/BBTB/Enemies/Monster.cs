@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using BBTB.States;
 using Microsoft.Xna.Framework.Input;
 using BBTB.Items;
+using System.Diagnostics;
 
 namespace BBTB
 {
@@ -18,8 +19,6 @@ namespace BBTB
         int _life;
         public Item _item;
 		int _xp;
-		Player _player;
-        public int _monsterDead;
 		Vector2 _position;
         PlayerInventory PlayerInventory = new PlayerInventory();
 
@@ -31,36 +30,25 @@ namespace BBTB
         {
 			_position = position;
             _itemTexture = itemTexture;
-
             _life = 100;
 			_xp = 10;
-            _monsterDead = 0;
         }
 
-        public int MonsterDead { get { return _monsterDead; } set { _monsterDead = value; } }
         public int Life { get { return _life; } set { _life = value; } }
 		// public Vector2 Position { get { return _position; } set { _position = value; } }
 
         public void Update(GameTime gameTime)
         {
-            IsDead();
         }
 
         public void Hit(Bullet bullet)
         {
             _life -= bullet.Damages;
-            //if (IsDead()) prévenir le jeu pour gagner l'expérience
-        }
-
-        public bool IsDead()
-        {
             if (_life <= 0)
             {
 
-               _monsterDead++;
-                return true;
-            }
-            return false;
+            } 
+            //if (IsDead()) prévenir le jeu pour gagner l'expérience
         }
         
         public void DropItem ()
