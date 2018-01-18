@@ -20,10 +20,11 @@ namespace BBTB
         private Vector2 oldPosition;
 		bool _havePrayed;
 		God _god;
+        public PlayerInventory Inventory;
    
         
 
-        public Player(Texture2D texture, Texture2D weaponTexture, Texture2D weaponTexture2, Texture2D bulletTexture, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed)
+        public Player(Texture2D texture, Texture2D weaponTexture, Texture2D weaponTexture2, Texture2D bulletTexture, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed,PlayerInventory inventory)
             : base(texture, position, spritebatch)
         {
             _playerM = new PlayerModel("Tanguy", 1);
@@ -31,14 +32,11 @@ namespace BBTB
             _time = 0;
             _booltime = false;
             _weapon = weapon;
-			_havePrayed = havePrayed;
+            Inventory = inventory;
+            Inventory.ItemByDefault(this);
+            _havePrayed = havePrayed;
             _weapon = new Weapon(weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, Position, spritebatch, this);
             
-        }
-        public void ChangeWeapon (Item item)
-        {
-            _weapon.Damages = Convert.ToInt32(this._playerM.Level * 1.8); ;
-            _weapon._weaponTexture = item._texture;
         }
 		
 		public bool HavePrayed { get { return _havePrayed; } set { _havePrayed = value; }  }

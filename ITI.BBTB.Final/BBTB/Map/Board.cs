@@ -117,13 +117,13 @@ namespace BBTB
 
                     if (DistanceX <= 10 && DistanceY <= 10)
                     {
-                        string Text = string.Format("Press E to equip: ({0:0})", items[y].Name);
+                        string Text = string.Format("Press F to equip: ({0:0})", items[y].Name);
                         DrawWithShadow(Text, new Vector2(items[y]._position.X, items[y]._position.Y));
 
-                        if (keyboardState.IsKeyDown(Keys.E))
+                        if (keyboardState.IsKeyDown(Keys.F))
                         {
 
-                            List<Item> _item = Inventory.AddItemToInventory(items[y], items);
+                            List<Item> _item = Inventory.AddItemToInventory(items[y], items,_player);
                             items = _item;
 
                         }
@@ -142,6 +142,7 @@ namespace BBTB
         public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
         {
+            items = new List<Item>();
 			if (_special != _roomNumber)
 			{
 				AddMonsters();

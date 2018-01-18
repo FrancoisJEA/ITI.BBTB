@@ -70,7 +70,7 @@ namespace BBTB
             if (dropProb >= 10)
             {
                 Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
-                _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch,PlayerInventory._player);
+                _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);
             }
             return _item;
         }

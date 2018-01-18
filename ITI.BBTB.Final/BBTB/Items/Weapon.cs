@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using BBTB.States;
+using BBTB.Items;
 
 namespace BBTB
 {
@@ -46,15 +47,16 @@ namespace BBTB
 
         void SetWeaponType( int type )
         {
+            List<Item> Inventory = _player.Inventory.InventoryList();
             if (type == 1)
             {
-                Texture = _weaponTexture;
-                _damages = 50;
+                Texture = Inventory[4]._texture;
+                _damages = 100;
             }
             else
             {
-                Texture = _weaponTexture2;
-                _damages = 100;
+                Texture = Inventory[5]._texture;
+                _damages = 50;
             }
         }
 

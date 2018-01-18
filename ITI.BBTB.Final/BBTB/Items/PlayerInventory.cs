@@ -9,25 +9,24 @@ using System.Threading.Tasks;
 
 namespace BBTB.Items
 {
-   public class PlayerInventory
+    public class PlayerInventory
     {
-        List<Item> Inventory = new List<Item>();
+        List<Item> Inventory = new List<Item>(); 
         public List<Texture2D> allTexture;
         public Texture2D InvTexture;
         SpriteBatch sb;
-        public Player _player;
 
 
 
-        public PlayerInventory(List<Texture2D> AllTexture, SpriteBatch spriteBatch,Player player)
+        public PlayerInventory(List<Texture2D> AllTexture, SpriteBatch spriteBatch)
         {
             allTexture = AllTexture;
             sb = spriteBatch;
             this.InvTexture = allTexture[0];
-            _player = player;
+          
         }
 
-        public void ItemByDefault ()
+        public void ItemByDefault (Player _player)
         {
             List<Item> DefaultInventory = new List<Item>();
             DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[9], sb,_player)); //Helmet
@@ -41,13 +40,11 @@ namespace BBTB.Items
             //DefaultInventory.Add(new Item(new Vector2(80, 80), AllTexture[7], SpriteBatch));
             Inventory = DefaultInventory;
         }
-        public List<Item> AddItemToInventory(Item Item, List<Item> Items)
+        public List<Item> AddItemToInventory(Item Item, List<Item> Items,Player _player)
         {   
                 int i = Item.InventoryEmplacement;
                 Inventory.RemoveAt(i);
                 Inventory.Insert(i, Item);
-                if (Item.ItemType == "weapon")
-                { _player.ChangeWeapon(Item); }
                 Items.Remove(Item);
                 return Items;
 
