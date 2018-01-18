@@ -18,10 +18,10 @@ namespace BBTB
         int _time;
         bool _booltime;
         private Vector2 oldPosition;
-		bool _havePrayed;
-		God _god;
+        bool _havePrayed;
+        God _god;
         public PlayerInventory Inventory;
-   
+        public string PlayerClasse {get; set;}
         
 
         public Player(Texture2D texture, Texture2D weaponTexture, Texture2D weaponTexture2, Texture2D bulletTexture, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed,PlayerInventory inventory)
@@ -36,6 +36,7 @@ namespace BBTB
             Inventory.ItemByDefault(this);
             _havePrayed = havePrayed;
             _weapon = new Weapon(weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, Position, spritebatch, this);
+            PlayerClasse = "Wizard";
             
         }
 		

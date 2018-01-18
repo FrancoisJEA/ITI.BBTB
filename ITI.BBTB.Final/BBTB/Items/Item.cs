@@ -17,9 +17,10 @@ namespace BBTB.Items
         public SpriteBatch SpriteBatch;
         public string Name { get; }
         public string ItemType { get; set; }
+        
         //public enum category
-        public enum _classe{ Wizard, Archer, Gunner };
-        public int Attack { get; }
+        public string ItemClasse { get; set; }
+        public int Attack { get; set; }
         private Player _player;
 
 
@@ -34,15 +35,26 @@ namespace BBTB.Items
             _texture = texture;
             SpriteBatch = spriteBatch;
             Name = texture.Name.Replace("_"," ");
+            Name = Name.Replace("Items/","");
+          
             InventoryEmplacement = this.FindInventoryEmplacement(Name);
-
             _player = player;
-            
-
+            ItemClasse = FindClasse();
+            if (ItemType == "weapon")
+                Attack = 20 + Convert.ToInt32(_player._playerM.Level * 1.8);
         }
+
+        private string FindClasse()
+        {
+            if(Name.Contains("bow") || (Name.Contains("crossbow"))) return "Archer";
+            if(Name.Contains("gun") || (Name.Contains("rifle"))) return "Gunner";
+            if (Name.Contains("staff") || (Name.Contains("stick"))) return "Wizard";
+            else return "All";
+        }
+
         public void DefineItem ()
         {
-           
+            
         }
 
         public void AddToInventory(string Name)
@@ -57,7 +69,7 @@ namespace BBTB.Items
             if (Name.Contains("boots")) {  this.ItemType = "armor"; return 3; }
             if (Name.Contains("gloves")) {  this.ItemType = "armor"; return 2; }
             if (Name.Contains("bow") || Name.Contains("staff") || Name.Contains("gun")) {  ItemType = "weapon"; return 4; }
-            if (Name.Contains("dagger") || Name.Contains("stick") || Name.Contains("sword")) {  ItemType = "weapon"; return 5; }
+            if (Name.Contains("crossbow") || Name.Contains("stick") || Name.Contains("sword")) {  ItemType = "weapon"; return 5; }
 
             else return 6;
 

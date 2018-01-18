@@ -28,6 +28,7 @@ namespace BBTB.States
         SoundEffect _sound;
         public List<Texture2D> _itemTexture;
         PlayerInventory Inventory;
+        
         internal Board Board
         {
             get { return _board; }
@@ -52,8 +53,9 @@ namespace BBTB.States
             var weaponTexture2 = Content.Load<Texture2D>("weapon2");
             var bulletTexture2 = Content.Load<Texture2D>("bullet2");
 			var _chestTexture = Content.Load<Texture2D>("chest");
-
-            Inventory = new PlayerInventory(_itemTexture, _spriteBatch);
+            var _boxTexture = Content.Load<Texture2D>("HUDBox");
+            var _boxTexture2 = Content.Load<Texture2D>("HUDBox2");
+        Inventory = new PlayerInventory(_itemTexture, _spriteBatch, _boxTexture,_boxTexture2);
             _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false,Inventory);
 
             _background = new Sprite(Content.Load<Texture2D>("ground"), new Vector2(60, 60), _spriteBatch);
@@ -124,7 +126,7 @@ namespace BBTB.States
             _background.Draw();
             _board.Draw();
             Inventory.ShowInventory();
-
+            _board.TakeItem();
             WriteDebugInformation();
             _player.Draw();
             _spriteBatch.End();

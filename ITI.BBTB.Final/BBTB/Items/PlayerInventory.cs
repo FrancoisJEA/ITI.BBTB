@@ -15,15 +15,18 @@ namespace BBTB.Items
         public List<Texture2D> allTexture;
         public Texture2D InvTexture;
         SpriteBatch sb;
+        public Texture2D BoxTexture { get; set; }
+        public Texture2D BoxTexture2 { get; set; }
 
 
 
-        public PlayerInventory(List<Texture2D> AllTexture, SpriteBatch spriteBatch)
+        public PlayerInventory(List<Texture2D> AllTexture, SpriteBatch spriteBatch, Texture2D boxTexture, Texture2D boxTexture2 )
         {
             allTexture = AllTexture;
             sb = spriteBatch;
             this.InvTexture = allTexture[0];
-          
+            BoxTexture = boxTexture;
+            BoxTexture2 = boxTexture2;
         }
 
         public void ItemByDefault (Player _player)

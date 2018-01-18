@@ -99,8 +99,6 @@ namespace BBTB
         public void TakeItem ()
         {
             KeyboardState keyboardState = Keyboard.GetState();
-
-          
             for (int y = 0; y < items.Count; y++)
             {
                 if (items[y] != null)
@@ -117,27 +115,38 @@ namespace BBTB
 
                     if (DistanceX <= 10 && DistanceY <= 10)
                     {
-                        string Text = string.Format("Press F to equip: ({0:0})", items[y].Name);
-                        DrawWithShadow(Text, new Vector2(items[y]._position.X, items[y]._position.Y));
-
-                        if (keyboardState.IsKeyDown(Keys.F))
+                        if (items[y].ItemClasse == _player.PlayerClasse || items[y].ItemClasse == "All")
                         {
+                            Sprite Box = new Sprite(Inventory.BoxTexture, new Vector2(items[y]._position.X, items[y]._position.Y), SpriteBatch);
+                            Box.Draw();
+                            string Text = string.Format(" {0:0} \r\n \r\n Press F to equip", items[y].Name);
+                            DrawWithShadow(Text, new Vector2(items[y]._position.X + 40, items[y]._position.Y + 15));
 
-                            List<Item> _item = Inventory.AddItemToInventory(items[y], items,_player);
-                            items = _item;
+                            if ((keyboardState.IsKeyDown(Keys.F)))
+                            {
 
+                                List<Item> _item = Inventory.AddItemToInventory(items[y], items, _player);
+                                items = _item;
+
+                            }
+
+                        } else
+                        {
+                            Sprite Box = new Sprite(Inventory.BoxTexture2, new Vector2(items[y]._position.X-100, items[y]._position.Y - 100), SpriteBatch);
+                            Box.Draw();
+                            string Text = string.Format("{1:1} \r\n \r\nThis Item can only \r\n be equipped by {0:0}", items[y].ItemClasse,items[y].Name);
+                            DrawWithShadow(Text, new Vector2(Box.Position.X+45, Box.Position.Y+15));
                         }
                     }
                 }
-            }
-            
+            }            
         }
         private void DrawWithShadow(string text, Vector2 position)
         {
-            SpriteBatch.Begin();
+ 
             SpriteBatch.DrawString(_debugFont, text, position + Vector2.One, Color.Black);
             SpriteBatch.DrawString(_debugFont, text, position, Color.LightYellow);
-            SpriteBatch.End();
+
         }
         public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
@@ -271,9 +280,7 @@ namespace BBTB
                         if (_rnd.Next(4, 20) == 4)
                         {
                             Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-
                             Monsters.Add(new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture,Inventory));
-                           
                         }
                     }
 
@@ -416,7 +423,7 @@ namespace BBTB
             NewRoom();
             NewStage();
             BulletUpdate(gameTime);
-            TakeItem();
+            
             
         }
 

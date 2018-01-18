@@ -20,6 +20,7 @@ namespace BBTB
         internal WeaponLib WeaponLib { get; set; }
         public Texture2D _weaponTexture, _bulletTexture, _weaponTexture2, _bulletTexture2;
         int _time;
+        List<Item> Inventory;
 
         GameState _ctx;
         int _damages;
@@ -28,17 +29,18 @@ namespace BBTB
             : base(weaponTexture, position, spritebatch)
         {
             _bulletTexture = bulletTexture;
-            _weaponTexture = weaponTexture;
-            _bulletTexture2 = bulletTexture2;
-            _weaponTexture2 = weaponTexture2;
             _player = player;
+            Inventory = _player.Inventory.InventoryList();
+            _weaponTexture = Inventory[4]._texture;
+            _bulletTexture2 = bulletTexture2;
+            _weaponTexture2 = Inventory[5]._texture;
+            SetWeaponType(1);
+
             _rotationOrigin = new Vector2(_player.Position.X - (_player.Bounds.Width) - 50, _player.Position.Y - (_player.Bounds.Height) - 15);
             Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
             WeaponLib = new WeaponLib();
             _time = 15;
             _ctx = player.Ctx;
-
-            _damages = 50;
         }
 
 		public int Damages { get { return _damages;} set { _damages = value; } }
@@ -47,24 +49,26 @@ namespace BBTB
 
         void SetWeaponType( int type )
         {
-            List<Item> Inventory = _player.Inventory.InventoryList();
+            
             if (type == 1)
             {
                 Texture = Inventory[4]._texture;
-                _damages = 100;
+                _damages = Inventory[4].Attack;
             }
             else
             {
                 Texture = Inventory[5]._texture;
-                _damages = 50;
+                _damages = Inventory[5].Attack;
             }
         }
 
         public void Update(GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.E)) SetWeaponType( 1 );
-            if (keyboardState.IsKeyDown(Keys.R)) SetWeaponType( 2 );
+            
+            if (keyboardState.IsKeyDown(Keys.E)) SetWeaponType(1);
+            if (keyboardState.IsKeyDown(Keys.R)) SetWeaponType(2);
+            
 
             var mousePos = CheckMouseAndUpdateMovement();
             Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
