@@ -13,11 +13,13 @@ namespace BBTB
         public Weapon _weapon;
         public PlayerModel _playerM;
         Vector2 _mouvement;
-
+       
         int _time;
         bool _booltime;
         private Vector2 oldPosition;
 		bool _havePrayed;
+      
+        internal string _classes;
 		God _god;
 		#endregion
 
@@ -35,7 +37,7 @@ namespace BBTB
 
 		#region propriété 
 		public bool HavePrayed { get { return _havePrayed; } set { _havePrayed = value; }  }
-
+        public string Classes { get { return _classes ; } set { _classes = value; } }
         public int WeaponType => _weapon.WeaponType;
 
         public Weapon Weapon => _weapon;

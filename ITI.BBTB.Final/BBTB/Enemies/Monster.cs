@@ -15,11 +15,14 @@ namespace BBTB
     public class Monster : Sprite
     {
         public bool IsAlive { get { return _life >= 0; } }
-
+        public bool IsDead { get; set; }
         int _life;
         public Item _item;
 		int _xp;
+        Vector2 _mouvement;
 		Vector2 _position;
+        Bullet _bullet;
+        Monster _monster;
         PlayerInventory PlayerInventory = new PlayerInventory();
 
         GameState _ctx; // Paramètre du constructeur
@@ -28,7 +31,8 @@ namespace BBTB
         public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)
             : base(texture, position, batch)
         {
-			_position = position;
+            _mouvement = Vector2.Zero;
+            _position = position;
             _itemTexture = itemTexture;
             _life = 100;
 			_xp = 10;
@@ -39,11 +43,58 @@ namespace BBTB
 
         public void Update(GameTime gameTime)
         {
+            if (IsDead == true)
+            {
+                Board.CurrentBoard.Monsters.Remove(_bullet._monster);
+            }
+
+        }
+
+        public void Idle()
+        {
+            foreach (Monster monsters in Board.CurrentBoard.Monsters)
+            {
+                Patroling();
+            }
+        }
+
+        public void Patroling()
+        {
+            foreach (Monster monster in Board.CurrentBoard.Monsters)
+            {
+                if 
+                   (
+                        !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture.Bounds) 
+                        || !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture2.Bounds)
+                        || !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture3.Bounds) 
+                   )
+                {
+                    if (monster.Position.X > 0)
+                    {
+                        _mouvement += Vector2.UnitX * 2;
+                    }
+                    else if ( monster.Position.X <= 0)
+                    {
+                        _mouvement -= Vector2.UnitX * 2;
+                    }
+                }
+            }
+        }
+        
+        public void Shooting()
+        {
+
+        }
+
+        private void UpdatePositionBasedOnMovement(GameTime gameTime)
+        {
+            Position += _mouvement * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
         }
 
         public void Hit(Bullet bullet)
         {
             _life -= bullet.Damages;
+            _monster = bullet._monster;
             if (_life <= 0)
             {
 

@@ -49,14 +49,8 @@
     <Compile Include="Armor\Leggings.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Controls\Button.cs" />
-<<<<<<< HEAD
     <Compile Include="Enemies\Boss.cs" />
-    <Compile Include="Item\InventorySystem2.cs" />
-    <Compile Include="Item\InventoryItem.cs" />
-=======
-    <Compile Include="Items\Armor.cs" />
     <Compile Include="Items\PlayerInventory.cs" />
->>>>>>> origin/master
     <Compile Include="GodPlaces\Preacher.cs" />
     <Compile Include="GodPlaces\God.cs" />
     <Compile Include="Items\Item.cs" />
