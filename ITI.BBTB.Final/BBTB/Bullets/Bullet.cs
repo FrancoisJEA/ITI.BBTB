@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using BBTB.Enemies;
 using BBTB.Items;
+using Microsoft.Xna.Framework.Content;
 
 namespace BBTB
 {
@@ -15,12 +16,14 @@ namespace BBTB
 		Board _ctx;
         float _rotation;
         Boss _boss;
+        public Monster _monster;
         Vector2 _origin;
         private SpriteBatch _spriteBatch;
         public BulletLib BulletLib { get; set; }
 		int _damages;
         public Sprite _item;
         private Texture2D _itemTexture;
+
         protected ContentManager _content;
         protected GraphicsDevice GraphicsDevice;
     
@@ -45,6 +48,8 @@ namespace BBTB
         public void Update(GameTime gameTime)
         {
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);
+            if (TouchEnemy() )
+                _monster.Update(gameTime);
             Position += new Vector2(BulletLib.PositionUpdate().X, BulletLib.PositionUpdate().Y);
         }
 
@@ -52,19 +57,21 @@ namespace BBTB
 		{
             foreach (Monster monster in Board.CurrentBoard.Monsters)
             {
-
+                    
                     if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
                         monster.Hit(this);
                         if (monster.Life <= 0)
                         {
-                        Board.CurrentBoard.Monsters.Remove(monster);
+                            _monster = monster;
+                            monster.IsDead = false;
                             new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
                         }
-                }
+                        return true;
+                    }
             }
             
-            if(_boss.IsAlive)
+            if(_boss.AddBoss)
             {
                 if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(_boss.Bounds))
                 {

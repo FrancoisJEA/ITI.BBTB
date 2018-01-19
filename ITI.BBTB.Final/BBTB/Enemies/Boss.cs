@@ -10,26 +10,24 @@ namespace BBTB.Enemies
 {
     public class Boss : Monster
     {
-        
-        public bool  _isAlive { get; set; }
+
+        public new bool IsAlive { get { return _life >= 0; }  set { } }
+        public bool AddBoss { get; set; }
         int _life;
         int _xp;
         
-        public Boss(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive) : base(texture, position, batch, isAlive)
+        public Boss(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture ) : base(texture, position, batch, isAlive, itemTexture)
         {
-            _isAlive = isAlive;
+           
             _life = 10000;
             _xp = 100;
-       
+            AddBoss = isAlive;
+          
         }
 
         public new int Life { get { return _life; } set { _life = value; } }
         public int Xp { get { return _xp; } set { _xp = value; } }
 
-        public new void Update(GameTime gameTime)
-        {
-            IsDead();
-        }
 
         public new void Hit(Bullet bullet)
         {
@@ -37,19 +35,11 @@ namespace BBTB.Enemies
             //if (IsDead()) prévenir le jeu pour gagner l'expérience
         }
 
-        public new bool IsDead()
-        {
-            if (_life <= 0)
-            {
-                IsAlive = false;
-                return true;
-            }
-            return false;
-        }
+  
         public override void Draw()
         {
            
-            if (IsAlive)
+            if (AddBoss && IsAlive)
             {
                 base.Draw();
             }

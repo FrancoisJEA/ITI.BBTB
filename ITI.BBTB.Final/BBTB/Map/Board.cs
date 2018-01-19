@@ -7,6 +7,7 @@ using BBTB.Enemies;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework.Content;
 using BBTB.Items;
+using System.IO;
 
 namespace BBTB
 {
@@ -42,14 +43,13 @@ namespace BBTB
         Vector2 _bossPosition = new Vector2(300,400);
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
-        List<Bullet> Bullets { get; }
-
+        public List<Bullet> Bullets { get; }
+        public List<Monster> Monsters;
         public List<Texture2D> ItemTexture { get; set; }
         readonly GameState _gameState;
 		BinaryFormatter _f;
 
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, Texture2D[,] MapTextures, Texture2D preacherTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture)
-		public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, Texture2D[,] MapTextures, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture)
         {
             Columns = columns;
             Rows = rows;
@@ -69,10 +69,12 @@ namespace BBTB
 
             _tiles = new Tile[Columns, Rows];
             _tile2 = new Tile[Columns, Rows];
-            _boss = new Boss(BossTexture, _bossPosition , SpriteBatch, false);
+            _tile3 = new Tile[Columns, Rows];
             _tile4 = new Tile[Columns, Rows];
 
-			Board.CurrentBoard = this;
+            _boss = new Boss(BossTexture, _bossPosition, SpriteBatch, false, itemTexture);
+  
+            Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();
 			
 			_player = player;
@@ -117,7 +119,7 @@ namespace BBTB
 			{
                 AddMonsters();
                 if (_roomNumber == _roomInFloor)
-                    _boss.IsAlive = true;
+                    _boss.AddBoss = true;
 
                 BlockSomeTilesRandomly();
 				SetStairs();
@@ -148,7 +150,7 @@ namespace BBTB
             }
 			SetAllBorderTilesBlocked();
 			SetTopLeftTileUnblocked();
-            if (_boss.IsAlive == true)
+            if (_boss.AddBoss == true)
                 SetBossTileUnblocked();
 			_player.ResetPosition();
 		}
@@ -172,10 +174,15 @@ namespace BBTB
             bool showExist = true;
             foreach (Monster monster in Monsters)
             {
-                if (monster.IsAlive)
+                if (monster.IsAlive && _roomNumber < _roomInFloor)
                 {
                     showExist = false;
+                   
                     break;
+                } else if (_roomNumber == _roomInFloor && monster.IsAlive && _boss.IsAlive)
+                {
+                    showExist = false;
+                    break;    
                 }
             }
             Tile3[13, 1].IsBlocked = showExist;
@@ -244,24 +251,24 @@ namespace BBTB
         }
         private void SetBossTileUnblocked()
         {
-            Tiles2[6, 4].IsBlocked = false;
-            Tiles2[7, 4].IsBlocked = false;
-            Tiles2[8, 4].IsBlocked = false;
-            Tiles2[6, 5].IsBlocked = false;
-            Tiles2[7, 5].IsBlocked = false;
-            Tiles2[8, 5].IsBlocked = false;
-            Tiles2[6, 6].IsBlocked = false;
-            Tiles2[7, 6].IsBlocked = false;
-            Tiles2[8, 6].IsBlocked = false;
+            Tile2[6, 4].IsBlocked = false;
+            Tile2[7, 4].IsBlocked = false;
+            Tile2[8, 4].IsBlocked = false;
+            Tile2[6, 5].IsBlocked = false;
+            Tile2[7, 5].IsBlocked = false;
+            Tile2[8, 5].IsBlocked = false;
+            Tile2[6, 6].IsBlocked = false;
+            Tile2[7, 6].IsBlocked = false;
+            Tile2[8, 6].IsBlocked = false;
 
             for (int x = 0; x < Columns; x++)
             {
                 for (int y = 0; y < Rows; y++)
                 {
-                    if (Tiles2[x,y].IsBlocked.Equals(_boss.Position))
+                    if (Tile2[x,y].IsBlocked.Equals(_boss.Position))
                     {
-                        Tiles2[x, y].IsBlocked = false;
-                        Monsters[x, y].IsAlive = false;
+                        Tile2[x, y].IsBlocked = false;
+                        _boss.IsAlive = false;
                     }
                 }
             }
@@ -308,8 +315,6 @@ namespace BBTB
 			{
 				for (int y = 0; y < Rows; y++)
 				{
-					Vector2 preacherPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-					Monsters[x, y] = new Monster(MonsterTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false);
 
 					if (x > 0 && x < 14 && y > 0 && y < 9)
 					{
@@ -381,14 +386,14 @@ namespace BBTB
             }
         }
 
-        private void SetStairs() // donne la position aux escaliers
+      private void SetStairs() // donne la position aux escaliers
         {
             for (int x = 0; x < Columns; x++)
             {
                 for (int y = 0; y < Rows; y++)
                 {
                     Vector2 tilePosition = new Vector2(x * TileTexture3.Width, y * TileTexture3.Height);
-                    Tile3[x, y] = new Tile(TileTexture3, tilePosition, SpriteBatch, false);
+                  Tile3[x, y] = new Tile(TileTexture3, tilePosition, SpriteBatch, false);
                 }
             }
         }
@@ -398,7 +403,7 @@ namespace BBTB
 
             _boss.Draw();
 
-            foreach (var tile in Tiles)
+            foreach (var tile in Tile)
             {
                 tile.Draw();
             }
@@ -454,8 +459,9 @@ namespace BBTB
                 {
                     b.Update(gameTime);
                 }
+
+                _boss.Update(gameTime);
             }
-            _boss.Update(gameTime);
         }
 
         public bool HasRoomForRectangle(Rectangle rectangleToCheck)

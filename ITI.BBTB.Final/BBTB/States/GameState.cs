@@ -74,7 +74,7 @@ namespace BBTB.States
            
 			var _chestTexture = Content.Load<Texture2D>("chest");
             var _bossTexture = Content.Load<Texture2D>("boss");
-
+            _itemTexture = ItemTextures(Content);
             if (classeSelected == "archer")
             {
                 playerTexture = archerTexture;
@@ -113,8 +113,8 @@ namespace BBTB.States
             _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false);
             _player.Classes = classeSelected;
 
-            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, _chestTexture, monsterTexture, mapTextures, preacherTexture, /*mapTextures,*/ 15, 10, _player, this, _itemTexture);
-            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, _bossTexture, 15, 10, _player, this);
+       
+            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, mapTextures, mapTextures[1, 2], _bossTexture, 15, 10, _player, this, _itemTexture);
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound");
@@ -123,11 +123,11 @@ namespace BBTB.States
      public List<Texture2D> ItemTextures (ContentManager Content)
         {
             List<Texture2D> AllTextures = new List<Texture2D>();
-            AllTextures.Add(Content.Load<Texture2D>("Steel_boots"));
-            AllTextures.Add(Content.Load<Texture2D>("Bow"));
-            AllTextures.Add(Content.Load<Texture2D>("Steel_boots"));
-            AllTextures.Add(Content.Load<Texture2D>("Bow"));
-            AllTextures.Add(Content.Load<Texture2D>("Bow"));
+            AllTextures.Add(Content.Load<Texture2D>("weed"));
+            AllTextures.Add(Content.Load<Texture2D>("weed"));
+            AllTextures.Add(Content.Load<Texture2D>("weed"));
+            AllTextures.Add(Content.Load<Texture2D>("weed"));
+            AllTextures.Add(Content.Load<Texture2D>("weed"));
             return AllTextures;
         }
 
