@@ -38,6 +38,7 @@ namespace BBTB
             _name = name;
             _classes = classes;
             _life = 100;
+            _level = 1;
             _experience = 0;
         }
 

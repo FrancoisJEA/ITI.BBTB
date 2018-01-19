@@ -7,6 +7,7 @@ using BBTB.Enemies;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework.Content;
 using BBTB.Items;
+using Microsoft.Xna.Framework.Input;
 using System.IO;
 
 namespace BBTB
@@ -17,12 +18,12 @@ namespace BBTB
 		Tile[,] _tile2;
 		Tile[,] _tile3;
 		Tile[,] _tile4;
-       
         public Texture2D[,] mapTextures;
        
         public List<Preacher> Preacher { get; set; }
 
         public Player _player;
+        Weapon _weapon;
 		int _stageNumber;
 		int _roomInFloor;
 		int _roomNumber;
@@ -39,18 +40,24 @@ namespace BBTB
         public Texture2D BossTexture { get; set; }
         public Texture2D PreacherTexture { get; set; }
         private SpriteBatch SpriteBatch { get; set; }
+
         internal Boss _boss;
         Vector2 _bossPosition = new Vector2(300,400);
+
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
         public List<Bullet> Bullets { get; }
         public List<Monster> Monsters;
         public List<Texture2D> ItemTexture { get; set; }
         readonly GameState _gameState;
+        private List<Item> items = new List<Item>();
+        PlayerInventory Inventory;
 		BinaryFormatter _f;
+        private SpriteFont _debugFont;
 
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, Texture2D[,] MapTextures, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture)
-        {
+
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture,Texture2D[,] MapTextures, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont, PlayerInventory inventory)
+	    {
             Columns = columns;
             Rows = rows;
             TileTexture = tileTexture;
@@ -60,19 +67,20 @@ namespace BBTB
             BossTexture = bossTexture;
 			MonsterTexture = monsterTexture;
             PreacherTexture = preacherTexture;
+
+           
             ItemTexture = itemTexture;
 			SpriteBatch = spritebatch;
-            Monsters = new List<Monster>();
             Preacher = new List<Preacher>();
-
+            Inventory = inventory;
+            _debugFont = debugFont;
             mapTextures = MapTextures;
-
             _tiles = new Tile[Columns, Rows];
             _tile2 = new Tile[Columns, Rows];
             _tile3 = new Tile[Columns, Rows];
             _tile4 = new Tile[Columns, Rows];
 
-            _boss = new Boss(BossTexture, _bossPosition, SpriteBatch, false, itemTexture);
+            _boss = new Boss(BossTexture, _bossPosition, SpriteBatch, false, itemTexture,Inventory);
   
             Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();
@@ -102,19 +110,79 @@ namespace BBTB
 
 		public void KillMonster()
         {
-            for (int x = 0; x < Monsters.Count; x++) {
+            List<Monster> monsterToRemove = new List<Monster>();
+
+            for (int x = 0; x < Monsters.Count; x++)
+            {
 
                 if (Monsters[x].IsAlive == false)
                 {
-                   
-                    Monsters[x].DropItem();
-                    Monsters.RemoveAt(x--);
+
+                    Item Item = Monsters[x].DropItem();
+                    monsterToRemove.Add(Monsters[x]);
+                    items.Add(Item);
                 }
             }
+
+            foreach (Monster m in monsterToRemove) Monsters.Remove(m);
+        }
+
+        public void TakeItem ()
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
+            for (int y = 0; y < items.Count; y++)
+            {
+                if (items[y] != null)
+                {
+                    float DistanceX;
+                    float DistanceY;
+
+                    if (_player.Position.X > items[y]._position.X) { DistanceX = _player.Position.X - items[y]._position.X; }
+                    else { DistanceX = items[y]._position.X - _player.Position.X; }
+
+                    if (_player.Position.X > items[y]._position.X) { DistanceY = _player.Position.Y - items[y]._position.Y; }
+                    else { DistanceY = items[y]._position.Y - _player.Position.Y; }
+
+
+                    if (DistanceX <= 10 && DistanceY <= 10)
+                    {
+                        if (items[y].ItemClasse == _player.PlayerClasse || items[y].ItemClasse == "All")
+                        {
+                            Sprite Box = new Sprite(Inventory.BoxTexture, new Vector2(items[y]._position.X, items[y]._position.Y), SpriteBatch);
+                            Box.Draw();
+                            string Text = string.Format(" {0:0} \r\n \r\n Press F to equip", items[y].Name);
+                            DrawWithShadow(Text, new Vector2(items[y]._position.X + 40, items[y]._position.Y + 15));
+
+                            if ((keyboardState.IsKeyDown(Keys.F)))
+                            {
+
+                                List<Item> _item = Inventory.AddItemToInventory(items[y], items, _player);
+                                items = _item;
+
+                            }
+
+                        } else
+                        {
+                            Sprite Box = new Sprite(Inventory.BoxTexture2, new Vector2(items[y]._position.X-100, items[y]._position.Y - 100), SpriteBatch);
+                            Box.Draw();
+                            string Text = string.Format("{1:1} \r\n \r\nThis Item can only \r\n be equipped by {0:0}", items[y].ItemClasse,items[y].Name);
+                            DrawWithShadow(Text, new Vector2(Box.Position.X+45, Box.Position.Y+15));
+                        }
+                    }
+                }
+            }            
+        }
+        private void DrawWithShadow(string text, Vector2 position)
+        {
+ 
+            SpriteBatch.DrawString(_debugFont, text, position + Vector2.One, Color.Black);
+            SpriteBatch.DrawString(_debugFont, text, position, Color.LightYellow);
+
         }
         public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save  */
         {
+            items = new List<Item>();
 			if (_special != _roomNumber)
 			{
                 AddMonsters();
@@ -137,7 +205,7 @@ namespace BBTB
             else if (Special == _roomNumber && SpecialType == 3)
             {
                 
-					string Saves = Path.GetTempFileName();
+					/*string Saves = Path.GetTempFileName();
 					var Hero = _player._playerM;
 				    var Map = CurrentBoard;
 					_f = new BinaryFormatter();
@@ -145,7 +213,7 @@ namespace BBTB
 					{
 						_f.Serialize(stream, Hero);
 					    //_f.Serialize(stream, Map);
-					}
+					}*/
 				
             }
 			SetAllBorderTilesBlocked();
@@ -223,6 +291,7 @@ namespace BBTB
 			}
 		}
 
+
         private void SetTopLeftTileUnblocked()
         {
             Tile2[1, 1].IsBlocked = false;
@@ -280,6 +349,7 @@ namespace BBTB
 		// Add Monster in the board (if its not a special room)
         private void AddMonsters()
         {
+            Monsters = new List<Monster>();
             for (int x = 0; x < Columns; x++)
             {
                 for (int y = 0; y < Rows; y++)
@@ -292,9 +362,7 @@ namespace BBTB
                         if (_rnd.Next(4, 20) == 4)
                         {
                             Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-
-                            Monsters.Add(new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture));
-                           
+                            Monsters.Add(new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture,Inventory));
                         }
                     }
 
@@ -405,6 +473,7 @@ namespace BBTB
 
             foreach (var tile in Tile)
             {
+                if (StageNumber > 0) tile.Texture = mapTextures[StageNumber - 1, 1];
                 tile.Draw();
             }
 
@@ -426,8 +495,8 @@ namespace BBTB
 			foreach (var monster in Monsters)
             {
                 if (StageNumber > 0) monster.Texture = mapTextures[StageNumber - 1, 2];
+                monster.Draw();
 
-                if (monster != null) monster.Draw();
             }
 
             foreach (var bullet in Bullets)
@@ -435,7 +504,10 @@ namespace BBTB
                 bullet.Draw();
             }
 
-
+            foreach(var item in items)
+            {
+                if (item != null) item.Draw();
+            }
         }
 
         internal void Update(GameTime gameTime)
@@ -443,7 +515,8 @@ namespace BBTB
             NewRoom();
             NewStage();
             BulletUpdate(gameTime);
-            KillMonster();
+            
+            
         }
 
         private void BulletUpdate(GameTime gameTime)

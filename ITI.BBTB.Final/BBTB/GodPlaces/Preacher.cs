@@ -1,4 +1,5 @@
 ﻿using BBTB.Items;
+using BBTB.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -21,9 +22,10 @@ namespace BBTB
 		bool _isAlive;
 		bool _activated;
 		int _life;
+        PlayerInventory inventory;
 
-        public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, List<Texture2D> itemTexture)
-			: base(texture,position,batch, false, itemTexture)
+        public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, List<Texture2D> itemTexture, PlayerInventory Inventory)
+			: base(texture,position,batch,isAlive, itemTexture,Inventory)
 		{
             
 			_position = position;
@@ -32,6 +34,8 @@ namespace BBTB
 			_isAlive = isAlive;
 			_dieu = dieu;
 			_activated = activated;
+            inventory = Inventory;
+
 		}
 
 		public int Life { get { return _life; } set { _life = value; } }

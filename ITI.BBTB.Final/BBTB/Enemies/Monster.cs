@@ -16,37 +16,34 @@ namespace BBTB
     {
         public bool IsAlive { get { return _life >= 0; } }
         public bool IsDead { get; set; }
+        readonly Weapon _weapon;
+
         int _life;
         public Item _item;
-		int _xp;
         Vector2 _mouvement;
-		Vector2 _position;
         Bullet _bullet;
+        PlayerInventory PlayerInventory;
         Monster _monster;
-        PlayerInventory PlayerInventory = new PlayerInventory();
 
-        GameState _ctx; // Paramètre du constructeur
         public List<Texture2D> _itemTexture { get; set; }
 
-        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)
+        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
             _mouvement = Vector2.Zero;
-            _position = position;
+
             _itemTexture = itemTexture;
+            PlayerInventory = Inventory;
             _life = 100;
-			_xp = 10;
         }
 
-        public int Life { get { return _life; } set { _life = value; } }
+        public Weapon Weapon => _weapon;
+        public int Life { get { return _life; } }
 		// public Vector2 Position { get { return _position; } set { _position = value; } }
 
         public void Update(GameTime gameTime)
         {
-            if (IsDead == true)
-            {
-                Board.CurrentBoard.Monsters.Remove(_bullet._monster);
-            }
+            //IsDead();
 
         }
 
@@ -101,24 +98,28 @@ namespace BBTB
             } 
             //if (IsDead()) prévenir le jeu pour gagner l'expérience
         }
-        
-        public void DropItem ()
+
+        public Item DropItem()
         {
             Random Random = new Random();
             int ItemNb = _itemTexture.Count - 1;
-            int ItemID = Random.Next(0, ItemNb);
+            int ItemID = Random.Next(1, ItemNb);
+            int dropProb = Random.Next(0, 100);
+            if (dropProb >= 10)
+            {
+                Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
+                _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);
 
-            Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
-            _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch);
-            _item.Draw();
+            }
+            return _item;
         }
 
         public override void Draw()
         {
-            if (IsAlive)
-            {
+           // if (IsAlive)
+            //{
                 base.Draw();
-            }
+            //}
         }
 
     }

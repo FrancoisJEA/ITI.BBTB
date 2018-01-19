@@ -5,12 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-<<<<<<< HEAD
 using BBTB.Enemies;
-=======
-using Microsoft.Xna.Framework.Content;
 using BBTB.Items;
->>>>>>> origin/master
+using Microsoft.Xna.Framework.Content;
 
 namespace BBTB
 {
@@ -19,19 +16,15 @@ namespace BBTB
 		Board _ctx;
         float _rotation;
         Boss _boss;
+        public Monster _monster;
         Vector2 _origin;
         private SpriteBatch _spriteBatch;
         public BulletLib BulletLib { get; set; }
 		int _damages;
-<<<<<<< HEAD
-    
-=======
-        public Sprite _item;
-        private Texture2D _itemTexture;
+
         protected ContentManager _content;
         protected GraphicsDevice GraphicsDevice;
-
->>>>>>> origin/master
+    
         Weapon _weaponCtx;
 
         public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon, Board board, Weapon weaponCtx)
@@ -53,6 +46,8 @@ namespace BBTB
         public void Update(GameTime gameTime)
         {
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);
+            if (TouchEnemy() )
+                _monster.Update(gameTime);
             Position += new Vector2(BulletLib.PositionUpdate().X, BulletLib.PositionUpdate().Y);
         }
 
@@ -60,28 +55,42 @@ namespace BBTB
 		{
             foreach (Monster monster in Board.CurrentBoard.Monsters)
             {
-
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
                     if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
                         monster.Hit(this);
                         if (monster.Life <= 0)
                         {
-                        Board.CurrentBoard.Monsters.Remove(monster);
+<<<<<<< HEAD
+                            Board.CurrentBoard.Monsters.Remove(monster);
                             new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
                         }
+=======
+                        Board.CurrentBoard.KillMonster();
+
+                            _monster = monster;
+                            monster.IsDead = false;
+>>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
                         return true;
+
+                        new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
+                        }
+                        
                     }
-                
             }
             
-            if(_boss.IsAlive)
+            if(_boss.AddBoss)
             {
                 if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(_boss.Bounds))
                 {
                     _boss.Hit(this);
                     if (_boss.Life < +0) _boss.IsAlive = false;
                     return true;
-                }
+                    }
+                
             }
 				return false;
         }

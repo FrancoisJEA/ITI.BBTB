@@ -21,8 +21,6 @@ namespace BBTB
         private SpriteBatch _spriteBatch;
         public BulletLib BulletLib { get; set; }
 		int _damages;
-        public Sprite _item;
-        private Texture2D _itemTexture;
 
         protected ContentManager _content;
         protected GraphicsDevice GraphicsDevice;
@@ -57,17 +55,20 @@ namespace BBTB
 		{
             foreach (Monster monster in Board.CurrentBoard.Monsters)
             {
-                    
                     if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
                         monster.Hit(this);
                         if (monster.Life <= 0)
                         {
+                        Board.CurrentBoard.KillMonster();
+
                             _monster = monster;
                             monster.IsDead = false;
-                            new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
-                        }
                         return true;
+
+                        new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
+                        }
+                        
                     }
             }
             
