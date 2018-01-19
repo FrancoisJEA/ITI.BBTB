@@ -41,12 +41,8 @@ namespace BBTB
         public Texture2D PreacherTexture { get; set; }
         private SpriteBatch SpriteBatch { get; set; }
 
-        public Texture2D WeaponTexture { get; set; }
         internal Boss _boss;
         Vector2 _bossPosition = new Vector2(300,400);
-        public Texture2D WeaponTexture2 { get; set; }
-        public Texture2D BulletTexture { get; set; }
-        public Texture2D BulletTexture2 { get; set; }
 
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
@@ -58,8 +54,10 @@ namespace BBTB
         PlayerInventory Inventory;
 		BinaryFormatter _f;
         private SpriteFont _debugFont;
+
+
         public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture,Texture2D[,] MapTextures, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont, PlayerInventory inventory)
-	{
+	    {
             Columns = columns;
             Rows = rows;
             TileTexture = tileTexture;
@@ -70,14 +68,9 @@ namespace BBTB
 			MonsterTexture = monsterTexture;
             PreacherTexture = preacherTexture;
 
-            WeaponTexture = weaponTexture;
-            WeaponTexture2 = weaponTexture2;
-            BulletTexture = bulletTexture;
-            BulletTexture2 = bulletTexture2;
-
+           
             ItemTexture = itemTexture;
 			SpriteBatch = spritebatch;
-            //Monsters = new List<Monster>();
             Preacher = new List<Preacher>();
             Inventory = inventory;
             _debugFont = debugFont;

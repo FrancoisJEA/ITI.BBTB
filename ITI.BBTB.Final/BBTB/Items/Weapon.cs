@@ -25,7 +25,7 @@ namespace BBTB
         GameState _ctx;
         int _damages;
 
-        public Weapon(Texture2D Texture,Vector2 position, SpriteBatch spritebatch, Player player, List<Texture2D> BulletTextures)
+        public Weapon(GameState ctx, Texture2D Texture,Vector2 position, SpriteBatch spritebatch, Player player, List<Texture2D> BulletTextures)
             : base (Texture,position,spritebatch)
         {
           
@@ -34,15 +34,16 @@ namespace BBTB
             _bulletTextures = BulletTextures;
             Inventory = _player.Inventory.InventoryList();
             _weaponTexture = Inventory[4]._texture;
+
+            _ctx = ctx;
            
             _weaponTexture2 = Inventory[5]._texture;
 
             SetWeaponType(1);
             _bulletTextures = Inventory[4].DefineBulletTexture(BulletTextures, _player.PlayerClasse);
 
-                _rotationOrigin = new Vector2(_player.Position.X - (_player.Bounds.Width) - 50, _player.Position.Y - (_player.Bounds.Height) - 15);
-                Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
-            }
+            _rotationOrigin = new Vector2(_player.Position.X - (_player.Bounds.Width) - 50, _player.Position.Y - (_player.Bounds.Height) - 15);
+            Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
             _time = 15;
         }
 

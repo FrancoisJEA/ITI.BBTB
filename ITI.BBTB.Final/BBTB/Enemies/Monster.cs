@@ -31,7 +31,6 @@ namespace BBTB
             : base(texture, position, batch)
         {
             _mouvement = Vector2.Zero;
-            _position = position;
 
             _itemTexture = itemTexture;
             PlayerInventory = Inventory;
@@ -99,8 +98,8 @@ namespace BBTB
             } 
             //if (IsDead()) prévenir le jeu pour gagner l'expérience
         }
-        
-        public Item DropItem ()
+
+        public Item DropItem()
         {
             Random Random = new Random();
             int ItemNb = _itemTexture.Count - 1;
@@ -113,6 +112,7 @@ namespace BBTB
 
             }
             return _item;
+        }
 
         public override void Draw()
         {

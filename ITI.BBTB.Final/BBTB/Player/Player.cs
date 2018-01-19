@@ -44,7 +44,7 @@ namespace BBTB
             _havePrayed = havePrayed;
             _bulletTextures = BulletTextures;
             PlayerClasse = _classe;
-            _weapon = new Weapon(_bulletTextures[1],Position, spritebatch, this,_bulletTextures);
+            _weapon = new Weapon(_ctx, _bulletTextures[1],Position, spritebatch, this,_bulletTextures);
            
             
             
