@@ -79,9 +79,7 @@ namespace BBTB.States
 				Hero2 = (PlayerModel)f.Deserialize(stream);
 				_board = (Board)f.Deserialize(stream);
 			}
-			Hero2.StageAndRoom();
-			_board.Special = Hero2.Room;
-			_board.PlayerActualRoom--;
+			_board.Special = Hero2.Room;	
 			_board.NewRoom();
 		}
 
