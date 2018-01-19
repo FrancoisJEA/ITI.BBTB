@@ -16,8 +16,9 @@ namespace BBTB.States
         private SpriteFont font;
         private List<Component> _components;
         private Texture2D backGround;
+        Player _player;
         Vector2 position;
-        
+        string _classeSelected;
 
         public CharacterMenu(Game1 game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
@@ -28,7 +29,7 @@ namespace BBTB.States
             font = _content.Load<SpriteFont>("Font/Character");
             backGround = _content.Load<Texture2D>("Background/Character");
             position = new Vector2(0, 0);
-
+            
 
             var newArcher = new Button(archerTexture, buttonFont)
             {
@@ -69,17 +70,23 @@ namespace BBTB.States
         }
         private void NewMage_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new GameState(_game, _graphicsDevice, _content));
+            _classeSelected = "Wizard";
+            _game.ChangeState(new GameState(_game, _graphicsDevice, _content, _classeSelected));    
+           
         }
 
         private void NewArcher_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new GameState(_game, _graphicsDevice, _content));
+            _classeSelected = "Archer";
+            _game.ChangeState(new GameState(_game, _graphicsDevice, _content, _classeSelected));
+            
         }
 
         private void NewGunner_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new GameState(_game, _graphicsDevice, _content));
+            _classeSelected = "Gunner";
+            _game.ChangeState(new GameState(_game, _graphicsDevice, _content, _classeSelected));
+            
         }
 
         public override void PostUpdate(GameTime gameTime)

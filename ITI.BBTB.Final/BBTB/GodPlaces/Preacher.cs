@@ -22,9 +22,10 @@ namespace BBTB
 		bool _isAlive;
 		bool _activated;
 		int _life;
+        PlayerInventory inventory;
 
-        public Preacher(GameState ctx, Texture2D texture, Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Vector2 position, Weapon weapon, Player player, SpriteBatch batch, bool isAlive, God dieu, bool activated, List<Texture2D> itemTexture)
-			: base(ctx, texture, weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, weapon, position, batch, itemTexture)
+        public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, List<Texture2D> itemTexture, PlayerInventory Inventory)
+			: base(texture,position,batch,isAlive, itemTexture,Inventory)
 		{
             
 			_position = position;
@@ -33,6 +34,8 @@ namespace BBTB
 			_isAlive = isAlive;
 			_dieu = dieu;
 			_activated = activated;
+            inventory = Inventory;
+
 		}
 
 		public int Life { get { return _life; } set { _life = value; } }

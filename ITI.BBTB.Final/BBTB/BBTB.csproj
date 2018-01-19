@@ -49,7 +49,7 @@
     <Compile Include="Armor\Leggings.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Controls\Button.cs" />
-    <Compile Include="Items\Armor.cs" />
+    <Compile Include="Enemies\Boss.cs" />
     <Compile Include="Items\PlayerInventory.cs" />
     <Compile Include="GodPlaces\Preacher.cs" />
     <Compile Include="GodPlaces\God.cs" />

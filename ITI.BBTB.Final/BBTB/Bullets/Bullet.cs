@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
+using BBTB.Enemies;
 using BBTB.Items;
+using Microsoft.Xna.Framework.Content;
 
 namespace BBTB
 {
@@ -14,27 +15,30 @@ namespace BBTB
     {
 		Board _ctx;
         float _rotation;
+        Boss _boss;
+        public Monster _monster;
         Vector2 _origin;
         private SpriteBatch _spriteBatch;
         public BulletLib BulletLib { get; set; }
 		int _damages;
-        public Sprite _item;
-        private Texture2D _itemTexture;
+
         protected ContentManager _content;
         protected GraphicsDevice GraphicsDevice;
-
+    
         Weapon _weaponCtx;
 
         public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon, Board board, Weapon weaponCtx)
             : base(texture, position, spritebatch)
         {
+           
+    
             _origin = new Vector2(-27, 20);
             _rotation = weapon.Rotation;
-            BulletLib = new BulletLib(weapon, new Vector2(base.Position.X, base.Position.Y), texture.Height, texture.Width);
-
+            BulletLib = new BulletLib(weapon, new Vector2(base.Position.X, base.Position.Y), texture.Height, texture.Width);    
             _weaponCtx = weaponCtx;
             _damages = weaponCtx.Damages;
 			_ctx = board;
+            _boss = _ctx._boss;
         }
 
 		public int Damages { get { return _damages;} set { _damages = value; } }
@@ -42,6 +46,8 @@ namespace BBTB
         public void Update(GameTime gameTime)
         {
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);
+            if (TouchEnemy() )
+                _monster.Update(gameTime);
             Position += new Vector2(BulletLib.PositionUpdate().X, BulletLib.PositionUpdate().Y);
         }
 
@@ -54,10 +60,25 @@ namespace BBTB
                         monster.Hit(this);
                         if (monster.Life <= 0)
                         {
-                            Board.CurrentBoard.Monsters.Remove(monster);
-                            new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
-                        }
+                        Board.CurrentBoard.KillMonster();
+
+                            _monster = monster;
+                            monster.IsDead = false;
                         return true;
+
+                        new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
+                        }
+                        
+                    }
+            }
+            
+            if(_boss.AddBoss)
+            {
+                if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(_boss.Bounds))
+                {
+                    _boss.Hit(this);
+                    if (_boss.Life < +0) _boss.IsAlive = false;
+                    return true;
                     }
                 
             }

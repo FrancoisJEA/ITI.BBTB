@@ -12,9 +12,9 @@ namespace BBTB.Items
     {
         int Protection { get; }
 
-        public Armor(Vector2 position, Texture2D texture, SpriteBatch spriteBatch, PlayerModel player) : base(position, texture, spriteBatch)
+        public Armor(Vector2 position, Texture2D texture, SpriteBatch spriteBatch, Player player) : base(position, texture, spriteBatch,player)
         {
-            this.Protection = player.Level * 14;
+            this.Protection = player._playerM.Level * 14;
         }
 
     }

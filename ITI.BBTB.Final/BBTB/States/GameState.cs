@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using BBTB.Enemies;
 
 using BBTB.Items;
 
@@ -21,25 +22,30 @@ namespace BBTB.States
         private SpriteBatch _spriteBatch;
         private Player _player;
         private Board _board;
+        private Boss _boss;
         private Sprite _background;
-        private Sprite _sprite, _item;
         private Random _rnd = new Random();
         private SpriteFont _debugFont;
    
-        public Item Item;
         SoundEffect _sound;
         public List<Texture2D> _itemTexture;
-
+        PlayerInventory Inventory;
+        List<Texture2D> _bulletTextures;
         internal Board Board
         {
             get { return _board; }
         }
 
 
-        public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager Content) : base(game, graphicsDevice, Content)
+        public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager Content, string classeSelected) : base(game, graphicsDevice, Content)
         {
             _graphicsDevice = graphicsDevice;
             _spriteBatch = new SpriteBatch(graphicsDevice);
+            Texture2D playerTexture;
+            Texture2D weaponTexture;
+            Texture2D weaponTexture2;
+            Texture2D bulletTexture;
+            Texture2D bulletTexture2;
 
             mapTextures = new Texture2D[11, 3]; // Nombre d'étages (11 - 1), type de murs ou type de ground ou type de monstre (0 ground, 1 murs, 2 monstre))
 
@@ -57,45 +63,66 @@ namespace BBTB.States
 
             var tileTexture = Content.Load<Texture2D>("tile");
             var tileTexture2 = Content.Load<Texture2D>("barrel");
+            var archerTexture = Content.Load<Texture2D>("Character/P_archer");
+            var mageTexture = Content.Load<Texture2D>("Character/P_mage");
+            var gunnerTexture = Content.Load<Texture2D>("Character/P_gunner");
             var tileTexture3 = Content.Load<Texture2D>("stairs");
-            var playerTexture = Content.Load<Texture2D>("BBTBplayer");
-            var monsterTexture = mapTextures[0, 2];
-            var preacherTexture = Content.Load<Texture2D>("prêtre");
+            var monsterTexture = Content.Load<Texture2D>("monster");
+            _bulletTextures = BulletTextures(Content);
             _itemTexture = ItemTextures(Content);
-            var itemTexture = Content.Load<Texture2D>("weapon2");
-            var weaponTexture = Content.Load<Texture2D>("weapon");
-            var bulletTexture = Content.Load<Texture2D>("bullet");
-            var weaponTexture2 = Content.Load<Texture2D>("weapon2");
-            var bulletTexture2 = Content.Load<Texture2D>("bullet2");
-			var _chestTexture = Content.Load<Texture2D>("chest");
-            
-            _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false);
-
-            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, _chestTexture, monsterTexture, mapTextures, weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, preacherTexture, /*mapTextures,*/ 15, 10, _player, this, _itemTexture);
-
+            var _boxTexture = Content.Load<Texture2D>("HUDBox");
+            var _boxTexture2 = Content.Load<Texture2D>("HUDBox2");
+            var _chestTexture = Content.Load<Texture2D>("chest");
+            var _bossTexture = Content.Load<Texture2D>("boss");
             _debugFont = Content.Load<SpriteFont>("DebugFont");
-
             _sound = Content.Load<SoundEffect>("Sound/GunSound"); 
+            playerTexture = mageTexture;
+            Inventory = new PlayerInventory(_itemTexture, _spriteBatch, _boxTexture,_boxTexture2);
+            _player = new Player(playerTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
+            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, mapTextures, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont, Inventory);
+       
+          
         }
 
      public List<Texture2D> ItemTextures (ContentManager Content)
         {
             List<Texture2D> AllTextures = new List<Texture2D>();
-            AllTextures.Add(Content.Load<Texture2D>("Steel_boots"));
-            AllTextures.Add(Content.Load<Texture2D>("Bow"));
-            AllTextures.Add(Content.Load<Texture2D>("Steel_boots"));
-            AllTextures.Add(Content.Load<Texture2D>("Bow"));
-            AllTextures.Add(Content.Load<Texture2D>("Bow"));
+            AllTextures.Add(Content.Load<Texture2D>("InventorySprite"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Steel_gloves"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Steel_boots"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Steel_helmet"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Super_bow"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Steel_armor"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Leather_armor"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Leather_boots"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Leather_gloves"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Leather_helmet"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Skeleton_sword"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Super_staff"));
             return AllTextures;
         }
+        public List<Texture2D> BulletTextures(ContentManager Content)
+        {
+            List<Texture2D> AllTextures = new List<Texture2D>();
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Mage_effect1"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Mage_effect2"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Arrow"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Crossbow_arrow"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Bullet1"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/Bullet2"));
+            return AllTextures;
+        }
+
         public override void Update(GameTime gameTime)
         {
             _player.Update(gameTime);
+           
 
-
+             Board.KillMonster();
             foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
             foreach (Tile tile in _board.Tile2) tile.Update(gameTime);
             //foreach (Preacher preacher in _board.Preacher) preacher.Update(gameTime);
+      
             CheckKeyboardAndReact();
             _board.Update(gameTime);
 
@@ -125,16 +152,19 @@ namespace BBTB.States
             _spriteBatch.Begin();
             _background.Draw();
             _board.Draw();
-
+            Inventory.ShowInventory();
+            _board.TakeItem();
             WriteDebugInformation();
 
             _player.Draw();
             _spriteBatch.End();
+
         }
 		
         private void WriteDebugInformation()
         {
             string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.Position.X, _player.Position.Y);
+          //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
 
             string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
             string experienceInText = string.Format("Character's experience: ({0:0} / {1:0.0})", _player._playerM.Experience, _player._playerM.Experience);
@@ -149,6 +179,7 @@ namespace BBTB.States
             string monsterDeadInText = string.Format("Monsters Dead: ({0:0})", _board.MonsterDead);
 
             DrawWithShadow(positionInText, new Vector2(10, 0));
+          //DrawWithShadow(movementInText, new Vector2(10, 20));
 
             DrawWithShadow(lifeInText, new Vector2(200, 200));
             DrawWithShadow(experienceInText, new Vector2(240, 240));

@@ -39,6 +39,10 @@ namespace BBTB
             _time = 0;
             _booltime = false;
             _weapon = weapon;
+<<<<<<< HEAD
+			_havePrayed = havePrayed;
+            _weapon = new Weapon(_ctx, weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, Position, spritebatch, this);
+=======
             Inventory = inventory;
             Inventory.ItemByDefault(this);
             _havePrayed = havePrayed;
@@ -49,6 +53,7 @@ namespace BBTB
             
             
             
+>>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
         }
 
 		#region propriété 

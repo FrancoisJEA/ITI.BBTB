@@ -15,21 +15,26 @@ namespace BBTB
     public class Monster : Sprite
     {
         public bool IsAlive { get { return _life >= 0; } }
-
+        public bool IsDead { get; set; }
         readonly Weapon _weapon;
 
         int _life;
         public Item _item;
+        Vector2 _mouvement;
+        Bullet _bullet;
+        PlayerInventory PlayerInventory;
+        Monster _monster;
 
         public List<Texture2D> _itemTexture { get; set; }
 
-        public Monster(GameState ctx, Texture2D texture, Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Weapon weapon, Vector2 position, SpriteBatch batch, List<Texture2D> itemTexture)
+        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
-            _weapon = weapon;
-            _weapon = new Weapon(ctx, weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, position, batch, null);
+            _mouvement = Vector2.Zero;
+            _position = position;
 
             _itemTexture = itemTexture;
+            PlayerInventory = Inventory;
             _life = 100;
         }
 
@@ -39,11 +44,55 @@ namespace BBTB
 
         public void Update(GameTime gameTime)
         {
+            //IsDead();
+
+        }
+
+        public void Idle()
+        {
+            foreach (Monster monsters in Board.CurrentBoard.Monsters)
+            {
+                Patroling();
+            }
+        }
+
+        public void Patroling()
+        {
+            foreach (Monster monster in Board.CurrentBoard.Monsters)
+            {
+                if 
+                   (
+                        !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture.Bounds) 
+                        || !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture2.Bounds)
+                        || !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture3.Bounds) 
+                   )
+                {
+                    if (monster.Position.X > 0)
+                    {
+                        _mouvement += Vector2.UnitX * 2;
+                    }
+                    else if ( monster.Position.X <= 0)
+                    {
+                        _mouvement -= Vector2.UnitX * 2;
+                    }
+                }
+            }
+        }
+        
+        public void Shooting()
+        {
+
+        }
+
+        private void UpdatePositionBasedOnMovement(GameTime gameTime)
+        {
+            Position += _mouvement * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
         }
 
         public void Hit(Bullet bullet)
         {
             _life -= bullet.Damages;
+            _monster = bullet._monster;
             if (_life <= 0)
             {
 
@@ -51,24 +100,26 @@ namespace BBTB
             //if (IsDead()) prévenir le jeu pour gagner l'expérience
         }
         
-        /*public void DropItem ()
+        public Item DropItem ()
         {
             Random Random = new Random();
             int ItemNb = _itemTexture.Count - 1;
-            int ItemID = Random.Next(0, ItemNb);
+            int ItemID = Random.Next(1, ItemNb);
+            int dropProb = Random.Next(0, 100);
+            if (dropProb >= 10)
+            {
+                Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
+                _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);
 
-            Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
-            _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch);
-            _item.Draw();
-        }*/
+            }
+            return _item;
 
         public override void Draw()
         {
-            if (IsAlive)
-            {
+           // if (IsAlive)
+            //{
                 base.Draw();
-                _weapon.Draw();
-            }
+            //}
         }
 
     }
