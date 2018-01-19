@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using BBTB.Items;
 
 namespace BBTB.Enemies
 {
@@ -16,7 +17,7 @@ namespace BBTB.Enemies
         int _life;
         int _xp;
         
-        public Boss(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture ) : base(texture, position, batch, isAlive, itemTexture)
+        public Boss(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture, PlayerInventory inventory ) : base(texture, position, batch, isAlive, itemTexture,inventory)
         {
            
             _life = 10000;

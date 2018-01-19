@@ -70,21 +70,21 @@ namespace BBTB.States
         }
         private void NewMage_Click(object sender, EventArgs e)
         {
-            _classeSelected = "mage";
+            _classeSelected = "Wizard";
             _game.ChangeState(new GameState(_game, _graphicsDevice, _content, _classeSelected));    
            
         }
 
         private void NewArcher_Click(object sender, EventArgs e)
         {
-            _classeSelected = "archer";
+            _classeSelected = "Archer";
             _game.ChangeState(new GameState(_game, _graphicsDevice, _content, _classeSelected));
             
         }
 
         private void NewGunner_Click(object sender, EventArgs e)
         {
-            _classeSelected = "gunner";
+            _classeSelected = "Gunner";
             _game.ChangeState(new GameState(_game, _graphicsDevice, _content, _classeSelected));
             
         }

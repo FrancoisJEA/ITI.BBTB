@@ -21,15 +21,17 @@ namespace BBTB
         private Vector2 oldPosition;
         bool _havePrayed;
       
-        internal string _classes;
+        internal string _classes { get; set; }
         God _god;
 		#endregion
         public PlayerInventory Inventory;
         public string PlayerClasse {get; set;}
         public List<Texture2D> _bulletTextures;
+        public Texture2D _weaponTexture;
+
         
 
-        public Player(Texture2D texture, Texture2D weaponTexture, Texture2D weaponTexture2, Texture2D bulletTexture, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed,PlayerInventory inventory,List<Texture2D> BulletTextures)
+        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed,PlayerInventory inventory,List<Texture2D> BulletTextures,string _classe)
             : base(texture, position, spritebatch)
         {
             _playerM = new PlayerModel("Tanguy", 1);
@@ -41,8 +43,8 @@ namespace BBTB
             Inventory.ItemByDefault(this);
             _havePrayed = havePrayed;
             _bulletTextures = BulletTextures;
-            PlayerClasse = "Wizard";
-            _weapon = new Weapon(weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, Position, spritebatch, this,_bulletTextures);
+            PlayerClasse = _classe;
+            _weapon = new Weapon(_bulletTextures[1],Position, spritebatch, this,_bulletTextures);
            
             
             

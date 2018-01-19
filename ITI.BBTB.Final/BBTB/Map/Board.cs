@@ -74,7 +74,7 @@ namespace BBTB
             _tile3 = new Tile[Columns, Rows];
             _tile4 = new Tile[Columns, Rows];
 
-            _boss = new Boss(BossTexture, _bossPosition, SpriteBatch, false, itemTexture);
+            _boss = new Boss(BossTexture, _bossPosition, SpriteBatch, false, itemTexture,Inventory);
   
             Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();

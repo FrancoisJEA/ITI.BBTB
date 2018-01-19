@@ -25,8 +25,8 @@ namespace BBTB
         GameState _ctx;
         int _damages;
 
-        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, Player player, List<Texture2D> BulletTextures)
-            : base(weaponTexture, position, spritebatch)
+        public Weapon(Texture2D Texture,Vector2 position, SpriteBatch spritebatch, Player player, List<Texture2D> BulletTextures)
+            : base (Texture,position,spritebatch)
         {
           
             _player = player;
