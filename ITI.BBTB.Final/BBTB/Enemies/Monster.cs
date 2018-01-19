@@ -8,19 +8,22 @@ using System.Threading.Tasks;
 using BBTB.States;
 using Microsoft.Xna.Framework.Input;
 using BBTB.Items;
+using System.Diagnostics;
 
 namespace BBTB
 {
     public class Monster : Sprite
     {
         public bool IsAlive { get { return _life >= 0; } }
-
+        public bool IsDead { get; set; }
         int _life;
         public Item _item;
 		int _xp;
-		Player _player;
-        public int _monsterDead;
+        Vector2 _mouvement;
+		Vector2 _position;
+        Bullet _bullet;
         PlayerInventory PlayerInventory;
+        Monster _monster;
 
         GameState _ctx; // Paramètre du constructeur
         public List<Texture2D> _itemTexture { get; set; }
@@ -28,37 +31,73 @@ namespace BBTB
         public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
-         
+            _mouvement = Vector2.Zero;
+            _position = position;
             _itemTexture = itemTexture;
             PlayerInventory = Inventory;
             _life = 100;
 			_xp = 10;
-            _monsterDead = 0;
         }
 
-        public int MonsterDead { get { return _monsterDead; } set { _monsterDead = value; } }
         public int Life { get { return _life; } set { _life = value; } }
+		// public Vector2 Position { get { return _position; } set { _position = value; } }
 
         public void Update(GameTime gameTime)
         {
             //IsDead();
+
+        }
+
+        public void Idle()
+        {
+            foreach (Monster monsters in Board.CurrentBoard.Monsters)
+            {
+                Patroling();
+            }
+        }
+
+        public void Patroling()
+        {
+            foreach (Monster monster in Board.CurrentBoard.Monsters)
+            {
+                if 
+                   (
+                        !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture.Bounds) 
+                        || !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture2.Bounds)
+                        || !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture3.Bounds) 
+                   )
+                {
+                    if (monster.Position.X > 0)
+                    {
+                        _mouvement += Vector2.UnitX * 2;
+                    }
+                    else if ( monster.Position.X <= 0)
+                    {
+                        _mouvement -= Vector2.UnitX * 2;
+                    }
+                }
+            }
+        }
+        
+        public void Shooting()
+        {
+
+        }
+
+        private void UpdatePositionBasedOnMovement(GameTime gameTime)
+        {
+            Position += _mouvement * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
         }
 
         public void Hit(Bullet bullet)
         {
             _life -= bullet.Damages;
-            //if (IsDead()) prévenir le jeu pour gagner l'expérience
-        }
-
-        public bool IsDead()
-        {
+            _monster = bullet._monster;
             if (_life <= 0)
             {
 
-               _monsterDead++;
-                return true;
-            }
-            return false;
+            } 
+            //if (IsDead()) prévenir le jeu pour gagner l'expérience
         }
         
         public Item DropItem ()

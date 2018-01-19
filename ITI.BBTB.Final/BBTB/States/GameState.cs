@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using BBTB.Enemies;
 
 using BBTB.Items;
 
@@ -15,16 +16,17 @@ namespace BBTB.States
 {
     public class GameState : State
     {
+        Texture2D[,] mapTextures;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Player _player;
         private Board _board;
+        private Boss _boss;
         private Sprite _background;
         private Random _rnd = new Random();
         private SpriteFont _debugFont;
    
-        private Monster monster;
-
         SoundEffect _sound;
         public List<Texture2D> _itemTexture;
         PlayerInventory Inventory;
@@ -35,42 +37,95 @@ namespace BBTB.States
         }
 
 
-        public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager Content) : base(game, graphicsDevice, Content)
+        public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager Content, string classeSelected) : base(game, graphicsDevice, Content)
         {
             _graphicsDevice = graphicsDevice;
             _spriteBatch = new SpriteBatch(graphicsDevice);
+            Texture2D playerTexture;
+            Texture2D weaponTexture;
+            Texture2D weaponTexture2;
+            Texture2D bulletTexture;
+            Texture2D bulletTexture2;
+
+            mapTextures = new Texture2D[11, 3]; // Nombre d'étages (11 - 1), type de murs ou type de ground ou type de monstre (0 ground, 1 murs, 2 monstre))
+
+            mapTextures[0, 0] = Content.Load<Texture2D>("ground");
+            mapTextures[0, 1] = Content.Load<Texture2D>("tile");
+            mapTextures[0, 2] = Content.Load<Texture2D>("monster");
+
+            mapTextures[1, 0] = Content.Load<Texture2D>("ground2");
+            mapTextures[1, 1] = Content.Load<Texture2D>("tile");
+            mapTextures[1, 2] = Content.Load<Texture2D>("prêtre");
 
 
-            var groundTexture = Content.Load<Texture2D>("ground");
             var tileTexture = Content.Load<Texture2D>("tile");
             var tileTexture2 = Content.Load<Texture2D>("barrel");
+            var archerTexture = Content.Load<Texture2D>("Character/P_archer");
+            var mageTexture = Content.Load<Texture2D>("Character/P_mage");
+            var gunnerTexture = Content.Load<Texture2D>("Character/P_gunner");
             var tileTexture3 = Content.Load<Texture2D>("stairs");
             var monsterTexture = Content.Load<Texture2D>("monster");
-            var playerTexture = Content.Load<Texture2D>("BBTBplayer");
-            _itemTexture = ItemTextures(Content);
             _bulletTextures = BulletTextures(Content);      
                 var weaponTexture = Content.Load<Texture2D>("weapon");
-            var bulletTexture = Content.Load<Texture2D>("bullet");
-            var weaponTexture2 = Content.Load<Texture2D>("weapon2");
-            var bulletTexture2 = Content.Load<Texture2D>("bullet2");
-			var _chestTexture = Content.Load<Texture2D>("chest");
             var _boxTexture = Content.Load<Texture2D>("HUDBox");
             var _boxTexture2 = Content.Load<Texture2D>("HUDBox2");
         Inventory = new PlayerInventory(_itemTexture, _spriteBatch, _boxTexture,_boxTexture2);
             _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false,Inventory,_bulletTextures);
-
-            _background = new Sprite(Content.Load<Texture2D>("ground"), new Vector2(60, 60), _spriteBatch);
-            _debugFont = Content.Load<SpriteFont>("DebugFont");
+          
             _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, 15, 10, _player, this,_itemTexture,_debugFont, Inventory);
             
-          
+             
+           
+            
+           
+			var _chestTexture = Content.Load<Texture2D>("chest");
+            var _bossTexture = Content.Load<Texture2D>("boss");
+            _itemTexture = ItemTextures(Content);
+            if (classeSelected == "archer")
+            {
+                playerTexture = archerTexture;
+                weaponTexture = Content.Load<Texture2D>("Weapon/crossbow");
+                weaponTexture2 = Content.Load<Texture2D>("Weapon/bow");
+                bulletTexture = Content.Load<Texture2D>("arrow");
+                bulletTexture2 = Content.Load<Texture2D>("arrow");
+            }
+            else if (classeSelected == "mage")
+            {
+                playerTexture = mageTexture;
+                weaponTexture = Content.Load<Texture2D>("Weapon/Book");
+                weaponTexture2 = Content.Load<Texture2D>("Weapon/staff00");
+                bulletTexture = Content.Load<Texture2D>("Fireball");
+                bulletTexture2 = Content.Load<Texture2D>("Iceball");
+            }
+            else if (classeSelected == "gunner")
+            {
+                playerTexture = gunnerTexture;
+                weaponTexture = Content.Load<Texture2D>("weapon");
+                weaponTexture2 = Content.Load<Texture2D>("weapon2");
+                bulletTexture = Content.Load<Texture2D>("bullet");
+                bulletTexture2 = Content.Load<Texture2D>("bullet2");
+            }
+            else
+            {
+                playerTexture = Content.Load<Texture2D>("BBTBplayer");
+                weaponTexture = Content.Load<Texture2D>("weapon");
+                weaponTexture2 = Content.Load<Texture2D>("weapon2");
+                bulletTexture = Content.Load<Texture2D>("bullet");
+                bulletTexture2 = Content.Load<Texture2D>("bullet2");
+            }
+            
+           
+            
+            _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false);
+            _player.Classes = classeSelected;
+
+       
+            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, mapTextures, mapTextures[1, 2], _bossTexture, 15, 10, _player, this, _itemTexture);
+            _debugFont = Content.Load<SpriteFont>("DebugFont");
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound");
         }
 
-    
-
-       
      public List<Texture2D> ItemTextures (ContentManager Content)
         {
             List<Texture2D> AllTextures = new List<Texture2D>();
@@ -107,11 +162,13 @@ namespace BBTB.States
 
              Board.KillMonster();
             foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
-            foreach (Tile tile in _board.Tiles2) tile.Update(gameTime);
+            foreach (Tile tile in _board.Tile2) tile.Update(gameTime);
             //foreach (Preacher preacher in _board.Preacher) preacher.Update(gameTime);
+      
             CheckKeyboardAndReact();
             _board.Update(gameTime);
 
+            _background = new Sprite(mapTextures[_board.StageNumber - 1, 0], new Vector2(60, 60), _spriteBatch);
         }
 
         internal void PlayGunSound()
@@ -140,6 +197,7 @@ namespace BBTB.States
             Inventory.ShowInventory();
             _board.TakeItem();
             WriteDebugInformation();
+
             _player.Draw();
             _spriteBatch.End();
 
@@ -159,7 +217,7 @@ namespace BBTB.States
             string SpecialInText = string.Format("Special Number: ({0:0})", Board.CurrentBoard.Special);
             string SpecialTypeInText = string.Format("Special Type: ({0:0})", Board.CurrentBoard.SpecialType);
 
-            //string monsterDeadInText = string.Format("Monsters Dead: ({0:0})", Board.monsters.MonsterDead);
+            string monsterDeadInText = string.Format("Monsters Dead: ({0:0})", _board.MonsterDead);
 
             DrawWithShadow(positionInText, new Vector2(10, 0));
           //DrawWithShadow(movementInText, new Vector2(10, 20));
@@ -173,7 +231,7 @@ namespace BBTB.States
             DrawWithShadow(SpecialInText, new Vector2(360, 360));
             DrawWithShadow(SpecialTypeInText, new Vector2(400, 400));
 
-            //DrawWithShadow(monsterDeadInText, new Vector2(440, 440));
+            DrawWithShadow(monsterDeadInText, new Vector2(440, 440));
 
             DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }

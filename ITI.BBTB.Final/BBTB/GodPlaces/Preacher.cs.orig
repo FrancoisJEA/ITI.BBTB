@@ -23,8 +23,13 @@ namespace BBTB
 		int _life;
         PlayerInventory inventory;
 
+<<<<<<< HEAD
         public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, List<Texture2D> itemTexture, PlayerInventory Inventory)
 			: base(texture,position,batch,isAlive, itemTexture,Inventory)
+=======
+        public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, List<Texture2D> itemTexture)
+			: base(texture,position,batch, false, itemTexture)
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 		{
             
 			_position = position;

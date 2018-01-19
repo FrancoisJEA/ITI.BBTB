@@ -244,7 +244,11 @@
 /processorParam:TextureFormat=Color
 /build:chest.png
 
+<<<<<<< HEAD
+#begin Items/Item__00.png
+=======
 #begin boss.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -254,9 +258,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__00.png
+
+#begin Items/Item__01.png
+=======
 /build:boss.png
 
 #begin book.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -266,9 +276,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__01.png
+
+#begin Items/Item__02.png
+=======
 /build:book.png
 
 #begin bow.jpg
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -278,9 +294,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__02.png
+
+#begin Items/Item__04.png
+=======
 /build:bow.jpg
 
 #begin crossbow.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -290,9 +312,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__04.png
+
+#begin Items/Item__05.png
+=======
 /build:crossbow.png
 
 #begin staff.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -302,9 +330,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__05.png
+
+#begin Items/Item__06.png
+=======
 /build:staff.png
 
 #begin staff00.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -314,9 +348,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__06.png
+
+#begin Items/Item__07.png
+=======
 /build:staff00.png
 
 #begin Character/P_archer.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -326,9 +366,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__07.png
+
+#begin Items/Item__08.png
+=======
 /build:Character/P_archer.png
 
 #begin Character/P_mage.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -338,9 +384,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__08.png
+
+#begin Items/Item__09.png
+=======
 /build:Character/P_mage.png
 
 #begin Character/P_gunner.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -350,9 +402,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__09.png
+
+#begin Items/Item__10.png
+=======
 /build:Character/P_gunner.png
 
 #begin Weapon/book.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -362,9 +420,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__10.png
+
+#begin Items/Item__11.png
+=======
 /build:Weapon/book.png
 
 #begin Weapon/bow.jpg
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -374,9 +438,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__11.png
+
+#begin Items/Item__12.png
+=======
 /build:Weapon/bow.jpg
 
 #begin Weapon/arrow.jpg
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -386,9 +456,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__12.png
+
+#begin Items/Item__13.png
+=======
 /build:Weapon/arrow.jpg
 
 #begin FireBall.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -398,9 +474,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__13.png
+
+#begin Items/Item__14.png
+=======
 /build:FireBall.png
 
 #begin Iceball.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -410,9 +492,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__14.png
+
+#begin Items/Item__15.png
+=======
 /build:Iceball.png
 
 #begin Weapon/staff00.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -422,9 +510,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__15.png
+
+#begin Items/Item__16.png
+=======
 /build:Weapon/staff00.png
 
 #begin Weapon/crossbow.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -434,9 +528,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__16.png
+
+#begin Items/Item__18.png
+=======
 /build:Weapon/crossbow.png
 
 #begin arrow.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -446,9 +546,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__18.png
+
+#begin Items/Item__21.png
+=======
 /build:arrow.png
 
 #begin ground2.jpg
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -458,9 +564,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:Items/Item__21.png
+
+#begin Items/Item__22.png
+=======
 /build:ground2.jpg
 
 #begin prêtre.jpg
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -470,14 +582,10 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:prêtre.jpg
+<<<<<<< HEAD
+/build:Items/Item__22.png
 
-#begin Saves/Saves.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:Saves/Saves.xml
-
-#begin weed.png
+#begin Items/Item__23.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -487,7 +595,12 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:weed.png
+/build:Items/Item__23.png
+
+#begin Items/Item__24.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=True
 /processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
@@ -1193,6 +1306,16 @@
 /build:Effect/Bullet2.png
 
 #begin Effect/Mage_effect1.png
+=======
+/build:prêtre.jpg
+
+#begin Saves/Saves.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Saves/Saves.xml
+
+#begin weed.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1202,5 +1325,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
 /build:Effect/Mage_effect1.png
+=======
+/build:weed.png
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 

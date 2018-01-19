@@ -8,83 +8,135 @@ using System.Threading.Tasks;
 using BBTB.States;
 using Microsoft.Xna.Framework.Input;
 using BBTB.Items;
+using System.Diagnostics;
 
 namespace BBTB
 {
     public class Monster : Sprite
     {
-        public bool IsAlive { get; set; }
-
+        public bool IsAlive { get { return _life >= 0; } }
+        public bool IsDead { get; set; }
         int _life;
-<<<<<<< HEAD
-       public Item _item;
-=======
+        public Item _item;
 		int _xp;
+<<<<<<< HEAD
 		Player _player;
         public int _monsterDead;
->>>>>>> 00c1b9768a593954fad3b35bc9b32b3d14a3c918
+        PlayerInventory PlayerInventory;
+=======
+        Vector2 _mouvement;
+		Vector2 _position;
+        Bullet _bullet;
+        Monster _monster;
+        PlayerInventory PlayerInventory = new PlayerInventory();
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
 
         GameState _ctx; // Paramètre du constructeur
-        public Texture2D _itemTexture { get; set; }
+        public List<Texture2D> _itemTexture { get; set; }
 
-        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,Texture2D itemTexture)
+        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
-            
+            _mouvement = Vector2.Zero;
+            _position = position;
             _itemTexture = itemTexture;
-            IsAlive = isAlive;
+<<<<<<< HEAD
+            PlayerInventory = Inventory;
+=======
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
             _life = 100;
 			_xp = 10;
-            _monsterDead = 0;
         }
 
-        public int MonsterDead { get { return _monsterDead; } set { _monsterDead = value; } }
         public int Life { get { return _life; } set { _life = value; } }
+		// public Vector2 Position { get { return _position; } set { _position = value; } }
 
         public void Update(GameTime gameTime)
         {
-            IsDead();
-            KillAllMonsters();
+<<<<<<< HEAD
+            //IsDead();
+=======
+            if (IsDead == true)
+            {
+                Board.CurrentBoard.Monsters.Remove(_bullet._monster);
+            }
+
+>>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
+        }
+
+        public void Idle()
+        {
+            foreach (Monster monsters in Board.CurrentBoard.Monsters)
+            {
+                Patroling();
+            }
+        }
+
+        public void Patroling()
+        {
+            foreach (Monster monster in Board.CurrentBoard.Monsters)
+            {
+                if 
+                   (
+                        !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture.Bounds) 
+                        || !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture2.Bounds)
+                        || !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture3.Bounds) 
+                   )
+                {
+                    if (monster.Position.X > 0)
+                    {
+                        _mouvement += Vector2.UnitX * 2;
+                    }
+                    else if ( monster.Position.X <= 0)
+                    {
+                        _mouvement -= Vector2.UnitX * 2;
+                    }
+                }
+            }
+        }
+        
+        public void Shooting()
+        {
+
+        }
+
+        private void UpdatePositionBasedOnMovement(GameTime gameTime)
+        {
+            Position += _mouvement * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
         }
 
         public void Hit(Bullet bullet)
         {
             _life -= bullet.Damages;
-            //if (IsDead()) prévenir le jeu pour gagner l'expérience
-        }
-
-        public bool IsDead()
-        {
+            _monster = bullet._monster;
             if (_life <= 0)
             {
-                IsAlive = false;
-<<<<<<< HEAD
-               // InventorySystem2 InventorySystem2 = new InventorySystem2();
-               // string ItemName = InventorySystem2.Drop_Random_Item();
-               // if (ItemName != null) {
-                    _item = new Item(new Vector2(this.position.X, this.position.Y), _itemTexture, SpriteBatch);
-                    _item.Draw();
-                //}
-=======
-                _monsterDead++;
->>>>>>> 00c1b9768a593954fad3b35bc9b32b3d14a3c918
-                return true;
+
+            } 
+            //if (IsDead()) prévenir le jeu pour gagner l'expérience
+        }
+        
+        public Item DropItem ()
+        {
+            Random Random = new Random();
+            int ItemNb = _itemTexture.Count - 1;
+            int ItemID = Random.Next(1, ItemNb);
+            int dropProb = Random.Next(0, 100);
+            if (dropProb >= 10)
+            {
+                Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
+                _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);
+
             }
-            return false;
+            return _item;
         }
 
         public override void Draw()
         {
-            if (IsAlive)
-            {
+           // if (IsAlive)
+            //{
                 base.Draw();
-            }
-        }
-
-        internal void KillAllMonsters()
-        {
-            KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.B)) { IsAlive = false; }
+            //}
         }
 
     }
