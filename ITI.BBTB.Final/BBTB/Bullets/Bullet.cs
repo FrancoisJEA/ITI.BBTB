@@ -49,13 +49,12 @@ namespace BBTB
 		{
             foreach (Monster monster in Board.CurrentBoard.Monsters)
             {
-
                     if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
                         monster.Hit(this);
                         if (monster.Life <= 0)
                         {
-                        Board.CurrentBoard.Monsters.Remove(monster);
+                            Board.CurrentBoard.Monsters.Remove(monster);
                             new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
                         }
                         return true;

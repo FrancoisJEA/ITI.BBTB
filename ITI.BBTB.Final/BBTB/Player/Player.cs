@@ -30,7 +30,7 @@ namespace BBTB
             _booltime = false;
             _weapon = weapon;
 			_havePrayed = havePrayed;
-            _weapon = new Weapon(weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, Position, spritebatch, this);
+            _weapon = new Weapon(_ctx, weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, Position, spritebatch, this);
         }
 
 		#region propriété 

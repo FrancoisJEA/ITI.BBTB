@@ -23,20 +23,22 @@ namespace BBTB
         GameState _ctx;
         int _damages;
 
-        public Weapon(Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, Player player)
+        public Weapon(GameState ctx, Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, Player player = null)
             : base(weaponTexture, position, spritebatch)
         {
+            _ctx = ctx;
             _bulletTexture = bulletTexture;
             _weaponTexture = weaponTexture;
             _bulletTexture2 = bulletTexture2;
             _weaponTexture2 = weaponTexture2;
-            _player = player;
-            _rotationOrigin = new Vector2(_player.Position.X - (_player.Bounds.Width) - 50, _player.Position.Y - (_player.Bounds.Height) - 15);
-            Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
             WeaponLib = new WeaponLib();
+            _player = player;
+            if (_player != null)
+            {
+                _rotationOrigin = new Vector2(_player.Position.X - (_player.Bounds.Width) - 50, _player.Position.Y - (_player.Bounds.Height) - 15);
+                Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
+            }
             _time = 15;
-            _ctx = player.Ctx;
-
             _damages = 50;
         }
 

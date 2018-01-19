@@ -48,9 +48,12 @@ namespace BBTB.States
             mapTextures[0, 2] = Content.Load<Texture2D>("monster");
 
             mapTextures[1, 0] = Content.Load<Texture2D>("ground2");
-            mapTextures[1, 1] = Content.Load<Texture2D>("tile");
-            mapTextures[1, 2] = Content.Load<Texture2D>("prêtre");
+            mapTextures[1, 1] = Content.Load<Texture2D>("tile2");
+            mapTextures[1, 2] = Content.Load<Texture2D>("monster2");
 
+            mapTextures[2, 0] = Content.Load<Texture2D>("ground3");
+            mapTextures[2, 1] = Content.Load<Texture2D>("tile3");
+            mapTextures[2, 2] = Content.Load<Texture2D>("monster3");
 
             var tileTexture = Content.Load<Texture2D>("tile");
             var tileTexture2 = Content.Load<Texture2D>("barrel");
@@ -68,11 +71,11 @@ namespace BBTB.States
             
             _player = new Player(playerTexture, weaponTexture, weaponTexture2, bulletTexture, bulletTexture2, new Vector2(80, 80), _spriteBatch, this, null, false);
 
-            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, _chestTexture, monsterTexture, mapTextures, preacherTexture, /*mapTextures,*/ 15, 10, _player, this, _itemTexture);
+            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, _chestTexture, monsterTexture, mapTextures, weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, preacherTexture, /*mapTextures,*/ 15, 10, _player, this, _itemTexture);
 
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 
-            _sound = Content.Load<SoundEffect>("Sound/GunSound");
+            _sound = Content.Load<SoundEffect>("Sound/GunSound"); 
         }
 
      public List<Texture2D> ItemTextures (ContentManager Content)
@@ -134,7 +137,8 @@ namespace BBTB.States
             string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.Position.X, _player.Position.Y);
 
             string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
-            string experienceInText = string.Format("Character's experience: ({0:0})", _player._playerM.Experience);
+            string experienceInText = string.Format("Character's experience: ({0:0} / {1:0.0})", _player._playerM.Experience, _player._playerM.Experience);
+            string moneyInText = string.Format("Money: ({0:0})", _player._playerM.Money);
 
             string RoomNumberInText = string.Format("Room Number: ({0:0})", Board.CurrentBoard.RoomNumber);
             string StageNumberInText = string.Format("Stage Number: ({0:0})", Board.CurrentBoard.StageNumber);
@@ -148,6 +152,7 @@ namespace BBTB.States
 
             DrawWithShadow(lifeInText, new Vector2(200, 200));
             DrawWithShadow(experienceInText, new Vector2(240, 240));
+            DrawWithShadow(moneyInText, new Vector2(520, 240));
 
             DrawWithShadow(RoomNumberInText, new Vector2(280, 280));
             DrawWithShadow(StageNumberInText, new Vector2(320, 320));

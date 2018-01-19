@@ -22,6 +22,7 @@ namespace BBTB
         public List<Preacher> Preacher { get; set; }
 
         public Player _player;
+        Weapon _weapon;
 		int _stageNumber;
 		int _roomInFloor;
 		int _roomNumber;
@@ -37,6 +38,12 @@ namespace BBTB
         public Texture2D MonsterTexture { get; set; }
         public Texture2D PreacherTexture { get; set; }
         private SpriteBatch SpriteBatch { get; set; }
+
+        public Texture2D WeaponTexture { get; set; }
+        public Texture2D WeaponTexture2 { get; set; }
+        public Texture2D BulletTexture { get; set; }
+        public Texture2D BulletTexture2 { get; set; }
+
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
         List<Bullet> Bullets { get; }
@@ -45,7 +52,7 @@ namespace BBTB
         readonly GameState _gameState;
 		BinaryFormatter _f;
 
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, Texture2D[,] MapTextures, Texture2D preacherTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture, Texture2D[,] MapTextures, Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Texture2D preacherTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture)
         {
             Columns = columns;
             Rows = rows;
@@ -55,6 +62,12 @@ namespace BBTB
             ChestTexture = chestTexture;
 			MonsterTexture = monsterTexture;
             PreacherTexture = preacherTexture;
+
+            WeaponTexture = weaponTexture;
+            WeaponTexture2 = weaponTexture2;
+            BulletTexture = bulletTexture;
+            BulletTexture2 = bulletTexture2;
+
             ItemTexture = itemTexture;
 			SpriteBatch = spritebatch;
             Monsters = new List<Monster>();
@@ -98,7 +111,7 @@ namespace BBTB
                 if (Monsters[x].IsAlive == false)
                 {
                    
-                    Monsters[x].DropItem();
+                    //Monsters[x].DropItem();
                     Monsters.RemoveAt(x--);
                 }
             }
@@ -125,7 +138,7 @@ namespace BBTB
             else if (Special == _roomNumber && SpecialType == 3)
             {
 				
-					string Saves = Path.GetTempFileName();
+					/*string Saves = Path.GetTempFileName();
 					var Hero = _player._playerM;
 				    var Map = CurrentBoard;
 					_f = new BinaryFormatter();
@@ -133,7 +146,7 @@ namespace BBTB
 					{
 						_f.Serialize(stream, Hero);
 					    //_f.Serialize(stream, Map);
-					}
+					}*/
 				
             }
 			SetAllBorderTilesBlocked();
@@ -250,7 +263,7 @@ namespace BBTB
                         {
                             Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
 
-                            Monsters.Add(new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture));
+                            Monsters.Add(new Monster(_gameState, MonsterTexture, WeaponTexture, BulletTexture, WeaponTexture2, BulletTexture2, _weapon, monsterPosition, SpriteBatch,  this.ItemTexture));
                            
                         }
                     }
@@ -356,6 +369,7 @@ namespace BBTB
         {
             foreach (var tile in Tile)
             {
+                if (StageNumber > 0) tile.Texture = mapTextures[StageNumber - 1, 1];
                 tile.Draw();
             }
 
