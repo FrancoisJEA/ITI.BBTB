@@ -136,6 +136,8 @@ namespace BBTB
 
                     if (_player.Position.X > items[y]._position.X) { DistanceY = _player.Position.Y - items[y]._position.Y; }
                     else { DistanceY = items[y]._position.Y - _player.Position.Y; }
+                    string Text = "";
+               
 
 
                     if (DistanceX <= 10 && DistanceY <= 10)
@@ -144,7 +146,14 @@ namespace BBTB
                         {
                             Sprite Box = new Sprite(Inventory.BoxTexture, new Vector2(items[y]._position.X, items[y]._position.Y), SpriteBatch);
                             Box.Draw();
-                            string Text = string.Format(" {0:0} \r\n \r\n Press F to equip", items[y].Name);
+                            if (items[y]._specialItem == true)
+                            {
+                                Text = string.Format(" {0:0} \r\n Special Item !\r\n Strength +{1:0}\r\n Intelligence +{2:0}\r\n Agility +{3:0} \r\n Press F to equip \r\n ", items[y].Name, items[y]._strength, items[y]._intelligence, items[y]._agility);
+                            }
+                            else if (items[y]._specialItem == false)
+                            {
+                                Text = string.Format(" {0:0} \r\n \r\n Press F to equip", items[y].Name);
+                            }
                             DrawWithShadow(Text, new Vector2(items[y]._position.X + 40, items[y]._position.Y + 15));
 
                             if ((keyboardState.IsKeyDown(Keys.F)))
@@ -159,7 +168,7 @@ namespace BBTB
                         {
                             Sprite Box = new Sprite(Inventory.BoxTexture2, new Vector2(items[y]._position.X-100, items[y]._position.Y - 100), SpriteBatch);
                             Box.Draw();
-                            string Text = string.Format("{1:1} \r\n \r\nThis Item can only \r\n be equipped by {0:0}", items[y].ItemClasse,items[y].Name);
+                            Text = string.Format("{1:1} \r\n \r\nThis Item can only \r\n be equipped by {0:0}", items[y].ItemClasse,items[y].Name);
                             DrawWithShadow(Text, new Vector2(Box.Position.X+45, Box.Position.Y+15));
                         }
                     }
