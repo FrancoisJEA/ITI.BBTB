@@ -15,53 +15,70 @@ namespace BBTB
     public class Monster : Sprite
     {
         public bool IsAlive { get { return _life >= 0; } }
-<<<<<<< HEAD
-
+        public bool IsDead { get; set; }
         readonly Weapon _weapon;
 
         int _life;
         public Item _item;
-=======
-        public bool IsDead { get; set; }
-        int _life;
-        public Item _item;
-		int _xp;
         Vector2 _mouvement;
-		Vector2 _position;
         Bullet _bullet;
         PlayerInventory PlayerInventory;
         Monster _monster;
->>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
+        int Type;
+        int _attack;
+        int _level;
+        int _xp;
+        bool _reflect; // If monster return damage
 
         public List<Texture2D> _itemTexture { get; set; }
 
-<<<<<<< HEAD
-        public Monster(GameState ctx, Texture2D texture, Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Weapon weapon, Vector2 position, SpriteBatch batch, List<Texture2D> itemTexture)
-            : base(texture, position, batch)
-        {
-            _weapon = weapon;
-            _weapon = new Weapon(ctx, weaponTexture, bulletTexture, weaponTexture2, bulletTexture2, position, batch, null);
-
-=======
         public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
             _mouvement = Vector2.Zero;
-            _position = position;
->>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
+
             _itemTexture = itemTexture;
             PlayerInventory = Inventory;
+            if (Board.CurrentBoard == null) Type = 0;
+            else Type = Board.CurrentBoard.StageNumber; 
+            DefineMonster(Type);
+        }
+
+        private void DefineMonster(int t)
+        {
+            _attack = 15;
             _life = 100;
+            _level = 1;
+            _xp = 10;
+
+
+            for(int x=0; x<t; x++)
+            {
+                _attack *= 3;
+                _life *= 2;
+                _level ++;
+                _xp *=2;
+                if (x == 2) _reflect = true;
+            }
+        }
+        public void Reflect (PlayerModel p)
+        {
+            if (this._reflect == true) p.Life -= this.Life / 100;
         }
 
         public Weapon Weapon => _weapon;
-        public int Life { get { return _life; } }
+        public int Life { get { return _life; } set { } }
 		// public Vector2 Position { get { return _position; } set { _position = value; } }
 
         public void Update(GameTime gameTime)
         {
             //IsDead();
 
+        }
+        public void WhenMonsterDie(Player p)
+        {
+            p._playerM.Experience +=_xp;
+            p._playerM.LevelUp();
         }
 
         public void Idle()
@@ -108,19 +125,20 @@ namespace BBTB
         public void Hit(Bullet bullet)
         {
             _life -= bullet.Damages;
-            _monster = bullet._monster;
+<<<<<<< HEAD
+            
+           // _monster = bullet._monster;
             if (_life <= 0)
             {
-
+                
             } 
             //if (IsDead()) prévenir le jeu pour gagner l'expérience
-        }
-        
-<<<<<<< HEAD
-        /*public void DropItem ()
 =======
-        public Item DropItem ()
->>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
+            _monster = bullet._monster;
+>>>>>>> fbe158f7673d44533f7f9aaddf958cefbe1fed62
+        }
+
+        public Item DropItem()
         {
             Random Random = new Random();
             int ItemNb = _itemTexture.Count - 1;
@@ -131,29 +149,13 @@ namespace BBTB
                 Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
                 _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);
 
-<<<<<<< HEAD
-            Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
-            _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch);
-            _item.Draw();
-        }*/
-=======
             }
             return _item;
         }
->>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
 
         public override void Draw()
         {
-           // if (IsAlive)
-            //{
-                base.Draw();
-<<<<<<< HEAD
-                _weapon.Draw();
-            }
-=======
-            //}
->>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
+            base.Draw();
         }
-
     }
 }

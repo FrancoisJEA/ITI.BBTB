@@ -20,7 +20,11 @@ namespace BBTB
         Vector2 _origin;
         private SpriteBatch _spriteBatch;
         public BulletLib BulletLib { get; set; }
+<<<<<<< HEAD
+        int _damages;
+=======
 		int _damages;
+>>>>>>> fbe158f7673d44533f7f9aaddf958cefbe1fed62
 
         protected ContentManager _content;
         protected GraphicsDevice GraphicsDevice;
@@ -36,13 +40,20 @@ namespace BBTB
             _rotation = weapon.Rotation;
             BulletLib = new BulletLib(weapon, new Vector2(base.Position.X, base.Position.Y), texture.Height, texture.Width);    
             _weaponCtx = weaponCtx;
+<<<<<<< HEAD
+            _damages = _weaponCtx.Damages;
+=======
             _damages = weaponCtx.Damages;
+>>>>>>> fbe158f7673d44533f7f9aaddf958cefbe1fed62
 			_ctx = board;
             _boss = _ctx._boss;
         }
 
-		public int Damages { get { return _damages;} set { _damages = value; } }
+        public int Damages { get { return _damages; } }
+<<<<<<< HEAD
+=======
 
+>>>>>>> fbe158f7673d44533f7f9aaddf958cefbe1fed62
         public void Update(GameTime gameTime)
         {
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);
@@ -55,31 +66,32 @@ namespace BBTB
 		{
             foreach (Monster monster in Board.CurrentBoard.Monsters)
             {
-<<<<<<< HEAD
-=======
-                    
->>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
                     if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
+                    if (monster.IsAlive)
+                    {
                         monster.Hit(this);
+                        monster.Reflect(Board.CurrentBoard._player._playerM);
                         if (monster.Life <= 0)
                         {
-<<<<<<< HEAD
-                            Board.CurrentBoard.Monsters.Remove(monster);
-                            new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
-                        }
-=======
-                        Board.CurrentBoard.KillMonster();
+                            Board.CurrentBoard.KillMonster();
 
                             _monster = monster;
                             monster.IsDead = false;
->>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
-                        return true;
+<<<<<<< HEAD
+                            return false;
 
-                        new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
+                            //new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
                         }
-                        
+                        else return true;
                     }
+                        
+=======
+                        return true;
+                        }
+>>>>>>> fbe158f7673d44533f7f9aaddf958cefbe1fed62
+                    }
+                
             }
             
             if(_boss.AddBoss)

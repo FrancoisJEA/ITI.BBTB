@@ -17,7 +17,7 @@ namespace BBTB.States
     public class GameState : State
     {
         Texture2D[,] mapTextures;
-
+        
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Player _player;
@@ -32,6 +32,9 @@ namespace BBTB.States
         PlayerInventory Inventory;
         List<Texture2D> _bulletTextures;
         List<Texture2D> playerTexture;
+
+        Texture2D heartTexture;
+
         internal Board Board
         {
             get { return _board; }
@@ -54,13 +57,24 @@ namespace BBTB.States
             mapTextures[1, 1] = Content.Load<Texture2D>("tile2");
             mapTextures[1, 2] = Content.Load<Texture2D>("monster2");
 
-<<<<<<< HEAD
-=======
             mapTextures[2, 0] = Content.Load<Texture2D>("ground3");
             mapTextures[2, 1] = Content.Load<Texture2D>("tile3");
             mapTextures[2, 2] = Content.Load<Texture2D>("monster3");
 
->>>>>>> a8fa051d2edab86946f73339c71f3708c2ebb79a
+            mapTextures[3, 0] = Content.Load<Texture2D>("ground4");
+            mapTextures[3, 1] = Content.Load<Texture2D>("tile4");
+            mapTextures[3, 2] = Content.Load<Texture2D>("monster4");
+
+            mapTextures[4, 0] = Content.Load<Texture2D>("ground5");
+            mapTextures[4, 1] = Content.Load<Texture2D>("tile5");
+            mapTextures[4, 2] = Content.Load<Texture2D>("monster5");
+
+            mapTextures[5, 0] = Content.Load<Texture2D>("ground6");
+            mapTextures[5, 1] = Content.Load<Texture2D>("tile6");
+            mapTextures[5, 2] = Content.Load<Texture2D>("monster6");
+
+            heartTexture = Content.Load<Texture2D>("heart");
+
             var tileTexture = Content.Load<Texture2D>("tile");
             var tileTexture2 = Content.Load<Texture2D>("barrel");
             var archerTexture = Content.Load<Texture2D>("Character/P_archer");
@@ -77,8 +91,7 @@ namespace BBTB.States
             var _chestTexture = Content.Load<Texture2D>("chest");
             var _bossTexture = Content.Load<Texture2D>("boss");
             _debugFont = Content.Load<SpriteFont>("DebugFont");
-<<<<<<< HEAD
-            _sound = Content.Load<SoundEffect>("Sound/GunSound");
+            _sound = Content.Load<SoundEffect>("Sound/GunSound"); 
             
             Inventory = new PlayerInventory(_itemTexture, _spriteBatch, _boxTexture,_boxTexture2);
             if (classeSelected == "Wizard")
@@ -95,15 +108,6 @@ namespace BBTB.States
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             }
                 _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, mapTextures, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont, Inventory);
-       
-          
-=======
-            _sound = Content.Load<SoundEffect>("Sound/GunSound"); 
-            playerTexture = mageTexture;
-            Inventory = new PlayerInventory(_itemTexture, _spriteBatch, _boxTexture,_boxTexture2);
-            _player = new Player(playerTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
-            _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, mapTextures, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont, Inventory);
->>>>>>> a8fa051d2edab86946f73339c71f3708c2ebb79a
         }
 
         public List<Texture2D> ItemTextures (ContentManager Content)
@@ -129,8 +133,7 @@ namespace BBTB.States
             List<Texture2D> AllTextures = new List<Texture2D>();
             AllTextures.Add(Content.Load<Texture2D>("Effect/Mage_effect1"));
             AllTextures.Add(Content.Load<Texture2D>("Effect/Mage_effect2"));
-            AllTextures.Add(Content.Load<Texture2D>("Effect/Arrow"));
-            AllTextures.Add(Content.Load<Texture2D>("Effect/Crossbow_arrow"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/arrow"));
             AllTextures.Add(Content.Load<Texture2D>("Effect/Bullet1"));
             AllTextures.Add(Content.Load<Texture2D>("Effect/Bullet2"));
             return AllTextures;
@@ -139,9 +142,14 @@ namespace BBTB.States
         public override void Update(GameTime gameTime)
         {
             _player.Update(gameTime);
+<<<<<<< HEAD
            
 
+             //Board.KillMonster();
+=======
+            
              Board.KillMonster();
+>>>>>>> fbe158f7673d44533f7f9aaddf958cefbe1fed62
             foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
             foreach (Tile tile in _board.Tile2) tile.Update(gameTime);
             //foreach (Preacher preacher in _board.Preacher) preacher.Update(gameTime);
@@ -175,11 +183,14 @@ namespace BBTB.States
             _spriteBatch.Begin();
             _background.Draw();
             _board.Draw();
-            Inventory.ShowInventory();
+            Inventory.ShowInventory(_player,_debugFont);
             _board.TakeItem();
-            WriteDebugInformation();
-
             _player.Draw();
+
+            _player.HeartsDrawing(heartTexture);
+
+            WriteDebugInformation();
+            
             _spriteBatch.End();
 
         }
@@ -190,7 +201,7 @@ namespace BBTB.States
           //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
 
             string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
-            string experienceInText = string.Format("Character's experience: ({0:0} / {1:0.0})", _player._playerM.Experience, _player._playerM.Experience);
+            string experienceInText = string.Format("Character's experience: ({0:0} / {1:0.0})", _player._playerM.Experience, _player._playerM.Xpnext);
             string moneyInText = string.Format("Money: ({0:0})", _player._playerM.Money);
 
             string RoomNumberInText = string.Format("Room Number: ({0:0})", Board.CurrentBoard.RoomNumber);
