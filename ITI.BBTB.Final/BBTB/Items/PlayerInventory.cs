@@ -42,7 +42,7 @@ namespace BBTB.Items
             //DefaultInventory.Add(new Item(new Vector2(80, 80), AllTexture[7], SpriteBatch));
             Inventory = DefaultInventory;
         }
-        public List<Item> AddItemToInventory(Item Item, List<Item> Items,Player _player)
+        public List<Item> AddItemToInventory(Item Item, List<Item> Items,Player _player,int y)
         {   
                 int i = Item.InventoryEmplacement;
             Inventory[i]._position.X = Item._position.X;

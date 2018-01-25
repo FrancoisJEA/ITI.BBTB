@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BBTB.Items
 {
-    public class Item
+    public class Item : Sprite
     {
 
 
@@ -34,7 +34,7 @@ namespace BBTB.Items
 
 
 
-        public Item(Vector2 position, Texture2D texture, SpriteBatch spriteBatch,Player player)
+        public Item(Vector2 position, Texture2D texture, SpriteBatch spriteBatch,Player player) : base(texture,position,spriteBatch)
              
         {
             _position = position;

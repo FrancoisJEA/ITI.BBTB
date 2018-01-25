@@ -54,6 +54,9 @@ namespace BBTB
         PlayerInventory Inventory;
 		BinaryFormatter _f;
         private SpriteFont _debugFont;
+        bool _chestState;
+        Monster m;
+     
 
 
         public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture,Texture2D[,] MapTextures, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont, PlayerInventory inventory)
@@ -68,7 +71,7 @@ namespace BBTB
 			MonsterTexture = monsterTexture;
             PreacherTexture = preacherTexture;
             _time = 15;
-           
+            _chestState = false;
             ItemTexture = itemTexture;
 			SpriteBatch = spritebatch;
             Preacher = new List<Preacher>();
@@ -130,24 +133,26 @@ namespace BBTB
 
         public void TakeItem ()
         {
-            KeyboardState keyboardState = Keyboard.GetState();
+            
             for (int y = 0; y < items.Count; y++)
             {
+                KeyboardState keyboardState = Keyboard.GetState();
                 if (items[y] != null)
                 {
-                    float DistanceX;
-                    float DistanceY;
+                    //float DistanceX;
+                    //float DistanceY;
 
-                    if (_player.Position.X > items[y]._position.X) { DistanceX = _player.Position.X - items[y]._position.X; }
-                    else { DistanceX = items[y]._position.X - _player.Position.X; }
+                    //if (_player.Position.X > items[y]._position.X) { DistanceX = _player.Position.X - items[y]._position.X; }
+                    //else { DistanceX = items[y]._position.X - _player.Position.X; }
 
-                    if (_player.Position.X > items[y]._position.X) { DistanceY = _player.Position.Y - items[y]._position.Y; }
-                    else { DistanceY = items[y]._position.Y - _player.Position.Y; }
+                    //if (_player.Position.X > items[y]._position.X) { DistanceY = _player.Position.Y - items[y]._position.Y; }
+                   // else { DistanceY = items[y]._position.Y - _player.Position.Y; }
                     string Text = "";
-               
 
 
-                    if (DistanceX <= 10 && DistanceY <= 10)
+
+                    //if (DistanceX <= 10 && DistanceY <= 10)
+                    if (_player.Bounds.Intersects(items[y].Bounds))
                     {
                         if (items[y].ItemClasse == _player.PlayerClasse || items[y].ItemClasse == "All")
                         {
@@ -168,7 +173,7 @@ namespace BBTB
                                 if (_time < 15) { _time += 1; }
                                 else
                                 {
-                                    List<Item> _item = Inventory.AddItemToInventory(items[y], items, _player);
+                                    List<Item> _item = Inventory.AddItemToInventory(items[y], items, _player,y);
                                     items = _item;
                                     _time = 1;
                                 }
@@ -219,6 +224,7 @@ namespace BBTB
             else if (Special == _roomNumber && SpecialType == 1)
 			{
 				Tile4[5, 4].IsBlocked = true;
+                Tile4[7, 6].IsBlocked = true;
 			}
             else if (Special == _roomNumber && SpecialType == 2)
 			{
@@ -286,6 +292,30 @@ namespace BBTB
                 }
             }
         }
+        public void OpenChest ()
+        {
+            Rectangle r = Tile4[5, 4].Bounds;
+            r.Inflate(30, 30);
+            if (_player.Bounds.Intersects(r) && _chestState == false && SpecialType == 1)
+            {
+                KeyboardState keyboardState = Keyboard.GetState();
+                if ((keyboardState.IsKeyDown(Keys.F)))
+                {
+                    int X = r.X;
+                    int Y = r.Y;
+                    Random rng = new Random();
+                    int nbItem = rng.Next(1, 3);
+                    for (int w = 0; w < nbItem; w++)
+                    {
+                        X += 100;
+                        Y += 140;
+                        int i = rng.Next(2, ItemTexture.Count);
+                        items.Add(new Item(new Vector2(X, Y), ItemTexture[i], SpriteBatch, _player));
+                    }
+                        _chestState = true;
+                }
+            }
+        }
         
         public void NewStage()
         {
@@ -296,8 +326,7 @@ namespace BBTB
                 _stageNumber = _stageNumber + 1;
                 _roomNumber = 1;
 				_special = _rnd.Next(2, _roomInFloor);
-				//_specialType = _rnd.Next(1, 3);
-				_specialType = 3;
+				_specialType = _rnd.Next(1, 3);
             }
         }
 
@@ -317,6 +346,9 @@ namespace BBTB
         private void SetTopLeftTileUnblocked()
         {
             Tile2[1, 1].IsBlocked = false;
+            Tile2[2, 1].IsBlocked = false;
+            Tile2[1, 2].IsBlocked = false;
+            Tile2[2, 2].IsBlocked = false;
             //Monsters[1, 1].IsAlive = false;
 
             //Monsters[13, 1].IsAlive = false;
@@ -342,6 +374,7 @@ namespace BBTB
         }
         private void SetBossTileUnblocked()
         {
+            
             Tile2[6, 4].IsBlocked = false;
             Tile2[7, 4].IsBlocked = false;
             Tile2[8, 4].IsBlocked = false;
@@ -538,6 +571,7 @@ namespace BBTB
             NewStage();
             BulletUpdate(gameTime);
             PlayerDead();
+            OpenChest();
         }
 
         private void BulletUpdate(GameTime gameTime)

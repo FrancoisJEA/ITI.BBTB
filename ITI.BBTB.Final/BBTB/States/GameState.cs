@@ -195,7 +195,7 @@ namespace BBTB.States
           //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
 
             string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
-            string experienceInText = string.Format("Character's experience: ({0:0} / {1:0.0})", _player._playerM.Experience, _player._playerM.Xpnext);
+            string experienceInText = string.Format("Experience: ({0:0} / {1:0})", _player._playerM.Experience,_player._playerM.Xpnext);
             string moneyInText = string.Format("Money: ({0:0})", _player._playerM.Money);
 
             string RoomNumberInText = string.Format("Room Number: ({0:0})", Board.CurrentBoard.RoomNumber);
@@ -206,11 +206,11 @@ namespace BBTB.States
 
             string monsterDeadInText = string.Format("Monsters Dead: ({0:0})", _board.MonsterDead);
 
-            DrawWithShadow(positionInText, new Vector2(10, 0));
+            //DrawWithShadow(positionInText, new Vector2(10, 0));
           //DrawWithShadow(movementInText, new Vector2(10, 20));
 
             DrawWithShadow(lifeInText, new Vector2(200, 200));
-            DrawWithShadow(experienceInText, new Vector2(240, 240));
+            DrawWithShadow(experienceInText, new Vector2(10, 20));
             DrawWithShadow(moneyInText, new Vector2(520, 240));
 
             DrawWithShadow(RoomNumberInText, new Vector2(280, 280));
@@ -219,7 +219,7 @@ namespace BBTB.States
             DrawWithShadow(SpecialInText, new Vector2(360, 360));
             DrawWithShadow(SpecialTypeInText, new Vector2(400, 400));
 
-            DrawWithShadow(monsterDeadInText, new Vector2(440, 440));
+           // DrawWithShadow(monsterDeadInText, new Vector2(440, 440));
 
             DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }
