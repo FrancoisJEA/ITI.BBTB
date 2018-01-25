@@ -9,8 +9,8 @@ namespace BBTB
     [Serializable]
     public class PlayerModel 
     {
-		#region Champs
-		int _classes;
+        #region Champs
+        public string _classe;
         /*Attributs*/
         int _life, _strength, _agility, _experience, _intelligence, _resistance;
         /*Inventory*/
@@ -33,13 +33,16 @@ namespace BBTB
 		Board _board;
 #endregion
 
-		public PlayerModel(string name, int classes)
+		public PlayerModel(string name,  string classe)
         {
             _name = name;
-            _classes = classes;
+            _classe = classe;
+            DefineStats();
             _life = 100;
             _level = 1;
             _experience = 0;
+
+           
         }
 
 		#region Propriétés
@@ -60,6 +63,29 @@ namespace BBTB
         public int SkillPoint { get { return _skillsPoints ; } set { _skillsPoints = value; } }
 		public int Room {get {return _room; }}
 		#endregion
+        public void DefineStats()
+        {
+            if (_classe == "Wizard")
+            {
+                _strength = 20;
+                _agility = 10;
+                _intelligence = 30;
+
+            }
+            else if (_classe == "Gunner")
+            {
+                _strength = 30;
+                _agility = 20;
+                _intelligence = 10;
+            }
+            else if (_classe == "Archer")
+            {
+                _strength = 15;
+                _agility = 25;
+                _intelligence = 20;
+
+            }
+        }
 
         public void Level1SkillSetUp()
         {
@@ -90,15 +116,15 @@ namespace BBTB
 
         public void StatLevelUP()
         {
-            if (_classes == 1)
+            if (_classe == "Wizard")
             {
                 _life = _life + 10;
             }
-            else if (_classes==2)
+            else if (_classe =="Gunner")
             {
                 _life = _life + 10;
             }
-            else if(_classes ==3)
+            else if(_classe =="Archer")
             {
                 _life = _life + 10;
             }

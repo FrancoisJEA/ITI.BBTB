@@ -46,11 +46,27 @@ namespace BBTB.Items
         public List<Item> AddItemToInventory(Item Item, List<Item> Items,Player _player)
         {   
                 int i = Item.InventoryEmplacement;
+            Inventory[i]._position.X = Item._position.X;
+            Inventory[i]._position.Y = Item._position.Y;
+            if (Item._specialItem == true)  UpdatePlayerSats(Inventory[i], Item,_player);
+            Items.Add(Inventory[i]);
                 Inventory.RemoveAt(i);
                 Inventory.Insert(i, Item);
                 Items.Remove(Item);
+            
                 return Items;
 
+        }
+
+        private void UpdatePlayerSats(Item OldItem, Item NewItem, Player player)
+        {
+            PlayerModel p = player._playerM;
+            p.Strength -= OldItem._strength;
+            p.Intelligence = OldItem._intelligence;
+            p.Agility -= OldItem._agility;
+            p.Strength += NewItem._strength;
+            p.Intelligence += NewItem._intelligence;
+            p.Agility += NewItem._agility;
         }
 
         public void Draw(SpriteBatch sb, Vector2 position)

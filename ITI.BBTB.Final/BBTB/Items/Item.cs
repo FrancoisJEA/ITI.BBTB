@@ -22,6 +22,11 @@ namespace BBTB.Items
         public string ItemClasse { get; set; }
         public int Attack { get; set; }
         private Player _player;
+        public int _agility;
+        public int _strength;
+        public int _intelligence;
+        public bool _specialItem;
+
 
 
         public int InventoryEmplacement { get; }
@@ -36,12 +41,53 @@ namespace BBTB.Items
             SpriteBatch = spriteBatch;
             Name = texture.Name.Replace("_"," ");
             Name = Name.Replace("Items/","");
-          
             InventoryEmplacement = this.FindInventoryEmplacement(Name);
             _player = player;
             ItemClasse = FindClasse();
             if (ItemType == "weapon")
-                Attack = 20 + Convert.ToInt32(_player._playerM.Level * 1.8);
+                Attack = 20 + Convert.ToInt32(_player._playerM.Level * 1.8 * _player._playerM.Strength/5);
+            RandomStat();
+        }
+
+        private void RandomStat()
+        {
+            Random random = new Random();
+            int prob = _player._playerM.Intelligence/10 *4;
+            int RNG = random.Next(prob, 100);
+            if (RNG > 70)
+            {
+                string _playerclasse = _player._playerM._classe;
+                if (_playerclasse == "Wizard")
+                {
+                    _specialItem = true;
+                    _strength = _player._playerM.Level * 2;
+                    _intelligence = _player._playerM.Level * 3;
+                    _agility = _player._playerM.Level * 2;
+                }
+                else if (_playerclasse == "Gunner")
+                {
+                    _specialItem = true;
+                    _strength = _player._playerM.Level * 3;
+                    _intelligence = _player._playerM.Level * 2;
+                    _agility = _player._playerM.Level * 2;
+                }
+                else if (_playerclasse == "Archer")
+                {
+                    _specialItem = true;
+                    _strength = _player._playerM.Level * 2;
+                    _intelligence = _player._playerM.Level * 2;
+                    _agility = _player._playerM.Level * 3;
+                }
+
+
+            }
+            else
+            {
+                _strength = 0;
+                _intelligence = 0;
+                _agility = 0;
+                _specialItem = false;
+            }
         }
 
         private string FindClasse()

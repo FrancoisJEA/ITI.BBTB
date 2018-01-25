@@ -34,7 +34,8 @@ namespace BBTB
         public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed,PlayerInventory inventory,List<Texture2D> BulletTextures,string _classe)
             : base(texture, position, spritebatch)
         {
-            _playerM = new PlayerModel("Tanguy", 1);
+            PlayerClasse = _classe;
+            _playerM = new PlayerModel("Tanguy", PlayerClasse);
             _ctx = ctx;
             _time = 0;
             _booltime = false;
@@ -43,7 +44,6 @@ namespace BBTB
             Inventory.ItemByDefault(this);
             _havePrayed = havePrayed;
             _bulletTextures = BulletTextures;
-            PlayerClasse = _classe;
             _weapon = new Weapon(_ctx, _bulletTextures[1], Position, spritebatch, this,_bulletTextures);
         }
 
@@ -61,6 +61,13 @@ namespace BBTB
         {
             Position = Vector2.One * 70;
             _mouvement = Vector2.Zero;
+        }
+        public Texture2D FindPlayerTexture(List<Texture2D> t)
+        {
+            if (this.PlayerClasse == "Gunner") return t[0];
+            if (this.PlayerClasse == "Archer") return t[1];
+            if (this.PlayerClasse == "Wizard") return t[2];
+            else return t[2];
         }
 
         public void Update(GameTime gameTime)
