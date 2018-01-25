@@ -25,17 +25,24 @@ namespace BBTB
         GameState _ctx;
         int _damages;
 
-        public Weapon(GameState ctx, Texture2D Texture,Vector2 position, SpriteBatch spritebatch, Player player, List<Texture2D> BulletTextures)
+<<<<<<< HEAD
+        public Weapon(GameState ctx, Texture2D weaponTexture, Texture2D bulletTexture, Texture2D weaponTexture2, Texture2D bulletTexture2, Vector2 position, SpriteBatch spritebatch, Player player = null)
+            : base(weaponTexture, position, spritebatch)
+        {
+            _ctx = ctx;
+            _bulletTexture = bulletTexture;
+            _weaponTexture = weaponTexture;
+            _bulletTexture2 = bulletTexture2;
+            _weaponTexture2 = weaponTexture2;
+=======
+        public Weapon(Texture2D Texture,Vector2 position, SpriteBatch spritebatch, Player player, List<Texture2D> BulletTextures)
             : base (Texture,position,spritebatch)
         {
           
-            WeaponLib = new WeaponLib();
             _player = player;
             _bulletTextures = BulletTextures;
             Inventory = _player.Inventory.InventoryList();
             _weaponTexture = Inventory[4]._texture;
-
-            _ctx = ctx;
            
             _weaponTexture2 = Inventory[5]._texture;
 
@@ -44,7 +51,20 @@ namespace BBTB
 
             _rotationOrigin = new Vector2(_player.Position.X - (_player.Bounds.Width) - 50, _player.Position.Y - (_player.Bounds.Height) - 15);
             Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
+>>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
+            WeaponLib = new WeaponLib();
+            _player = player;
+            if (_player != null)
+            {
+                _rotationOrigin = new Vector2(_player.Position.X - (_player.Bounds.Width) - 50, _player.Position.Y - (_player.Bounds.Height) - 15);
+                Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
+            }
             _time = 15;
+<<<<<<< HEAD
+            _damages = 50;
+=======
+            _ctx = player.Ctx;
+>>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
         }
 
 		public int Damages { get { return _damages;} set { _damages = value; } }

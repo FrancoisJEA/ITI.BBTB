@@ -16,30 +16,29 @@ namespace BBTB
     {
         public bool IsAlive { get { return _life >= 0; } }
         public bool IsDead { get; set; }
+        readonly Weapon _weapon;
+
         int _life;
         public Item _item;
-		int _xp;
         Vector2 _mouvement;
-		Vector2 _position;
         Bullet _bullet;
         PlayerInventory PlayerInventory;
         Monster _monster;
 
-        GameState _ctx; // Paramètre du constructeur
         public List<Texture2D> _itemTexture { get; set; }
 
         public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
             _mouvement = Vector2.Zero;
-            _position = position;
+
             _itemTexture = itemTexture;
             PlayerInventory = Inventory;
             _life = 100;
-			_xp = 10;
         }
 
-        public int Life { get { return _life; } set { _life = value; } }
+        public Weapon Weapon => _weapon;
+        public int Life { get { return _life; } }
 		// public Vector2 Position { get { return _position; } set { _position = value; } }
 
         public void Update(GameTime gameTime)
@@ -99,8 +98,8 @@ namespace BBTB
             } 
             //if (IsDead()) prévenir le jeu pour gagner l'expérience
         }
-        
-        public Item DropItem ()
+
+        public Item DropItem()
         {
             Random Random = new Random();
             int ItemNb = _itemTexture.Count - 1;

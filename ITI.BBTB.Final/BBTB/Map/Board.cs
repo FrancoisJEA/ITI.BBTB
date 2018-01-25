@@ -23,6 +23,7 @@ namespace BBTB
         public List<Preacher> Preacher { get; set; }
 
         public Player _player;
+        Weapon _weapon;
 		int _stageNumber;
 		int _roomInFloor;
 		int _roomNumber;
@@ -39,8 +40,10 @@ namespace BBTB
         public Texture2D BossTexture { get; set; }
         public Texture2D PreacherTexture { get; set; }
         private SpriteBatch SpriteBatch { get; set; }
+
         internal Boss _boss;
         Vector2 _bossPosition = new Vector2(300,400);
+
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
         public List<Bullet> Bullets { get; }
@@ -51,8 +54,10 @@ namespace BBTB
         PlayerInventory Inventory;
 		BinaryFormatter _f;
         private SpriteFont _debugFont;
+
+
         public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D chestTexture, Texture2D monsterTexture,Texture2D[,] MapTextures, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont, PlayerInventory inventory)
-	{
+	    {
             Columns = columns;
             Rows = rows;
             TileTexture = tileTexture;
@@ -62,9 +67,10 @@ namespace BBTB
             BossTexture = bossTexture;
 			MonsterTexture = monsterTexture;
             PreacherTexture = preacherTexture;
+
+           
             ItemTexture = itemTexture;
 			SpriteBatch = spritebatch;
-            //Monsters = new List<Monster>();
             Preacher = new List<Preacher>();
             Inventory = inventory;
             _debugFont = debugFont;
@@ -208,7 +214,7 @@ namespace BBTB
             else if (Special == _roomNumber && SpecialType == 3)
             {
                 
-					string Saves = Path.GetTempFileName();
+					/*string Saves = Path.GetTempFileName();
 					var Hero = _player._playerM;
 				    var Map = CurrentBoard;
 					_f = new BinaryFormatter();
@@ -216,7 +222,7 @@ namespace BBTB
 					{
 						_f.Serialize(stream, Hero);
 					    //_f.Serialize(stream, Map);
-					}
+					}*/
 				
             }
 			SetAllBorderTilesBlocked();
@@ -476,6 +482,7 @@ namespace BBTB
 
             foreach (var tile in Tile)
             {
+                if (StageNumber > 0) tile.Texture = mapTextures[StageNumber - 1, 1];
                 tile.Draw();
             }
 

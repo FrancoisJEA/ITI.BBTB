@@ -44,9 +44,8 @@ namespace BBTB
             Inventory.ItemByDefault(this);
             _havePrayed = havePrayed;
             _bulletTextures = BulletTextures;
+            _weapon = new Weapon(_ctx, _bulletTextures[1],Position, spritebatch, this,_bulletTextures);
            
-            _weapon = new Weapon(_bulletTextures[1],Position, spritebatch, this,_bulletTextures);
-
             
         }
 

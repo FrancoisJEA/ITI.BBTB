@@ -21,12 +21,7 @@ namespace BBTB
         private SpriteBatch _spriteBatch;
         public BulletLib BulletLib { get; set; }
 		int _damages;
-<<<<<<< HEAD
-=======
-        public Sprite _item;
-        private Texture2D _itemTexture;
 
->>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
         protected ContentManager _content;
         protected GraphicsDevice GraphicsDevice;
     
@@ -60,23 +55,26 @@ namespace BBTB
 		{
             foreach (Monster monster in Board.CurrentBoard.Monsters)
             {
+<<<<<<< HEAD
+=======
                     
+>>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
                     if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
                         monster.Hit(this);
                         if (monster.Life <= 0)
                         {
 <<<<<<< HEAD
-                        Board.CurrentBoard.KillMonster();
-
-=======
-                            _monster = monster;
-                            monster.IsDead = false;
+                            Board.CurrentBoard.Monsters.Remove(monster);
                             new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
                         }
->>>>>>> b5426da9a681adc44b23e2d49de088095d5e91fc
-                        return true;
+=======
+                        Board.CurrentBoard.KillMonster();
 
+                            _monster = monster;
+                            monster.IsDead = false;
+>>>>>>> a5193c5e076c6ab329d33efb055ce0dab3b144ca
+                        return true;
 
                         new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
                         }
