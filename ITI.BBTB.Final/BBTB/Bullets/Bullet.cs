@@ -65,10 +65,7 @@ namespace BBTB
                             _monster = monster;
                             monster.IsDead = false;
                         return true;
-
-                        new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
                         }
-                        
                     }
             }
             

@@ -181,6 +181,16 @@ namespace BBTB
                 }
             }            
         }
+
+        private void PlayerDead()
+        {
+            if (_player._playerM.Life <= 0)
+            {
+                _player._playerM.Life = 100;
+                Stage1();
+            }
+        }
+
         private void DrawWithShadow(string text, Vector2 position)
         {
  
@@ -254,7 +264,6 @@ namespace BBTB
                 if (monster.IsAlive && _roomNumber < _roomInFloor)
                 {
                     showExist = false;
-                   
                     break;
                 } else if (_roomNumber == _roomInFloor && monster.IsAlive && _boss.IsAlive)
                 {
@@ -524,8 +533,7 @@ namespace BBTB
             NewRoom();
             NewStage();
             BulletUpdate(gameTime);
-            
-            
+            PlayerDead();
         }
 
         private void BulletUpdate(GameTime gameTime)

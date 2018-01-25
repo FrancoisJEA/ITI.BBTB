@@ -17,7 +17,7 @@ namespace BBTB.States
     public class GameState : State
     {
         Texture2D[,] mapTextures;
-
+        
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Player _player;
@@ -32,6 +32,9 @@ namespace BBTB.States
         PlayerInventory Inventory;
         List<Texture2D> _bulletTextures;
         List<Texture2D> playerTexture;
+
+        Texture2D heartTexture;
+
         internal Board Board
         {
             get { return _board; }
@@ -57,6 +60,21 @@ namespace BBTB.States
             mapTextures[2, 0] = Content.Load<Texture2D>("ground3");
             mapTextures[2, 1] = Content.Load<Texture2D>("tile3");
             mapTextures[2, 2] = Content.Load<Texture2D>("monster3");
+
+            mapTextures[3, 0] = Content.Load<Texture2D>("ground4");
+            mapTextures[3, 1] = Content.Load<Texture2D>("tile4");
+            mapTextures[3, 2] = Content.Load<Texture2D>("monster4");
+
+            mapTextures[4, 0] = Content.Load<Texture2D>("ground5");
+            mapTextures[4, 1] = Content.Load<Texture2D>("tile5");
+            mapTextures[4, 2] = Content.Load<Texture2D>("monster5");
+
+            mapTextures[5, 0] = Content.Load<Texture2D>("ground6");
+            mapTextures[5, 1] = Content.Load<Texture2D>("tile6");
+            mapTextures[5, 2] = Content.Load<Texture2D>("monster6");
+
+            heartTexture = Content.Load<Texture2D>("heart");
+
             var tileTexture = Content.Load<Texture2D>("tile");
             var tileTexture2 = Content.Load<Texture2D>("barrel");
             var archerTexture = Content.Load<Texture2D>("Character/P_archer");
@@ -124,8 +142,7 @@ namespace BBTB.States
         public override void Update(GameTime gameTime)
         {
             _player.Update(gameTime);
-           
-
+            
              Board.KillMonster();
             foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
             foreach (Tile tile in _board.Tile2) tile.Update(gameTime);
@@ -162,9 +179,12 @@ namespace BBTB.States
             _board.Draw();
             Inventory.ShowInventory();
             _board.TakeItem();
-            WriteDebugInformation();
-
             _player.Draw();
+
+            _player.HeartsDrawing(heartTexture);
+
+            WriteDebugInformation();
+            
             _spriteBatch.End();
 
         }

@@ -92,11 +92,6 @@ namespace BBTB
         {
             _life -= bullet.Damages;
             _monster = bullet._monster;
-            if (_life <= 0)
-            {
-
-            } 
-            //if (IsDead()) prévenir le jeu pour gagner l'expérience
         }
 
         public Item DropItem()
@@ -116,11 +111,7 @@ namespace BBTB
 
         public override void Draw()
         {
-           // if (IsAlive)
-            //{
-                base.Draw();
-            //}
+            base.Draw();
         }
-
     }
 }
