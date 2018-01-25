@@ -61,7 +61,7 @@ namespace BBTB.Items
             Random random = new Random();
             int prob = _player._playerM.Intelligence/10 *4;
             int RNG = random.Next(prob, 100);
-            if (RNG > 80)
+            if (RNG > 70)
             {
                 string _playerclasse = _player._playerM._classe;
                 if (_playerclasse == "Wizard")

@@ -58,7 +58,7 @@ namespace BBTB
                 _life *= 2;
                 _level ++;
                 _xp *=2;
-                if (x == 2) _reflect = true;
+                if (x == 0) _reflect = true;
             }
         }
         public void Reflect (PlayerModel p)
@@ -134,8 +134,9 @@ namespace BBTB
             Random Random = new Random();
             int ItemNb = _itemTexture.Count - 1;
             int ItemID = Random.Next(1, ItemNb);
-            int dropProb = Random.Next(0, 100);
-            if (dropProb >= 10)
+            int Intelligence = Board.CurrentBoard._player._playerM.Intelligence / 10 * 4;
+            int dropProb = Random.Next(Intelligence, 100);
+            if (dropProb >= 90)
             {
                 Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
                 _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);

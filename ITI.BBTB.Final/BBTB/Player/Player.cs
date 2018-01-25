@@ -59,13 +59,24 @@ namespace BBTB
 
         public void HeartsDrawing(Texture2D _heartTexture)
         {
-            int heartPositionx = 700;
+            int heartPositionx = 900;
             int heartPositiony = 10;
             heartNumber = (_playerM.Life / 25);
             for (int i = 0; i < heartNumber; i++)
             {
-                heartPositionx += 40;
+                if (heartNumber == 6)
+                {
+                    heartPositiony += 40;
+                    heartPositionx = 900;
+                }
+                else heartPositionx -= 40;
 
+                Sprite heart = new Sprite(_heartTexture, new Vector2(heartPositionx, heartPositiony), SpriteBatch);
+                heart.Draw();
+               
+            }
+            if (_playerM.Life < 25 && _playerM.Life > 0)
+            {
                 Sprite heart = new Sprite(_heartTexture, new Vector2(heartPositionx, heartPositiony), SpriteBatch);
                 heart.Draw();
             }

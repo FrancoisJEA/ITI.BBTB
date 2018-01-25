@@ -17,8 +17,8 @@ namespace BBTB
         string _weapon1, _weapon2;
         string _helmet, _breastplate, _boots, _leggings;
         string _potiontype;
-        int _krumbz;      
-
+        int _krumbz;
+        int _lifemax;
         int _level;
 
 		int _xpnext;
@@ -63,6 +63,7 @@ namespace BBTB
         {
             if (_classe == "Wizard")
             {
+                _lifemax = 110;
                 _strength = 20;
                 _agility = 10;
                 _intelligence = 30;
@@ -70,12 +71,14 @@ namespace BBTB
             }
             else if (_classe == "Gunner")
             {
+                _lifemax = 130;
                 _strength = 30;
                 _agility = 20;
                 _intelligence = 10;
             }
             else if (_classe == "Archer")
             {
+                _lifemax = 100;
                 _strength = 15;
                 _agility = 25;
                 _intelligence = 20;
@@ -87,7 +90,6 @@ namespace BBTB
         {
             Level = 1;
             Experience = 0;
-            Life = 100;
             Resistance = 10;
             Money = 0;
             _xplast = 0;
@@ -105,6 +107,7 @@ namespace BBTB
                 _xpnext = _xpnext * 3;
                 _skillsPoints++; 
                 StatLevelUP();
+                _life = _lifemax;
             }
         }
 
@@ -112,25 +115,26 @@ namespace BBTB
         {
             if (_classe == "Wizard")
             {
-                _life = _life + 10;
+                _lifemax = _lifemax + 10;
                 _agility += 1;
                 _intelligence += 5;
                 _strength += 3;
             }
             else if (_classe =="Gunner")
             {
-                _life = _life + 10;
+                _lifemax = _lifemax + 15;
                 _agility += 2;
                 _intelligence += 2;
                 _strength += 5;
             }
             else if(_classe =="Archer")
             {
-                _life = _life + 10;
+                _lifemax = _lifemax + 10;
                 _agility += 5;
                 _intelligence += 3;
                 _strength += 1;
             }
+            _life = _lifemax;
         }
 
         public void UpSkills(int skillPointNumber, string attribute)
