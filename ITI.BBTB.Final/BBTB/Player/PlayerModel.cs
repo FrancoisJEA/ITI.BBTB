@@ -61,12 +61,6 @@ namespace BBTB
 		public int Room {get {return _room; }}
 		#endregion
 
-		public void StageAndRoom()
-		{
-			_floor = _board.StageNumber;
-			_room = _board.RoomNumber;
-			_type = 3;
-		}
         public void Level1SkillSetUp()
         {
             Level = 1;
