@@ -101,7 +101,7 @@ namespace BBTB.Items
             {
                 Texture2D BulletTexture = BulletTextures.ElementAt(2);
                 Btextures.Add(BulletTexture);
-                Texture2D BulletTexture2 = BulletTextures.ElementAt(3);
+                Texture2D BulletTexture2 = BulletTextures.ElementAt(2);
                 Btextures.Add(BulletTexture2);
                 return Btextures;
             }

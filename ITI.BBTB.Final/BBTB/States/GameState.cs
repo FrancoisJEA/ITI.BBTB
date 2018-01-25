@@ -105,8 +105,7 @@ namespace BBTB.States
             List<Texture2D> AllTextures = new List<Texture2D>();
             AllTextures.Add(Content.Load<Texture2D>("Effect/Mage_effect1"));
             AllTextures.Add(Content.Load<Texture2D>("Effect/Mage_effect2"));
-            AllTextures.Add(Content.Load<Texture2D>("Effect/Arrow"));
-            AllTextures.Add(Content.Load<Texture2D>("Effect/Crossbow_arrow"));
+            AllTextures.Add(Content.Load<Texture2D>("Effect/arrow"));
             AllTextures.Add(Content.Load<Texture2D>("Effect/Bullet1"));
             AllTextures.Add(Content.Load<Texture2D>("Effect/Bullet2"));
             return AllTextures;

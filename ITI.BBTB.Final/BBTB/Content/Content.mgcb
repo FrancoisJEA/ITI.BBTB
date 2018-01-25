@@ -424,18 +424,6 @@
 /processorParam:TextureFormat=Color
 /build:Weapon/crossbow.png
 
-#begin arrow.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:arrow.png
-
 #begin ground2.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -548,6 +536,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:weed.png
+
+#begin Items/Item__24.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
 /processorParam:ColorKeyEnabled=True
 /processorParam:GenerateMipmaps=False
 /processorParam:PremultiplyAlpha=True
@@ -1192,30 +1185,6 @@
 /processorParam:TextureFormat=Color
 /build:HUDBox2.png
 
-#begin Effect/Arrow.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Effect/Arrow.png
-
-#begin Effect/Crossbow_arrow.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Effect/Crossbow_arrow.png
-
 #begin Effect/Mage_effect2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1263,4 +1232,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Effect/Mage_effect1.png
+
+#begin Effect/arrow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Effect/arrow.png
 
