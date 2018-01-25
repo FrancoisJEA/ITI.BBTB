@@ -45,14 +45,13 @@ namespace BBTB
             _havePrayed = havePrayed;
             _bulletTextures = BulletTextures;
 <<<<<<< HEAD
-=======
             PlayerClasse = _classe;
+            _weapon = new Weapon(_ctx, _bulletTextures[1], Position, spritebatch, this,_bulletTextures);
+=======
             _weapon = new Weapon(_ctx, _bulletTextures[1],Position, spritebatch, this,_bulletTextures);
->>>>>>> a8fa051d2edab86946f73339c71f3708c2ebb79a
            
-            _weapon = new Weapon(_bulletTextures[1],Position, spritebatch, this,_bulletTextures);
-
             
+>>>>>>> cff7b627160dfe751e9cf525d5f9e1cfa679d30a
         }
 
 		#region propriété 

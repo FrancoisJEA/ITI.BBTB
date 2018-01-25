@@ -36,7 +36,7 @@ namespace BBTB
             _rotation = weapon.Rotation;
             BulletLib = new BulletLib(weapon, new Vector2(base.Position.X, base.Position.Y), texture.Height, texture.Width);    
             _weaponCtx = weaponCtx;
-            _damages = _weaponCtx.Damages;
+            _damages = weaponCtx.Damages;
 			_ctx = board;
             _boss = _ctx._boss;
         }
@@ -67,12 +67,10 @@ namespace BBTB
                             _monster = monster;
                             monster.IsDead = false;
                             return false;
-
                             //new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
                         }
                         else return true;
                     }
-                        
                     }
                 
             }

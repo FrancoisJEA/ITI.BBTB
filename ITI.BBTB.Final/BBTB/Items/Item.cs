@@ -154,15 +154,15 @@ namespace BBTB.Items
             {
                 Texture2D BulletTexture = BulletTextures.ElementAt(2);
                 Btextures.Add(BulletTexture);
-                Texture2D BulletTexture2 = BulletTextures.ElementAt(3);
+                Texture2D BulletTexture2 = BulletTextures.ElementAt(2);
                 Btextures.Add(BulletTexture2);
                 return Btextures;
             }
             if (classe == "Gunner")
             {
-                Texture2D BulletTexture = BulletTextures.ElementAt(4);
+                Texture2D BulletTexture = BulletTextures.ElementAt(3);
                 Btextures.Add(BulletTexture);
-                Texture2D BulletTexture2 = BulletTextures.ElementAt(5);
+                Texture2D BulletTexture2 = BulletTextures.ElementAt(4);
                 Btextures.Add(BulletTexture2);
                 return Btextures;
             }

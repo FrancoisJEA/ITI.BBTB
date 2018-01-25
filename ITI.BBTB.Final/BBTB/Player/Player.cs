@@ -10,6 +10,8 @@ namespace BBTB
 {
     public class Player : Sprite
     {
+        int heartNumber;
+
 		#region Champs
 		readonly GameState _ctx;
         public Weapon _weapon;
@@ -29,8 +31,6 @@ namespace BBTB
         public List<Texture2D> _bulletTextures;
         public Texture2D _weaponTexture;
 
-        
-
         public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed,PlayerInventory inventory,List<Texture2D> BulletTextures,string _classe)
             : base(texture, position, spritebatch)
         {
@@ -44,13 +44,11 @@ namespace BBTB
             Inventory.ItemByDefault(this);
             _havePrayed = havePrayed;
             _bulletTextures = BulletTextures;
-            _weapon = new Weapon(_ctx, _bulletTextures[1],Position, spritebatch, this,_bulletTextures);
-           
-            
+            _weapon = new Weapon(_ctx, _bulletTextures[1], Position, spritebatch, this, _bulletTextures);
         }
 
-		#region propriété 
-		public bool HavePrayed { get { return _havePrayed; } set { _havePrayed = value; }  }
+        #region propriété 
+        public bool HavePrayed { get { return _havePrayed; } set { _havePrayed = value; }  }
         public string Classes { get { return _classes ; } set { _classes = value; } }
         public int WeaponType => _weapon.WeaponType;
 
@@ -59,11 +57,26 @@ namespace BBTB
         public GameState Ctx => _ctx;
 		#endregion 
 
+        public void HeartsDrawing(Texture2D _heartTexture)
+        {
+            int heartPositionx = 700;
+            int heartPositiony = 10;
+            heartNumber = (_playerM.Life / 25);
+            for (int i = 0; i < heartNumber; i++)
+            {
+                heartPositionx += 40;
+
+                Sprite heart = new Sprite(_heartTexture, new Vector2(heartPositionx, heartPositiony), SpriteBatch);
+                heart.Draw();
+            }
+        }
+
 		public void ResetPosition()
         {
             Position = Vector2.One * 70;
             _mouvement = Vector2.Zero;
         }
+
         public Texture2D FindPlayerTexture(List<Texture2D> t)
         {
             if (this.PlayerClasse == "Gunner") return t[0];
