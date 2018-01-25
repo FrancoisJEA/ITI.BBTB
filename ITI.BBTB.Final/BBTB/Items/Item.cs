@@ -26,6 +26,7 @@ namespace BBTB.Items
         public int _strength;
         public int _intelligence;
         public bool _specialItem;
+        public int Defense;
 
 
 
@@ -46,6 +47,8 @@ namespace BBTB.Items
             ItemClasse = FindClasse();
             if (ItemType == "weapon")
                 Attack = 20 + Convert.ToInt32(_player._playerM.Level * 1.8 * _player._playerM.Strength/5);
+            if (ItemType == "armor")
+                Defense = 20 + Convert.ToInt32(_player._playerM.Level * 1.8 * _player._playerM.Strength / 5);
             RandomStat();
         }
 
@@ -54,7 +57,7 @@ namespace BBTB.Items
             Random random = new Random();
             int prob = _player._playerM.Intelligence/10 *4;
             int RNG = random.Next(prob, 100);
-            if (RNG > 70)
+            if (RNG > 90)
             {
                 string _playerclasse = _player._playerM._classe;
                 if (_playerclasse == "Wizard")

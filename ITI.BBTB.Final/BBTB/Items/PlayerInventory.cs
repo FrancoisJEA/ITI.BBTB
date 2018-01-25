@@ -19,7 +19,6 @@ namespace BBTB.Items
         public Texture2D BoxTexture2 { get; set; }
 
 
-
         public PlayerInventory(List<Texture2D> AllTexture, SpriteBatch spriteBatch, Texture2D boxTexture, Texture2D boxTexture2 )
         {
             allTexture = AllTexture;
@@ -48,7 +47,7 @@ namespace BBTB.Items
                 int i = Item.InventoryEmplacement;
             Inventory[i]._position.X = Item._position.X;
             Inventory[i]._position.Y = Item._position.Y;
-            if (Item._specialItem == true)  UpdatePlayerSats(Inventory[i], Item,_player);
+           UpdatePlayerSats(Inventory[i], Item,_player);
             Items.Add(Inventory[i]);
                 Inventory.RemoveAt(i);
                 Inventory.Insert(i, Item);
@@ -62,7 +61,7 @@ namespace BBTB.Items
         {
             PlayerModel p = player._playerM;
             p.Strength -= OldItem._strength;
-            p.Intelligence = OldItem._intelligence;
+            p.Intelligence -= OldItem._intelligence;
             p.Agility -= OldItem._agility;
             p.Strength += NewItem._strength;
             p.Intelligence += NewItem._intelligence;
@@ -86,15 +85,17 @@ namespace BBTB.Items
             return itemTexture;
         }
 
-        public void ShowInventory ()
+        public void ShowInventory (Player player, SpriteFont _debugFont)
         {
+            string Text;
             KeyboardState keyboardState = Keyboard.GetState();
             int x = 550;
             int y = 200;
             if (keyboardState.IsKeyDown(Keys.A))
             {
                 this.Draw(sb, new Vector2(350,200));
-
+                Text = string.Format("{0:0}\r\n Level = {4:0} \r\n\r\n Skills \r\n Strength ={1:0}\r\n Intelligence ={2:0}\r\n Agility ={3:0} \r\n", player._playerM.Name, player._playerM.Strength, player._playerM.Intelligence, player._playerM.Agility, player._playerM.Level);
+                DrawWithShadow(Text, new Vector2(360,200),_debugFont);
                 foreach (Item i in Inventory)
                 {
                     i._position.X = x;
@@ -103,6 +104,11 @@ namespace BBTB.Items
                     y += 64;
                 }
             }
+        }
+        private void DrawWithShadow(string text, Vector2 position,SpriteFont _debugFont)
+        {
+            sb.DrawString(_debugFont, text, position + Vector2.One, Color.Black);
+            sb.DrawString(_debugFont, text, position, Color.LightYellow);
         }
     }
 }

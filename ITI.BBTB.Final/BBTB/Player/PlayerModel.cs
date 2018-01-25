@@ -38,11 +38,7 @@ namespace BBTB
             _name = name;
             _classe = classe;
             DefineStats();
-            _life = 100;
-            _level = 1;
-            _experience = 0;
-
-           
+            Level1SkillSetUp();
         }
 
 		#region Propriétés
@@ -92,13 +88,11 @@ namespace BBTB
             Level = 1;
             Experience = 0;
             Life = 100;
-            Strength = 10;
-            Intelligence = 10;
-            Agility = 10;
             Resistance = 10;
             Money = 0;
             _xplast = 0;
             _xpnext = 100;
+
         }
 
         public void LevelUp()
@@ -110,7 +104,7 @@ namespace BBTB
                 _xplast = _xpnext;
                 _xpnext = _xpnext * 3;
                 _skillsPoints++; 
-                StatLevelUP();
+                //StatLevelUP();
             }
         }
 

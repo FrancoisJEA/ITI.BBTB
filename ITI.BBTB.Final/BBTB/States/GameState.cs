@@ -161,7 +161,7 @@ namespace BBTB.States
             _spriteBatch.Begin();
             _background.Draw();
             _board.Draw();
-            Inventory.ShowInventory();
+            Inventory.ShowInventory(_player,_debugFont);
             _board.TakeItem();
             WriteDebugInformation();
 
@@ -176,7 +176,7 @@ namespace BBTB.States
           //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
 
             string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
-            string experienceInText = string.Format("Character's experience: ({0:0} / {1:0.0})", _player._playerM.Experience, _player._playerM.Experience);
+            string experienceInText = string.Format("Character's experience: ({0:0} / {1:0.0})", _player._playerM.Experience, _player._playerM.Xpnext);
             string moneyInText = string.Format("Money: ({0:0})", _player._playerM.Money);
 
             string RoomNumberInText = string.Format("Room Number: ({0:0})", Board.CurrentBoard.RoomNumber);

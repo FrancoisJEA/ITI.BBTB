@@ -40,7 +40,7 @@ namespace BBTB
         public Texture2D BossTexture { get; set; }
         public Texture2D PreacherTexture { get; set; }
         private SpriteBatch SpriteBatch { get; set; }
-
+        private int _time;
         internal Boss _boss;
         Vector2 _bossPosition = new Vector2(300,400);
 
@@ -67,7 +67,7 @@ namespace BBTB
             BossTexture = bossTexture;
 			MonsterTexture = monsterTexture;
             PreacherTexture = preacherTexture;
-
+            _time = 15;
            
             ItemTexture = itemTexture;
 			SpriteBatch = spritebatch;
@@ -119,6 +119,7 @@ namespace BBTB
                 {
 
                     Item Item = Monsters[x].DropItem();
+                    Monsters[x].WhenMonsterDie(_player);
                     monsterToRemove.Add(Monsters[x]);
                     items.Add(Item);
                 }
@@ -164,10 +165,13 @@ namespace BBTB
 
                             if ((keyboardState.IsKeyDown(Keys.F)))
                             {
-
-                                List<Item> _item = Inventory.AddItemToInventory(items[y], items, _player);
-                                items = _item;
-
+                                if (_time < 15) { _time += 1; }
+                                else
+                                {
+                                    List<Item> _item = Inventory.AddItemToInventory(items[y], items, _player);
+                                    items = _item;
+                                    _time = 1;
+                                }
                             }
 
                         } else

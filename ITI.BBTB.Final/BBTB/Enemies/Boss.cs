@@ -20,7 +20,7 @@ namespace BBTB.Enemies
         public Boss(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture, PlayerInventory inventory ) : base(texture, position, batch, isAlive, itemTexture,inventory)
         {
            
-            _life = 10000;
+            _life = 1000;
             _xp = 100;
             AddBoss = isAlive;
           

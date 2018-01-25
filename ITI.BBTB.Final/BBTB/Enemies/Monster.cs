@@ -46,6 +46,11 @@ namespace BBTB
             //IsDead();
 
         }
+        public void WhenMonsterDie(Player p)
+        {
+            p._playerM.Experience += 8;
+            p._playerM.LevelUp();
+        }
 
         public void Idle()
         {
