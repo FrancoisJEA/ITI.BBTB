@@ -18,7 +18,7 @@ namespace BBTB
         string _helmet, _breastplate, _boots, _leggings;
         string _potiontype;
         int _krumbz;
-        int _lifemax;
+       public int _lifemax;
         int _level;
 
 		int _xpnext;

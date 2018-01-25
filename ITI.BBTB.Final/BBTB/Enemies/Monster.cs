@@ -136,7 +136,7 @@ namespace BBTB
             int ItemID = Random.Next(1, ItemNb);
             int Intelligence = Board.CurrentBoard._player._playerM.Intelligence / 10 * 4;
             int dropProb = Random.Next(Intelligence, 100);
-            if (dropProb >= 90)
+            if (dropProb >= 50)
             {
                 Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
                 _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);

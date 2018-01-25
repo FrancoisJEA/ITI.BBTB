@@ -125,6 +125,8 @@ namespace BBTB.States
             AllTextures.Add(Content.Load<Texture2D>("Items/Leather_helmet"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Skeleton_sword"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Super_staff"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Heal_potion"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Used_potion"));
             return AllTextures;
         }
 
@@ -196,7 +198,7 @@ namespace BBTB.States
 
             string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
             string experienceInText = string.Format("Experience: ({0:0} / {1:0})", _player._playerM.Experience,_player._playerM.Xpnext);
-            string moneyInText = string.Format("Money: ({0:0})", _player._playerM.Money);
+            string moneyInText = string.Format("Potions: ({0:0})", _player.Inventory._potionNb);
 
             string RoomNumberInText = string.Format("Room Number: ({0:0})", Board.CurrentBoard.RoomNumber);
             string StageNumberInText = string.Format("Stage Number: ({0:0})", Board.CurrentBoard.StageNumber);
