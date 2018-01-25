@@ -20,7 +20,6 @@ namespace BBTB
         Vector2 _origin;
         private SpriteBatch _spriteBatch;
         public BulletLib BulletLib { get; set; }
-		int _damages;
 
         protected ContentManager _content;
         protected GraphicsDevice GraphicsDevice;
@@ -36,12 +35,10 @@ namespace BBTB
             _rotation = weapon.Rotation;
             BulletLib = new BulletLib(weapon, new Vector2(base.Position.X, base.Position.Y), texture.Height, texture.Width);    
             _weaponCtx = weaponCtx;
-            _damages = weaponCtx.Damages;
 			_ctx = board;
             _boss = _ctx._boss;
         }
 
-		public int Damages { get { return _damages;} set { _damages = value; } }
 
         public void Update(GameTime gameTime)
         {

@@ -80,11 +80,9 @@ namespace BBTB.States
             Inventory = new PlayerInventory(_itemTexture, _spriteBatch, _boxTexture,_boxTexture2);
             _player = new Player(playerTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, mapTextures, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont, Inventory);
-       
-          
         }
 
-     public List<Texture2D> ItemTextures (ContentManager Content)
+        public List<Texture2D> ItemTextures (ContentManager Content)
         {
             List<Texture2D> AllTextures = new List<Texture2D>();
             AllTextures.Add(Content.Load<Texture2D>("InventorySprite"));
@@ -101,6 +99,7 @@ namespace BBTB.States
             AllTextures.Add(Content.Load<Texture2D>("Items/Super_staff"));
             return AllTextures;
         }
+
         public List<Texture2D> BulletTextures(ContentManager Content)
         {
             List<Texture2D> AllTextures = new List<Texture2D>();
