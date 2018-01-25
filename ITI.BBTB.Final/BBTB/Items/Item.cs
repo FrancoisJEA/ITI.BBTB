@@ -46,9 +46,13 @@ namespace BBTB.Items
             _player = player;
             ItemClasse = FindClasse();
             if (ItemType == "weapon")
-                Attack = 20 + Convert.ToInt32(_player._playerM.Level * 1.8 * _player._playerM.Strength/5);
+            {
+                Attack = 20 * Convert.ToInt32(_player._playerM.Level * 1.8 * _player._playerM.Strength / 5);
+            }
             if (ItemType == "armor")
+            {
                 Defense = 20 + Convert.ToInt32(_player._playerM.Level * 1.8 * _player._playerM.Strength / 5);
+            }
             RandomStat();
         }
 

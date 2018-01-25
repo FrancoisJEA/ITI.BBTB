@@ -127,7 +127,7 @@ namespace BBTB.States
             _player.Update(gameTime);
            
 
-             Board.KillMonster();
+             //Board.KillMonster();
             foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
             foreach (Tile tile in _board.Tile2) tile.Update(gameTime);
             //foreach (Preacher preacher in _board.Preacher) preacher.Update(gameTime);

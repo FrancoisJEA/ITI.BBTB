@@ -24,6 +24,10 @@ namespace BBTB
         Bullet _bullet;
         PlayerInventory PlayerInventory;
         Monster _monster;
+        int Type;
+        int _attack;
+        int _level;
+        int _xp;
 
         public List<Texture2D> _itemTexture { get; set; }
 
@@ -34,11 +38,30 @@ namespace BBTB
 
             _itemTexture = itemTexture;
             PlayerInventory = Inventory;
-            _life = 100;
+            if (Board.CurrentBoard == null) Type = 0;
+            else Type = Board.CurrentBoard.StageNumber; 
+            DefineMonster(Type);
+        }
+
+        private void DefineMonster(int t)
+        {
+             _attack = 15;
+             _life = 100;
+            _level = 1;
+            _xp = 10;
+
+
+            for(int x=0; x<t; x++)
+            {
+                _attack *= 3;
+                _life *= 2;
+                _level ++;
+                _xp *=2;
+            }
         }
 
         public Weapon Weapon => _weapon;
-        public int Life { get { return _life; } }
+        public int Life { get { return _life; } set { } }
 		// public Vector2 Position { get { return _position; } set { _position = value; } }
 
         public void Update(GameTime gameTime)
@@ -48,7 +71,7 @@ namespace BBTB
         }
         public void WhenMonsterDie(Player p)
         {
-            p._playerM.Experience += 8;
+            p._playerM.Experience +=_xp;
             p._playerM.LevelUp();
         }
 
@@ -96,10 +119,10 @@ namespace BBTB
         public void Hit(Bullet bullet)
         {
             _life -= bullet.Damages;
-            _monster = bullet._monster;
+           // _monster = bullet._monster;
             if (_life <= 0)
             {
-
+                
             } 
             //if (IsDead()) prévenir le jeu pour gagner l'expérience
         }

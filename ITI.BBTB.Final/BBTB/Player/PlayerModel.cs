@@ -104,7 +104,7 @@ namespace BBTB
                 _xplast = _xpnext;
                 _xpnext = _xpnext * 3;
                 _skillsPoints++; 
-                //StatLevelUP();
+                StatLevelUP();
             }
         }
 
@@ -113,14 +113,23 @@ namespace BBTB
             if (_classe == "Wizard")
             {
                 _life = _life + 10;
+                _agility += 1;
+                _intelligence += 5;
+                _strength += 3;
             }
             else if (_classe =="Gunner")
             {
                 _life = _life + 10;
+                _agility += 2;
+                _intelligence += 2;
+                _strength += 5;
             }
             else if(_classe =="Archer")
             {
                 _life = _life + 10;
+                _agility += 5;
+                _intelligence += 3;
+                _strength += 1;
             }
         }
 
