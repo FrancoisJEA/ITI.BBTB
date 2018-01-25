@@ -28,6 +28,7 @@ namespace BBTB
         int _attack;
         int _level;
         int _xp;
+        bool _reflect; // If monster return damage
 
         public List<Texture2D> _itemTexture { get; set; }
 
@@ -45,8 +46,8 @@ namespace BBTB
 
         private void DefineMonster(int t)
         {
-             _attack = 15;
-             _life = 100;
+            _attack = 15;
+            _life = 100;
             _level = 1;
             _xp = 10;
 
@@ -57,7 +58,12 @@ namespace BBTB
                 _life *= 2;
                 _level ++;
                 _xp *=2;
+                if (x == 2) _reflect = true;
             }
+        }
+        public void Reflect (PlayerModel p)
+        {
+            if (this._reflect == true) p.Life -= this.Life / 100;
         }
 
         public Weapon Weapon => _weapon;
@@ -119,6 +125,7 @@ namespace BBTB
         public void Hit(Bullet bullet)
         {
             _life -= bullet.Damages;
+            
            // _monster = bullet._monster;
             if (_life <= 0)
             {

@@ -47,7 +47,7 @@ namespace BBTB.Items
                 int i = Item.InventoryEmplacement;
             Inventory[i]._position.X = Item._position.X;
             Inventory[i]._position.Y = Item._position.Y;
-           UpdatePlayerSats(Inventory[i], Item,_player);
+            UpdatePlayerSats(Inventory[i], Item,_player);
             Items.Add(Inventory[i]);
                 Inventory.RemoveAt(i);
                 Inventory.Insert(i, Item);

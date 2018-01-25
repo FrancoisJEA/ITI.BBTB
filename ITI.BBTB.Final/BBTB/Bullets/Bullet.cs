@@ -59,6 +59,7 @@ namespace BBTB
                     if (monster.IsAlive)
                     {
                         monster.Hit(this);
+                        monster.Reflect(Board.CurrentBoard._player._playerM);
                         if (monster.Life <= 0)
                         {
                             Board.CurrentBoard.KillMonster();

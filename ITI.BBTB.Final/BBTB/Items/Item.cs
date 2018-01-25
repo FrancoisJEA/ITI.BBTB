@@ -61,7 +61,7 @@ namespace BBTB.Items
             Random random = new Random();
             int prob = _player._playerM.Intelligence/10 *4;
             int RNG = random.Next(prob, 100);
-            if (RNG > 90)
+            if (RNG > 80)
             {
                 string _playerclasse = _player._playerM._classe;
                 if (_playerclasse == "Wizard")
@@ -101,7 +101,7 @@ namespace BBTB.Items
         {
             if(Name.Contains("bow") || (Name.Contains("crossbow"))) return "Archer";
             if(Name.Contains("gun") || (Name.Contains("rifle"))) return "Gunner";
-            if (Name.Contains("staff") || (Name.Contains("stick"))) return "Wizard";
+            if (Name.Contains("staff") || (Name.Contains("book"))) return "Wizard";
             else return "All";
         }
 
@@ -117,12 +117,12 @@ namespace BBTB.Items
         internal int FindInventoryEmplacement (string Name)
         {
 
-            if (Name.Contains("helmet")) {  ItemType = "armor"; return 0; } //this.category 
-            if (Name.Contains("armor")) {  this.ItemType = "armor"; return 1; }
-            if (Name.Contains("boots")) {  this.ItemType = "armor"; return 3; }
-            if (Name.Contains("gloves")) {  this.ItemType = "armor"; return 2; }
+            if (Name.Contains("helmet")) { ItemType = "armor"; return 0; }
+            if (Name.Contains("armor"))  { ItemType = "armor"; return 1; }
+            if (Name.Contains("boots"))  { ItemType = "armor"; return 3; }
+            if (Name.Contains("gloves")) { ItemType = "armor"; return 2; }
             if (Name.Contains("bow") || Name.Contains("staff") || Name.Contains("gun")) {  ItemType = "weapon"; return 4; }
-            if (Name.Contains("crossbow") || Name.Contains("stick") || Name.Contains("sword")) {  ItemType = "weapon"; return 5; }
+            if (Name.Contains("crossbow") || Name.Contains("book") || Name.Contains("sword")) {  ItemType = "weapon"; return 5; }
 
             else return 6;
 
