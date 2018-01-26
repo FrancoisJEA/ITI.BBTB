@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BBTB.Items
 {
-    public class Item
+    public class Item : Sprite
     {
 
 
@@ -34,7 +34,7 @@ namespace BBTB.Items
 
 
 
-        public Item(Vector2 position, Texture2D texture, SpriteBatch spriteBatch,Player player)
+        public Item(Vector2 position, Texture2D texture, SpriteBatch spriteBatch,Player player) : base(texture,position,spriteBatch)
              
         {
             _position = position;
@@ -61,39 +61,40 @@ namespace BBTB.Items
             Random random = new Random();
             int prob = _player._playerM.Intelligence/10 *4;
             int RNG = random.Next(prob, 100);
-            if (RNG > 70)
+            if (Name != "Heal potion")
             {
-                string _playerclasse = _player._playerM._classe;
-                if (_playerclasse == "Wizard")
+                if (RNG > 70)
                 {
-                    _specialItem = true;
-                    _strength = _player._playerM.Level * 2;
-                    _intelligence = _player._playerM.Level * 3;
-                    _agility = _player._playerM.Level * 2;
+                    string _playerclasse = _player._playerM._classe;
+                    if (_playerclasse == "Wizard")
+                    {
+                        _specialItem = true;
+                        _strength = _player._playerM.Level * 2;
+                        _intelligence = _player._playerM.Level * 3;
+                        _agility = _player._playerM.Level * 2;
+                    }
+                    else if (_playerclasse == "Gunner")
+                    {
+                        _specialItem = true;
+                        _strength = _player._playerM.Level * 3;
+                        _intelligence = _player._playerM.Level * 2;
+                        _agility = _player._playerM.Level * 2;
+                    }
+                    else if (_playerclasse == "Archer")
+                    {
+                        _specialItem = true;
+                        _strength = _player._playerM.Level * 2;
+                        _intelligence = _player._playerM.Level * 2;
+                        _agility = _player._playerM.Level * 3;
+                    }
                 }
-                else if (_playerclasse == "Gunner")
+                else
                 {
-                    _specialItem = true;
-                    _strength = _player._playerM.Level * 3;
-                    _intelligence = _player._playerM.Level * 2;
-                    _agility = _player._playerM.Level * 2;
+                    _strength = 0;
+                    _intelligence = 0;
+                    _agility = 0;
+                    _specialItem = false;
                 }
-                else if (_playerclasse == "Archer")
-                {
-                    _specialItem = true;
-                    _strength = _player._playerM.Level * 2;
-                    _intelligence = _player._playerM.Level * 2;
-                    _agility = _player._playerM.Level * 3;
-                }
-
-
-            }
-            else
-            {
-                _strength = 0;
-                _intelligence = 0;
-                _agility = 0;
-                _specialItem = false;
             }
         }
 
@@ -114,6 +115,10 @@ namespace BBTB.Items
         {
          
         }
+        public void UsePotion()
+        {
+            
+        }
         internal int FindInventoryEmplacement (string Name)
         {
 
@@ -122,7 +127,8 @@ namespace BBTB.Items
             if (Name.Contains("boots"))  { ItemType = "armor"; return 3; }
             if (Name.Contains("gloves")) { ItemType = "armor"; return 2; }
             if (Name.Contains("bow") || Name.Contains("staff") || Name.Contains("gun")) {  ItemType = "weapon"; return 4; }
-            if (Name.Contains("crossbow") || Name.Contains("book") || Name.Contains("sword")) {  ItemType = "weapon"; return 5; }
+            if (Name.Contains("crossbow") || Name.Contains("book") || Name.Contains("sword")) { ItemType = "weapon"; return 5; }
+            if (Name.Contains("potion")) { ItemType = "Potion"; return 6; }
 
             else return 6;
 

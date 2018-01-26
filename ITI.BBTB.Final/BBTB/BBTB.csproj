@@ -47,6 +47,7 @@
     <Compile Include="Armor\BreastPlate.cs" />
     <Compile Include="Armor\Helmet.cs" />
     <Compile Include="Armor\Leggings.cs" />
+    <Compile Include="Bullets\MonsterBullets.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Enemies\Boss.cs" />

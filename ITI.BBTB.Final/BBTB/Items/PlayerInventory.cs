@@ -17,7 +17,8 @@ namespace BBTB.Items
         SpriteBatch sb;
         public Texture2D BoxTexture { get; set; }
         public Texture2D BoxTexture2 { get; set; }
-
+        public int _potionNb;
+        private int _potionMax = 5;
 
         public PlayerInventory(List<Texture2D> AllTexture, SpriteBatch spriteBatch, Texture2D boxTexture, Texture2D boxTexture2 )
         {
@@ -26,6 +27,7 @@ namespace BBTB.Items
             this.InvTexture = allTexture[0];
             BoxTexture = boxTexture;
             BoxTexture2 = boxTexture2;
+            _potionNb = 2;
         }
 
         public void ItemByDefault (Player _player)
@@ -35,26 +37,67 @@ namespace BBTB.Items
             DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[6], sb, _player)); //Armor
             DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[8], sb, _player)); // gloves
             DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[7], sb, _player));  //Boots
-            DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[11], sb, _player)); // Weapon2
-            DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[10], sb, _player)); // Weapon1
-            //DefaultInventory.Add(new Item(new Vector2(80, 80), AllTexture[5], SpriteBatch));
+            if (_player.PlayerClasse == "Wizard")
+            {
+                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[11], sb, _player)); // Weapon2
+                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[10], sb, _player)); // Weapon1
+            } else if (_player.PlayerClasse == "Gunner")
+            {
+                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[11], sb, _player)); // Weapon2
+                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[10], sb, _player)); // Weapon1
+            }
+            else if (_player.PlayerClasse == "Archer")
+            {
+                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[11], sb, _player)); // Weapon2
+                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[10], sb, _player)); // Weapon1
+            }
+            DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[12], sb, _player)); //
             //DefaultInventory.Add(new Item(new Vector2(80, 80), AllTexture[6], SpriteBatch));
             //DefaultInventory.Add(new Item(new Vector2(80, 80), AllTexture[7], SpriteBatch));
             Inventory = DefaultInventory;
         }
-        public List<Item> AddItemToInventory(Item Item, List<Item> Items,Player _player)
-        {   
-                int i = Item.InventoryEmplacement;
-            Inventory[i]._position.X = Item._position.X;
-            Inventory[i]._position.Y = Item._position.Y;
-            UpdatePlayerSats(Inventory[i], Item,_player);
-            Items.Add(Inventory[i]);
+        public void AddEmptyPotion(Player _player)
+        {
+            Item i = new Item(new Vector2(80,80), allTexture[13], sb, _player);
+            Inventory.RemoveAt(6);
+            Inventory.Insert(6, i);
+        }
+        public List<Item> AddItemToInventory(Item Item, List<Item> Items,Player _player,int y)
+        {
+            int i = Item.InventoryEmplacement;
+            if (Item.Name == "Heal potion")
+            {
+                
+                if (_potionNb < _potionMax)
+                {
+                    _potionNb++;
+                    Inventory[i]._position.X = Item._position.X;
+                    Inventory[i]._position.Y = Item._position.Y;
+                    Inventory.RemoveAt(i);
+                    Inventory.Insert(i, Item);
+                    Items.Remove(Item);
+                }
+
+               
+            }
+            else if (Item.Name == "Used potion")
+            {
+                _player._playerM.Money += 20;
+                Items.Remove(Item);
+            }
+            else 
+            {
+
+                Inventory[i]._position.X = Item._position.X;
+                Inventory[i]._position.Y = Item._position.Y;
+                UpdatePlayerSats(Inventory[i], Item, _player);
+                Items.Add(Inventory[i]);
                 Inventory.RemoveAt(i);
                 Inventory.Insert(i, Item);
                 Items.Remove(Item);
-            
-                return Items;
 
+            }
+            return Items;
         }
 
         private void UpdatePlayerSats(Item OldItem, Item NewItem, Player player)

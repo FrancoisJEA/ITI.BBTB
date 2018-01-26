@@ -12,26 +12,26 @@ namespace BBTB
     {
         int heartNumber;
 
-		#region Champs
-		readonly GameState _ctx;
+        #region Champs
+        readonly GameState _ctx;
         public Weapon _weapon;
         public PlayerModel _playerM;
         Vector2 _mouvement;
-       
+
         int _time;
         bool _booltime;
         private Vector2 oldPosition;
         bool _havePrayed;
-      
+
         internal string _classes { get; set; }
         God _god;
-		#endregion
+        #endregion
         public PlayerInventory Inventory;
-        public string PlayerClasse {get; set;}
+        public string PlayerClasse { get; set; }
         public List<Texture2D> _bulletTextures;
         public Texture2D _weaponTexture;
 
-        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed,PlayerInventory inventory,List<Texture2D> BulletTextures,string _classe)
+        public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed, PlayerInventory inventory, List<Texture2D> BulletTextures, string _classe)
             : base(texture, position, spritebatch)
         {
             PlayerClasse = _classe;
@@ -48,14 +48,14 @@ namespace BBTB
         }
 
         #region propriété 
-        public bool HavePrayed { get { return _havePrayed; } set { _havePrayed = value; }  }
-        public string Classes { get { return _classes ; } set { _classes = value; } }
+        public bool HavePrayed { get { return _havePrayed; } set { _havePrayed = value; } }
+        public string Classes { get { return _classes; } set { _classes = value; } }
         public int WeaponType => _weapon.WeaponType;
 
         public Weapon Weapon => _weapon;
 
         public GameState Ctx => _ctx;
-		#endregion 
+        #endregion
 
         public void HeartsDrawing(Texture2D _heartTexture)
         {
@@ -73,7 +73,7 @@ namespace BBTB
 
                 Sprite heart = new Sprite(_heartTexture, new Vector2(heartPositionx, heartPositiony), SpriteBatch);
                 heart.Draw();
-               
+
             }
             if (_playerM.Life < 25 && _playerM.Life > 0)
             {
@@ -82,7 +82,7 @@ namespace BBTB
             }
         }
 
-		public void ResetPosition()
+        public void ResetPosition()
         {
             Position = Vector2.One * 70;
             _mouvement = Vector2.Zero;
@@ -103,8 +103,40 @@ namespace BBTB
             MoveAsFarAsPossible(gameTime);
             StopMovingIfBlocked();
             if (_weapon != null) { _weapon.Update(gameTime); }
+            UsePotion();
         }
+        private void UsePotion()
+        {
+            KeyboardState keyboardState = Keyboard.GetState();
+            _time = 60;
+            if (keyboardState.IsKeyDown(Keys.P)) {
+                
+                if (Inventory._potionNb > 0)
+                {
+                    if (_time == 60)
+                    {
+                        int x = 0;
+                        if (_playerM.Life < _playerM._lifemax) {
+                            while (_playerM.Life < _playerM._lifemax && x < 30) 
+                            {
 
+                                _playerM.Life++;
+                                x++;
+                                _time = 0;
+
+                            }
+                            Inventory._potionNb--;
+                            if (Inventory._potionNb == 0)
+                            {
+                                Inventory.AddEmptyPotion(this);
+                            }
+                        }
+                    }
+                    else _time++;
+                    
+                }
+            }
+        }
         private void CheckKeyboardAndUpdateMovement()
         {
             KeyboardState keyboardState = Keyboard.GetState();

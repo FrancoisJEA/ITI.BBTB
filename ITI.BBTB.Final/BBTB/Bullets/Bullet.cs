@@ -38,7 +38,7 @@ namespace BBTB
             _weaponCtx = weaponCtx;
             _damages = weaponCtx.Damages;
 			_ctx = board;
-            _boss = _ctx._boss;
+            _boss = Board.CurrentBoard._boss;
         }
 
         public int Damages { get { return _damages; } }
