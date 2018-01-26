@@ -12,15 +12,15 @@ namespace BBTB.Bullets
     {
         Player _player;
         float _rotation;
+
         public MonsterBullets(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon, Board board, Weapon weaponCtx) : base(texture, position, spritebatch, weapon, board, weaponCtx)
         {
             _player = Board.CurrentBoard._player;
-            _rotation = 
         }
 
         public override void Draw()
         {
-            SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
+            //SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
         }
 
         public void TouchPlayer()

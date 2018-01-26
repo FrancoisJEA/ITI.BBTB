@@ -145,7 +145,7 @@ namespace BBTB
             {
                 if (new Rectangle((int)monster.Position.X, (int)monster.Position.Y, monster.Bounds.Width, monster.Bounds.Height).Intersects(tile.Bounds))
                     return true;
-
+                
             }
             return false;
         }
