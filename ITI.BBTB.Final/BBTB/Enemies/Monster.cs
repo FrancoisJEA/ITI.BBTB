@@ -20,7 +20,8 @@ namespace BBTB
 
         int _life;
         public Item _item;
-        Vector2 _mouvement;
+
+        Vector2 newPosition;
         Bullet _bullet;
         PlayerInventory PlayerInventory;
         Monster _monster;
@@ -35,7 +36,7 @@ namespace BBTB
         public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
-            _mouvement = Vector2.Zero;
+
 
             _itemTexture = itemTexture;
             PlayerInventory = Inventory;
@@ -73,6 +74,7 @@ namespace BBTB
         public void Update(GameTime gameTime)
         {
             //IsDead();
+            UpdatePositionBasedOnMovement(gameTime);
 
         }
         public void WhenMonsterDie(Player p)
@@ -83,44 +85,85 @@ namespace BBTB
 
         public void Idle()
         {
-            foreach (Monster monsters in Board.CurrentBoard.Monsters)
-            {
-                Patroling();
-            }
+
+            Patroling(this);
+
+
         }
 
-        public void Patroling()
+        public void Patroling(Monster monsters)
         {
-            foreach (Monster monster in Board.CurrentBoard.Monsters)
+            if (TouchTile(monsters) == true)
             {
-                if 
-                   (
-                        !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture.Bounds) 
-                        || !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture2.Bounds)
-                        || !monster.Bounds.Intersects(Board.CurrentBoard.TileTexture3.Bounds) 
-                   )
+                float distanceX = monsters.Position.X - Board.CurrentBoard._player.Position.X;
+                if (monsters.Position.X < 824 && monsters.Position.X > 64)
                 {
-                    if (monster.Position.X > 0)
+                    if (distanceX > 0)
                     {
-                        _mouvement += Vector2.UnitX * 2;
+
+                        newPosition.X--;
+
                     }
-                    else if ( monster.Position.X <= 0)
+                    if (distanceX < 0)
                     {
-                        _mouvement -= Vector2.UnitX * 2;
+
+                        newPosition.X++;
+
                     }
                 }
-            }
-        }
-        
-        public void Shooting()
-        {
+                else newPosition.X = -newPosition.X;
 
+
+                float distanceY = monsters.Position.Y - Board.CurrentBoard._player.Position.Y;
+                if (monsters.Position.Y < 516 && monsters.Position.Y > 64)
+                {
+                    if (distanceX > 0)
+                    {
+
+                        newPosition.Y--;
+
+                    }
+
+                    if (distanceX < 0)
+                    {
+
+                        newPosition.Y++;
+
+                    }
+                }
+                else newPosition.Y = -newPosition.Y;
+            }
+            else newPosition = -newPosition;
+        
+        }
+
+
+
+        public bool TouchTile(Monster monster)
+        {
+            foreach (Tile tile in Board.CurrentBoard.Tile2)
+            {
+                if (new Rectangle((int)monster.Position.X, (int)monster.Position.Y, monster.Bounds.Width, monster.Bounds.Height).Intersects(tile.Bounds))
+                    return true;
+
+            }
+            return false;
+        }
+        public bool Shooting(Monster monsters)
+        {
+            if (monsters.Position.Y > Board.CurrentBoard._player.Position.Y * 0.9)
+                return true;
+            else
+                return false;
         }
 
         private void UpdatePositionBasedOnMovement(GameTime gameTime)
         {
-            Position += _mouvement * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
+
+            Position += newPosition * (float)gameTime.ElapsedGameTime.TotalMinutes * 10;
+            Idle();
         }
+
 
         public void Hit(Bullet bullet)
         {
