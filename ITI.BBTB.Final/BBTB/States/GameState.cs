@@ -127,6 +127,8 @@ namespace BBTB.States
             AllTextures.Add(Content.Load<Texture2D>("Items/Super_staff"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Heal_potion"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Used_potion"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Deadric_crossbow"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Fire_book"));
             return AllTextures;
         }
 

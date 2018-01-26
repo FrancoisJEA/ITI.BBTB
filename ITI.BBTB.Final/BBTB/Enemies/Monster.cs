@@ -77,6 +77,7 @@ namespace BBTB
         }
         public void WhenMonsterDie(Player p)
         {
+            p._playerM.Money += 5;
             p._playerM.Experience +=_xp;
             p._playerM.LevelUp();
         }
