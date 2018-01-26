@@ -28,6 +28,8 @@ namespace BBTB.States
         private SpriteFont _debugFont;
    
         SoundEffect _sound;
+        SoundEffect _bgsound;
+
         public List<Texture2D> _itemTexture;
         PlayerInventory Inventory;
         List<Texture2D> _bulletTextures;
@@ -91,7 +93,9 @@ namespace BBTB.States
             var _chestTexture = Content.Load<Texture2D>("chest");
             var _bossTexture = Content.Load<Texture2D>("boss");
             _debugFont = Content.Load<SpriteFont>("DebugFont");
+
             _sound = Content.Load<SoundEffect>("Sound/GunSound"); 
+            _bgsound = Content.Load<SoundEffect>("bgmusic"); 
             
             Inventory = new PlayerInventory(_itemTexture, _spriteBatch, _boxTexture,_boxTexture2);
             if (classeSelected == "Wizard")
@@ -108,6 +112,8 @@ namespace BBTB.States
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             }
                 _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, mapTextures, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont, Inventory);
+
+            _bgsound.Play(0.05f, 0, 0);
         }
 
         public List<Texture2D> ItemTextures (ContentManager Content)
@@ -156,7 +162,7 @@ namespace BBTB.States
 
         internal void PlayGunSound()
         {
-            _sound.Play();
+            _sound.Play(0.2f, 0, 0);
         }
 
         private void RestartGame()
