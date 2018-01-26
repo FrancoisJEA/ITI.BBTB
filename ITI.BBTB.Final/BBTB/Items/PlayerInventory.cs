@@ -40,7 +40,8 @@ namespace BBTB.Items
             if (_player.PlayerClasse == "Wizard")
             {
                 DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[11], sb, _player)); // Weapon2
-                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[10], sb, _player)); // Weapon1
+                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[15], sb, _player)); // Weapon1
+
             } else if (_player.PlayerClasse == "Gunner")
             {
                 DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[11], sb, _player)); // Weapon2
