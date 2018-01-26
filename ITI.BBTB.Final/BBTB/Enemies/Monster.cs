@@ -33,13 +33,13 @@ namespace BBTB
 
         public List<Texture2D> _itemTexture { get; set; }
 
-        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,PlayerInventory Inventory)
+        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)//,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
 
 
             _itemTexture = itemTexture;
-            PlayerInventory = Inventory;
+            //PlayerInventory = Inventory;
             if (Board.CurrentBoard == null) Type = 0;
             else Type = Board.CurrentBoard.StageNumber; 
             DefineMonster(Type);
@@ -59,12 +59,13 @@ namespace BBTB
                 _life *= 2;
                 _level ++;
                 _xp *=2;
-                if (x == 0) _reflect = true;
+                if (t == 1) _reflect = true;
+                else _reflect = false;
             }
         }
         public void Reflect (PlayerModel p)
         {
-            if (this._reflect == true) p.Life -= this.Life / 100;
+            if (_reflect == true) p.Life -= p.Life / 100;
         }
 
         public Weapon Weapon => _weapon;
@@ -182,7 +183,7 @@ namespace BBTB
             int dropProb = Random.Next(Intelligence, 100);
             if (dropProb >= 50)
             {
-                Texture2D ItemTexture = PlayerInventory.FoundTextureByID(ItemID, _itemTexture);
+                Texture2D ItemTexture = Board.CurrentBoard._player.Inventory.FoundTextureByID(ItemID, _itemTexture);
                 _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);
 
             }

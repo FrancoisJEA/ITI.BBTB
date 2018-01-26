@@ -83,7 +83,7 @@ namespace BBTB
             _tile3 = new Tile[Columns, Rows];
             _tile4 = new Tile[Columns, Rows];
 
-            _boss = new Boss(BossTexture, _bossPosition, SpriteBatch, false, itemTexture,Inventory);
+            _boss = new Boss(BossTexture, _bossPosition, SpriteBatch, false, itemTexture);
   
             Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();
@@ -229,7 +229,7 @@ namespace BBTB
             else if (Special == _roomNumber && SpecialType == 2)
 			{
 				AddPreacher();
-                // SetSanctuary();
+                 //SetSanctuary();
             }
             else if (Special == _roomNumber && SpecialType == 3)
             {
@@ -417,7 +417,7 @@ namespace BBTB
                         if (_rnd.Next(4, 20) == 4)
                         {
                             Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-                            Monsters.Add(new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture,Inventory));
+                            Monsters.Add(new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture));
                         }
                     }
 
@@ -444,7 +444,7 @@ namespace BBTB
 						if (_rnd.Next(4, 20) == 4)
 						{
                             Vector2 preacherPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-                            //Monsters.Add(new Monster(MonsterTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, ItemTexture));
+                            Monsters.Add(new Monster(PreacherTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, ItemTexture));
 						}
 					}
 				}

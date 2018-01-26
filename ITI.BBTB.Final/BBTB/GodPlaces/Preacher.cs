@@ -17,15 +17,13 @@ namespace BBTB
 		Vector2 _position;
 		Texture2D _texture;
         SpriteBatch _batch;
-        Texture2D itemTexture;
-        Item item;
 		bool _isAlive;
 		bool _activated;
 		int _life;
         PlayerInventory inventory;
 
         public Preacher(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive, God dieu, bool activated, List<Texture2D> itemTexture, PlayerInventory Inventory)
-			: base(texture,position,batch,isAlive, itemTexture,Inventory)
+			: base(texture,position,batch,isAlive, itemTexture)
 		{
             
 			_position = position;

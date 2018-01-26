@@ -61,7 +61,7 @@ namespace BBTB.Items
             Random random = new Random();
             int prob = _player._playerM.Intelligence/10 *4;
             int RNG = random.Next(prob, 100);
-            if (Name != "Heal potion")
+            if (Name != "Heal potion" && Name != "Used potion")
             {
                 if (RNG > 70)
                 {

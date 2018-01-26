@@ -64,12 +64,7 @@ namespace BBTB
             heartNumber = (_playerM.Life / 25);
             for (int i = 0; i < heartNumber; i++)
             {
-                if (heartNumber == 6)
-                {
-                    heartPositiony += 40;
-                    heartPositionx = 900;
-                }
-                else heartPositionx -= 40;
+                 heartPositionx -= 40;
 
                 Sprite heart = new Sprite(_heartTexture, new Vector2(heartPositionx, heartPositiony), SpriteBatch);
                 heart.Draw();

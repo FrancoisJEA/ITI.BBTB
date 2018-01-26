@@ -123,12 +123,13 @@ namespace BBTB.States
             AllTextures.Add(Content.Load<Texture2D>("Items/Leather_boots"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Leather_gloves"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Leather_helmet"));
-            AllTextures.Add(Content.Load<Texture2D>("Items/Skeleton_sword"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Fireball_gun"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Super_staff"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Heal_potion"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Used_potion"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Deadric_crossbow"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Fire_book"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Ice_gun"));
             return AllTextures;
         }
 
