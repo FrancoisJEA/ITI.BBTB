@@ -30,6 +30,7 @@ namespace BBTB
         public string PlayerClasse { get; set; }
         public List<Texture2D> _bulletTextures;
         public Texture2D _weaponTexture;
+        int _time2;
 
         public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed, PlayerInventory inventory, List<Texture2D> BulletTextures, string _classe)
             : base(texture, position, spritebatch)
@@ -38,6 +39,7 @@ namespace BBTB
             _playerM = new PlayerModel("Tanguy", PlayerClasse);
             _ctx = ctx;
             _time = 0;
+            _time2 = 0;
             _booltime = false;
             _weapon = weapon;
             Inventory = inventory;
@@ -99,6 +101,7 @@ namespace BBTB
             StopMovingIfBlocked();
             if (_weapon != null) { _weapon.Update(gameTime); }
             UsePotion();
+            HasTouchedMonster();
         }
         private void UsePotion()
         {
@@ -114,11 +117,9 @@ namespace BBTB
                         if (_playerM.Life < _playerM._lifemax) {
                             while (_playerM.Life < _playerM._lifemax && x < 30) 
                             {
-
                                 _playerM.Life++;
                                 x++;
                                 _time = 0;
-
                             }
                             Inventory._potionNb--;
                             if (Inventory._potionNb == 0)
@@ -128,7 +129,6 @@ namespace BBTB
                         }
                     }
                     else _time++;
-                    
                 }
             }
         }
@@ -172,10 +172,12 @@ namespace BBTB
             {
                 if (monster.IsAlive)
                 {
-                    if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
+                    if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds) && _time2 == 120)
                     {
+                        _playerM.Life -= monster._attack/10;
+                        _time2 = 1;
                         return true;
-                    }
+                    } else if (_time2 < 120) _time2++; 
                 }
             }
             return false;

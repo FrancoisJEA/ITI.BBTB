@@ -32,6 +32,7 @@ namespace BBTB.States
         PlayerInventory Inventory;
         List<Texture2D> _bulletTextures;
         List<Texture2D> playerTexture;
+        public Texture2D goblinTexture;
 
         Texture2D heartTexture;
 
@@ -74,21 +75,23 @@ namespace BBTB.States
             mapTextures[5, 2] = Content.Load<Texture2D>("monster6");
 
             heartTexture = Content.Load<Texture2D>("heart");
-
+            //goblinTexture = Content.Load<Texture2D>("goblin");
             var tileTexture = Content.Load<Texture2D>("tile");
             var tileTexture2 = Content.Load<Texture2D>("barrel");
             var archerTexture = Content.Load<Texture2D>("Character/P_archer");
             var mageTexture = Content.Load<Texture2D>("Character/P_mage");
             var gunnerTexture = Content.Load<Texture2D>("Character/P_gunner");
             var tileTexture3 = Content.Load<Texture2D>("stairs");
+            var tileTexture4 = Content.Load<Texture2D>("stairs_closed");
             var monsterTexture = Content.Load<Texture2D>("monster");
             var basicTexture = Content.Load<Texture2D>("Character/P_gunner");
             _bulletTextures = BulletTextures(Content);
             _itemTexture = ItemTextures(Content);
-
+            var tileTexture5 = Content.Load<Texture2D>("shop");
             var _boxTexture = Content.Load<Texture2D>("HUDBox");
             var _boxTexture2 = Content.Load<Texture2D>("HUDBox2");
             var _chestTexture = Content.Load<Texture2D>("chest");
+            var _chestTexture2 = Content.Load<Texture2D>("chest_open");
             var _bossTexture = Content.Load<Texture2D>("boss");
             _debugFont = Content.Load<SpriteFont>("DebugFont");
             _sound = Content.Load<SoundEffect>("Sound/GunSound"); 
@@ -107,7 +110,7 @@ namespace BBTB.States
                 basicTexture = Content.Load<Texture2D>("Character/P_archer");
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             }
-                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, mapTextures, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont, Inventory);
+                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,tileTexture4,tileTexture5,_chestTexture,_chestTexture2, monsterTexture, mapTextures, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont, Inventory);
         }
 
         public List<Texture2D> ItemTextures (ContentManager Content)

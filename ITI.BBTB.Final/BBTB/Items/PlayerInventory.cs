@@ -89,8 +89,9 @@ namespace BBTB.Items
             else 
             {
 
-                Inventory[i]._position.X = Item._position.X;
-                Inventory[i]._position.Y = Item._position.Y;
+                Inventory[i].Position = new Vector2(_player.Position.X, _player.Position.Y);
+                Inventory[i]._position.X = _player.Position.X;
+                Inventory[i]._position.Y = _player.Position.Y;
                 UpdatePlayerSats(Inventory[i], Item, _player);
                 Items.Add(Inventory[i]);
                 Inventory.RemoveAt(i);
