@@ -63,7 +63,7 @@ namespace BBTB.Items
             int RNG = random.Next(prob, 100);
             if (Name != "Heal potion" && Name != "Used potion")
             {
-                if (RNG > 70)
+                if (RNG > 60)
                 {
                     string _playerclasse = _player._playerM._classe;
                     if (_playerclasse == "Wizard")

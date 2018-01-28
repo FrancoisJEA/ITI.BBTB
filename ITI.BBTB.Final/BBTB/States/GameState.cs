@@ -35,6 +35,7 @@ namespace BBTB.States
         public Texture2D goblinTexture;
 
         Texture2D heartTexture;
+        private Texture2D TraderTexture;
 
         internal Board Board
         {
@@ -93,6 +94,7 @@ namespace BBTB.States
             var _chestTexture = Content.Load<Texture2D>("chest");
             var _chestTexture2 = Content.Load<Texture2D>("chest_open");
             var _bossTexture = Content.Load<Texture2D>("boss");
+            TraderTexture = Content.Load<Texture2D>("trader");
             _debugFont = Content.Load<SpriteFont>("DebugFont");
             _sound = Content.Load<SoundEffect>("Sound/GunSound"); 
             
@@ -110,7 +112,7 @@ namespace BBTB.States
                 basicTexture = Content.Load<Texture2D>("Character/P_archer");
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             }
-                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,tileTexture4,tileTexture5,_chestTexture,_chestTexture2, monsterTexture, mapTextures, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont, Inventory);
+                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,tileTexture4,tileTexture5,_chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont);
         }
 
         public List<Texture2D> ItemTextures (ContentManager Content)

@@ -55,18 +55,20 @@ namespace BBTB
         public List<Bullet> Bullets { get; }
         public List<Monster> Monsters;
         public List<Texture2D> ItemTexture { get; set; }
+        private Texture2D _traderTexture;
         readonly GameState _gameState;
-        private List<Item> items = new List<Item>();
+        private List<Item> items = new List<Item>(); // All items in the ground 
         PlayerInventory Inventory;
 		BinaryFormatter _f;
         private SpriteFont _debugFont;
         bool _chestState;
         Monster m;
         private Texture2D Goblin;
-     
+        Trader Trader;
 
 
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3,Texture2D tileTexture4,Texture2D tileTexture5, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont, PlayerInventory inventory)
+
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3,Texture2D tileTexture4,Texture2D tileTexture5, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont)
 	    {
             
             Columns = columns;
@@ -81,12 +83,13 @@ namespace BBTB
             BossTexture = bossTexture;
 			MonsterTexture = monsterTexture;
             PreacherTexture = preacherTexture;
+            _traderTexture = TraderTexture;
             _time = 15;
             _chestState = false;
             ItemTexture = itemTexture;
 			SpriteBatch = spritebatch;
             Preacher = new List<Preacher>();
-            Inventory = inventory;
+      
             _debugFont = debugFont;
             mapTextures = MapTextures;
             _tiles = new Tile[Columns, Rows];
@@ -101,9 +104,9 @@ namespace BBTB
 			Bullets = new List<Bullet>();
 			
 			_player = player;
-           
+            Inventory = _player.Inventory;
 
-			_gameState = gameState;
+            _gameState = gameState;
 			Stage1();
 
             _monsterDead = 0;
@@ -240,7 +243,7 @@ namespace BBTB
         public void CreateNewBoard()
 			/*  Types= 1:chest 2:god 3:save 4:Shop */
         {
-           
+            
             items = new List<Item>();
 			if (_special != _roomNumber)
 			{
@@ -253,6 +256,7 @@ namespace BBTB
                 Tile3[13, 1].IsBlocked = true;
                 SetUpChestInTheMiddle();
                 SetUpShop();
+
             }
             else if (Special == _roomNumber && SpecialType == 1)
 			{
@@ -278,10 +282,12 @@ namespace BBTB
 					}*/
 				
             }
-            else if (Special ==_roomNumber && SpecialType == 4)
+            else if (Special == _roomNumber && SpecialType == 4)
             {
-                Tile5[6, 4].IsBlocked = true;
-                Tile5[2, 4].IsBlocked = true;
+                //Tile5[6, 4].IsBlocked = true;
+                Tile5[4, 4].IsBlocked = true;
+                Trader = new Trader(_traderTexture,new Vector2(400,400),SpriteBatch, ItemTexture);
+                items = Trader.ItemsToSell(items);
 
             }
 			SetAllBorderTilesBlocked();
@@ -302,6 +308,8 @@ namespace BBTB
             _roomInFloor = _rnd.Next(4, 7);
             _stageNumber = 1;
             _roomNumber = 1;
+            _special = _rnd.Next(2, _roomInFloor);
+            _specialType = 4;//_rnd.Next(1, 4);
             CreateNewBoard();
         }
         
@@ -337,7 +345,7 @@ namespace BBTB
                 }
             }
         }
-        public void OpenChest ()
+        public void OpenChest()
         {
             Rectangle r = Tile4[5, 4].Bounds;
             r.Inflate(30, 30);
@@ -352,12 +360,13 @@ namespace BBTB
                     int nbItem = rng.Next(1, 3);
                     for (int w = 0; w < nbItem; w++)
                     {
-                        X += 100;
-                        Y += 140;
-                        int i = rng.Next(2, ItemTexture.Count);
+                         X = rng.Next(Convert.ToInt32(Tile4[5,4].Position.X - 128), Convert.ToInt32(Tile4[5, 4].Position.X + 128));
+                         Y = rng.Next(Convert.ToInt32(Tile4[5, 4].Position.Y - 128), Convert.ToInt32(Tile4[5, 4].Position.Y + 128));
+                        int i = rng.Next(1, ItemTexture.Count);
                         items.Add(new Item(new Vector2(X, Y), ItemTexture[i], SpriteBatch, _player));
                     }
-                        _chestState = true;
+                    _player._playerM.Money += rng.Next(10 * StageNumber * (1 + _player._playerM.Intelligence / 10), 20 * StageNumber * (1 + _player._playerM.Intelligence / 10));
+                         _chestState = true;
                     Tile4[5, 4].Texture = ChestTexture2;
                 }
             }
@@ -607,8 +616,9 @@ namespace BBTB
             {
                 if (StageNumber > 0) monster.Texture = mapTextures[StageNumber - 1, 2];
                 monster.Draw();
-
             }
+            if (Trader != null) Trader.Draw();
+
             foreach (var bullet in Bullets)
             {
                 bullet.Draw();
