@@ -92,7 +92,7 @@ namespace BBTB
             Level = 1;
             Experience = 0;
             Resistance = 10;
-            Money = 0;
+            Money = 2000;
             _xplast = 0;
             _xpnext = 100;
 

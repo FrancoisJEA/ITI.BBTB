@@ -27,6 +27,7 @@ namespace BBTB.Items
         public int _intelligence;
         public bool _specialItem;
         public int Defense;
+        public int _price;
 
 
 
@@ -54,6 +55,7 @@ namespace BBTB.Items
                 Defense = 20 + Convert.ToInt32(_player._playerM.Level * 1.8 * _player._playerM.Strength / 5);
             }
             RandomStat();
+            _price = 2000;//_player._playerM.Level * 100 - _player._playerM.Intelligence;
         }
 
         private void RandomStat()

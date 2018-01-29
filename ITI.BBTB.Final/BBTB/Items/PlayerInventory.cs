@@ -71,9 +71,18 @@ namespace BBTB.Items
         public List<Item> AddItemToInventory(Item Item, List<Item> Items,Player _player,int y)
         {
             int i = Item.InventoryEmplacement;
+
+            // If its an Item to sell
+            if (Board.CurrentBoard.Special == Board.CurrentBoard.RoomNumber && Board.CurrentBoard.SpecialType == 4) 
+            {
+                if (_player._playerM.Money > Item._price) { _player._playerM.Money -= Item._price; }
+                else { return Items; }
+            }
+
+
             if (Item.Name == "Heal potion")
             {
-                
+             
                 if (_potionNb < _potionMax)
                 {
                     _potionNb++;
