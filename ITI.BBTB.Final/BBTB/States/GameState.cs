@@ -34,8 +34,10 @@ namespace BBTB.States
         PlayerInventory Inventory;
         List<Texture2D> _bulletTextures;
         List<Texture2D> playerTexture;
+        public Texture2D goblinTexture;
 
         Texture2D heartTexture;
+        private Texture2D TraderTexture;
 
         internal Board Board
         {
@@ -76,22 +78,25 @@ namespace BBTB.States
             mapTextures[5, 2] = Content.Load<Texture2D>("monster6");
 
             heartTexture = Content.Load<Texture2D>("heart");
-
+            //goblinTexture = Content.Load<Texture2D>("goblin");
             var tileTexture = Content.Load<Texture2D>("tile");
             var tileTexture2 = Content.Load<Texture2D>("barrel");
             var archerTexture = Content.Load<Texture2D>("Character/P_archer");
             var mageTexture = Content.Load<Texture2D>("Character/P_mage");
             var gunnerTexture = Content.Load<Texture2D>("Character/P_gunner");
             var tileTexture3 = Content.Load<Texture2D>("stairs");
+            var tileTexture4 = Content.Load<Texture2D>("stairs_closed");
             var monsterTexture = Content.Load<Texture2D>("monster");
             var basicTexture = Content.Load<Texture2D>("Character/P_gunner");
             _bulletTextures = BulletTextures(Content);
             _itemTexture = ItemTextures(Content);
-
+            var tileTexture5 = Content.Load<Texture2D>("shop");
             var _boxTexture = Content.Load<Texture2D>("HUDBox");
             var _boxTexture2 = Content.Load<Texture2D>("HUDBox2");
             var _chestTexture = Content.Load<Texture2D>("chest");
+            var _chestTexture2 = Content.Load<Texture2D>("chest_open");
             var _bossTexture = Content.Load<Texture2D>("boss");
+            TraderTexture = Content.Load<Texture2D>("trader");
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound"); 
@@ -111,7 +116,7 @@ namespace BBTB.States
                 basicTexture = Content.Load<Texture2D>("Character/P_archer");
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             }
-                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,_chestTexture, monsterTexture, mapTextures, mapTextures[1, 1], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont, Inventory);
+                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,tileTexture4,tileTexture5,_chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont);
 
             _bgsound.Play(0.3f, 0, 0);
         }
@@ -129,12 +134,13 @@ namespace BBTB.States
             AllTextures.Add(Content.Load<Texture2D>("Items/Leather_boots"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Leather_gloves"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Leather_helmet"));
-            AllTextures.Add(Content.Load<Texture2D>("Items/Skeleton_sword"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Fireball_gun"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Super_staff"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Heal_potion"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Used_potion"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Deadric_crossbow"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Fire_book"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Ice_gun"));
             return AllTextures;
         }
 
@@ -206,7 +212,7 @@ namespace BBTB.States
 
             string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
             string experienceInText = string.Format("Experience: ({0:0} / {1:0})", _player._playerM.Experience,_player._playerM.Xpnext);
-            string moneyInText = string.Format("Potions: ({0:0})", _player.Inventory._potionNb);
+            string moneyInText = string.Format("Money: ({0:0})", _player._playerM.Money);
 
             string RoomNumberInText = string.Format("Room Number: ({0:0})", Board.CurrentBoard.RoomNumber);
             string StageNumberInText = string.Format("Stage Number: ({0:0})", Board.CurrentBoard.StageNumber);

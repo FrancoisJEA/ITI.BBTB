@@ -51,6 +51,7 @@
     <Compile Include="Component.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Enemies\Boss.cs" />
+    <Compile Include="Enemies\Trader.cs" />
     <Compile Include="Items\PlayerInventory.cs" />
     <Compile Include="GodPlaces\Preacher.cs" />
     <Compile Include="GodPlaces\God.cs" />

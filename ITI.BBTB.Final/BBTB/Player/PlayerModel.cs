@@ -39,6 +39,7 @@ namespace BBTB
             _classe = classe;
             DefineStats();
             Level1SkillSetUp();
+            _life = _lifemax;
         }
 
 		#region Propriétés
@@ -91,7 +92,7 @@ namespace BBTB
             Level = 1;
             Experience = 0;
             Resistance = 10;
-            Money = 0;
+            Money = 2000;
             _xplast = 0;
             _xpnext = 100;
 
@@ -134,7 +135,6 @@ namespace BBTB
                 _intelligence += 3;
                 _strength += 1;
             }
-            _life = _lifemax;
         }
 
         public void UpSkills(int skillPointNumber, string attribute)
