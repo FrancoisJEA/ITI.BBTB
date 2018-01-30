@@ -65,27 +65,27 @@ namespace BBTB.States
             mapTextures[1, 0] = Content.Load<Texture2D>("ground2");
             mapTextures[1, 1] = Content.Load<Texture2D>("tile2");
             mapTextures[1, 2] = Content.Load<Texture2D>("monster2");
-            mapTextures[1, 3] = Content.Load<Texture2D>("barrel");
+            mapTextures[1, 3] = Content.Load<Texture2D>("tile");
 
             mapTextures[2, 0] = Content.Load<Texture2D>("ground3");
             mapTextures[2, 1] = Content.Load<Texture2D>("tile3");
             mapTextures[2, 2] = Content.Load<Texture2D>("monster3");
-            mapTextures[2, 3] = Content.Load<Texture2D>("barrel");
+            mapTextures[2, 3] = Content.Load<Texture2D>("tile2");
 
             mapTextures[3, 0] = Content.Load<Texture2D>("ground4");
             mapTextures[3, 1] = Content.Load<Texture2D>("tile4");
             mapTextures[3, 2] = Content.Load<Texture2D>("monster4");
-            mapTextures[3, 3] = Content.Load<Texture2D>("barrel");
+            mapTextures[3, 3] = Content.Load<Texture2D>("tile3");
 
             mapTextures[4, 0] = Content.Load<Texture2D>("ground5");
             mapTextures[4, 1] = Content.Load<Texture2D>("tile5");
             mapTextures[4, 2] = Content.Load<Texture2D>("monster5");
-            mapTextures[4, 3] = Content.Load<Texture2D>("barrel");
+            mapTextures[4, 3] = Content.Load<Texture2D>("tile4");
 
             mapTextures[5, 0] = Content.Load<Texture2D>("ground6");
             mapTextures[5, 1] = Content.Load<Texture2D>("tile6");
             mapTextures[5, 2] = Content.Load<Texture2D>("monster6");
-            mapTextures[5, 3] = Content.Load<Texture2D>("barrel");
+            mapTextures[5, 3] = Content.Load<Texture2D>("tile5");
 
             heartTexture = Content.Load<Texture2D>("heart");
             //goblinTexture = Content.Load<Texture2D>("goblin");
@@ -101,6 +101,7 @@ namespace BBTB.States
             _bulletTextures = BulletTextures(Content);
             _itemTexture = ItemTextures(Content);
             var tileTexture5 = Content.Load<Texture2D>("shop");
+            var tileTexture6 = Content.Load<Texture2D>("monster");
             var _boxTexture = Content.Load<Texture2D>("HUDBox");
             var _boxTexture2 = Content.Load<Texture2D>("HUDBox2");
             var _chestTexture = Content.Load<Texture2D>("chest");
@@ -127,7 +128,7 @@ namespace BBTB.States
                 basicTexture = Content.Load<Texture2D>("Character/P_archer");
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             }
-                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3,tileTexture4,tileTexture5,_chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont,LvlUpTexture);
+                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont,LvlUpTexture);
 
             _bgsound.Play(0.3f, 0, 0);
         }
@@ -231,10 +232,10 @@ namespace BBTB.States
 		
         private void WriteDebugInformation()
         {
-            string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.Position.X, _player.Position.Y);
+          //string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.Position.X, _player.Position.Y);
           //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
 
-            string lifeInText = string.Format("Character's life: ({0:0})", _player._playerM.Life);
+            string lifeInText = string.Format("Life: ({0:0})", _player._playerM.Life);
             string experienceInText = string.Format("Experience: ({0:0} / {1:0})", _player._playerM.Experience,_player._playerM.Xpnext);
             string moneyInText = string.Format("Money: ({0:0})", _player._playerM.Money);
 
@@ -249,9 +250,9 @@ namespace BBTB.States
             //DrawWithShadow(positionInText, new Vector2(10, 0));
             //DrawWithShadow(movementInText, new Vector2(10, 20));
 
-            //DrawWithShadow(lifeInText, new Vector2(200, 200));
-           // DrawWithShadow(experienceInText, new Vector2(10, 20));
-           // DrawWithShadow(moneyInText, new Vector2(520, 240));
+            DrawWithShadow(lifeInText, new Vector2(250, 20));
+            DrawWithShadow(experienceInText, new Vector2(10, 20));
+            DrawWithShadow(moneyInText, new Vector2(400, 20));
             if (_player._playerM.lvlup) DrawWithShadow(LvlUpInText, new Vector2(320, 270));
 
            // DrawWithShadow(RoomNumberInText, new Vector2(280, 280));
@@ -262,7 +263,7 @@ namespace BBTB.States
 
            // DrawWithShadow(monsterDeadInText, new Vector2(440, 440));
 
-            DrawWithShadow("F5 for random board", new Vector2(70, 600));
+            //DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }
 		
         private void DrawWithShadow(string text, Vector2 position)
