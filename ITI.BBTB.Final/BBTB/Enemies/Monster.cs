@@ -17,10 +17,10 @@ namespace BBTB
         public bool IsAlive { get { return _life >= 0; } }
         public bool IsDead { get; set; }
         readonly Weapon _weapon;
-
+		int time;
         int _life;
         public Item _item;
-
+		List<MonstersBullet> Bullets = new List<MonstersBullet>();
         Vector2 newPosition;
         Bullet _bullet;
         PlayerInventory PlayerInventory;
@@ -31,17 +31,18 @@ namespace BBTB
         int _xp;
         bool _reflect; // If monster return damage
         bool _goblin;  // If monster Give money when hit
+		Texture2D _monsterBulletTexture;
         public List<Texture2D> _itemTexture { get; set; }
 
-        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)//,PlayerInventory Inventory)
+        public Monster(Texture2D texture,Texture2D monsterBulletTexure, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)//,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
-
-
             _itemTexture = itemTexture;
+			time = 0;
             //PlayerInventory = Inventory;
             if (Board.CurrentBoard == null) Type = 0;
-            else Type = Board.CurrentBoard.StageNumber; 
+            else Type = Board.CurrentBoard.StageNumber;
+			_monsterBulletTexture = monsterBulletTexure;
             DefineMonster(Type);
         }
 
@@ -66,6 +67,7 @@ namespace BBTB
                 //{  _goblin = true; this.Texture = }
             }
         }
+
         public void Reflect (PlayerModel p)
         {
             if (_reflect == true) p.Life -= p.Life / 100;
@@ -79,8 +81,9 @@ namespace BBTB
         {
             //IsDead();
             UpdatePositionBasedOnMovement(gameTime);
-
+			FillBulletList();
         }
+
         public void WhenMonsterDie(Player p)
         {
             p._playerM.Money += 2;
@@ -90,10 +93,7 @@ namespace BBTB
 
         public void Idle()
         {
-
             Patroling(this);
-
-
         }
 
         public void Patroling(Monster monsters)
@@ -142,8 +142,6 @@ namespace BBTB
         
         }
 
-
-
         public bool TouchTile(Monster monster)
         {
             foreach (Tile tile in Board.CurrentBoard.Tile2)
@@ -154,12 +152,23 @@ namespace BBTB
             }
             return false;
         }
+
         public bool Shooting(Monster monsters)
         {
-            if (monsters.Position.Y > Board.CurrentBoard._player.Position.Y * 0.9)
-                return true;
-            else
-                return false;
+			if (Board.CurrentBoard._player != null)
+			{
+				double m = (Board.CurrentBoard._player.Position.X - this.Position.X);
+				double i = (Board.CurrentBoard._player.Position.Y - this.Position.Y);
+				double l = m * m + i * i;
+				l = Math.Sqrt(l);
+
+				if (50 < l && l < 200)
+				{
+					return true;
+				}
+				return false;
+			}
+			return false;
         }
 
         private void UpdatePositionBasedOnMovement(GameTime gameTime)
@@ -193,9 +202,50 @@ namespace BBTB
             return _item;
         }
 
-        public override void Draw()
+		public void FillBulletList()
+		{
+			if (Life > 0)
+			{
+				time++;
+				if (time == 30)
+				{
+					Bullets.Add(new MonstersBullet(_monsterBulletTexture,this.Position,Board.CurrentBoard._player.Position,SpriteBatch));
+					time = 0;
+				}
+			}
+		}
+
+		public void DeleteBullet()
+		{
+			foreach(MonstersBullet bullet in Bullets)
+			{
+				Rectangle p = new Rectangle((int)bullet.Position.X, (int)bullet.Position.Y, bullet.Texture.Width, bullet.Texture.Height);
+				foreach (Tile tile in Board.CurrentBoard.Tile)
+				{
+					if (p.Intersects(tile.Bounds))
+					{
+						OnBulletDestroy(bullet);
+					}
+				}
+			}
+		}
+
+		internal void OnBulletDestroy(MonstersBullet bullet)
+		{
+			for (int i = 0; i < Bullets.Count; i++)
+			{
+				MonstersBullet b = Bullets[i];
+				Bullets.RemoveAt(i--);
+			}
+		}
+
+		public override void Draw()
         {
             base.Draw();
+			foreach(MonstersBullet bullet in Bullets)
+			{
+				base.Draw();
+			}
         }
     }
 }

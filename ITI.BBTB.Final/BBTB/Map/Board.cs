@@ -65,12 +65,13 @@ namespace BBTB
         Monster m;
         private Texture2D Goblin;
         Trader Trader;
+		Texture2D _monsterBulletTexture;
 
 
 
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3,Texture2D tileTexture4,Texture2D tileTexture5, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture,Texture2D monsterBulletTexture, Texture2D tileTexture2, Texture2D tileTexture3,Texture2D tileTexture4,Texture2D tileTexture5, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont)
 	    {
-            
+			_monsterBulletTexture = monsterBulletTexture;
             Columns = columns;
             Rows = rows;
             TileTexture = tileTexture;
@@ -98,7 +99,7 @@ namespace BBTB
             _tile4 = new Tile[Columns, Rows];
             _tile5 = new Tile[Columns, Rows];
 
-            _boss = new Boss(BossTexture, _bossPosition, SpriteBatch, false, itemTexture);
+            _boss = new Boss(BossTexture,monsterBulletTexture, _bossPosition, SpriteBatch, false, itemTexture);
   
             Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();
@@ -485,7 +486,7 @@ namespace BBTB
                         if (_rnd.Next(4, 20) == 4)
                         {
                             Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-                            Monsters.Add(new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture));
+                            Monsters.Add(new Monster(MonsterTexture,_monsterBulletTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture));
                         }
                     }
 
@@ -511,7 +512,7 @@ namespace BBTB
 						if (_rnd.Next(4, 20) == 4)
 						{
                             Vector2 preacherPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-                            Monsters.Add(new Monster(PreacherTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, ItemTexture));
+                            Monsters.Add(new Monster(PreacherTexture,_monsterBulletTexture , preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, ItemTexture));
 						}
 					}
 				}

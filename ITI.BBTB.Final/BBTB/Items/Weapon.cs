@@ -28,7 +28,6 @@ namespace BBTB
         public Weapon(GameState ctx, Texture2D Texture,Vector2 position, SpriteBatch spritebatch, Player player, List<Texture2D> BulletTextures)
             : base (Texture,position,spritebatch)
         {
-          
             WeaponLib = new WeaponLib();
             _player = player;
             _bulletTextures = BulletTextures;
@@ -53,7 +52,6 @@ namespace BBTB
 
         void SetWeaponType( int type )
         {
-            
             if (type == 1)
             {
                 Texture = Inventory[4]._texture;

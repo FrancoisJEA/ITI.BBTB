@@ -30,8 +30,6 @@ namespace BBTB
         public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon, Board board, Weapon weaponCtx)
             : base(texture, position, spritebatch)
         {
-           
-    
             _origin = new Vector2(-27, 20);
             _rotation = weapon.Rotation;
             BulletLib = new BulletLib(weapon, new Vector2(base.Position.X, base.Position.Y), texture.Height, texture.Width);    
@@ -42,6 +40,7 @@ namespace BBTB
         }
 
         public int Damages { get { return _damages; } }
+
         public void Update(GameTime gameTime)
         {
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);

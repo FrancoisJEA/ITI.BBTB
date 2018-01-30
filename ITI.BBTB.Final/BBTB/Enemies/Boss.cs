@@ -16,10 +16,12 @@ namespace BBTB.Enemies
         public bool AddBoss { get; set; }
         int _life;
         int _xp;
+		Texture2D _monsterBullettexture;
         
-        public Boss(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture) : base(texture, position, batch, isAlive, itemTexture)
+        public Boss(Texture2D texture,Texture2D bulletTexture ,Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture) 
+			: base(texture,bulletTexture, position, batch, isAlive, itemTexture)
         {
-           
+			_monsterBullettexture = bulletTexture;
             _life = 1000;
             _xp = 100;
             AddBoss = isAlive;
