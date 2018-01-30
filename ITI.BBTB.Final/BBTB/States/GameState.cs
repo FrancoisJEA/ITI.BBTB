@@ -168,7 +168,7 @@ namespace BBTB.States
         private void deadTimer()
         {
             _endTimer++;
-            if (_endTimer == 3600)
+            if (_endTimer == 7200)
             {
                 RestartGame();
                 _player._playerM.Life = _player._playerM._lifemax;

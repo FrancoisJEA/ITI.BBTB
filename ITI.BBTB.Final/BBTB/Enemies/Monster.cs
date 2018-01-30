@@ -154,6 +154,7 @@ namespace BBTB
             }
             return false;
         }
+
         public bool Shooting(Monster monsters)
         {
             if (monsters.Position.Y > Board.CurrentBoard._player.Position.Y * 0.9)
