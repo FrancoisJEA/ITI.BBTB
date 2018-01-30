@@ -14,7 +14,8 @@ namespace BBTB
 {
     public class Monster : Sprite
     {
-        public bool IsAlive { get { return _life >= 0; } }
+		#region Propriété
+		public bool IsAlive { get { return _life >= 0; } }
         public bool IsDead { get; set; }
         readonly Weapon _weapon;
 		int time;
@@ -33,8 +34,9 @@ namespace BBTB
         bool _goblin;  // If monster Give money when hit
 		Texture2D _monsterBulletTexture;
         public List<Texture2D> _itemTexture { get; set; }
+		#endregion
 
-        public Monster(Texture2D texture,Texture2D monsterBulletTexure, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)//,PlayerInventory Inventory)
+		public Monster(Texture2D texture,Texture2D monsterBulletTexure, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)//,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
             _itemTexture = itemTexture;
@@ -73,6 +75,14 @@ namespace BBTB
             if (_reflect == true) p.Life -= p.Life / 100;
         }
 
+		public void DeleteBullet()
+		{
+			if(HasTouchedSomething() != 0)
+			{
+				Bullets.RemoveAt(HasTouchedSomething());
+			}
+		}
+
         public Weapon Weapon => _weapon;
         public int Life { get { return _life; } set { } }
 		// public Vector2 Position { get { return _position; } set { _position = value; } }
@@ -82,6 +92,7 @@ namespace BBTB
             //IsDead();
             UpdatePositionBasedOnMovement(gameTime);
 			FillBulletList();
+			MonsterBulletPositionUpdate();
 			DeleteBullet();
         }
 
@@ -213,8 +224,9 @@ namespace BBTB
 			}
 		}
 
-		public void DeleteBullet()
+		public int HasTouchedSomething()
 		{
+			int i = 0; 
 			foreach(MonstersBullet bullet in Bullets)
 			{
 				Rectangle p = new Rectangle((int)bullet.Position.X, (int)bullet.Position.Y, bullet.Texture.Width, bullet.Texture.Height);
@@ -222,38 +234,54 @@ namespace BBTB
 				{
 					if (p.Intersects(tile.Bounds))
 					{
-						OnBulletDestroy(bullet);
+						return i;
 					}
 				}
 				foreach (Tile tile in Board.CurrentBoard.Tile2)
 				{
 					if (p.Intersects(tile.Bounds))
 					{
-						OnBulletDestroy(bullet);
+						return i;
 					}
 				}
 				foreach (Tile tile in Board.CurrentBoard.Tile3)
 				{
 					if (p.Intersects(tile.Bounds))
 					{
-						OnBulletDestroy(bullet);
+						return i;
 					}
 				}
 				foreach (Tile tile in Board.CurrentBoard.Tile4)
 				{
 					if (p.Intersects(tile.Bounds))
 					{
-						OnBulletDestroy(bullet);
+						return i;
 					}
 				}
 				foreach (Tile tile in Board.CurrentBoard.Tile5)
 				{
 					if (p.Intersects(tile.Bounds))
 					{
-						OnBulletDestroy(bullet);
+						return i;
 					}
 				}
+
+			    if (p.Intersects(Board.CurrentBoard._player.Bounds))
+			    {
+				   return i;
+				}
+				i = i + 1;
 			}
+			return 0;
+		}
+
+		public Vector2 MonsterBulletPositionUpdate()
+		{
+			foreach (MonstersBullet bullet in Bullets)
+			{
+				return bullet.Position = bullet.Destination * 2f;
+			}
+				return new  Vector2(0,0) ;
 		}
 
 		internal void OnBulletDestroy(MonstersBullet bullet)
