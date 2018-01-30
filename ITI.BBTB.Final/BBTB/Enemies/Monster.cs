@@ -82,6 +82,7 @@ namespace BBTB
             //IsDead();
             UpdatePositionBasedOnMovement(gameTime);
 			FillBulletList();
+			DeleteBullet();
         }
 
         public void WhenMonsterDie(Player p)
@@ -124,9 +125,7 @@ namespace BBTB
                 {
                     if (distanceX > 0)
                     {
-
                         newPosition.Y--;
-
                     }
 
                     if (distanceX < 0)
@@ -173,7 +172,6 @@ namespace BBTB
 
         private void UpdatePositionBasedOnMovement(GameTime gameTime)
         {
-
             Position += newPosition * (float)gameTime.ElapsedGameTime.TotalMinutes * 10;
             Idle();
         }
@@ -221,6 +219,34 @@ namespace BBTB
 			{
 				Rectangle p = new Rectangle((int)bullet.Position.X, (int)bullet.Position.Y, bullet.Texture.Width, bullet.Texture.Height);
 				foreach (Tile tile in Board.CurrentBoard.Tile)
+				{
+					if (p.Intersects(tile.Bounds))
+					{
+						OnBulletDestroy(bullet);
+					}
+				}
+				foreach (Tile tile in Board.CurrentBoard.Tile2)
+				{
+					if (p.Intersects(tile.Bounds))
+					{
+						OnBulletDestroy(bullet);
+					}
+				}
+				foreach (Tile tile in Board.CurrentBoard.Tile3)
+				{
+					if (p.Intersects(tile.Bounds))
+					{
+						OnBulletDestroy(bullet);
+					}
+				}
+				foreach (Tile tile in Board.CurrentBoard.Tile4)
+				{
+					if (p.Intersects(tile.Bounds))
+					{
+						OnBulletDestroy(bullet);
+					}
+				}
+				foreach (Tile tile in Board.CurrentBoard.Tile5)
 				{
 					if (p.Intersects(tile.Bounds))
 					{

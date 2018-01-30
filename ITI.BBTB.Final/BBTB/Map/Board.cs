@@ -14,11 +14,11 @@ namespace BBTB
 {
     public class Board
     {
-		Tile[,] _tiles; //
-		Tile[,] _tile2; //
-		Tile[,] _tile3; //
-		Tile[,] _tile4; //
-        Tile[,] _tile5; //
+		Tile[,] _tiles; 
+		Tile[,] _tile2; 
+		Tile[,] _tile3; 
+		Tile[,] _tile4; 
+        Tile[,] _tile5; 
         public Texture2D[,] mapTextures;
        
         public List<Preacher> Preacher { get; set; }
