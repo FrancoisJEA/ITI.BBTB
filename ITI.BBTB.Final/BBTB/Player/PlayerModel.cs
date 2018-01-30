@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,15 +28,20 @@ namespace BBTB
 
 		int _floor, _room, _type;
 		public string _name;
+        GameTime g;
 
 		[NonSerialized]
         int _xplast;
 		[NonSerialized]
 		Board _board;
+        float _time = 5;
+        float Timer = 5;
+       public bool lvlup;
 #endregion
 
 		public PlayerModel(string name,  string classe)
         {
+
             _name = name;
             _classe = classe;
             DefineStats();
@@ -103,12 +110,29 @@ namespace BBTB
             while (_experience >= _xpnext)
             {
                 _level++;
-				_experience = _xpnext - Experience;
+                _experience = _xpnext - Experience;
                 _xplast = _xpnext;
                 _xpnext = _xpnext * 3;
-                _skillsPoints++; 
+                _skillsPoints++;
                 StatLevelUP();
                 _life = _lifemax;
+               lvlup = true;
+            }
+        }
+        public void  LvlUpdate ()
+        {
+            if (lvlup == true)
+            {
+                float elapsed = (float)Board.CurrentBoard.GameTime.ElapsedGameTime.TotalSeconds;
+                _time -= elapsed;
+                if (_time < 0)
+                {
+                   
+                    //Timer expired, execute action
+                    _time = Timer;
+                    lvlup = false;
+
+                }               
             }
         }
 

@@ -32,6 +32,7 @@ namespace BBTB
         bool _reflect; // If monster return damage
         bool _goblin;  // If monster Give money when hit
         public List<Texture2D> _itemTexture { get; set; }
+        int _money;
 
         public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)//,PlayerInventory Inventory)
             : base(texture, position, batch)
@@ -51,6 +52,7 @@ namespace BBTB
             _life = 100;
             _level = 1;
             _xp = 10;
+            _money = 2;
             Random r = new Random();
             int rng = r.Next(1, 500);
 
@@ -60,6 +62,7 @@ namespace BBTB
                 _life *= 2;
                 _level ++;
                 _xp *=2;
+                _money *= 2;
                 if (t == 2) _reflect = true;
                 else _reflect = false;
               //  if (rng > 490)
@@ -68,7 +71,7 @@ namespace BBTB
         }
         public void Reflect (PlayerModel p)
         {
-            if (_reflect == true) p.Life -= p.Life / 100;
+            if (_reflect == true) p.Life -= p.Life / 1000;
         }
 
         public Weapon Weapon => _weapon;
@@ -83,7 +86,7 @@ namespace BBTB
         }
         public void WhenMonsterDie(Player p)
         {
-            p._playerM.Money += 2;
+            p._playerM.Money += _money;
             p._playerM.Experience +=_xp;
             p._playerM.LevelUp();
         }
@@ -184,7 +187,7 @@ namespace BBTB
             int ItemID = Random.Next(1, ItemNb);
             int Intelligence = Board.CurrentBoard._player._playerM.Intelligence / 10 * 4;
             int dropProb = Random.Next(Intelligence, 100);
-            if (dropProb >= 70)
+            if (dropProb >= 85)
             {
                 Texture2D ItemTexture = Board.CurrentBoard._player.Inventory.FoundTextureByID(ItemID, _itemTexture);
                 _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);

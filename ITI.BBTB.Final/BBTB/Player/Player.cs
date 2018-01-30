@@ -32,6 +32,7 @@ namespace BBTB
         public Texture2D _weaponTexture;
         int _time2;
         int _time3;
+        public bool IsDead;
 
         public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed, PlayerInventory inventory, List<Texture2D> BulletTextures, string _classe)
             : base(texture, position, spritebatch)
@@ -104,6 +105,7 @@ namespace BBTB
             if (_weapon != null) { _weapon.Update(gameTime); }
             UsePotion();
             HasTouchedMonster();
+            _playerM.LvlUpdate();
         }
         private void UsePotion()
         {

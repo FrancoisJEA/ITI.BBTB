@@ -37,26 +37,26 @@ namespace BBTB.Items
         public void ItemByDefault (Player _player)
         {
             List<Item> DefaultInventory = new List<Item>();
-            DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[9], sb,_player)); //Helmet
-            DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[6], sb, _player)); //Armor
-            DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[8], sb, _player)); // gloves
-            DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[7], sb, _player));  //Boots
+            DefaultInventory.Add(new Item(new Vector2(420, 230), allTexture[9], sb,_player)); //Helmet
+            DefaultInventory.Add(new Item(new Vector2(420, 280), allTexture[6], sb, _player)); //Armor
+            DefaultInventory.Add(new Item(new Vector2(420, 320), allTexture[8], sb, _player)); // gloves
+            DefaultInventory.Add(new Item(new Vector2(420, 370), allTexture[7], sb, _player));  //Boots
             if (_player.PlayerClasse == "Wizard")
             {
-                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[11], sb, _player)); // Weapon2
-                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[15], sb, _player)); // Weapon1
+                DefaultInventory.Add(new Item(new Vector2(370, 290), allTexture[11], sb, _player)); // Weapon2
+                DefaultInventory.Add(new Item(new Vector2(460, 290), allTexture[15], sb, _player)); // Weapon1
             }
             else if (_player.PlayerClasse == "Gunner")
             {
-                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[16], sb, _player)); // Weapon2
-                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[10], sb, _player)); // Weapon1
+                DefaultInventory.Add(new Item(new Vector2(370, 290), allTexture[16], sb, _player)); // Weapon2
+                DefaultInventory.Add(new Item(new Vector2(460, 290), allTexture[10], sb, _player)); // Weapon1
             }
             else if (_player.PlayerClasse == "Archer")
             {
-                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[11], sb, _player)); // Weapon2
-                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[10], sb, _player)); // Weapon1
+                DefaultInventory.Add(new Item(new Vector2(370, 290), allTexture[11], sb, _player)); // Weapon2
+                DefaultInventory.Add(new Item(new Vector2(460, 290), allTexture[10], sb, _player)); // Weapon1
             }
-            DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[12], sb, _player)); //
+            DefaultInventory.Add(new Item(new Vector2(380, 430), allTexture[12], sb, _player)); // Potion
             //DefaultInventory.Add(new Item(new Vector2(80, 80), AllTexture[6], SpriteBatch));
             //DefaultInventory.Add(new Item(new Vector2(80, 80), AllTexture[7], SpriteBatch));
             Inventory = DefaultInventory;
@@ -164,15 +164,23 @@ namespace BBTB.Items
       
             if (Display)
             {
-                this.Draw(sb, new Vector2(350, 200));
-                Text = string.Format("{0:0}\r\n Level = {4:0} \r\n\r\n Skills \r\n Strength ={1:0}\r\n Intelligence ={2:0}\r\n Agility ={3:0} \r\n", player._playerM.Name, player._playerM.Strength, player._playerM.Intelligence, player._playerM.Agility, player._playerM.Level);
-                DrawWithShadow(Text, new Vector2(360, 200), _debugFont);
-                foreach (Item i in Inventory)
-                {
-                    i._position.X = x;
-                    i._position.Y = y;
-                    i.Draw();
-                    y += 64;
+                this.Draw(sb, new Vector2(275, 155));
+                Text = string.Format("{0:0}\r\n Level {4:0} \r\n Strength: {1:0}\r\n Intelligence: {2:0}\r\n Agility: {3:0} \r\n", player._playerM.Name, player._playerM.Strength, player._playerM.Intelligence, player._playerM.Agility, player._playerM.Level);
+                DrawWithShadow(Text, new Vector2(360, 465), _debugFont);
+
+                foreach (Item i in Inventory) {
+
+                    List<Item> item = new List<Item>();
+                    if (i.ItemType=="Potion")
+                    {
+                        for (int j = 0; j < _potionNb; j++)
+                        {
+                            Item tmp = i;
+                            tmp._position.X += 60;
+                      //      item[j] = tmp;
+                        }
+                        foreach (Item j in item) j.Draw();
+                    } else i.Draw();
                 }
             }    
         }
