@@ -46,6 +46,16 @@ namespace BBTB.Enemies
             }
             return i;
         }
+
+        public void DefinePrices ()
+        {
+            foreach (Item i in Inventory)
+            {
+                
+            }
+
+        }
+         ~Trader () { }
         
 
     }

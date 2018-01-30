@@ -53,8 +53,13 @@ namespace BBTB.Items
             }
             else if (_player.PlayerClasse == "Archer")
             {
+<<<<<<< HEAD
                 DefaultInventory.Add(new Item(new Vector2(370, 290), allTexture[11], sb, _player)); // Weapon2
                 DefaultInventory.Add(new Item(new Vector2(460, 290), allTexture[10], sb, _player)); // Weapon1
+=======
+                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[4], sb, _player)); // Weapon1
+                DefaultInventory.Add(new Item(new Vector2(80, 80), allTexture[14], sb, _player)); // Weapon2
+>>>>>>> ea37b4d0a28728ff3358c7bb07e50575b242174f
             }
             DefaultInventory.Add(new Item(new Vector2(380, 430), allTexture[12], sb, _player)); // Potion
             //DefaultInventory.Add(new Item(new Vector2(80, 80), AllTexture[6], SpriteBatch));

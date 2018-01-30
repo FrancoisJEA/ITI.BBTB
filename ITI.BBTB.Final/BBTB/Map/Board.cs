@@ -45,10 +45,15 @@ namespace BBTB
         public Texture2D MonsterTexture { get; set; }
         public Texture2D BossTexture { get; set; }
         public Texture2D PreacherTexture { get; set; }
-        private SpriteBatch SpriteBatch { get; set; }
+        public Texture2D LvlUpTexture { get; set; }
+        public SpriteBatch SpriteBatch { get; set; }
         private int _time;
         internal Boss _boss;
+        public bool _lvlup;
         Vector2 _bossPosition = new Vector2(300,400);
+        public GameTime GameTime;
+        float _time2 = 5;
+        float Timer = 5;
 
         private Random _rnd = new Random();
         public static Board CurrentBoard { get; private set; }
@@ -65,12 +70,13 @@ namespace BBTB
         Monster m;
         private Texture2D Goblin;
         Trader Trader;
+        bool Shop;
+        
 
 
-
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3,Texture2D tileTexture4,Texture2D tileTexture5, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3,Texture2D tileTexture4,Texture2D tileTexture5, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont,Texture2D lvluptexture)
 	    {
-            
+            LvlUpTexture = lvluptexture;
             Columns = columns;
             Rows = rows;
             TileTexture = tileTexture;
@@ -89,7 +95,9 @@ namespace BBTB
             ItemTexture = itemTexture;
 			SpriteBatch = spritebatch;
             Preacher = new List<Preacher>();
-      
+       
+
+
             _debugFont = debugFont;
             mapTextures = MapTextures;
             _tiles = new Tile[Columns, Rows];
@@ -99,18 +107,15 @@ namespace BBTB
             _tile5 = new Tile[Columns, Rows];
 
             _boss = new Boss(BossTexture, _bossPosition, SpriteBatch, false, itemTexture);
-  
             Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();
-			
 			_player = player;
             Inventory = _player.Inventory;
-
             _gameState = gameState;
 			Stage1();
-
             _monsterDead = 0;
-		}
+            Shop = Special == _roomNumber && SpecialType == 4;
+        }
 		
 		#region Prorpiétés
         public int StageNumber { get { return _stageNumber; } set { _stageNumber = value; } }
@@ -151,7 +156,7 @@ namespace BBTB
         {
             string Text = "";
             int _charac = 0;
-            string _type = "null";
+            string _type = "";
             for (int y = 0; y < items.Count; y++)
             {
                 KeyboardState keyboardState = Keyboard.GetState();
@@ -229,6 +234,7 @@ namespace BBTB
                 _player._playerM.Life = _player._playerM._lifemax;
                 _player.Inventory.ItemByDefault(_player);
                 Stage1();
+                _player.IsDead = true;
             }
         }
 
@@ -282,10 +288,10 @@ namespace BBTB
 					}*/
 				
             }
-            else if (Special == _roomNumber && SpecialType == 4)
+            else if (Shop)
             {
                 //Tile5[6, 4].IsBlocked = true;
-                Tile5[4, 4].IsBlocked = true;
+                Tile5[3, 3].IsBlocked = true;
                 Trader = new Trader(_traderTexture,new Vector2(400,400),SpriteBatch, ItemTexture);
                 items = Trader.ItemsToSell(items);
 
@@ -341,7 +347,8 @@ namespace BBTB
                 if (showExist == true &&_player.Bounds.Intersects(Tile3[13, 1].Bounds))
                 {
 					_roomNumber++;
-					CreateNewBoard();
+                    Shop = Special == _roomNumber && SpecialType == 4;
+                    CreateNewBoard();
                 }
             }
         }
@@ -382,6 +389,8 @@ namespace BBTB
                 _roomNumber = 1;
 				_special = _rnd.Next(2, _roomInFloor);
                 _specialType = 4;//_rnd.Next(1, 4);
+               // Shop = Special == _roomNumber && SpecialType == 4;
+                
             }
         }
 
@@ -402,7 +411,7 @@ namespace BBTB
             {
                 for (int y = 0; y < Rows; y++)
                 {
-                    Vector2 tilePosition = new Vector2(x * TileTexture5.Width, y * TileTexture5.Height);
+                    Vector2 tilePosition = new Vector2(x+64, y * TileTexture4.Height); //a modifier
                     Tile5[x, y] = new Tile(TileTexture5, tilePosition, SpriteBatch, false);
                 }
             }
@@ -411,6 +420,16 @@ namespace BBTB
 
         private void SetTopLeftTileUnblocked()
         {
+            if (Shop)
+            {
+                Tile2[3, 3].IsBlocked = false;
+                Tile2[4, 3].IsBlocked = false;
+                Tile2[5, 3].IsBlocked = false;
+                Tile2[6, 3].IsBlocked = false;
+                Tile2[6, 3].IsBlocked = false;
+                Tile2[7, 3].IsBlocked = false;
+                Tile2[8, 3].IsBlocked = false;
+            }
             Tile2[1, 1].IsBlocked = false;
             Tile2[2, 1].IsBlocked = false;
             Tile2[1, 2].IsBlocked = false;
@@ -618,7 +637,7 @@ namespace BBTB
                 if (StageNumber > 0) monster.Texture = mapTextures[StageNumber - 1, 2];
                 monster.Draw();
             }
-            if (Trader != null) Trader.Draw();
+            if (Trader != null && Special == _roomNumber && SpecialType == 4) Trader.Draw();
 
             foreach (var bullet in Bullets)
             {
@@ -627,12 +646,25 @@ namespace BBTB
 
             foreach(var item in items)
             {
-                if (item != null) item.Draw();
+                item?.Draw();
+            }
+            if (_player.IsDead == true) {
+                float elapsed = (float)Board.CurrentBoard.GameTime.ElapsedGameTime.TotalSeconds;
+                _time2 -= elapsed;
+                SpriteBatch.Draw(LvlUpTexture, new Vector2(250, 250), Color.AliceBlue);
+                DrawWithShadow("                        Game Over\r\n  Don't worry, you stil have your stats", new Vector2(270, 270));
+                if (_time2 < 0)
+                {
+                    _time2 = Timer;
+                    _player.IsDead = false;
+                }
+                    
             }
         }
 
         internal void Update(GameTime gameTime)
         {
+            GameTime = gameTime;
             NewRoom();
             NewStage();
             BulletUpdate(gameTime);

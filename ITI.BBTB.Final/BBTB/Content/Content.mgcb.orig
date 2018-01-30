@@ -1317,13 +1317,6 @@
 /processorParam:TextureFormat=Color
 /build:Items/Fire_book.png
 
-<<<<<<< HEAD
-#begin Sound/bgmusic.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sound/bgmusic.mp3
-=======
 #begin Items/Fireball_gun.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1407,5 +1400,24 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:trader.png
->>>>>>> 8faad36493b221f03f4263e4ee4792830f02a9e9
+
+<<<<<<< HEAD
+#begin lvlup.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:lvlup.png
+=======
+#begin Sound/bgmusic.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/bgmusic.mp3
+>>>>>>> ea37b4d0a28728ff3358c7bb07e50575b242174f
 
