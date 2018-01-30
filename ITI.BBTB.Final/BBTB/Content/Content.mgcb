@@ -1401,6 +1401,12 @@
 /processorParam:TextureFormat=Color
 /build:trader.png
 
+#begin Sound/bgmusic.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/bgmusic.mp3
+
 #begin lvlup.png
 /importer:TextureImporter
 /processor:TextureProcessor

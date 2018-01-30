@@ -135,6 +135,7 @@ namespace BBTB
                 }
             }
         }
+
         private void CheckKeyboardAndUpdateMovement()
         {
             KeyboardState keyboardState = Keyboard.GetState();
