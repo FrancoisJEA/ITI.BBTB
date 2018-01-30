@@ -598,6 +598,7 @@ namespace BBTB
             }
             foreach (var tile2 in Tile2)
             {
+                if(StageNumber > 0) tile2.Texture = mapTextures[StageNumber - 1, 3];
                 tile2.Draw();
             }
             foreach (var tile3 in Tile3)
