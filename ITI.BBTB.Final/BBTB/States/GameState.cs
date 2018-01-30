@@ -26,7 +26,9 @@ namespace BBTB.States
         private Sprite _background;
         private Random _rnd = new Random();
         private SpriteFont _debugFont;
-        
+
+        private int _endTimer;
+   
         SoundEffect _sound;
         SoundEffect _bgsound;
 
@@ -51,32 +53,39 @@ namespace BBTB.States
             _graphicsDevice = graphicsDevice;
             _spriteBatch = new SpriteBatch(graphicsDevice);
             LvlUpTexture = Content.Load<Texture2D>("lvlup");
+            _endTimer = 0;
 
-            mapTextures = new Texture2D[11, 3]; // Nombre d'étages (11 - 1), type de murs ou type de ground ou type de monstre (0 ground, 1 murs, 2 monstre))
+            mapTextures = new Texture2D[11, 4]; // Nombre d'étages (11 - 1), type de murs, type de ground, type de monstre ou type d'obstacle (0 ground, 1 murs, 2 monstre, 3 obstacle))
             
             mapTextures[0, 0] = Content.Load<Texture2D>("ground");
             mapTextures[0, 1] = Content.Load<Texture2D>("tile");
             mapTextures[0, 2] = Content.Load<Texture2D>("monster");
+            mapTextures[0, 3] = Content.Load<Texture2D>("barrel");
 
             mapTextures[1, 0] = Content.Load<Texture2D>("ground2");
             mapTextures[1, 1] = Content.Load<Texture2D>("tile2");
             mapTextures[1, 2] = Content.Load<Texture2D>("monster2");
+            mapTextures[1, 3] = Content.Load<Texture2D>("barrel");
 
             mapTextures[2, 0] = Content.Load<Texture2D>("ground3");
             mapTextures[2, 1] = Content.Load<Texture2D>("tile3");
             mapTextures[2, 2] = Content.Load<Texture2D>("monster3");
+            mapTextures[2, 3] = Content.Load<Texture2D>("barrel");
 
             mapTextures[3, 0] = Content.Load<Texture2D>("ground4");
             mapTextures[3, 1] = Content.Load<Texture2D>("tile4");
             mapTextures[3, 2] = Content.Load<Texture2D>("monster4");
+            mapTextures[3, 3] = Content.Load<Texture2D>("barrel");
 
             mapTextures[4, 0] = Content.Load<Texture2D>("ground5");
             mapTextures[4, 1] = Content.Load<Texture2D>("tile5");
             mapTextures[4, 2] = Content.Load<Texture2D>("monster5");
+            mapTextures[4, 3] = Content.Load<Texture2D>("barrel");
 
             mapTextures[5, 0] = Content.Load<Texture2D>("ground6");
             mapTextures[5, 1] = Content.Load<Texture2D>("tile6");
             mapTextures[5, 2] = Content.Load<Texture2D>("monster6");
+            mapTextures[5, 3] = Content.Load<Texture2D>("barrel");
 
             heartTexture = Content.Load<Texture2D>("heart");
             //goblinTexture = Content.Load<Texture2D>("goblin");
@@ -157,8 +166,21 @@ namespace BBTB.States
             return AllTextures;
         }
 
+        private void deadTimer()
+        {
+            _endTimer++;
+            if (_endTimer == 3600)
+            {
+                RestartGame();
+                _player._playerM.Life = _player._playerM._lifemax;
+                _endTimer = 0;
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
+            deadTimer();
+
             _player.Update(gameTime);
             //Board.KillMonster();
             foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
