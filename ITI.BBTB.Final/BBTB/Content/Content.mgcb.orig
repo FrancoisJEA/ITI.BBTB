@@ -13,13 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin DebugFont.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:DebugFont.spritefont
-
 #begin tile.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1317,13 +1310,6 @@
 /processorParam:TextureFormat=Color
 /build:Items/Fire_book.png
 
-<<<<<<< HEAD
-#begin Sound/bgmusic.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sound/bgmusic.mp3
-=======
 #begin Items/Fireball_gun.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1407,5 +1393,37 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:trader.png
->>>>>>> 8faad36493b221f03f4263e4ee4792830f02a9e9
+
+#begin Sound/bgmusic.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sound/bgmusic.mp3
+
+<<<<<<< HEAD
+#begin brumisateur_modif.jpg
+=======
+#begin lvlup.png
+>>>>>>> 13f3918386999d94889333a6efd2e142f4a7fdea
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+<<<<<<< HEAD
+/build:brumisateur_modif.jpg
+
+#begin DebugFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:DebugFont.spritefont
+=======
+/build:lvlup.png
+>>>>>>> 13f3918386999d94889333a6efd2e142f4a7fdea
 
