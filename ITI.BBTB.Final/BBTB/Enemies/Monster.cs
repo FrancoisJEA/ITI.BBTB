@@ -17,15 +17,12 @@ namespace BBTB
 		#region Propriété
 		public bool IsAlive { get { return _life >= 0; } }
         public bool IsDead { get; set; }
-        readonly Weapon _weapon;
 		int time;
         int _life;
         public Item _item;
 		List<MonstersBullet> Bullets = new List<MonstersBullet>();
         Vector2 newPosition;
         Bullet _bullet;
-        PlayerInventory PlayerInventory;
-        Monster _monster;
         int Type;
         public int _attack;
         int _level;
@@ -86,17 +83,19 @@ namespace BBTB
 			}
 		}
 
-        public Weapon Weapon => _weapon;
         public int Life { get { return _life; } set { } }
 		// public Vector2 Position { get { return _position; } set { _position = value; } }
 
         public void Update(GameTime gameTime)
         {
-            //IsDead();
             UpdatePositionBasedOnMovement(gameTime);
 			FillBulletList();
-			MonsterBulletPositionUpdate();
+			
 			DeleteBullet();
+			foreach(MonstersBullet bullet in Bullets)
+			{
+				bullet.Update(gameTime);
+			}
         }
 
         public void WhenMonsterDie(Player p)
@@ -104,11 +103,6 @@ namespace BBTB
             p._playerM.Money += _money;
             p._playerM.Experience +=_xp;
             p._playerM.LevelUp();
-        }
-
-        public void Idle()
-        {
-            Patroling(this);
         }
 
         public void Patroling(Monster monsters)
@@ -187,7 +181,7 @@ namespace BBTB
         private void UpdatePositionBasedOnMovement(GameTime gameTime)
         {
             Position += newPosition * (float)gameTime.ElapsedGameTime.TotalMinutes * 10;
-            Idle();
+			Patroling(this);
         }
 
 
@@ -271,6 +265,7 @@ namespace BBTB
 
 			    if (p.Intersects(Board.CurrentBoard._player.Bounds))
 			    {
+				   Board.CurrentBoard._player._playerM.Life = Board.CurrentBoard._player._playerM.Life - bullet.Damages;
 				   return i;
 				}
 				i = i + 1;
@@ -278,30 +273,37 @@ namespace BBTB
 			return 0;
 		}
 
-		public Vector2 MonsterBulletPositionUpdate()
-		{
-			foreach (MonstersBullet bullet in Bullets)
-			{
-				return bullet.Position = bullet.Destination * 2f;
-			}
-				return new  Vector2(0,0) ;
-		}
 
-		internal void OnBulletDestroy(MonstersBullet bullet)
+		/* internal void OnBulletDestroy(MonstersBullet bullet)
 		{
 			for (int i = 0; i < Bullets.Count; i++)
 			{
 				MonstersBullet b = Bullets[i];
 				Bullets.RemoveAt(i--);
 			}
+		}*/
+		/*
+		internal int MonsterBulletTimer()
+		{
+			foreach (MonstersBullet bullet in Bullets)
+			{
+				if(  )
+				{ 
+					return Bullets.IndexOf(bullet);
+				}
+			}
+			return 9999;
 		}
+		*/
 
+		// internal void 
+        
 		public override void Draw()
         {
             base.Draw();
 			foreach(MonstersBullet bullet in Bullets)
 			{
-				base.Draw();
+				bullet.Draw();
 			}
         }
     }

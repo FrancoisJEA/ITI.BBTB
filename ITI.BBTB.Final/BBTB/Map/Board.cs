@@ -76,10 +76,7 @@ namespace BBTB
 		Texture2D _monsterBulletTexture;
         bool Shop;
         
-
-
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture,Texture2D monsterBulletTexture, Texture2D tileTexture2, Texture2D tileTexture3,Texture2D tileTexture4,Texture2D tileTexture5, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont)
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D tileTexture4, Texture2D tileTexture5, Texture2D tileTexture6, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont,Texture2D lvluptexture)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture,Texture2D monsterBulletTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D tileTexture4, Texture2D tileTexture5, Texture2D tileTexture6, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont,Texture2D lvluptexture)
 	    {
 			_monsterBulletTexture = monsterBulletTexture;
             LvlUpTexture = lvluptexture;
@@ -90,7 +87,7 @@ namespace BBTB
             TileTexture3 = tileTexture3;
             TileTexture4 = tileTexture4;
             TileTexture5 = tileTexture5;
-            TileTexture6 = tileTexture6;
+			TileTexture6 = tileTexture6;
 
             ChestTexture = chestTexture;
             ChestTexture2 = chestTexture2;
@@ -115,8 +112,10 @@ namespace BBTB
             _tile6 = new Tile[Columns, Rows];
 
             _boss = new Boss(BossTexture,monsterBulletTexture, _bossPosition, SpriteBatch, false, itemTexture);
-            Board.CurrentBoard = this;
+            
 			Bullets = new List<Bullet>();
+			Board.CurrentBoard = this;
+
 			_player = player;
             Inventory = _player.Inventory;
             _gameState = gameState;

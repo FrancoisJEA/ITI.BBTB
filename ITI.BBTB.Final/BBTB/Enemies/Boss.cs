@@ -46,8 +46,6 @@ namespace BBTB.Enemies
             {
                 base.Draw();
             }
-          
-            
         }
 
 
