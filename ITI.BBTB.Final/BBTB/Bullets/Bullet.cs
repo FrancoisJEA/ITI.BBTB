@@ -75,14 +75,15 @@ namespace BBTB
                 
             }
             
-            if(_boss.AddBoss)
+            if(_boss.AddBoss())
             {
                 if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(_boss.Bounds))
                 {
                     _boss.Hit(this);
                     if (_boss.Life < +0) _boss.IsAlive = false;
                     return true;
-                    }
+                }
+                else return false;
                 
             }
 				return false;
