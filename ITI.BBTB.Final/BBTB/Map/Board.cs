@@ -22,6 +22,9 @@ namespace BBTB
         Tile[,] _tile6; //
         Tile[,] _tile7; //
 
+        float totalSeconds;
+        const float TimerSpikes = 20;
+
         public Texture2D[,] mapTextures;
        
         public List<Preacher> Preacher { get; set; }
@@ -81,6 +84,8 @@ namespace BBTB
 
         public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D tileTexture4, Texture2D tileTexture5, Texture2D tileTexture6, Texture2D tileTexture7, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont,Texture2D lvluptexture)
 	    {
+            totalSeconds = 20;
+
             LvlUpTexture = lvluptexture;
             Columns = columns;
             Rows = rows;
@@ -170,13 +175,14 @@ namespace BBTB
         {
             foreach (var tile in Tile7)
             {
-                int timeHit = 40;
-                if (tile.IsBlocked && tile.Bounds.Intersects(_player.Bounds) && timeHit == 40)
+                float timeHit = (float)Board.CurrentBoard.GameTime.ElapsedGameTime.TotalSeconds;
+                totalSeconds -= timeHit;
+
+                if (tile.IsBlocked && tile.Bounds.Intersects(_player.Bounds) && totalSeconds < 0)
                 {
-                    _player._playerM.Life -= 1;
-                    timeHit = 0;
+                    _player._playerM.Life -= 3;
+                    totalSeconds = TimerSpikes;
                 }
-                timeHit++;
             }
         }
 
@@ -253,17 +259,6 @@ namespace BBTB
                     }
                 }
             }            
-        }
-
-        private void PlayerDead()
-        {
-            if (_player._playerM.Life <= 0)
-            {
-                _player._playerM.Life = _player._playerM._lifemax;
-                _player.Inventory.ItemByDefault(_player);
-                Stage1();
-                _player.IsDead = true;
-            }
         }
 
         private void DrawWithShadow(string text, Vector2 position)
@@ -344,8 +339,6 @@ namespace BBTB
             _roomInFloor = _rnd.Next(4, 7);
             _stageNumber = 1;
             _roomNumber = 1;
-            _special = _rnd.Next(2, _roomInFloor);
-            _specialType = _rnd.Next(1, 4);
             _boss._life = 5000;
             CreateNewBoard();
         }
@@ -367,6 +360,7 @@ namespace BBTB
                     break;    
                 }
             }
+
             if (showExist == true)
             {
                 Tile3[13, 1].Texture = TileTexture3;
@@ -421,7 +415,7 @@ namespace BBTB
                 _stageNumber = _stageNumber + 1;
                 _roomNumber = 1;
 				_special = _rnd.Next(2, _roomInFloor);
-                _specialType = 4;//_rnd.Next(1, 4);
+                _specialType = _rnd.Next(1, 4);
                // Shop = Special == _roomNumber && SpecialType == 4;
                if (StageNumber != 1)
                 {
@@ -760,7 +754,6 @@ namespace BBTB
             NewRoom();
             NewStage();
             BulletUpdate(gameTime);
-            PlayerDead();
             OpenChest();
             SpikesHit();
         }

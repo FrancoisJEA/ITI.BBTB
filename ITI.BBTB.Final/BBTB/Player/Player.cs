@@ -62,6 +62,18 @@ namespace BBTB
         public GameState Ctx => _ctx;
         #endregion
 
+        private void PlayerDead()
+        {
+            if (_playerM.Life <= 0)
+            {
+                _playerM.Life = _playerM._lifemax;
+                Inventory.ItemByDefault(this);
+                _ctx.totalSecond = _ctx.hungerTime;
+                Board.CurrentBoard.Stage1();
+                IsDead = true;
+            }
+        }
+
         public void HeartsDrawing(Texture2D _heartTexture)
         {
             int heartPositionx = 900;
@@ -98,6 +110,7 @@ namespace BBTB
 
         public void Update(GameTime gameTime)
         {
+            PlayerDead();
             CheckKeyboardAndUpdateMovement();
             SimulateFriction();
             MoveAsFarAsPossible(gameTime);
@@ -107,6 +120,7 @@ namespace BBTB
             HasTouchedMonster();
             _playerM.LvlUpdate();
         }
+
         private void UsePotion()
         {
             KeyboardState keyboardState = Keyboard.GetState();
