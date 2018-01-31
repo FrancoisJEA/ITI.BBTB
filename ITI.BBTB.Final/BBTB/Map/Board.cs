@@ -138,7 +138,6 @@ namespace BBTB
 
             for (int x = 0; x < Monsters.Count; x++)
             {
-
                 if (Monsters[x].IsAlive == false)
                 {
 
@@ -148,9 +147,10 @@ namespace BBTB
                     items.Add(Item);
                 }
             }
-
             foreach (Monster m in monsterToRemove) Monsters.Remove(m);
         }
+
+
 
         public void TakeItem ()
         {
@@ -179,14 +179,16 @@ namespace BBTB
                     {
                         if (items[y].ItemClasse == _player.PlayerClasse || items[y].ItemClasse == "All")
                         {
-                            float X = items[y]._position.X + 25;
+                            float X = items[y]._position.X + 10;
                             float Y = items[y]._position.Y;
-                            if (X< 70) X += 40;
-                            else if (X > 800) X -= Inventory.BoxTexture.Bounds.Width + 25;
+                            if (X< 70) X += 20;
+                            else if (X > 800) X -= Inventory.BoxTexture.Bounds.Width + 10;
                             if (Y < 70) Y += items[y].Bounds.Height;
                             else if (Y > 800) Y -= Inventory.BoxTexture.Bounds.Height;
                             Sprite Box = new Sprite(Inventory.BoxTexture, new Vector2(X, Y), SpriteBatch);
                             Box.Draw();
+                            Sprite _itemSprite = new Sprite(items[y].Texture, new Vector2(X + 50, Y + 80),SpriteBatch);
+                            _itemSprite.Draw();
 
                             if (items[y].ItemType == "weapon") { _type = "Damages:";  _charac = items[y].Attack; }
                             else if (items[y].ItemType == "armor") { _type = "Armor:"; _charac = items[y].Defense; }
@@ -195,11 +197,11 @@ namespace BBTB
 
                             if (items[y]._specialItem == true)
                             {
-                                Text = string.Format("\r\n          {0:0} \r\n      Special Item !\r\n {4:0}: {5:0}\r\nStrength +{1:0} Intelligence +{2:0} Agility +{3:0}\r\n\r\n          Press F to equip \r\n ", items[y].Name, items[y]._strength, items[y]._intelligence, items[y]._agility, _type, _charac);
+                                Text = string.Format("               {0:0} \r\n \r\n                        Special Item !\r\n                        {4:0}: {5:0}\r\n                       Strength +{1:0}\r\n                         Intelligence +{2:0} \r\n                        Agility +{3:0}\r\n\r\n          Press F to equip \r\n ", items[y].Name, items[y]._strength, items[y]._intelligence, items[y]._agility, _type, _charac);
                             }
                             else if (items[y]._specialItem == false)
                             { 
-                                Text = string.Format("\r\n          {0:0} \r\n           {1:0} {2:0}\r\n \r\n             Press F to equip", items[y].Name, _type, _charac);
+                                Text = string.Format("               {0:0} \r\n\r\n                           {1:0} {2:0}\r\n \r\n                               Press F", items[y].Name, _type, _charac);
                             }
                             
                             DrawWithShadow(Text, new Vector2(X + 10, Y + 15));
@@ -373,7 +375,7 @@ namespace BBTB
                         items.Add(new Item(new Vector2(X, Y), ItemTexture[i], SpriteBatch, _player));
                     }
                     _player._playerM.Money += rng.Next(10 * StageNumber * (1 + _player._playerM.Intelligence / 10), 20 * StageNumber * (1 + _player._playerM.Intelligence / 10));
-                         _chestState = true;
+                    _chestState = true;
                     Tile4[5, 4].Texture = ChestTexture2;
                 }
             }
@@ -422,13 +424,13 @@ namespace BBTB
         {
             if (Shop)
             {
-                Tile2[3, 3].IsBlocked = false;
-                Tile2[4, 3].IsBlocked = false;
-                Tile2[5, 3].IsBlocked = false;
-                Tile2[6, 3].IsBlocked = false;
-                Tile2[6, 3].IsBlocked = false;
-                Tile2[7, 3].IsBlocked = false;
-                Tile2[8, 3].IsBlocked = false;
+                Tile2[3, 3].IsBlocked = true;
+                Tile2[4, 3].IsBlocked = true;
+                Tile2[5, 3].IsBlocked = true;
+                Tile2[6, 3].IsBlocked = true;
+                Tile2[6, 3].IsBlocked = true;
+                Tile2[7, 3].IsBlocked = true;
+                Tile2[8, 3].IsBlocked = true;
             }
             Tile2[1, 1].IsBlocked = false;
             Tile2[2, 1].IsBlocked = false;
@@ -446,7 +448,6 @@ namespace BBTB
 
             for (int x = 0; x < Columns; x++)
             {
-                
                 for (int y = 0; y < Rows; y++)
                 {
                     foreach (Monster monster in Monsters)

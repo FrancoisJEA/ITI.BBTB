@@ -165,8 +165,8 @@ namespace BBTB.Items
             if (Display)
             {
                 this.Draw(sb, new Vector2(275, 155));
-                Text = string.Format("{0:0}\r\n Level {4:0} \r\n Strength: {1:0}\r\n Intelligence: {2:0}\r\n Agility: {3:0} \r\n", player._playerM.Name, player._playerM.Strength, player._playerM.Intelligence, player._playerM.Agility, player._playerM.Level);
-                DrawWithShadow(Text, new Vector2(360, 465), _debugFont);
+                Text = string.Format("        {0:0}\r\n \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nLevel {4:0} \r\n Strength: {1:0}\r\n Intelligence: {2:0}\r\n Agility: {3:0} \r\n", player._playerM.Name, player._playerM.Strength, player._playerM.Intelligence, player._playerM.Agility, player._playerM.Level);
+                DrawWithShadow(Text, new Vector2(360, 175), _debugFont);
 
                 foreach (Item i in Inventory) {
 

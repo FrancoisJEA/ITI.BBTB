@@ -191,7 +191,6 @@ namespace BBTB
             {
                 Texture2D ItemTexture = Board.CurrentBoard._player.Inventory.FoundTextureByID(ItemID, _itemTexture);
                 _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);
-
             }
             return _item;
         }

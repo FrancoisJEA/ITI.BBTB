@@ -56,21 +56,21 @@ namespace BBTB
             {
                     if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
-                    if (monster.IsAlive)
-                    {
-                        monster.Hit(this);
-                        monster.Reflect(Board.CurrentBoard._player._playerM);
-                        if (monster.Life <= 0)
+                        if (monster.IsAlive)
                         {
-                            Board.CurrentBoard.KillMonster();
+                            monster.Hit(this);
+                            monster.Reflect(Board.CurrentBoard._player._playerM);
+                            if (monster.Life <= 0)
+                            {
+                                Board.CurrentBoard.KillMonster();
 
-                            _monster = monster;
-                            monster.IsDead = false;
-                            return false;
-                            //new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
+                                _monster = monster;
+                                monster.IsDead = false;
+                                return false;
+                                //new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
+                            }
+                            else return true;
                         }
-                        else return true;
-                    }
                     }
                 
             }
