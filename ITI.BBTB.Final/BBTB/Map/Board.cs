@@ -279,11 +279,13 @@ namespace BBTB
         {
             
             items = new List<Item>();
-			if (_special != _roomNumber)
+            if (_boss.AddBoss())
+                SetBossTileUnblocked();
+            if (_special != _roomNumber)
 			{
                 AddMonsters();
                 if (_roomNumber == _roomInFloor)
-                    _boss.AddBoss = true;
+                    _boss.AddBoss();
                 
                 BlockSomeTilesRandomly();
 				SetStairs();
@@ -327,8 +329,7 @@ namespace BBTB
             }
 			SetAllBorderTilesBlocked();
 			SetTopLeftTileUnblocked();
-            if (_boss.AddBoss == true)
-                SetBossTileUnblocked();
+         
 			_player.ResetPosition();
 		}
         
@@ -345,6 +346,7 @@ namespace BBTB
             _roomNumber = 1;
             _special = _rnd.Next(2, _roomInFloor);
             _specialType = _rnd.Next(1, 4);
+            _boss._life = 5000;
             CreateNewBoard();
         }
         
@@ -357,7 +359,9 @@ namespace BBTB
                 {
                     showExist = false;
                     break;
-                } else if (_roomNumber == _roomInFloor && monster.IsAlive && _boss.IsAlive)
+                }
+
+                if (_roomNumber == _roomInFloor && _boss.AddBoss() == true)
                 {
                     showExist = false;
                     break;    
@@ -419,6 +423,10 @@ namespace BBTB
 				_special = _rnd.Next(2, _roomInFloor);
                 _specialType = 4;//_rnd.Next(1, 4);
                // Shop = Special == _roomNumber && SpecialType == 4;
+               if (StageNumber != 1)
+                {
+                    _boss._life = 5000 * StageNumber * _player._playerM.Strength;
+                }
                 
             }
         }
