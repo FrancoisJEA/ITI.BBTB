@@ -62,12 +62,14 @@ namespace BBTB.Items
             Inventory = DefaultInventory;
             _potionNb = 2;
         }
+
         public void AddEmptyPotion(Player _player)
         {
             Item i = new Item(new Vector2(80,80), allTexture[13], sb, _player);
             Inventory.RemoveAt(6);
             Inventory.Insert(6, i);
         }
+
         public List<Item> AddItemToInventory(Item Item, List<Item> Items,Player _player,int y)
         {
             int i = Item.InventoryEmplacement;
@@ -79,10 +81,8 @@ namespace BBTB.Items
                 else { return Items; }
             }
 
-
             if (Item.Name == "Heal potion")
             {
-             
                 if (_potionNb < _potionMax)
                 {
                     _potionNb++;
@@ -92,8 +92,6 @@ namespace BBTB.Items
                     Inventory.Insert(i, Item);
                     Items.Remove(Item);
                 }
-
-               
             }
             else if (Item.Name == "Used potion")
             {
@@ -138,6 +136,7 @@ namespace BBTB.Items
         {
             return Inventory;
         }
+
         public Texture2D FoundTextureByID(int ItemID, List<Texture2D> ItemTextures)
         {
             Texture2D itemTexture = ItemTextures.ElementAt(ItemID);
@@ -146,7 +145,6 @@ namespace BBTB.Items
 
         public void ShowInventory (Player player, SpriteFont _debugFont)
         {
-            
             string Text;
             KeyboardState keyboardState = Keyboard.GetState();
             int x = 550;
@@ -159,7 +157,6 @@ namespace BBTB.Items
                     _displayTimer = 1;
                 }
                 else _displayTimer++;
-
             }
       
             if (Display)
@@ -184,10 +181,12 @@ namespace BBTB.Items
                 }
             }    
         }
+
         private void DrawWithShadow(string text, Vector2 position,SpriteFont _debugFont)
         {
             sb.DrawString(_debugFont, text, position + Vector2.One, Color.Black);
             sb.DrawString(_debugFont, text, position, Color.LightYellow);
         }
+
     }
 }

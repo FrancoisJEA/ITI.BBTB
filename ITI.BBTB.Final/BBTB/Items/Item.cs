@@ -108,20 +108,8 @@ namespace BBTB.Items
             else return "All";
         }
 
-        public void DefineItem ()
-        {
-            
-        }
-
-        public void AddToInventory(string Name)
-        {
-         
-        }
-        public void UsePotion()
-        {
-            
-        }
-
+  
+     
         internal int FindInventoryEmplacement (string Name)
         {
 

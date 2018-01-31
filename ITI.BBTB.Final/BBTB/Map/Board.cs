@@ -81,6 +81,7 @@ namespace BBTB
 
         public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D tileTexture4, Texture2D tileTexture5, Texture2D tileTexture6, Texture2D tileTexture7, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont,Texture2D lvluptexture)
 	    {
+            
             LvlUpTexture = lvluptexture;
             Columns = columns;
             Rows = rows;
@@ -146,22 +147,15 @@ namespace BBTB
 
         #endregion
 
-        public void KillMonster()
+        public void KillMonster(Monster monster)
         {
-            List<Monster> monsterToRemove = new List<Monster>();
-
-            for (int x = 0; x < Monsters.Count; x++)
-            {
-                if (Monsters[x].IsAlive == false)
+                if (monster.IsAlive == false)
                 {
-
-                    Item Item = Monsters[x].DropItem();
-                    Monsters[x].WhenMonsterDie(_player);
-                    monsterToRemove.Add(Monsters[x]);
+                    Item Item = monster.DropItem();
+                    monster.WhenMonsterDie(_player);       
                     items.Add(Item);
                 }
-            }
-            foreach (Monster m in monsterToRemove) Monsters.Remove(m);
+            Monsters.Remove(monster);
         }
 
         private void SpikesHit()
@@ -297,31 +291,35 @@ namespace BBTB
             }
             else if (Special == _roomNumber && SpecialType == 1)
 			{
-				Tile4[5, 4].IsBlocked = true;
+                ForSpecialRoom();
+                Tile4[5, 4].IsBlocked = true;
                 Tile4[7, 6].IsBlocked = true;
-			}
+               
+            }
             else if (Special == _roomNumber && SpecialType == 2)
 			{
 				AddPreacher();
-                 //SetSanctuary();
+                //SetSanctuary();
+                ForSpecialRoom();
             }
             else if (Special == _roomNumber && SpecialType == 3)
             {
-                
-					/*string Saves = Path.GetTempFileName();
-					var Hero = _player._playerM;
-				    var Map = CurrentBoard;
-					_f = new BinaryFormatter();
-					using (var stream = File.OpenWrite("Content/Saves/Saves"))
-					{
-						_f.Serialize(stream, Hero);
-					    //_f.Serialize(stream, Map);
-					}*/
-				
+                ForSpecialRoom();
+                /*string Saves = Path.GetTempFileName();
+                var Hero = _player._playerM;
+                var Map = CurrentBoard;
+                _f = new BinaryFormatter();
+                using (var stream = File.OpenWrite("Content/Saves/Saves"))
+                {
+                    _f.Serialize(stream, Hero);
+                    //_f.Serialize(stream, Map);
+                }*/
+
             }
             else if (Shop)
             {
                 //Tile5[6, 4].IsBlocked = true;
+                ForSpecialRoom();
                 Tile5[3, 3].IsBlocked = true;
                 Trader = new Trader(_traderTexture,new Vector2(400,400),SpriteBatch, ItemTexture);
                 items = Trader.ItemsToSell(items);
@@ -421,7 +419,7 @@ namespace BBTB
                 _stageNumber = _stageNumber + 1;
                 _roomNumber = 1;
 				_special = _rnd.Next(2, _roomInFloor);
-                _specialType = 4;//_rnd.Next(1, 4);
+                _specialType = _rnd.Next(1, 4);
                // Shop = Special == _roomNumber && SpecialType == 4;
                if (StageNumber != 1)
                 {
@@ -470,17 +468,35 @@ namespace BBTB
             }
         }
 
+        public void ForSpecialRoom ()
+        {
+
+            for (int x = 0; x < Columns; x++)
+            {
+                for (int y = 0; y < Rows; y++)
+                {
+                    Tile2[x, y].IsBlocked = false;
+                    Tile7[x, y].IsBlocked = false;
+                }
+            }
+        }
+
         private void SetTopLeftTileUnblocked()
         {
             if (Shop)
             {
-                Tile2[3, 3].IsBlocked = true;
-                Tile2[4, 3].IsBlocked = true;
-                Tile2[5, 3].IsBlocked = true;
-                Tile2[6, 3].IsBlocked = true;
-                Tile2[6, 3].IsBlocked = true;
-                Tile2[7, 3].IsBlocked = true;
-                Tile2[8, 3].IsBlocked = true;
+                Tile2[1, 4].IsBlocked = true;
+                Tile2[2, 4].IsBlocked = true;
+                Tile2[3, 4].IsBlocked = true;
+                Tile2[4, 4].IsBlocked = true;
+                Tile2[5, 4].IsBlocked = true;
+                Tile2[6, 4].IsBlocked = true;
+                Tile2[6, 4].IsBlocked = true;
+                Tile2[7, 4].IsBlocked = true;
+                Tile2[8, 4].IsBlocked = true;
+                Tile2[9, 4].IsBlocked = true;
+                Tile2[10, 4].IsBlocked = true;
+                Tile2[11, 4].IsBlocked = true;
             }
 
             Tile7[1, 1].IsBlocked = false;

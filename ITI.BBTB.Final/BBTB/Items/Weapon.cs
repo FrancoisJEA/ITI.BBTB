@@ -103,5 +103,6 @@ namespace BBTB
         {
             SpriteBatch.Draw(Texture, Position, null, Color.White, WeaponLib.Rotation, _rotationOrigin, 1, SpriteEffects.None, 0);
         }
+
     }
 }

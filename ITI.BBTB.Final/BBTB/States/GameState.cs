@@ -193,7 +193,6 @@ namespace BBTB.States
             _board.Update(gameTime);
             CheckKeyboardAndReact();
           
-
             _background = new Sprite(mapTextures[_board.StageNumber - 1, 0], new Vector2(60, 60), _spriteBatch);
         }
 

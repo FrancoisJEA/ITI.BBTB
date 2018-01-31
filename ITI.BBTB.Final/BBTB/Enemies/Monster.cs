@@ -71,7 +71,7 @@ namespace BBTB
         }
         public void Reflect (PlayerModel p)
         {
-            if (_reflect == true) p.Life -= p.Life / 1000;
+            if (_reflect == true) p.Life -= _attack/ 100;
         }
 
         public Weapon Weapon => _weapon;
