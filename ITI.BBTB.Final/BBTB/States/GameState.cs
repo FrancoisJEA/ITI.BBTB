@@ -18,42 +18,42 @@ namespace BBTB.States
     {
         Texture2D[,] mapTextures;
         
-        private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Player _player;
         private Board _board;
-        private Boss _boss;
         private Sprite _background;
         private Random _rnd = new Random();
         private SpriteFont _debugFont;
 
-        private int _endTimer;
-   
+        //public int _endTimer;
+
+        public float totalSecond;
+        public float hungerTime = 300;
+        string hungerText = "";
+
         SoundEffect _sound;
         SoundEffect _bgsound;
 
         public List<Texture2D> _itemTexture;
         PlayerInventory Inventory;
         List<Texture2D> _bulletTextures;
-        List<Texture2D> playerTexture;
         public Texture2D goblinTexture;
         Texture2D LvlUpTexture;
         Texture2D heartTexture;
         private Texture2D TraderTexture;
-        int _time;
 
         internal Board Board
         {
             get { return _board; }
         }
 
-
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager Content, string classeSelected) : base(game, graphicsDevice, Content)
         {
             _graphicsDevice = graphicsDevice;
             _spriteBatch = new SpriteBatch(graphicsDevice);
             LvlUpTexture = Content.Load<Texture2D>("lvlup");
-            _endTimer = 0;
+
+            totalSecond = hungerTime;
 
             mapTextures = new Texture2D[11, 4]; // Nombre d'étages (11 - 1), type de murs, type de ground, type de monstre ou type d'obstacle (0 ground, 1 murs, 2 monstre, 3 obstacle))
             
@@ -169,20 +169,28 @@ namespace BBTB.States
             return AllTextures;
         }
 
-        private void deadTimer()
+        private void deadTimer(GameTime gameTime)
         {
-            _endTimer++;
-            if (_endTimer == 7200)
+            
+            float totalTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            totalSecond -= totalTime;
+
+            var ss = Convert.ToInt32(totalSecond % 60).ToString("00");
+            var mm = (Math.Floor(totalSecond / 60) % 60).ToString("00");
+            var hh = Math.Floor(totalSecond / 60 / 60).ToString("00");
+
+            hungerText = mm + ":" + ss; 
+
+            if (totalSecond < 0)
             {
-                RestartGame();
-                _player._playerM.Life = _player._playerM._lifemax;
-                _endTimer = 0;
+                _player._playerM.Life = 0;
+                totalSecond = hungerTime;
             }
         }
 
         public override void Update(GameTime gameTime)
         {
-            deadTimer();
+            deadTimer(gameTime);
 
             _player.Update(gameTime);
             //Board.KillMonster();
@@ -248,6 +256,9 @@ namespace BBTB.States
 
             string monsterDeadInText = string.Format("Monsters Dead: ({0:0})", _board.MonsterDead);
             string LvlUpInText = string.Format("             Level Up ! \r\n {0:0} just reached Lvl. {1:0}", _player._playerM.Name, _player._playerM.Level);
+
+            string hungerTimeInText = string.Format("Death by Hunger in: ({0})", hungerText);
+
             //DrawWithShadow(positionInText, new Vector2(10, 0));
             //DrawWithShadow(movementInText, new Vector2(10, 20));
 
@@ -256,17 +267,19 @@ namespace BBTB.States
             DrawWithShadow(moneyInText, new Vector2(400, 20));
             if (_player._playerM.lvlup) DrawWithShadow(LvlUpInText, new Vector2(320, 270));
 
-           // DrawWithShadow(RoomNumberInText, new Vector2(280, 280));
-           // DrawWithShadow(StageNumberInText, new Vector2(320, 320));
+            // DrawWithShadow(RoomNumberInText, new Vector2(280, 280));
+            // DrawWithShadow(StageNumberInText, new Vector2(320, 320));
 
-           // DrawWithShadow(SpecialInText, new Vector2(360, 360));
-          //  DrawWithShadow(SpecialTypeInText, new Vector2(400, 400));
+            // DrawWithShadow(SpecialInText, new Vector2(360, 360));
+            //  DrawWithShadow(SpecialTypeInText, new Vector2(400, 400));
 
-           // DrawWithShadow(monsterDeadInText, new Vector2(440, 440));
+            // DrawWithShadow(monsterDeadInText, new Vector2(440, 440));
+
+            DrawWithShadow(hungerTimeInText, new Vector2(10, 600));
 
             //DrawWithShadow("F5 for random board", new Vector2(70, 600));
         }
-		
+
         private void DrawWithShadow(string text, Vector2 position)
         {
             _spriteBatch.DrawString(_debugFont, text, position + Vector2.One, Color.Black);
