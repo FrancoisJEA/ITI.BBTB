@@ -100,6 +100,7 @@ namespace BBTB.States
             var tileTexture4 = Content.Load<Texture2D>("stairs_closed");
             var monsterTexture = Content.Load<Texture2D>("monster");
             var basicTexture = Content.Load<Texture2D>("Character/P_gunner");
+			var monsterbulletsTexture = Content.Load<Texture2D>("brumisateur_modif");
             _bulletTextures = BulletTextures(Content);
             _itemTexture = ItemTextures(Content);
             var tileTexture5 = Content.Load<Texture2D>("shop");
@@ -133,7 +134,8 @@ namespace BBTB.States
                 basicTexture = Content.Load<Texture2D>("Character/P_archer");
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             }
-                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, tileTexture7, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont,LvlUpTexture,TileBis);
+            // _board = new Board(_spriteBatch, tileTexture,monsterbulletsTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, tileTexture7, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont,LvlUpTexture,TileBis);
+            _board = new Board(_spriteBatch, tileTexture,monsterbulletsTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, tileTexture7, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont,LvlUpTexture,TileBis);
 
             _bgsound.Play(0.3f, 0, 0);
         }

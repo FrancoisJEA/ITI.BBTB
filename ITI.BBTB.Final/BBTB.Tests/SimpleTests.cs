@@ -24,7 +24,7 @@ namespace BBTB.Tests
         {
             Assert.That(0, Is.EqualTo(1));
         }
-
+		/*
         [Test]
         public void PlayerSerializationandDeserialization()
             // Test the Serialization of 1 PlayerModel and check that the player stats are still the same even after the deserialization 
@@ -108,6 +108,6 @@ namespace BBTB.Tests
                 Assert.That(WhiteGuy.SkillPoint == 0);
                 Assert.That(WhiteGuy.Intelligence == 13);
             }
-        }
+        }*/
     }
 }

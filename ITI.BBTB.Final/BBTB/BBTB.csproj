@@ -60,6 +60,7 @@
     <Compile Include="Bullets\Bullet.cs" />
     <Compile Include="Bullets\BulletLib.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Bullets\MonstersBullet.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Enemies\Monster.cs" />
     <Compile Include="MovementWrapper.cs" />
