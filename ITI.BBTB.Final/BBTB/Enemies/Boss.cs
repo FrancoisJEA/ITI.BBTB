@@ -17,7 +17,7 @@ namespace BBTB.Enemies
         internal int _life;
         int _xp;
         
-        public Boss(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture) : base(texture, position, batch, isAlive, itemTexture)
+        public Boss(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,SpriteFont debugFont) : base(texture, position, batch, isAlive, itemTexture,debugFont)
         {
            
             _life = 5000;
