@@ -57,7 +57,7 @@ namespace BBTB
         private void DefineMonster(int t)
         {
             _attack = 15;
-            _life = 1000;
+            _life = 100;
             _level = 1;
             _xp = 10;
             _money = 2;

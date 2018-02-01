@@ -91,7 +91,7 @@ namespace BBTB.States
             heartTexture = Content.Load<Texture2D>("heart");
 
             //goblinTexture = Content.Load<Texture2D>("goblin");
-            var tileTexture = Content.Load<Texture2D>("tile");
+            var tileTexture = Content.Load<Texture2D>("tilewall1");
             var tileTexture2 = Content.Load<Texture2D>("barrel");
             var archerTexture = Content.Load<Texture2D>("Character/P_archer");
             var mageTexture = Content.Load<Texture2D>("Character/P_mage");
@@ -105,12 +105,13 @@ namespace BBTB.States
             var tileTexture5 = Content.Load<Texture2D>("shop");
             var tileTexture6 = Content.Load<Texture2D>("torche");
             var tileTexture7 = Content.Load<Texture2D>("spikes");
+            var tileTexture1roof = Content.Load<Texture2D>("tileangle1");
             var _boxTexture = Content.Load<Texture2D>("HUDBox");
             var _boxTexture2 = Content.Load<Texture2D>("HUDBox2");
             var _chestTexture = Content.Load<Texture2D>("chest");
             var _chestTexture2 = Content.Load<Texture2D>("chest_open");
             var _bossTexture = Content.Load<Texture2D>("boss");
-            var TileBis = Content.Load<Texture2D>("tilebis");
+            var TileBis = Content.Load<Texture2D>("tileroof1");
             
             TraderTexture = Content.Load<Texture2D>("trader");
             _debugFont = Content.Load<SpriteFont>("DebugFont");
@@ -133,7 +134,7 @@ namespace BBTB.States
                 basicTexture = Content.Load<Texture2D>("Character/P_archer");
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             }
-                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, tileTexture7, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont,LvlUpTexture,TileBis);
+                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, tileTexture7, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this, _itemTexture, _debugFont, LvlUpTexture, TileBis, tileTexture1roof);
 
             _bgsound.Play(0.3f, 0, 0);
         }
@@ -253,6 +254,7 @@ namespace BBTB.States
             string moneyInText = string.Format("Money: ({0:0})", _player._playerM.Money);
 
             string RoomNumberInText = string.Format("Room Number: ({0:0})", Board.CurrentBoard.RoomNumber);
+            string RoomInFloorInText = string.Format("Room Number: ({0:0})", Board.CurrentBoard.RoomInFloor);
             string StageNumberInText = string.Format("Stage Number: ({0:0})", Board.CurrentBoard.StageNumber);
 
             string SpecialInText = string.Format("Special Number: ({0:0})", Board.CurrentBoard.Special);
@@ -271,7 +273,8 @@ namespace BBTB.States
             DrawWithShadow(moneyInText, new Vector2(400, 20));
             if (_player._playerM.lvlup) DrawWithShadow(LvlUpInText, new Vector2(320, 270));
 
-            // DrawWithShadow(RoomNumberInText, new Vector2(280, 280));
+             DrawWithShadow(RoomNumberInText, new Vector2(280, 280));
+             DrawWithShadow(RoomInFloorInText, new Vector2(320, 320));
             // DrawWithShadow(StageNumberInText, new Vector2(320, 320));
 
             // DrawWithShadow(SpecialInText, new Vector2(360, 360));

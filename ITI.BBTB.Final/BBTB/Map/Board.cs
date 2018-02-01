@@ -50,6 +50,7 @@ namespace BBTB
         public Texture2D TileTexture5 { get; set; }
         public Texture2D TileTexture6 { get; set; }
         public Texture2D TileTexture7 { get; set; }
+        public Texture2D TileRoof { get; set; }
 
         public Texture2D MonsterTexture { get; set; }
         public Texture2D BossTexture { get; set; }
@@ -83,7 +84,7 @@ namespace BBTB
         Texture2D _tilebis;
 
 
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D tileTexture4, Texture2D tileTexture5, Texture2D tileTexture6, Texture2D tileTexture7, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont,Texture2D lvluptexture,Texture2D Tilebis)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D tileTexture4, Texture2D tileTexture5, Texture2D tileTexture6, Texture2D tileTexture7, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture, SpriteFont debugFont, Texture2D lvluptexture, Texture2D Tilebis, Texture2D tileroof)
 	    {
             totalSeconds = 20;
             _tilebis = Tilebis;
@@ -97,6 +98,7 @@ namespace BBTB
             TileTexture5 = tileTexture5;
             TileTexture6 = tileTexture6;
             TileTexture7 = tileTexture7;
+            TileRoof = tileroof;
 
             ChestTexture = chestTexture;
             ChestTexture2 = chestTexture2;
@@ -343,26 +345,31 @@ namespace BBTB
         
         public void NewRoom()
         {
-            bool showExist = true;
-            foreach (Monster monster in Monsters)
-            {
-                if (monster.IsAlive && _roomNumber < _roomInFloor)
+           bool showExist = true;
+           
+           if (_roomNumber != _roomInFloor)
+           {
+                foreach (Monster monster in Monsters)
                 {
-                    showExist = false;
-                    break;
+                    if (monster.IsAlive)
+                    {
+                        showExist = false;
+                        break;
+                    }
                 }
+           }
 
-                if (_roomNumber == _roomInFloor && _boss.AddBoss() == true)
-                {
-                    showExist = false;
-                    break;    
-                }
-            }
+           else if (_roomNumber == _roomInFloor && _boss.AddBoss() == true)
+           {
+               showExist = false;
+           }
+               
 
             if (showExist == true)
             {
                 Tile3[13, 1].Texture = TileTexture3;
-            } else if (showExist == false)
+            }
+            else if (showExist == false)
             {
                 Tile3[13, 1].Texture = TileTexture4;
             }
@@ -406,7 +413,7 @@ namespace BBTB
         
         public void NewStage()
         {
-            if(_roomNumber == _roomInFloor && _player.Bounds.Intersects(Tile3[13, 1].Bounds))
+            if(_roomNumber == _roomInFloor && Tile3[13, 1].Texture == TileTexture3 && _player.Bounds.Intersects(Tile3[13, 1].Bounds))
             {
                 CreateNewBoard();
                 _roomInFloor = _rnd.Next(4, 7);
@@ -417,7 +424,7 @@ namespace BBTB
                // Shop = Special == _roomNumber && SpecialType == 4;
                if (StageNumber != 1)
                 {
-                    _boss._life = 5000 * StageNumber * _player._playerM.Strength;
+                    _boss._life = 5000 * StageNumber;
                 }
                 
             }
@@ -462,7 +469,7 @@ namespace BBTB
             }
         }
 
-        public void ForSpecialRoom ()
+        public void ForSpecialRoom()
         {
 
             for (int x = 0; x < Columns; x++)
@@ -510,6 +517,8 @@ namespace BBTB
             Tile7[10, 1].IsBlocked = false;
             Tile7[9, 2].IsBlocked = false;
             Tile7[10, 2].IsBlocked = false;
+            Tile7[8, 1].IsBlocked = false;
+            Tile7[8, 2].IsBlocked = false;
 
             for (int x = 0; x < Columns; x++)
             {
@@ -621,10 +630,23 @@ namespace BBTB
                     Tile[x, y] = new Tile(TileTexture, tilePosition, SpriteBatch, false);
 
                     if (x == 0 || x == Columns - 1)
-                    { Tile[x, y].IsBlocked = true; }
-                    if ( y == 0 || y == Rows - 1)
                     {
-                        Tile[x, y].Texture = _tilebis;
+                        Tile[x, y].IsBlocked = true;
+                    }
+                    else if (y == 0 || y == Rows - 1)
+                    {
+                        if (_stageNumber == 1)
+                            Tile[x, y].Texture = _tilebis;
+                        else
+                            Tile[x, y].Texture = mapTextures[StageNumber, 1];
+
+                        Tile[x, y].IsBlocked = true;
+                    }
+                    if ((x == 0 && y == 0) || (x == Columns-1 && y == 0) || (x == 0 && y == Rows-1) || (x == Columns-1 && y == Rows-1))
+                    {
+                        if (_stageNumber == 1) Tile[x, y].Texture = TileRoof;
+                        else
+                            Tile[x, y].Texture = mapTextures[StageNumber, 1];
                         Tile[x, y].IsBlocked = true;
                     }
                 }
@@ -722,21 +744,20 @@ namespace BBTB
                 tile5.Draw();
             }
 
-            foreach (var tile6 in Tile6)
-            {
-                tile6.Draw();
-            }
-
             foreach (var tile7 in Tile7)
             {
                 tile7.Draw();
             }
             foreach (var tile in Tile)
             {
-                if (StageNumber > 0) tile.Texture = mapTextures[StageNumber - 1, 1];
+                //if (StageNumber > 0) tile.Texture = mapTextures[StageNumber - 1, 1];
                 tile.Draw();
             }
 
+            foreach (var tile6 in Tile6)
+            {
+                tile6.Draw();
+            }
 
             foreach (var monster in Monsters)
             {

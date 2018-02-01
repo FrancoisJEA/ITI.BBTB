@@ -119,7 +119,6 @@ namespace BBTB
 		public override void Draw()
         {
             SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
-         
         }
     }
 }
