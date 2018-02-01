@@ -23,8 +23,6 @@ namespace BBTB
 
         Vector2 newPosition;
         Bullet _bullet;
-        PlayerInventory PlayerInventory;
-        Monster _monster;
         int Type;
         public int _attack;
         int _level;
@@ -197,7 +195,6 @@ namespace BBTB
                 if (_time < 0.8)
                 {
                     DrawDmgPos.Y -= 1;
-
                     if (_time < 0)
                     {
                             GetHit = false;
@@ -207,6 +204,7 @@ namespace BBTB
                 }
             }
         }
+
         public Item DropItem()
         {
             Random Random = new Random();

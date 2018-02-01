@@ -34,7 +34,9 @@ namespace BBTB.Enemies
                 Texture2D ItemTexture = Board.CurrentBoard._player.Inventory.FoundTextureByID(ItemID,_allTexture);
                 float X = rng.Next(Convert.ToInt32(Position.X - 128),Convert.ToInt32(Position.X + 128));
                 float Y = rng.Next(Convert.ToInt32(Position.Y - 128), Convert.ToInt32(Position.Y + 128));
-                Inventory.Add(new Item(new Vector2(X,Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player));
+                Item item = new Item(new Vector2(X, Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);
+                item.ToSell = true;
+                Inventory.Add(item);
             }
 
         }
@@ -51,7 +53,7 @@ namespace BBTB.Enemies
         {
             foreach (Item i in Inventory)
             {
-                
+                item
             }
 
         }

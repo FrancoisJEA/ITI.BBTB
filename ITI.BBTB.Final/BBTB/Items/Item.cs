@@ -28,6 +28,7 @@ namespace BBTB.Items
         public bool _specialItem;
         public int Defense;
         public int _price;
+        public bool ToSell;
 
 
 
