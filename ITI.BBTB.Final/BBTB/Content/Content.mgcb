@@ -1515,3 +1515,9 @@
 /processorParam:TextureFormat=Color
 /build:obstacle3.png
 
+#begin tpsound.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:tpsound.mp3
+

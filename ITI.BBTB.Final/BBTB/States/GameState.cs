@@ -32,6 +32,7 @@ namespace BBTB.States
         string hungerText = "";
 
         SoundEffect _sound;
+        SoundEffect _tpsound;
         SoundEffect _bgsound;
 
         public List<Texture2D> _itemTexture;
@@ -114,6 +115,7 @@ namespace BBTB.States
             _debugFont = Content.Load<SpriteFont>("DebugFont");
 
             _sound = Content.Load<SoundEffect>("Sound/GunSound"); 
+            _tpsound = Content.Load<SoundEffect>("tpsound"); 
             _bgsound = Content.Load<SoundEffect>("Sound/bgmusic"); 
             
             Inventory = new PlayerInventory(_itemTexture, _spriteBatch, _boxTexture,_boxTexture2);
@@ -205,9 +207,10 @@ namespace BBTB.States
             _background = new Sprite(mapTextures[_board.StageNumber - 1, 0], new Vector2(60, 60), _spriteBatch);
         }
 
-        internal void PlayGunSound()
+        internal void PlaySound(int type)
         {
-            _sound.Play(0.2f, 0, 0);
+            if (type == 1) _sound.Play(0.2f, 0, 0);
+            if (type == 2) _tpsound.Play(0.4f, 0, 0);
         }
 
         private void RestartGame()
