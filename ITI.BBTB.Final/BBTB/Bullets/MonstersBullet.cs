@@ -13,24 +13,27 @@ namespace BBTB
 	{
 		Player _player;
 		Texture2D _texture;
-		public Vector2 _position;
+		Vector2 _position;
 		Vector2 _destination;
 		int _damages;
-		Timer _timer;
-		
-		public MonstersBullet(Texture2D texture,Vector2 position,Vector2 destination,SpriteBatch batch)
-			:base (texture,position,batch)
+		const float _p = 2 ;
+		float _o = _p;
+		bool _bool;
+
+		public MonstersBullet(Texture2D texture, Vector2 position, Vector2 destination, SpriteBatch batch)
+			: base(texture, position, batch)
 		{
 			_texture = texture;
 			_position = position;
 			_destination = destination;
 			_damages = 100;
+
 		}
 
-		public Timer LifeTime { get { return _timer; } }
+		// public Timer LifeTime { get { return _timer; } }
 		public Texture2D Texture { get { return _texture; } }
-		public Vector2 Position { get { return _position; } set { _position = value; } }
-		public Vector2 Destination { get { return _destination; }}
+		// public Vector2 Position { get { return _position; } set { _position = value; } }
+		public Vector2 Destination { get { return _destination; } }
 		public int Damages { get { return _damages; } set { _damages = value; } }
 
 		public void TouchPlayer()
@@ -41,9 +44,58 @@ namespace BBTB
 			}
 		}
 
+		internal void PositionAvencement()
+		{
+			Vector2 _basePosition = Position;
+			if (_destination.X < _position.X)
+			{
+				_position.X = Position.X - 2;
+				_position.Y = ((_destination.Y - _basePosition.Y) / (_destination.X - _basePosition.X)) * _position.X;
+				_position.Y = _position.Y + (_basePosition.Y - ((_destination.Y - _basePosition.Y) / (_destination.X - _basePosition.X)) * _basePosition.X);
+			}
+			else if (_destination.X > _position.X)
+			{
+				_position.X = Position.X + 2;
+				_position.Y = ((_destination.Y - _basePosition.Y) / (_destination.X - _basePosition.X)) * _position.X;
+				_position.Y = _position.Y + (_basePosition.Y - ((_destination.Y - _basePosition.Y) / (_destination.X - _basePosition.X)) * _basePosition.X);
+			}
+			else if (_destination.X == _position.X)
+			{
+				_position.Y = _position.Y + 2;
+			}
+			Position = new Vector2(_position.X, _position.Y);
+		}
+
+		public bool DeleteMe()
+		{
+			if ( this.Bounds.Intersects( Board.CurrentBoard._player.Bounds))//|| _player.Bounds.Intersects(this.Bounds))
+
+			//	if (_position == _destination )//|| _player.Bounds.Intersects(this.Bounds))
+			{
+				Board.CurrentBoard._player._playerM.Life -= 10;
+				return true; 
+			}
+			else if(_bool)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		public void Timer()
+		{
+			float Time = (float)Board.CurrentBoard.GameTime.ElapsedGameTime.TotalSeconds;
+			_o -= Time;
+			if(_o < 0)
+			{
+				_bool = true;
+			}
+		}
+
 		public void Update(GameTime gameTime)
 		{
-			_position += new Vector2((Position.X - Destination.X) * 2f, (Position.Y -Destination.Y) * 2f);
+			PositionAvencement();
+			Timer();
 		}
 		public override void Draw()
 		{

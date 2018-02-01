@@ -31,8 +31,8 @@ namespace BBTB
         bool _goblin;  // If monster Give money when hit
 		Texture2D _monsterBulletTexture;
         public List<Texture2D> _itemTexture { get; set; }
+		int _money;
 		#endregion
-        int _money;
 
 		public Monster(Texture2D texture,Texture2D monsterBulletTexure, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)//,PlayerInventory Inventory)
             : base(texture, position, batch)
@@ -77,10 +77,20 @@ namespace BBTB
 
 		public void DeleteBullet()
 		{
+			List<MonstersBullet> tmp = new List<MonstersBullet>() ;
+			
 			if(HasTouchedSomething() != 0)
 			{
 				Bullets.RemoveAt(HasTouchedSomething());
 			}
+			foreach (MonstersBullet bullet in Bullets)
+			{
+				if(bullet.DeleteMe())
+				{
+					tmp.Add(bullet);
+				}
+			}
+			foreach (MonstersBullet bullet in tmp) Bullets.Remove(bullet);
 		}
 
         public int Life { get { return _life; } set { } }
@@ -90,7 +100,6 @@ namespace BBTB
         {
             UpdatePositionBasedOnMovement(gameTime);
 			FillBulletList();
-			
 			DeleteBullet();
 			foreach(MonstersBullet bullet in Bullets)
 			{
@@ -105,7 +114,7 @@ namespace BBTB
             p._playerM.LevelUp();
         }
 
-        public void Patroling(Monster monsters)
+		public void Patroling(Monster monsters)
         {
             if (TouchTile(monsters) == true)
             {
@@ -213,7 +222,7 @@ namespace BBTB
 			if (Life > 0)
 			{
 				time++;
-				if (time == 30)
+				if (time == 60)
 				{
 					Bullets.Add(new MonstersBullet(_monsterBulletTexture,this.Position,Board.CurrentBoard._player.Position,SpriteBatch));
 					time = 0;
