@@ -103,10 +103,7 @@ namespace BBTB
 
         public void Idle()
         {
-
             Patroling(this);
-
-
         }
 
         public void Patroling(Monster monsters)
@@ -160,8 +157,10 @@ namespace BBTB
             foreach (Tile tile in Board.CurrentBoard.Tile2)
             {
                 if (new Rectangle((int)monster.Position.X, (int)monster.Position.Y, monster.Bounds.Width, monster.Bounds.Height).Intersects(tile.Bounds))
+                {
+                    if (tile.IsBlocked == true) { return false; }
                     return true;
-                
+                }
             }
             return false;
         }

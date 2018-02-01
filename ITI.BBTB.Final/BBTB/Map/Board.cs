@@ -270,6 +270,7 @@ namespace BBTB
             items = new List<Item>();
             if (_boss.AddBoss())
                 SetBossTileUnblocked();
+
             if (_special != _roomNumber)
 			{
                 AddMonsters();
@@ -622,6 +623,7 @@ namespace BBTB
 
                     if (x == 0 || x == Columns - 1)
                     { Tile[x, y].IsBlocked = true; }
+
                     if ( y == 0 || y == Rows - 1)
                     {
                         Tile[x, y].Texture = _tilebis;
