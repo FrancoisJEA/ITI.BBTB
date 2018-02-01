@@ -88,7 +88,7 @@ namespace BBTB
                 {
                     var bTexture = WeaponType == 1 ? _bulletTextures[0] : _bulletTextures[1];
                     _ctx.Board.CreateBullet(bTexture, Position, SpriteBatch, WeaponLib);
-                    _ctx.PlayGunSound();
+                    _ctx.PlaySound(1);
                     _time = 0;
                 }
                 else
