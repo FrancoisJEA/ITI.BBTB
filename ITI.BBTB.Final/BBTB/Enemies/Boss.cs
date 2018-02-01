@@ -13,18 +13,17 @@ namespace BBTB.Enemies
     {
 
         public new bool IsAlive { get { return _life >= 0; }  set { } }
-        public bool AddBoss { get; set; }
-        int _life;
+     
+        internal int _life;
         int _xp;
 		Texture2D _monsterBullettexture;
         
-        public Boss(Texture2D texture,Texture2D bulletTexture ,Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture) 
+        public Boss(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,SpriteFont debugFont) : base(texture, position, batch, isAlive, itemTexture,debugFont)
 			: base(texture,bulletTexture, position, batch, isAlive, itemTexture)
         {
-			_monsterBullettexture = bulletTexture;
-            _life = 1000;
+           
+            _life = 5000;
             _xp = 100;
-            AddBoss = isAlive;
           
         }
 
@@ -38,11 +37,20 @@ namespace BBTB.Enemies
             //if (IsDead()) prévenir le jeu pour gagner l'expérience
         }
 
+        public bool AddBoss()
+        {
+            if (IsAlive && Board.CurrentBoard.RoomInFloor == Board.CurrentBoard.RoomNumber)
+            {
+                return true;
+            }
+            else return false;
+        }
+
   
         public override void Draw()
         {
            
-            if (AddBoss && IsAlive)
+            if (AddBoss() )
             {
                 base.Draw();
             }

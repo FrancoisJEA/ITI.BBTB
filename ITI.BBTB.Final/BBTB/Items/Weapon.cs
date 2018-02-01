@@ -86,7 +86,7 @@ namespace BBTB
                 {
                     var bTexture = WeaponType == 1 ? _bulletTextures[0] : _bulletTextures[1];
                     _ctx.Board.CreateBullet(bTexture, Position, SpriteBatch, WeaponLib);
-                    _ctx.PlayGunSound();
+                    _ctx.PlaySound(1);
                     _time = 0;
                 }
                 else
@@ -101,5 +101,6 @@ namespace BBTB
         {
             SpriteBatch.Draw(Texture, Position, null, Color.White, WeaponLib.Rotation, _rotationOrigin, 1, SpriteEffects.None, 0);
         }
+
     }
 }

@@ -16,6 +16,5 @@ namespace BBTB.Items
         {
             this.Protection = player._playerM.Level * 14;
         }
-
     }
 }

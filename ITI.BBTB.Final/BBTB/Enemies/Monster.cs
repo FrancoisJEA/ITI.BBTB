@@ -32,13 +32,23 @@ namespace BBTB
 		Texture2D _monsterBulletTexture;
         public List<Texture2D> _itemTexture { get; set; }
 		int _money;
+        float Timer = 1; // Draw damages 
 		#endregion
+        float _time;
+        SpriteBatch sb;
+        SpriteFont spriteFont;
+        string Dmg;
+        bool GetHit;
+        Vector2 DrawDmgPos;
 
 		public Monster(Texture2D texture,Texture2D monsterBulletTexure, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)//,PlayerInventory Inventory)
+        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,SpriteFont debugFont)//,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
+            spriteFont = debugFont;
+            sb = batch;
+            _time = Timer;
             _itemTexture = itemTexture;
-			time = 0;
             //PlayerInventory = Inventory;
             if (Board.CurrentBoard == null) Type = 0;
             else Type = Board.CurrentBoard.StageNumber;
@@ -49,7 +59,7 @@ namespace BBTB
         private void DefineMonster(int t)
         {
             _attack = 15;
-            _life = 100;
+            _life = 1000;
             _level = 1;
             _xp = 10;
             _money = 2;
@@ -72,7 +82,7 @@ namespace BBTB
 
         public void Reflect (PlayerModel p)
         {
-            if (_reflect == true) p.Life -= p.Life / 1000;
+            if (_reflect == true) p.Life -= _attack/ 100;
         }
 
 		public void DeleteBullet()
@@ -99,6 +109,7 @@ namespace BBTB
         public void Update(GameTime gameTime)
         {
             UpdatePositionBasedOnMovement(gameTime);
+            DmgTimer();
 			FillBulletList();
 			DeleteBullet();
 			foreach(MonstersBullet bullet in Bullets)
@@ -163,8 +174,10 @@ namespace BBTB
             foreach (Tile tile in Board.CurrentBoard.Tile2)
             {
                 if (new Rectangle((int)monster.Position.X, (int)monster.Position.Y, monster.Bounds.Width, monster.Bounds.Height).Intersects(tile.Bounds))
+                {
+                    if (tile.IsBlocked == true) { return false; }
                     return true;
-                
+                }
             }
             return false;
         }
@@ -193,14 +206,33 @@ namespace BBTB
 			Patroling(this);
         }
 
-
         public void Hit(Bullet bullet)
         {
             _life -= bullet.Damages;
-            
-           // _monster = bullet._monster;
+            Dmg = string.Format(" - {0:0}", bullet.Damages);
+            DrawDmgPos = new Vector2(Position.X, Position.Y-15);
+            GetHit = true;
         }
 
+        public void DmgTimer()
+        {
+            if (GetHit)
+            {
+                float Time = (float)Board.CurrentBoard.GameTime.ElapsedGameTime.TotalSeconds;
+                _time -= Time;
+                if (_time < 0.8)
+                {
+                    DrawDmgPos.Y -= 1;
+
+                    if (_time < 0)
+                    {
+                            GetHit = false;
+                            _time = Timer;
+                    }
+                    
+                }
+            }
+        }
         public Item DropItem()
         {
             Random Random = new Random();
@@ -212,7 +244,6 @@ namespace BBTB
             {
                 Texture2D ItemTexture = Board.CurrentBoard._player.Inventory.FoundTextureByID(ItemID, _itemTexture);
                 _item = new Item(new Vector2(this.Position.X, this.Position.Y), ItemTexture, SpriteBatch, Board.CurrentBoard._player);
-
             }
             return _item;
         }
@@ -309,6 +340,7 @@ namespace BBTB
         
 		public override void Draw()
         {
+            if (GetHit == true) sb.DrawString(spriteFont, Dmg, DrawDmgPos, Color.AliceBlue);
             base.Draw();
 			foreach(MonstersBullet bullet in Bullets)
 			{
