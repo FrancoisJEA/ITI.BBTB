@@ -31,16 +31,9 @@ namespace BBTB
         bool _goblin;  // If monster Give money when hit
 		Texture2D _monsterBulletTexture;
         public List<Texture2D> _itemTexture { get; set; }
-<<<<<<< HEAD
 		int _money;
-		#endregion
-
-		public Monster(Texture2D texture,Texture2D monsterBulletTexure, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)//,PlayerInventory Inventory)
-            : base(texture, position, batch)
-        {
-=======
-        int _money;
         float Timer = 1; // Draw damages 
+		#endregion
         float _time;
         SpriteBatch sb;
         SpriteFont spriteFont;
@@ -48,15 +41,14 @@ namespace BBTB
         bool GetHit;
         Vector2 DrawDmgPos;
 
-        public Monster(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,SpriteFont debugFont)//,PlayerInventory Inventory)
+		// public Monster(Texture2D texture,Texture2D monsterBulletTexure, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture)//,PlayerInventory Inventory)
+        public Monster(Texture2D texture,Texture2D monsterBulletTexure, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,SpriteFont debugFont)//,PlayerInventory Inventory)
             : base(texture, position, batch)
         {
             spriteFont = debugFont;
             sb = batch;
             _time = Timer;
->>>>>>> 46e1167e55dc5312b4c474636d39f3acaad44184
             _itemTexture = itemTexture;
-			time = 0;
             //PlayerInventory = Inventory;
             if (Board.CurrentBoard == null) Type = 0;
             else Type = Board.CurrentBoard.StageNumber;
@@ -67,7 +59,11 @@ namespace BBTB
         private void DefineMonster(int t)
         {
             _attack = 15;
-            _life = 1000;
+<<<<<<< HEAD
+            _life = 200;
+=======
+            _life = 100;
+>>>>>>> a46db4c1d42c4a50db24b7963662e7fb23caf8ca
             _level = 1;
             _xp = 10;
             _money = 2;
@@ -77,7 +73,7 @@ namespace BBTB
             for(int x=0; x<t; x++)
             {
                 _attack *= 3;
-                _life *= 2;
+                _life += (int)(_life *1.5);
                 _level ++;
                 _xp *=2;
                 _money *= 2;
@@ -117,16 +113,13 @@ namespace BBTB
         public void Update(GameTime gameTime)
         {
             UpdatePositionBasedOnMovement(gameTime);
-<<<<<<< HEAD
+            DmgTimer();
 			FillBulletList();
 			DeleteBullet();
 			foreach(MonstersBullet bullet in Bullets)
 			{
 				bullet.Update(gameTime);
 			}
-=======
-            DmgTimer();
->>>>>>> 46e1167e55dc5312b4c474636d39f3acaad44184
         }
 
         public void WhenMonsterDie(Player p)
@@ -136,16 +129,7 @@ namespace BBTB
             p._playerM.LevelUp();
         }
 
-<<<<<<< HEAD
 		public void Patroling(Monster monsters)
-=======
-        public void Idle()
-        {
-            Patroling(this);
-        }
-
-        public void Patroling(Monster monsters)
->>>>>>> 46e1167e55dc5312b4c474636d39f3acaad44184
         {
             if (TouchTile(monsters) == true)
             {
@@ -243,7 +227,6 @@ namespace BBTB
                 if (_time < 0.8)
                 {
                     DrawDmgPos.Y -= 1;
-
                     if (_time < 0)
                     {
                             GetHit = false;
@@ -253,6 +236,7 @@ namespace BBTB
                 }
             }
         }
+
         public Item DropItem()
         {
             Random Random = new Random();
