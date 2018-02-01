@@ -109,6 +109,7 @@ namespace BBTB.States
             var _chestTexture = Content.Load<Texture2D>("chest");
             var _chestTexture2 = Content.Load<Texture2D>("chest_open");
             var _bossTexture = Content.Load<Texture2D>("boss");
+            var TileBis = Content.Load<Texture2D>("tilebis");
             
             TraderTexture = Content.Load<Texture2D>("trader");
             _debugFont = Content.Load<SpriteFont>("DebugFont");
@@ -130,7 +131,7 @@ namespace BBTB.States
                 basicTexture = Content.Load<Texture2D>("Character/P_archer");
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             }
-                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, tileTexture7, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont,LvlUpTexture);
+                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, tileTexture7, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont,LvlUpTexture,TileBis);
 
             _bgsound.Play(0.3f, 0, 0);
         }
