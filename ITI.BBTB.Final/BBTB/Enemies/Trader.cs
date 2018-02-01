@@ -53,7 +53,7 @@ namespace BBTB.Enemies
         {
             foreach (Item i in Inventory)
             {
-                item
+                
             }
 
         }

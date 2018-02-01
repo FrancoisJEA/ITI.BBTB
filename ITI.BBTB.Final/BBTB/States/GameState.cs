@@ -100,7 +100,7 @@ namespace BBTB.States
             var tileTexture4 = Content.Load<Texture2D>("stairs_closed");
             var monsterTexture = Content.Load<Texture2D>("monster");
             var basicTexture = Content.Load<Texture2D>("Character/P_gunner");
-			var monsterbulletsTexture = Content.Load<Texture2D>("brumisateur_modif");
+			var monsterbulletsTexture = Content.Load<Texture2D>("M_attack");
             _bulletTextures = BulletTextures(Content);
             _itemTexture = ItemTextures(Content);
             var tileTexture5 = Content.Load<Texture2D>("shop");
@@ -160,6 +160,11 @@ namespace BBTB.States
             AllTextures.Add(Content.Load<Texture2D>("Items/Deadric_crossbow"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Fire_book"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Ice_gun"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Samurai_boots"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Samurai_helmet"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Samurai_gloves"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Samurai_armor"));
+
             return AllTextures;
         }
 

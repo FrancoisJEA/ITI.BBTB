@@ -18,8 +18,8 @@ namespace BBTB.Enemies
         int _xp;
 		Texture2D _monsterBullettexture;
         
-        public Boss(Texture2D texture, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,SpriteFont debugFont) 
-			: base(texture, position, batch, isAlive, itemTexture, debugFont)
+        public Boss(Texture2D texture,Texture2D _monsterbullet, Vector2 position, SpriteBatch batch, bool isAlive,List<Texture2D> itemTexture,SpriteFont debugFont) 
+			: base(texture, _monsterbullet, position, batch, isAlive, itemTexture, debugFont)
 			// : base(texture,bulletTexture, position, batch, isAlive, itemTexture)
         {
            

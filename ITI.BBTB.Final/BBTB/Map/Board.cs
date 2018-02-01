@@ -123,7 +123,7 @@ namespace BBTB
             _tile6 = new Tile[Columns, Rows];
             _tile7 = new Tile[Columns, Rows];
 
-            _boss = new Boss(BossTexture, _bossPosition, SpriteBatch, false, itemTexture,_debugFont);
+            _boss = new Boss(BossTexture,_monsterBulletTexture, _bossPosition, SpriteBatch, false, itemTexture,_debugFont);
             Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();
 			_player = player;
@@ -713,6 +713,12 @@ namespace BBTB
                 tile2.Draw();
             }
 
+            foreach (var tile in Tile)
+            {
+                if (StageNumber > 0) tile.Texture = mapTextures[StageNumber - 1, 1];
+                tile.Draw();
+            }
+
             foreach (var tile3 in Tile3)
             {
                 tile3.Draw();
@@ -737,11 +743,7 @@ namespace BBTB
             {
                 tile7.Draw();
             }
-            foreach (var tile in Tile)
-            {
-                if (StageNumber > 0) tile.Texture = mapTextures[StageNumber - 1, 1];
-                tile.Draw();
-            }
+           
 
 
             foreach (var monster in Monsters)

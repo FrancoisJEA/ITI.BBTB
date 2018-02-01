@@ -59,7 +59,7 @@ namespace BBTB
         private void DefineMonster(int t)
         {
             _attack = 15;
-            _life = 1000;
+            _life = 200;
             _level = 1;
             _xp = 10;
             _money = 2;
@@ -69,7 +69,7 @@ namespace BBTB
             for(int x=0; x<t; x++)
             {
                 _attack *= 3;
-                _life *= 2;
+                _life += (int)(_life *1.5);
                 _level ++;
                 _xp *=2;
                 _money *= 2;
