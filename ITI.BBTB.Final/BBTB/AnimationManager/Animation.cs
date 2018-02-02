@@ -99,7 +99,10 @@ namespace BBTB.AnimationManager
 
 
                 }
-                else currentFrame = 0;
+               if (currentKBState.IsKeyDown(Keys.None) == true )
+                {
+                    currentFrame = 0;
+                }
 
                 
             }
