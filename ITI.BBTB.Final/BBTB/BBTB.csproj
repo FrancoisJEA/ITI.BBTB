@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AnimationManager\Animation.cs" />
     <Compile Include="Armor\ArmorPieceModel.cs" />
     <Compile Include="Armor\Boots.cs" />
     <Compile Include="Armor\BreastPlate.cs" />

@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Content;
 using BBTB.Items;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
+using BBTB.AnimationManager;
 
 namespace BBTB
 {
@@ -26,6 +27,7 @@ namespace BBTB
         public List<Preacher> Preacher { get; set; }
 
         public Player _player;
+        Animation animation;
 		int _stageNumber;
 		int _roomInFloor;
 		int _roomNumber;
@@ -193,7 +195,7 @@ namespace BBTB
                             if (X< 70) X += 40;
                             else if (X > 800) X -= Inventory.BoxTexture.Bounds.Width + 25;
                             if (Y < 70) Y += items[y].Bounds.Height;
-                            else if (Y > 800) Y -= Inventory.BoxTexture.Bounds.Height;
+                            else if (Y> 800) Y -= Inventory.BoxTexture.Bounds.Height;
                             Sprite Box = new Sprite(Inventory.BoxTexture, new Vector2(X, Y), SpriteBatch);
                             Box.Draw();
 

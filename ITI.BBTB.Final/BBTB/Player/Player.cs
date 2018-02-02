@@ -1,4 +1,5 @@
-﻿using BBTB.Items;
+﻿using BBTB.AnimationManager;
+using BBTB.Items;
 using BBTB.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,7 +23,7 @@ namespace BBTB
         bool _booltime;
         private Vector2 oldPosition;
         bool _havePrayed;
-
+        new Texture2D Texture { get; set; }
         internal string _classes { get; set; }
         God _god;
         #endregion
@@ -33,6 +34,8 @@ namespace BBTB
         int _time2;
         int _time3;
         public bool IsDead;
+        SpriteBatch _spriteBatch;
+        public Animation animation;
 
         public Player(Texture2D texture, Vector2 position, SpriteBatch spritebatch, GameState ctx, Weapon weapon, bool havePrayed, PlayerInventory inventory, List<Texture2D> BulletTextures, string _classe)
             : base(texture, position, spritebatch)
@@ -49,7 +52,13 @@ namespace BBTB
             Inventory.ItemByDefault(this);
             _havePrayed = havePrayed;
             _bulletTextures = BulletTextures;
+            animation = new Animation(texture, position, spritebatch, 9, 4);
+            Position = new Vector2(animation.SourceRect.X, animation.SourceRect.Y);
             _weapon = new Weapon(_ctx, _bulletTextures[1], Position, spritebatch, this, _bulletTextures);
+            _spriteBatch = spritebatch;
+          
+           
+
         }
 
         #region propriété 
@@ -98,7 +107,7 @@ namespace BBTB
 
         public void Update(GameTime gameTime)
         {
-            CheckKeyboardAndUpdateMovement();
+            CheckKeyboardAndUpdateMovement(gameTime);
             SimulateFriction();
             MoveAsFarAsPossible(gameTime);
             StopMovingIfBlocked();
@@ -136,17 +145,17 @@ namespace BBTB
             }
         }
 
-        private void CheckKeyboardAndUpdateMovement()
+        private void CheckKeyboardAndUpdateMovement(GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
-
+            
             Console.WriteLine(_time);
 
-            if (keyboardState.IsKeyDown(Keys.Q)) { _mouvement -= Vector2.UnitX*2; }
-            if (keyboardState.IsKeyDown(Keys.D)) { _mouvement += Vector2.UnitX*2; }
+            if (keyboardState.IsKeyDown(Keys.Q)) {_mouvement -= Vector2.UnitX*2; animation.AnimateLeft(gameTime);}
+            if (keyboardState.IsKeyDown(Keys.D)) { _mouvement += Vector2.UnitX*2; animation.AnimateRight(gameTime);}
 
-            if (keyboardState.IsKeyDown(Keys.S)) { _mouvement += Vector2.UnitY*2; }
-            if (keyboardState.IsKeyDown(Keys.Z)) { _mouvement -= Vector2.UnitY*2; }
+            if (keyboardState.IsKeyDown(Keys.S)) { _mouvement += Vector2.UnitY*2; animation.AnimateDown(gameTime);}
+            if (keyboardState.IsKeyDown(Keys.Z)) { _mouvement -= Vector2.UnitY*2; animation.AnimateUp(gameTime);}
 
             _booltime = keyboardState.IsKeyDown(Keys.Z) && keyboardState.IsKeyDown(Keys.Space) ||
                         keyboardState.IsKeyDown(Keys.S) && keyboardState.IsKeyDown(Keys.Space) ||
@@ -176,7 +185,7 @@ namespace BBTB
             {
                 if (monster.IsAlive)
                 {
-                    if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds) && _time2 == 60)
+                    if (new Rectangle((int)Position.X, (int)Position.Y, animation.spriteWidth, animation.spriteHeight).Intersects(monster.Bounds) && _time2 == 60)
                     {
                         _playerM.Life -= monster._attack/10;
                         _time2 = 1;
@@ -191,7 +200,7 @@ namespace BBTB
         {
             oldPosition = Position;
             UpdatePositionBasedOnMovement(gameTime);
-            Position = Board.CurrentBoard.WhereCanIGetTo(oldPosition, Position, Bounds);
+            Position = Board.CurrentBoard.WhereCanIGetTo(oldPosition, Position, animation.SourceRect);
         }
 
         private void SimulateFriction()
@@ -213,7 +222,7 @@ namespace BBTB
 
         public override void Draw()
         {
-            base.Draw();
+            animation.Draw(Position);
             if (_weapon != null) _weapon.Draw();
         }
     }

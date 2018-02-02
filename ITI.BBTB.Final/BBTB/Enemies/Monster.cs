@@ -123,7 +123,7 @@ namespace BBTB
 
 
                 float distanceY = monsters.Position.Y - Board.CurrentBoard._player.Position.Y;
-                if (monsters.Position.Y < 516 && monsters.Position.Y > 64)
+                if (monsters.Position.Y < 516 && monsters.Position.Y > 64 )
                 {
                     if (distanceX > 0)
                     {
@@ -140,6 +140,33 @@ namespace BBTB
                     }
                 }
                 else newPosition.Y = -newPosition.Y;
+
+           /*     foreach (Tile tile in Board.CurrentBoard.Tile2)
+                {
+                    if(new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(tile.Bounds))
+                    {
+
+                        if (monsters.Position.X > tile.Position.X)
+                        {
+                            newPosition.X -= newPosition.X;
+                        }
+                        if (monsters.Position.X < tile.Position.X)
+                        {
+                            newPosition.X += newPosition.;
+                        }
+                        if (monsters.Position.Y > tile.Position.Y)
+                        {
+                            newPosition.Y--;
+                        }
+                        if (monsters.Position.Y < tile.Position.Y)
+                        {
+                            newPosition.Y++;
+                        }
+
+
+
+                    }
+                }*/
             }
             else newPosition = -newPosition;
         

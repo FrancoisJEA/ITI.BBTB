@@ -42,8 +42,8 @@ namespace BBTB
             SetWeaponType(1);
             _bulletTextures = Inventory[4].DefineBulletTexture(BulletTextures, _player.PlayerClasse);
 
-            _rotationOrigin = new Vector2(_player.Position.X - (_player.Bounds.Width) - 50, _player.Position.Y - (_player.Bounds.Height) - 15);
-            Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
+            _rotationOrigin = new Vector2(_player.Position.X - (_player.animation.SourceRect.Width) - 50, _player.Position.Y - (_player.animation.SourceRect.Height) - 15);
+            Position = new Vector2(_player.Position.X + (_player.animation.SourceRect.Width / 2), _player.Position.Y + (_player.animation.SourceRect.Height / 2));
             _time = 15;
         }
 
@@ -75,7 +75,7 @@ namespace BBTB
             
 
             var mousePos = CheckMouseAndUpdateMovement();
-            Position = new Vector2(_player.Position.X + (_player.Bounds.Width / 2), _player.Position.Y + (_player.Bounds.Height / 2));
+            Position = new Vector2(_player.Position.X + (_player.animation.SourceRect.Width / 2), _player.Position.Y + (_player.animation.SourceRect.Height / 2));
             WeaponLib.Update(mousePos.X - Position.X, mousePos.Y - Position.Y);
         }
 
