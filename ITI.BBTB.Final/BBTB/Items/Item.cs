@@ -28,6 +28,7 @@ namespace BBTB.Items
         public bool _specialItem;
         public int Defense;
         public int _price;
+        public bool ToSell;
 
 
 
@@ -108,19 +109,8 @@ namespace BBTB.Items
             else return "All";
         }
 
-        public void DefineItem ()
-        {
-            
-        }
-
-        public void AddToInventory(string Name)
-        {
-         
-        }
-        public void UsePotion()
-        {
-            
-        }
+  
+     
         internal int FindInventoryEmplacement (string Name)
         {
 

@@ -71,7 +71,7 @@ namespace BBTB
         {
             if (_classe == "Wizard")
             {
-                _lifemax = 110;
+                _lifemax = 1100;
                 _strength = 20;
                 _agility = 10;
                 _intelligence = 30;

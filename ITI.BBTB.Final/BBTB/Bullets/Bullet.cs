@@ -30,8 +30,6 @@ namespace BBTB
         public Bullet(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon, Board board, Weapon weaponCtx)
             : base(texture, position, spritebatch)
         {
-           
-    
             _origin = new Vector2(-27, 20);
             _rotation = weapon.Rotation;
             BulletLib = new BulletLib(weapon, new Vector2(base.Position.X, base.Position.Y), texture.Height, texture.Width);    
@@ -42,6 +40,7 @@ namespace BBTB
         }
 
         public int Damages { get { return _damages; } }
+
         public void Update(GameTime gameTime)
         {
             BulletLib.Timer((float)gameTime.ElapsedGameTime.TotalSeconds);
@@ -56,21 +55,21 @@ namespace BBTB
             {
                     if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(monster.Bounds))
                     {
-                    if (monster.IsAlive)
-                    {
-                        monster.Hit(this);
-                        monster.Reflect(Board.CurrentBoard._player._playerM);
-                        if (monster.Life <= 0)
+                        if (monster.IsAlive)
                         {
-                            Board.CurrentBoard.KillMonster();
+                            monster.Hit(this);
+                            monster.Reflect(Board.CurrentBoard._player._playerM);
+                            if (monster.Life <= 0)
+                            {
+                                Board.CurrentBoard.KillMonster(monster);
 
-                            _monster = monster;
-                            monster.IsDead = false;
-                            return false;
-                            //new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
+                                _monster = monster;
+                                monster.IsDead = false;
+                                return false;
+                                //new Rectangle((int)monster.Position.X, (int)monster.Position.Y, Texture.Width, Texture.Height);
+                            }
+                            else return true;
                         }
-                        else return true;
-                    }
                     }
                 
             }
@@ -119,7 +118,6 @@ namespace BBTB
 		public override void Draw()
         {
             SpriteBatch.Draw(Texture, Position, null, Color.White, _rotation, _origin, 1, SpriteEffects.None, 0);
-         
         }
     }
 }
