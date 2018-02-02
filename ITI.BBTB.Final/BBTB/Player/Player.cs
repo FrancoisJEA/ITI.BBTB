@@ -119,6 +119,7 @@ namespace BBTB
 
         public void Update(GameTime gameTime)
         {
+            PlayerDead();
             CheckKeyboardAndUpdateMovement(gameTime);
             SimulateFriction();
             MoveAsFarAsPossible(gameTime);

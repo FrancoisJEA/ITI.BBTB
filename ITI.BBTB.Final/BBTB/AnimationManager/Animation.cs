@@ -15,7 +15,7 @@ namespace BBTB.AnimationManager
         SpriteBatch spriteBatch;
         Texture2D spriteTexture;
         float timer = 0f;
-        float interval = 150f;
+        float interval = 200f;
         int currentFrame = 0;
         public int spriteWidth;
         public int spriteHeight;
