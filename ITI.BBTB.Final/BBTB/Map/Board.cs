@@ -295,7 +295,7 @@ namespace BBTB
 			{
                 ForSpecialRoom();
                 Tile4[5, 4].IsBlocked = true;
-                Tile4[7, 6].IsBlocked = true;
+               // Tile4[7, 6].IsBlocked = true;
                 _chestState = false;
             }
             else if (Special == _roomNumber && SpecialType == 2)
