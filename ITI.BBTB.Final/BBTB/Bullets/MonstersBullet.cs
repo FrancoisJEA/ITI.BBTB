@@ -20,14 +20,13 @@ namespace BBTB
 		float _o = _p;
 		bool _bool;
 
-		public MonstersBullet(Texture2D texture, Vector2 position, Vector2 destination, SpriteBatch batch)
+		public MonstersBullet(Texture2D texture, Vector2 position, Vector2 destination, SpriteBatch batch, int Dmg)
 			: base(texture, position, batch)
 		{
 			_texture = texture;
 			_position = position;
 			_destination = destination;
-			_damages = 100;
-
+            _damages = Dmg;
 		}
 
 		// public Timer LifeTime { get { return _timer; } }
@@ -64,7 +63,7 @@ namespace BBTB
 
 			//	if (_position == _destination )//|| _player.Bounds.Intersects(this.Bounds))
 			{
-				Board.CurrentBoard._player._playerM.Life -= 10;
+				Board.CurrentBoard._player._playerM.Life -= _damages;
 				return true; 
 			}
            
@@ -74,6 +73,16 @@ namespace BBTB
 			}
 
             foreach (Tile tile in Board.CurrentBoard.Tile2)
+            {
+                if (tile.IsBlocked)
+                {
+                    if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(tile.Bounds))
+                    {
+                        return true;
+                    }
+                }
+            }
+            foreach (Tile tile in Board.CurrentBoard.Tile)
             {
                 if (tile.IsBlocked)
                 {

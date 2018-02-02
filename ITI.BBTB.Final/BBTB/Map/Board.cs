@@ -201,13 +201,13 @@ namespace BBTB
                     //else { DistanceX = items[y]._position.X - _player.Position.X; }
 
                     //if (_player.Position.X > items[y]._position.X) { DistanceY = _player.Position.Y - items[y]._position.Y; }
-                   // else { DistanceY = items[y]._position.Y - _player.Position.Y; }
-                   
+                    // else { DistanceY = items[y]._position.Y - _player.Position.Y; }
+
 
 
 
                     //if (DistanceX <= 10 && DistanceY <= 10)
-                    if (_player.Bounds.Intersects(items[y].Bounds))
+                    if (new Rectangle((int)_player.Position.X, (int)_player.Position.Y, _player.animation.spriteWidth, _player.animation.spriteHeight).Intersects(items[y].Bounds))
                     {
                         if (items[y].ItemClasse == _player.PlayerClasse || items[y].ItemClasse == "All")
                         {
@@ -342,9 +342,13 @@ namespace BBTB
 		public void Stage1()
         {
             _roomInFloor = _rnd.Next(4, 7);
+
             _stageNumber = 1;
             _roomNumber = 1;
+            _special = _rnd.Next(2, _roomInFloor);
+            _specialType = _rnd.Next(1, 4);
             _boss._life = 5000;
+
             CreateNewBoard();
         }
         
@@ -472,6 +476,7 @@ namespace BBTB
                     { if (_rnd.Next(4, 20) == 4) Tile6[x, y].IsBlocked = true; }
                 }
             }
+           
         }
 
         public void ForSpecialRoom()
@@ -504,6 +509,11 @@ namespace BBTB
                 Tile2[10, 4].IsBlocked = true;
                 Tile2[11, 4].IsBlocked = true;
             }
+            Tile6[1, 1].IsBlocked = false;
+            Tile6[1, 2].IsBlocked = false;
+            Tile6[1, 3].IsBlocked = false;
+
+
 
             Tile7[1, 1].IsBlocked = false;
             Tile2[1, 1].IsBlocked = false;

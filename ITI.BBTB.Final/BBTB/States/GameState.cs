@@ -258,12 +258,11 @@ namespace BBTB.States
           //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
 
             string lifeInText = string.Format("Life: ({0:0})", _player._playerM.Life);
-            string experienceInText = string.Format("Experience: ({0:0} / {1:0})", _player._playerM.Experience,_player._playerM.Xpnext);
+            string experienceInText = string.Format("Exp: ({0:0} / {1:0})", _player._playerM.Experience,_player._playerM.Xpnext);
             string moneyInText = string.Format("Money: ({0:0})", _player._playerM.Money);
 
-            string RoomNumberInText = string.Format("Room Number: ({0:0})", Board.CurrentBoard.RoomNumber);
-            string RoomInFloorInText = string.Format("Room Number: ({0:0})", Board.CurrentBoard.RoomInFloor);
-            string StageNumberInText = string.Format("Stage Number: ({0:0})", Board.CurrentBoard.StageNumber);
+            string RoomNumberInText = string.Format("Room: ({0:0})/ ({1:0})", Board.CurrentBoard.RoomNumber, Board.CurrentBoard.RoomInFloor);
+            string StageNumberInText = string.Format("Stage: ({0:0})", Board.CurrentBoard.StageNumber);
 
             string SpecialInText = string.Format("Special Number: ({0:0})", Board.CurrentBoard.Special);
             string SpecialTypeInText = string.Format("Special Type: ({0:0})", Board.CurrentBoard.SpecialType);
@@ -277,15 +276,15 @@ namespace BBTB.States
             //DrawWithShadow(positionInText, new Vector2(10, 0));
             //DrawWithShadow(movementInText, new Vector2(10, 20));
 
-            DrawWithShadow(lifeInText, new Vector2(250, 20));
-            DrawWithShadow(experienceInText, new Vector2(10, 20));
+            DrawWithShadow(lifeInText, new Vector2(10, 10));
+            DrawWithShadow(experienceInText, new Vector2(10, 30));
             DrawWithShadow(moneyInText, new Vector2(400, 20));
             if (_player._playerM.lvlup) DrawWithShadow(LvlUpInText, new Vector2(320, 270));
             DrawWithShadow(PotionInText, new Vector2(500, 600));
 
-            DrawWithShadow(RoomNumberInText, new Vector2(280, 280));
-             DrawWithShadow(RoomInFloorInText, new Vector2(320, 320));
-            // DrawWithShadow(StageNumberInText, new Vector2(320, 320));
+            DrawWithShadow(RoomNumberInText, new Vector2(140, 10));
+           //  DrawWithShadow(RoomInFloorInText, new Vector2(320, 320));
+            DrawWithShadow(StageNumberInText, new Vector2(140, 30));
 
             // DrawWithShadow(SpecialInText, new Vector2(360, 360));
             //  DrawWithShadow(SpecialTypeInText, new Vector2(400, 400));

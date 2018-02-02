@@ -140,21 +140,21 @@ namespace BBTB
         {
             if (_classe == "Wizard")
             {
-                _lifemax = _lifemax + 10;
+                _lifemax = _lifemax + 40;
                 _agility += 1;
                 _intelligence += 5;
                 _strength += 3;
             }
             else if (_classe =="Gunner")
             {
-                _lifemax = _lifemax + 15;
+                _lifemax = _lifemax + 50;
                 _agility += 2;
                 _intelligence += 2;
                 _strength += 5;
             }
             else if(_classe =="Archer")
             {
-                _lifemax = _lifemax + 10;
+                _lifemax = _lifemax + 45;
                 _agility += 5;
                 _intelligence += 3;
                 _strength += 1;

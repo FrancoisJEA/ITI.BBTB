@@ -59,7 +59,7 @@ namespace BBTB
         private void DefineMonster(int t)
         {
             _attack = 15;
-            _life = 200;
+            _life = 100;
             _level = 1;
             _xp = 10;
             _money = 2;
@@ -69,7 +69,7 @@ namespace BBTB
             for(int x=0; x<t; x++)
             {
                 _attack *= 3;
-                _life += (int)(_life *1.5);
+                _life = (int)(_life *1.5);
                 _level ++;
                 _xp *=2;
                 _money *= 2;
@@ -193,7 +193,6 @@ namespace BBTB
                 }*/
             }
             else newPosition = -newPosition;
-        
         }
 
         public bool TouchTile(Monster monster)
@@ -282,7 +281,7 @@ namespace BBTB
 				time++;
 				if (time == 60)
 				{
-					Bullets.Add(new MonstersBullet(_monsterBulletTexture,this.Position,Board.CurrentBoard._player.Position,SpriteBatch));
+					Bullets.Add(new MonstersBullet(_monsterBulletTexture,this.Position,Board.CurrentBoard._player.Position,SpriteBatch,_attack));
 					time = 0;
 				}
 			}
