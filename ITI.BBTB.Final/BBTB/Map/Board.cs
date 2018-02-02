@@ -381,7 +381,7 @@ namespace BBTB
 
             if (_roomNumber < _roomInFloor)
             {
-                if (showExist == true &&_player.Bounds.Intersects(Tile3[13, 1].Bounds))
+                if (showExist == true && (new Rectangle((int)_player.Position.X, (int)_player.Position.Y, _player.animation.spriteWidth, _player.animation.spriteHeight)).Intersects(Tile3[13, 1].Bounds))
                 {
 					_roomNumber++;
                     Shop = Special == _roomNumber && SpecialType == 4;
@@ -393,7 +393,7 @@ namespace BBTB
         {
             Rectangle r = Tile4[5, 4].Bounds;
             r.Inflate(30, 30);
-            if (_player.Bounds.Intersects(r) && _chestState == false && SpecialType == 1)
+            if ((new Rectangle((int)_player.Position.X, (int)_player.Position.Y, _player.animation.spriteWidth, _player.animation.spriteHeight)).Intersects(r) && _chestState == false && SpecialType == 1)
             {
                 KeyboardState keyboardState = Keyboard.GetState();
                 if ((keyboardState.IsKeyDown(Keys.F)))
@@ -418,7 +418,7 @@ namespace BBTB
         
         public void NewStage()
         {
-            if(_roomNumber == _roomInFloor && Tile3[13, 1].Texture == TileTexture3 && _player.Bounds.Intersects(Tile3[13, 1].Bounds))
+            if(_roomNumber == _roomInFloor && Tile3[13, 1].Texture == TileTexture3 && (new Rectangle((int)_player.Position.X, (int)_player.Position.Y, _player.animation.spriteWidth, _player.animation.spriteHeight)).Intersects(Tile3[13, 1].Bounds))
             {
                 CreateNewBoard();
                 _roomInFloor = _rnd.Next(4, 7);
