@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Content;
 using BBTB.Items;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
+using BBTB.AnimationManager;
 
 namespace BBTB
 {
@@ -31,6 +32,7 @@ namespace BBTB
         public List<Preacher> Preacher { get; set; }
 
         public Player _player;
+        Animation animation;
 		int _stageNumber;
 		int _roomInFloor;
 		int _roomNumber;
@@ -80,12 +82,14 @@ namespace BBTB
         Monster m;
         private Texture2D Goblin;
         Trader Trader;
+		Texture2D _monsterBulletTexture;
         bool Shop;
         Texture2D _tilebis;
 
-
-        public Board(SpriteBatch spritebatch, Texture2D tileTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D tileTexture4, Texture2D tileTexture5, Texture2D tileTexture6, Texture2D tileTexture7, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture, SpriteFont debugFont, Texture2D lvluptexture, Texture2D Tilebis, Texture2D tileroof)
+        // public Board(SpriteBatch spritebatch, Texture2D tileTexture,Texture2D monsterBulletTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D tileTexture4, Texture2D tileTexture5, Texture2D tileTexture6, Texture2D tileTexture7, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont,Texture2D lvluptexture)
+        public Board(SpriteBatch spritebatch, Texture2D tileTexture,Texture2D monsterBulletTexture, Texture2D tileTexture2, Texture2D tileTexture3, Texture2D tileTexture4, Texture2D tileTexture5, Texture2D tileTexture6, Texture2D tileTexture7, Texture2D chestTexture,Texture2D chestTexture2, Texture2D monsterTexture,Texture2D[,] MapTextures,Texture2D TraderTexture, Texture2D preacherTexture, Texture2D bossTexture, int columns, int rows, Player player, GameState gameState, List<Texture2D> itemTexture,SpriteFont debugFont,Texture2D lvluptexture,Texture2D Tilebis, Texture2D tileroof)
 	    {
+			_monsterBulletTexture = monsterBulletTexture;
             totalSeconds = 20;
             _tilebis = Tilebis;
             LvlUpTexture = lvluptexture;
@@ -96,7 +100,7 @@ namespace BBTB
             TileTexture3 = tileTexture3;
             TileTexture4 = tileTexture4;
             TileTexture5 = tileTexture5;
-            TileTexture6 = tileTexture6;
+			TileTexture6 = tileTexture6;
             TileTexture7 = tileTexture7;
             TileRoof = tileroof;
 
@@ -123,7 +127,7 @@ namespace BBTB
             _tile6 = new Tile[Columns, Rows];
             _tile7 = new Tile[Columns, Rows];
 
-            _boss = new Boss(BossTexture, _bossPosition, SpriteBatch, false, itemTexture,_debugFont);
+            _boss = new Boss(BossTexture,_monsterBulletTexture, _bossPosition, SpriteBatch, false, itemTexture,_debugFont);
             Board.CurrentBoard = this;
 			Bullets = new List<Bullet>();
 			_player = player;
@@ -165,7 +169,7 @@ namespace BBTB
             Monsters.Remove(monster);
         }
 
-        private void SpikesHit()
+         private void SpikesHit()
         {
             foreach (var tile in Tile7)
             {
@@ -212,7 +216,7 @@ namespace BBTB
                             if (X< 70) X += 20;
                             else if (X > 800) X -= Inventory.BoxTexture.Bounds.Width + 10;
                             if (Y < 70) Y += items[y].Bounds.Height;
-                            else if (Y > 800) Y -= Inventory.BoxTexture.Bounds.Height;
+                            else if (Y> 800) Y -= Inventory.BoxTexture.Bounds.Height;
                             Sprite Box = new Sprite(Inventory.BoxTexture, new Vector2(X, Y), SpriteBatch);
                             Box.Draw();
                             Sprite _itemSprite = new Sprite(items[y].Texture, new Vector2(X + 50, Y + 80),SpriteBatch);
@@ -272,6 +276,7 @@ namespace BBTB
             items = new List<Item>();
             if (_boss.AddBoss())
                 SetBossTileUnblocked();
+
             if (_special != _roomNumber)
 			{
                 AddMonsters();
@@ -585,7 +590,8 @@ namespace BBTB
                         if (_rnd.Next(4, 20) == 4)
                         {
                             Vector2 monsterPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-                            Monsters.Add(new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture,_debugFont));
+                              Monsters.Add(new Monster(MonsterTexture,_monsterBulletTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture,_debugFont));
+                            //Monsters.Add(new Monster(MonsterTexture, monsterPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, this.ItemTexture,_debugFont));
                         }
                     }
                 }
@@ -604,7 +610,8 @@ namespace BBTB
 						if (_rnd.Next(4, 20) == 4)
 						{
                             Vector2 preacherPosition = new Vector2(x * MonsterTexture.Width, y * MonsterTexture.Height);
-                            Monsters.Add(new Monster(PreacherTexture, preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, ItemTexture,_debugFont));
+                               Monsters.Add(new Monster(PreacherTexture,_monsterBulletTexture , preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, ItemTexture,_debugFont));
+                            // Monsters.Add(new Monster(PreacherTexture,_ preacherPosition, SpriteBatch, /*_rnd.Next(5) == 0*/ false, ItemTexture,_debugFont));
 						}
 					}
 				}
@@ -630,6 +637,7 @@ namespace BBTB
                     Tile[x, y] = new Tile(TileTexture, tilePosition, SpriteBatch, false);
 
                     if (x == 0 || x == Columns - 1)
+
                     {
                         Tile[x, y].IsBlocked = true;
                     }
@@ -729,6 +737,12 @@ namespace BBTB
                 tile2.Draw();
             }
 
+            foreach (var tile in Tile)
+            {
+                if (StageNumber > 0) tile.Texture = mapTextures[StageNumber - 1, 1];
+                tile.Draw();
+            }
+
             foreach (var tile3 in Tile3)
             {
                 tile3.Draw();
@@ -748,11 +762,8 @@ namespace BBTB
             {
                 tile7.Draw();
             }
-            foreach (var tile in Tile)
-            {
+           
                 //if (StageNumber > 0) tile.Texture = mapTextures[StageNumber - 1, 1];
-                tile.Draw();
-            }
 
             foreach (var tile6 in Tile6)
             {

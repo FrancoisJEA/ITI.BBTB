@@ -1,0 +1,53 @@
+<!DOCTYPE SpriteDecomposer>
+<sprites image="BODY_male.png" transparentColor="">
+ <animation title="FrontWalk" delay="150">
+  <cut w="30" x="17" y="15" h="46" row="1" col="1"/>
+  <cut w="30" x="81" y="15" h="46" row="1" col="1"/>
+  <cut w="30" x="145" y="15" h="47" row="1" col="1"/>
+  <cut w="30" x="273" y="15" h="47" row="1" col="1"/>
+  <cut w="30" x="337" y="15" h="46" row="1" col="1"/>
+  <cut w="30" x="401" y="15" h="47" row="1" col="1"/>
+  <cut w="30" x="529" y="15" h="47" row="1" col="1"/>
+  <cut w="29" x="209" y="16" h="47" row="1" col="1"/>
+  <cut w="29" x="466" y="16" h="47" row="1" col="1"/>
+ </animation>
+ <animation title="LeftWalk" delay="150">
+  <cut w="20" x="23" y="79" h="47" row="1" col="1"/>
+  <cut w="22" x="149" y="79" h="46" row="1" col="1"/>
+  <cut w="22" x="215" y="79" h="46" row="1" col="1"/>
+  <cut w="24" x="278" y="79" h="47" row="1" col="1"/>
+  <cut w="23" x="407" y="79" h="47" row="1" col="1"/>
+  <cut w="22" x="471" y="79" h="47" row="1" col="1"/>
+  <cut w="21" x="535" y="79" h="47" row="1" col="1"/>
+  <cut w="25" x="83" y="80" h="46" row="1" col="1"/>
+  <cut w="28" x="340" y="80" h="46" row="1" col="1"/>
+ </animation>
+ <animation title="BackWalk" delay="150">
+  <cut w="30" x="17" y="143" h="47" row="1" col="1"/>
+  <cut w="30" x="81" y="143" h="47" row="1" col="1"/>
+  <cut w="30" x="145" y="143" h="48" row="1" col="1"/>
+  <cut w="30" x="273" y="143" h="48" row="1" col="1"/>
+  <cut w="30" x="337" y="143" h="47" row="1" col="1"/>
+  <cut w="30" x="401" y="143" h="48" row="1" col="1"/>
+  <cut w="30" x="529" y="143" h="48" row="1" col="1"/>
+  <cut w="29" x="210" y="144" h="47" row="1" col="1"/>
+  <cut w="29" x="465" y="144" h="47" row="1" col="1"/>
+ </animation>
+ <animation title="RightWalk" delay="150">
+  <cut w="20" x="21" y="207" h="47" row="1" col="1"/>
+  <cut w="22" x="149" y="207" h="46" row="1" col="1"/>
+  <cut w="22" x="211" y="207" h="46" row="1" col="1"/>
+  <cut w="24" x="274" y="207" h="47" row="1" col="1"/>
+  <cut w="23" x="402" y="207" h="47" row="1" col="1"/>
+  <cut w="22" x="467" y="207" h="47" row="1" col="1"/>
+  <cut w="21" x="532" y="207" h="47" row="1" col="1"/>
+  <cut w="25" x="84" y="208" h="46" row="1" col="1"/>
+  <cut w="28" x="336" y="208" h="46" row="1" col="1"/>
+ </animation>
+ <animation title="Idle" delay="150">
+  <cut w="30" x="17" y="15" h="46" row="1" col="1"/>
+  <cut w="20" x="23" y="79" h="47" row="1" col="1"/>
+  <cut w="30" x="17" y="143" h="47" row="1" col="1"/>
+  <cut w="20" x="21" y="207" h="47" row="1" col="1"/>
+ </animation>
+</sprites>

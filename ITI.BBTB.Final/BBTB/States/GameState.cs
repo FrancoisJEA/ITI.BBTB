@@ -100,6 +100,7 @@ namespace BBTB.States
             var tileTexture4 = Content.Load<Texture2D>("stairs_closed");
             var monsterTexture = Content.Load<Texture2D>("monster");
             var basicTexture = Content.Load<Texture2D>("Character/P_gunner");
+			var monsterbulletsTexture = Content.Load<Texture2D>("M_attack");
             _bulletTextures = BulletTextures(Content);
             _itemTexture = ItemTextures(Content);
             var tileTexture5 = Content.Load<Texture2D>("shop");
@@ -123,18 +124,18 @@ namespace BBTB.States
             Inventory = new PlayerInventory(_itemTexture, _spriteBatch, _boxTexture,_boxTexture2);
             if (classeSelected == "Wizard")
             {
-                basicTexture = Content.Load<Texture2D>("Character/P_mage");
+                basicTexture = Content.Load<Texture2D>("Animation/WalkingMage");
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             } else if (classeSelected == "Gunner")
             {
-                basicTexture = Content.Load<Texture2D>("Character/P_gunner");
+                basicTexture = Content.Load<Texture2D>("Animation/WalkingGunner");
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             } else if (classeSelected == "Archer")
             {
-                basicTexture = Content.Load<Texture2D>("Character/P_archer");
+                basicTexture = Content.Load<Texture2D>("Animation/WalkingArcher");
                 _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             }
-                _board = new Board(_spriteBatch, tileTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, tileTexture7, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this, _itemTexture, _debugFont, LvlUpTexture, TileBis, tileTexture1roof);
+            _board = new Board(_spriteBatch, tileTexture,monsterbulletsTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, tileTexture7, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont,LvlUpTexture,TileBis,tileTexture1roof);
 
             _bgsound.Play(0.3f, 0, 0);
         }
@@ -159,6 +160,11 @@ namespace BBTB.States
             AllTextures.Add(Content.Load<Texture2D>("Items/Deadric_crossbow"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Fire_book"));
             AllTextures.Add(Content.Load<Texture2D>("Items/Ice_gun"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Samurai_boots"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Samurai_helmet"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Samurai_gloves"));
+            AllTextures.Add(Content.Load<Texture2D>("Items/Samurai_armor"));
+
             return AllTextures;
         }
 
@@ -235,6 +241,8 @@ namespace BBTB.States
             Inventory.ShowInventory(_player,_debugFont);
             _board.TakeItem();
             if (_player._playerM.lvlup)_spriteBatch.Draw(Board.CurrentBoard.LvlUpTexture, new Vector2(250, 250), Color.White);
+  
+            
             _player.Draw();
             _player.HeartsDrawing(heartTexture);
 
