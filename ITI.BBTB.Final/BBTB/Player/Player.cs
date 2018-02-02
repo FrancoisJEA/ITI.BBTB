@@ -173,22 +173,22 @@ namespace BBTB
                 if (keyboardState.IsKeyDown(Keys.Z) && keyboardState.IsKeyDown(Keys.Space))
                 {
                     _ctx.PlaySound(2);
-                    _mouvement -= new Vector2(0, 20);
+                    _mouvement -= new Vector2(0, 30);
                 }
                 else if (keyboardState.IsKeyDown(Keys.S) && keyboardState.IsKeyDown(Keys.Space))
                 {
                     _ctx.PlaySound(2);
-                    _mouvement += new Vector2(0, 20);
+                    _mouvement += new Vector2(0, 30);
                 }
                 else if (keyboardState.IsKeyDown(Keys.Q) && keyboardState.IsKeyDown(Keys.Space))
                 {
                     _ctx.PlaySound(2);
-                    _mouvement -= new Vector2(20, 0);
+                    _mouvement -= new Vector2(30, 0);
                 }
                 else if (keyboardState.IsKeyDown(Keys.D) && keyboardState.IsKeyDown(Keys.Space))
                 {
                     _ctx.PlaySound(2);
-                    _mouvement += new Vector2(20, 0);
+                    _mouvement += new Vector2(30, 0);
                 }
 
                 _time = 300;
