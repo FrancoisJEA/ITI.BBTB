@@ -25,7 +25,7 @@ namespace BBTB.Bullets
 
         public void TouchPlayer()
         {
-            if (new Rectangle((int)Position.X,(int)Position.Y,Texture.Width,Texture.Height).Intersects(_player.Bounds))
+            if (new Rectangle((int)Position.X,(int)Position.Y,Texture.Width,Texture.Height).Intersects(new Rectangle((int)_player.Position.X, (int)_player.Position.Y, _player.animation.spriteWidth, _player.animation.spriteHeight)))
             {
                 _player._playerM.Life -= 10; 
             }

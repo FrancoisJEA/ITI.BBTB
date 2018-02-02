@@ -36,14 +36,6 @@ namespace BBTB
 		public Vector2 Destination { get { return _destination; } }
 		public int Damages { get { return _damages; } set { _damages = value; } }
 
-		public void TouchPlayer()
-		{
-			if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(_player.Bounds))
-			{
-				_player._playerM.Life -= 10;
-			}
-		}
-
 		internal void PositionAvencement()
 		{
 			Vector2 _basePosition = Position;
@@ -68,18 +60,30 @@ namespace BBTB
 
 		public bool DeleteMe()
 		{
-			if ( this.Bounds.Intersects( Board.CurrentBoard._player.Bounds))//|| _player.Bounds.Intersects(this.Bounds))
+			if ( this.Bounds.Intersects(new Rectangle((int)Board.CurrentBoard._player.Position.X, (int)Board.CurrentBoard._player.Position.Y, Board.CurrentBoard._player.animation.spriteWidth, Board.CurrentBoard._player.animation.spriteHeight)))//|| _player.Bounds.Intersects(this.Bounds))
 
 			//	if (_position == _destination )//|| _player.Bounds.Intersects(this.Bounds))
 			{
 				Board.CurrentBoard._player._playerM.Life -= 10;
 				return true; 
 			}
+           
 			else if(_bool)
 			{
 				return true;
 			}
-			return false;
+
+            foreach (Tile tile in Board.CurrentBoard.Tile2)
+            {
+                if (tile.IsBlocked)
+                {
+                    if (new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height).Intersects(tile.Bounds))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
 		}
 
 		public void Timer()

@@ -176,7 +176,7 @@ namespace BBTB
                 float timeHit = (float)Board.CurrentBoard.GameTime.ElapsedGameTime.TotalSeconds;
                 totalSeconds -= timeHit;
 
-                if (tile.IsBlocked && tile.Bounds.Intersects(_player.Bounds) && totalSeconds < 0)
+                if (tile.IsBlocked && tile.Bounds.Intersects(new Rectangle((int)_player.Position.X, (int)_player.Position.Y, _player.animation.spriteWidth, _player.animation.spriteHeight)) && totalSeconds < 0)
                 {
                     _player._playerM.Life -= 3;
                     totalSeconds = TimerSpikes;
