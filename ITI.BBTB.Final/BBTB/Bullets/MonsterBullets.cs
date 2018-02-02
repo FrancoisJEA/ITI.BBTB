@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using BBTB.AnimationManager;
 
 namespace BBTB.Bullets
 {
@@ -12,9 +13,9 @@ namespace BBTB.Bullets
     {
         Player _player;
         float _rotation;
-
         public MonsterBullets(Texture2D texture, Vector2 position, SpriteBatch spritebatch, WeaponLib weapon, Board board, Weapon weaponCtx) : base(texture, position, spritebatch, weapon, board, weaponCtx)
         {
+
             _player = Board.CurrentBoard._player;
         }
 

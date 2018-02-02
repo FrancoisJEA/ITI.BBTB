@@ -100,8 +100,11 @@ namespace BBTB.Items
             }
             else 
             {
-
+                Item.Position = Inventory[i].Position;
+                Item._position.X = Inventory[i]._position.X;
+                Item._position.Y = Inventory[i]._position.Y;
                 Inventory[i].Position = new Vector2(_player.Position.X, _player.Position.Y);
+               
                 Inventory[i]._position.X = _player.Position.X;
                 Inventory[i]._position.Y = _player.Position.Y;
                 UpdatePlayerSats(Inventory[i], Item, _player);

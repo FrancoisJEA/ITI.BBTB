@@ -87,7 +87,7 @@ namespace BBTB
         {
             int heartPositionx = 900;
             int heartPositiony = 10;
-            heartNumber = (_playerM.Life / 25);
+            heartNumber = (_playerM.Life / 50);
             for (int i = 0; i < heartNumber; i++)
             {
                  heartPositionx -= 40;

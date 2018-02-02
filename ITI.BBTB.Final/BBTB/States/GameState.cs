@@ -273,6 +273,7 @@ namespace BBTB.States
 
             string hungerTimeInText = string.Format("Death by Hunger in: ({0})", hungerText);
 
+            string PotionInText = string.Format("Potion: ({0})", _player.Inventory._potionNb);
             //DrawWithShadow(positionInText, new Vector2(10, 0));
             //DrawWithShadow(movementInText, new Vector2(10, 20));
 
@@ -280,8 +281,9 @@ namespace BBTB.States
             DrawWithShadow(experienceInText, new Vector2(10, 20));
             DrawWithShadow(moneyInText, new Vector2(400, 20));
             if (_player._playerM.lvlup) DrawWithShadow(LvlUpInText, new Vector2(320, 270));
+            DrawWithShadow(PotionInText, new Vector2(500, 600));
 
-             DrawWithShadow(RoomNumberInText, new Vector2(280, 280));
+            DrawWithShadow(RoomNumberInText, new Vector2(280, 280));
              DrawWithShadow(RoomInFloorInText, new Vector2(320, 320));
             // DrawWithShadow(StageNumberInText, new Vector2(320, 320));
 
