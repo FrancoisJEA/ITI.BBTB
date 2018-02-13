@@ -36,8 +36,7 @@ namespace BBTB.Items
 
 
 
-        public Item(Vector2 position, Texture2D texture, SpriteBatch spriteBatch,Player player) : base(texture,position,spriteBatch)
-             
+        public Item(Vector2 position, Texture2D texture, SpriteBatch spriteBatch,Player player) : base(texture,position,spriteBatch)   
         {
             _position = position;
             _texture = texture;
@@ -56,7 +55,7 @@ namespace BBTB.Items
                 Defense = 20 + Convert.ToInt32(_player._playerM.Level * 1.8 * _player._playerM.Strength / 5);
             }
             RandomStat();
-            _price = 2000;//_player._playerM.Level * 100 - _player._playerM.Intelligence;
+
         }
 
         private void RandomStat()
@@ -128,7 +127,7 @@ namespace BBTB.Items
 
         public void Draw ()
         {
-            SpriteBatch.Draw(_texture, _position, Color.White);
+            SpriteBatch?.Draw(_texture, _position, Color.White);
         }
 
         public Texture2D FoundTextureByID(int ItemID, List<Texture2D> ItemTextures)

@@ -35,13 +35,13 @@ namespace BBTB.States
         SoundEffect _tpsound;
         SoundEffect _bgsound;
 
-        public List<Texture2D> _itemTexture;
+        public static List<Texture2D> _itemTexture;
         PlayerInventory Inventory;
         List<Texture2D> _bulletTextures;
-        public Texture2D goblinTexture;
         Texture2D LvlUpTexture;
         Texture2D heartTexture;
         private Texture2D TraderTexture;
+        private List<Texture2D> InvTextures = new List<Texture2D>();
 
         internal Board Board
         {
@@ -53,11 +53,14 @@ namespace BBTB.States
             _graphicsDevice = graphicsDevice;
             _spriteBatch = new SpriteBatch(graphicsDevice);
             LvlUpTexture = Content.Load<Texture2D>("lvlup");
-
+            InvTextures.Add(Content.Load<Texture2D>("HUDBox"));
+            InvTextures.Add(Content.Load<Texture2D>("HUDBox2"));
             totalSecond = hungerTime;
 
+            mapTextures = new Texture2D[11, 6]; // Nombre d'étages (11 - 1), type de murs, type de ground, type de monstre ou type d'obstacle (0 ground, 1 murs, 2 monstre, 3 obstacle))
+
             mapTextures = new Texture2D[11, 4]; // Nombre d'étages (11 - 1), type de murs, type de ground, type de monstre ou type d'obstacle (0 ground, 1 murs, 2 monstre, 3 obstacle))
-            
+
             mapTextures[0, 0] = Content.Load<Texture2D>("ground");
             mapTextures[0, 1] = Content.Load<Texture2D>("tile");
             mapTextures[0, 2] = Content.Load<Texture2D>("monster");
@@ -107,12 +110,10 @@ namespace BBTB.States
             var tileTexture6 = Content.Load<Texture2D>("torche");
             var tileTexture7 = Content.Load<Texture2D>("spikes");
             var tileTexture1roof = Content.Load<Texture2D>("tileangle1");
-            var _boxTexture = Content.Load<Texture2D>("HUDBox");
-            var _boxTexture2 = Content.Load<Texture2D>("HUDBox2");
             var _chestTexture = Content.Load<Texture2D>("chest");
             var _chestTexture2 = Content.Load<Texture2D>("chest_open");
             var _bossTexture = Content.Load<Texture2D>("boss");
-            var TileBis = Content.Load<Texture2D>("tileroof1");
+            var TileBis = Content.Load<Texture2D>("tilebis");
             
             TraderTexture = Content.Load<Texture2D>("trader");
             _debugFont = Content.Load<SpriteFont>("DebugFont");
@@ -121,21 +122,21 @@ namespace BBTB.States
             _tpsound = Content.Load<SoundEffect>("tpsound"); 
             _bgsound = Content.Load<SoundEffect>("Sound/bgmusic"); 
             
-            Inventory = new PlayerInventory(_itemTexture, _spriteBatch, _boxTexture,_boxTexture2);
+
             if (classeSelected == "Wizard")
             {
                 basicTexture = Content.Load<Texture2D>("Animation/WalkingMage");
-                _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
+                _player = new Player(basicTexture, new Vector2(80, 150), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             } else if (classeSelected == "Gunner")
             {
                 basicTexture = Content.Load<Texture2D>("Animation/WalkingGunner");
-                _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
+                _player = new Player(basicTexture, new Vector2(80, 150), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             } else if (classeSelected == "Archer")
             {
                 basicTexture = Content.Load<Texture2D>("Animation/WalkingArcher");
-                _player = new Player(basicTexture, new Vector2(80, 80), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
+                _player = new Player(basicTexture, new Vector2(80, 150), _spriteBatch, this, null, false, Inventory, _bulletTextures, classeSelected);
             }
-            _board = new Board(_spriteBatch, tileTexture,monsterbulletsTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, tileTexture7, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 15, 10, _player, this,_itemTexture,_debugFont,LvlUpTexture,TileBis,tileTexture1roof);
+            _board = new Board(_spriteBatch, tileTexture,monsterbulletsTexture, tileTexture2, tileTexture3, tileTexture4, tileTexture5, tileTexture6, tileTexture7, _chestTexture,_chestTexture2, monsterTexture, mapTextures,TraderTexture, mapTextures[1, 2], _bossTexture, 21, 12, _player, this,_itemTexture,_debugFont,LvlUpTexture,TileBis,tileTexture1roof, InvTextures);
 
             _bgsound.Play(0.3f, 0, 0);
         }
@@ -181,7 +182,6 @@ namespace BBTB.States
 
         private void deadTimer(GameTime gameTime)
         {
-            
             float totalTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             totalSecond -= totalTime;
 
@@ -201,7 +201,6 @@ namespace BBTB.States
         public override void Update(GameTime gameTime)
         {
             deadTimer(gameTime);
-
             _player.Update(gameTime);
             //Board.KillMonster();
             foreach (Monster monster in _board.Monsters) monster.Update(gameTime);
@@ -238,23 +237,18 @@ namespace BBTB.States
             _spriteBatch.Begin();
             _background.Draw();
             _board.Draw();
-            Inventory.ShowInventory(_player,_debugFont);
+            Inventory?.ShowInventory(_debugFont);
             _board.TakeItem();
             if (_player._playerM.lvlup)_spriteBatch.Draw(Board.CurrentBoard.LvlUpTexture, new Vector2(250, 250), Color.White);
-  
-            
             _player.Draw();
             _player.HeartsDrawing(heartTexture);
-
             WriteDebugInformation();
-            
             _spriteBatch.End();
-
         }
 		
         private void WriteDebugInformation()
         {
-          //string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.Position.X, _player.Position.Y);
+          string positionInText = string.Format("Position of Jumper: ({0:0.0}, {1:0.0})", _player.Position.X, _player.Position.Y);
           //string movementInText = string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Mouvement.X, _player.Mouvement.Y);
 
             string lifeInText = string.Format("Life: ({0:0})", _player._playerM.Life);
@@ -273,7 +267,7 @@ namespace BBTB.States
             string hungerTimeInText = string.Format("Death by Hunger in: ({0})", hungerText);
 
             string PotionInText = string.Format("Potion: ({0})", _player.Inventory._potionNb);
-            //DrawWithShadow(positionInText, new Vector2(10, 0));
+            DrawWithShadow(positionInText, new Vector2(10,400 ));
             //DrawWithShadow(movementInText, new Vector2(10, 20));
 
             DrawWithShadow(lifeInText, new Vector2(10, 10));

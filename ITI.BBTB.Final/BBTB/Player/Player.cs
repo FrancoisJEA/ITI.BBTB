@@ -31,8 +31,6 @@ namespace BBTB
         public string PlayerClasse { get; set; }
         public List<Texture2D> _bulletTextures;
         public Texture2D _weaponTexture;
-        int _time2;
-        int _time3;
         public bool IsDead;
         SpriteBatch _spriteBatch;
         public Animation animation;
@@ -42,23 +40,17 @@ namespace BBTB
         {
             PlayerClasse = _classe;
             _playerM = new PlayerModel("Tanguy", PlayerClasse);
+            Inventory = new PlayerInventory(GameState._itemTexture, _spriteBatch, this);
             _ctx = ctx;
-            _time = 0;
-            _time2 = 0;
-            _time3 = 15;
             _booltime = false;
             _weapon = weapon;
-            Inventory = inventory;
-            Inventory.ItemByDefault(this);
             _havePrayed = havePrayed;
             _bulletTextures = BulletTextures;
+            Position = position;
             animation = new Animation(texture, position, spritebatch, 9, 4);
             Position = new Vector2(animation.SourceRect.X, animation.SourceRect.Y);
             _weapon = new Weapon(_ctx, _bulletTextures[1], Position, spritebatch, this, _bulletTextures);
             _spriteBatch = spritebatch;
-          
-           
-
         }
 
         #region propriété 
@@ -76,7 +68,7 @@ namespace BBTB
             if (_playerM.Life <= 0)
             {
                 _playerM.Life = _playerM._lifemax;
-                Inventory.ItemByDefault(this);
+                Inventory.ItemByDefault();
                 _ctx.totalSecond = _ctx.hungerTime;
                 Board.CurrentBoard.Stage1();
                 IsDead = true;
@@ -90,11 +82,9 @@ namespace BBTB
             heartNumber = (_playerM.Life / 50);
             for (int i = 0; i < heartNumber; i++)
             {
-                 heartPositionx -= 40;
-
+                heartPositionx -= 40;
                 Sprite heart = new Sprite(_heartTexture, new Vector2(heartPositionx, heartPositiony), SpriteBatch);
                 heart.Draw();
-
             }
             if (_playerM.Life < 25 && _playerM.Life > 0)
             {
@@ -105,7 +95,7 @@ namespace BBTB
 
         public void ResetPosition()
         {
-            Position = Vector2.One * 70;
+            Position = Vector2.One * 128;
             _mouvement = Vector2.Zero;
         }
 
@@ -132,12 +122,13 @@ namespace BBTB
 
         private void UsePotion()
         {
+            int _time = 15;
             KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.P)) {
-                
+            if (keyboardState.IsKeyDown(Keys.P))
+            {
                 if (Inventory._potionNb > 0)
                 {
-                    if (_time3 == 15)
+                    if (_time == 15)
                     {
                         int x = 0;
                         if (_playerM.Life < _playerM._lifemax) {
@@ -145,22 +136,23 @@ namespace BBTB
                             {
                                 _playerM.Life++;
                                 x++;
-                                _time3 = 0;
+                                _time = 0;
                             }
                             Inventory._potionNb--;
                             if (Inventory._potionNb == 0)
                             {
-                                Inventory.AddEmptyPotion(this);
+                                Inventory.AddEmptyPotion();
                             }
                         }
                     }
-                    else _time3++;
+                    else _time++;
                 }
             }
         }
 
         private void CheckKeyboardAndUpdateMovement(GameTime gameTime)
         {
+            int _time = 0;
             KeyboardState keyboardState = Keyboard.GetState();
             
             Console.WriteLine(_time);
@@ -211,16 +203,17 @@ namespace BBTB
 
         public bool HasTouchedMonster()
         {
+            int _time = 0;
             foreach (Monster monster in Board.CurrentBoard.Monsters)
             {
                 if (monster.IsAlive)
                 {
-                    if (new Rectangle((int)Position.X, (int)Position.Y, animation.spriteWidth, animation.spriteHeight).Intersects(monster.Bounds) && _time2 == 60)
+                    if (new Rectangle((int)Position.X, (int)Position.Y, animation.spriteWidth, animation.spriteHeight).Intersects(monster.Bounds) && _time == 60)
                     {
                         _playerM.Life -= monster._attack/10;
-                        _time2 = 1;
+                        _time = 1;
                         return true;
-                    } else if (_time2 < 60) _time2++; 
+                    } else if (_time < 60) _time++; 
                 }
             }
             return false;

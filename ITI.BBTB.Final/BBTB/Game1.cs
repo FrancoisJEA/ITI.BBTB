@@ -23,9 +23,8 @@ namespace BBTB
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferWidth = 960;
-            graphics.PreferredBackBufferHeight = 640;
-
+            graphics.PreferredBackBufferWidth = 1366;
+            graphics.PreferredBackBufferHeight = 768;
             this.IsMouseVisible = true;
         }
 

@@ -21,63 +21,64 @@ namespace BBTB.Items
         private int _potionMax = 5;
         private int _displayTimer;
         private bool Display; // If Inventory is displayed
+        private Player player;
 
-        public PlayerInventory(List<Texture2D> AllTexture, SpriteBatch spriteBatch, Texture2D boxTexture, Texture2D boxTexture2 )
+        public PlayerInventory(List<Texture2D> AllTexture, SpriteBatch spriteBatch,Player _player)
         {
             allTexture = AllTexture;
             sb = spriteBatch;
             this.InvTexture = allTexture[0];
-            BoxTexture = boxTexture;
-            BoxTexture2 = boxTexture2;
             _potionNb = 2;
             _displayTimer = 14;
             Display = false;
+            player = _player;
+            ItemByDefault();
         }
 
-        public void ItemByDefault (Player _player)
+        public void ItemByDefault()
         {
             List<Item> DefaultInventory = new List<Item>();
-            DefaultInventory.Add(new Item(new Vector2(420, 230), allTexture[9], sb,_player)); //Helmet
-            DefaultInventory.Add(new Item(new Vector2(420, 280), allTexture[6], sb, _player)); //Armor
-            DefaultInventory.Add(new Item(new Vector2(420, 320), allTexture[8], sb, _player)); // gloves
-            DefaultInventory.Add(new Item(new Vector2(420, 370), allTexture[7], sb, _player));  //Boots
-            if (_player.PlayerClasse == "Wizard")
+            DefaultInventory.Add(new Item(new Vector2(420, 230), allTexture[9], sb, player)); //Helmet
+            DefaultInventory.Add(new Item(new Vector2(420, 280), allTexture[6], sb, player)); //Armor
+            DefaultInventory.Add(new Item(new Vector2(420, 320), allTexture[8], sb, player)); // gloves
+            DefaultInventory.Add(new Item(new Vector2(420, 370), allTexture[7], sb, player));  //Boots
+            if (player.PlayerClasse == "Wizard")
             {
-                DefaultInventory.Add(new Item(new Vector2(370, 290), allTexture[11], sb, _player)); // Weapon2
-                DefaultInventory.Add(new Item(new Vector2(460, 290), allTexture[15], sb, _player)); // Weapon1
+                DefaultInventory.Add(new Item(new Vector2(370, 290), allTexture[11], sb, player)); // Weapon2
+                DefaultInventory.Add(new Item(new Vector2(460, 290), allTexture[15], sb, player)); // Weapon1
             }
-            else if (_player.PlayerClasse == "Gunner")
+            else if (player.PlayerClasse == "Gunner")
             {
-                DefaultInventory.Add(new Item(new Vector2(370, 290), allTexture[16], sb, _player)); // Weapon2
-                DefaultInventory.Add(new Item(new Vector2(460, 290), allTexture[10], sb, _player)); // Weapon1
+                DefaultInventory.Add(new Item(new Vector2(370, 290), allTexture[16], sb, player)); // Weapon2
+                DefaultInventory.Add(new Item(new Vector2(460, 290), allTexture[10], sb, player)); // Weapon1
             }
-            else if (_player.PlayerClasse == "Archer")
+            else if (player.PlayerClasse == "Archer")
             {
-                DefaultInventory.Add(new Item(new Vector2(370, 290), allTexture[11], sb, _player)); // Weapon2
-                DefaultInventory.Add(new Item(new Vector2(460, 290), allTexture[10], sb, _player)); // Weapon1
+                DefaultInventory.Add(new Item(new Vector2(370, 290), allTexture[11], sb, player)); // Weapon2
+                DefaultInventory.Add(new Item(new Vector2(460, 290), allTexture[10], sb, player)); // Weapon1
             }
-            DefaultInventory.Add(new Item(new Vector2(380, 430), allTexture[12], sb, _player)); // Potion
+            DefaultInventory.Add(new Item(new Vector2(380, 430), allTexture[12], sb, player)); // Potion
             //DefaultInventory.Add(new Item(new Vector2(80, 80), AllTexture[6], SpriteBatch));
             //DefaultInventory.Add(new Item(new Vector2(80, 80), AllTexture[7], SpriteBatch));
             Inventory = DefaultInventory;
             _potionNb = 2;
         }
 
-        public void AddEmptyPotion(Player _player)
+        public void AddEmptyPotion()
         {
-            Item i = new Item(new Vector2(80,80), allTexture[13], sb, _player);
+            Item i = new Item(new Vector2(80,80), allTexture[13], sb, player);
             Inventory.RemoveAt(6);
             Inventory.Insert(6, i);
         }
 
-        public List<Item> AddItemToInventory(Item Item, List<Item> Items,Player _player,int y)
+        public List<Item> AddItemToInventory(Item Item, List<Item> Items,int y)
         {
             int i = Item.InventoryEmplacement;
 
             // If its an Item to sell
-            if (Board.CurrentBoard.Special == Board.CurrentBoard.RoomNumber && Board.CurrentBoard.SpecialType == 4) 
+            if (Item.ToSell) 
             {
-                if (_player._playerM.Money > Item._price) { _player._playerM.Money -= Item._price; }
+                if (player._playerM.Money > Item._price) { player._playerM.Money -= Item._price; }
                 else { return Items; }
             }
 
@@ -95,7 +96,7 @@ namespace BBTB.Items
             }
             else if (Item.Name == "Used potion")
             {
-                _player._playerM.Money += 20;
+                player._playerM.Money += 20;
                 Items.Remove(Item);
             }
             else 
@@ -103,21 +104,19 @@ namespace BBTB.Items
                 Item.Position = Inventory[i].Position;
                 Item._position.X = Inventory[i]._position.X;
                 Item._position.Y = Inventory[i]._position.Y;
-                Inventory[i].Position = new Vector2(_player.Position.X, _player.Position.Y);
-               
-                Inventory[i]._position.X = _player.Position.X;
-                Inventory[i]._position.Y = _player.Position.Y;
-                UpdatePlayerSats(Inventory[i], Item, _player);
+                Inventory[i].Position = new Vector2(player.Position.X, player.Position.Y);
+                Inventory[i]._position.X = player.Position.X;
+                Inventory[i]._position.Y = player.Position.Y;
+                UpdatePlayerSats(Inventory[i], Item);
                 Items.Add(Inventory[i]);
                 Inventory.RemoveAt(i);
                 Inventory.Insert(i, Item);
                 Items.Remove(Item);
-
             }
             return Items;
         }
 
-        private void UpdatePlayerSats(Item OldItem, Item NewItem, Player player)
+        private void UpdatePlayerSats(Item OldItem, Item NewItem)
         {
             PlayerModel p = player._playerM;
             p.Strength -= OldItem._strength;
@@ -146,7 +145,7 @@ namespace BBTB.Items
             return itemTexture;
         }
 
-        public void ShowInventory (Player player, SpriteFont _debugFont)
+        public void ShowInventory (SpriteFont _debugFont)
         {
             string Text;
             KeyboardState keyboardState = Keyboard.GetState();

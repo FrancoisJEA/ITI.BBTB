@@ -12,8 +12,8 @@ namespace BBTB.Enemies
     class Trader : Sprite
     {
         int _money;         
-        int _itemNb = 3;        // Nb of items sold by the Trader
-        public List<Item> Inventory;
+        int _itemNb = 3;        // Nb max of items sold by the Trader
+        private List<Item> Inventory;
         List<Texture2D> _allTexture;
 
         public Trader(Texture2D texture, Vector2 position, SpriteBatch batch, List<Texture2D> AllTextureItems) : base(texture, position, batch)
@@ -40,7 +40,7 @@ namespace BBTB.Enemies
             }
 
         }
-        public List<Item> ItemsToSell(List<Item> i)
+        public List<Item> ItemsToSell(List<Item> i) // i represent items in the board ground
         {
             foreach (Item item in Inventory)
             {
@@ -53,9 +53,10 @@ namespace BBTB.Enemies
         {
             foreach (Item i in Inventory)
             {
-                
+                i.ToSell = true;
+                if (i.ItemType == "potion") i._price = 100;
+                else if (i.ItemType == "armor") i._price = 2000;
             }
-
         }
          ~Trader () { }
         
