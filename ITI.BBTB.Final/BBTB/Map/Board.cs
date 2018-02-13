@@ -431,8 +431,9 @@ namespace BBTB
             {
                 for (int y = 0; y < Rows; y++)
                 {
-                    Vector2 tilePosition = new Vector2(x * mapTextures[_stageNumber + 1, 3].Width, y * mapTextures[_stageNumber - 1, 3].Height);
-                    _tileFloor[x, y] = new Tile(mapTextures[_stageNumber+1,3], tilePosition, SpriteBatch, false);
+                    Texture2D t = mapTextures[_stageNumber + 1, 1];
+                    Vector2 tilePosition = new Vector2(x * t.Width, y * t.Height);
+                    _tileFloor[x, y] = new Tile(t, tilePosition, SpriteBatch, true);
                 }
             }
         }
@@ -776,7 +777,7 @@ namespace BBTB
                 monster.Draw();
             }
 
-            if (Trader != null && Special == _roomNumber && SpecialType == 4) Trader.Draw();
+            if (Trader != null && Shop) Trader.Draw();
             _boss.Draw();
             foreach (var bullet in Bullets)
             {
